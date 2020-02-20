@@ -1,3 +1,4 @@
+using System.IO;
 using Project_Helpers;
 
 namespace Project_Base {
@@ -6,18 +7,22 @@ namespace Project_Base {
 
         public abstract string GetFileName();
 
-        public void Load() {
-            string path = this.BuildPath(this.GetFileName());
-            StorageHelper.LoadFile(path, this.GetType());
+        public bool Load() {
+            try {
+                StorageHelper.LoadFile("data", this.GetFileName(), this);
+                return true;
+            } catch(IOException) {
+                return false;
+            }
         }
 
-        public void Save() {
-            string path = this.BuildPath(this.GetFileName());
-            StorageHelper.SaveFile(path, this);
-        }
-
-        private string BuildPath(string fileName) {
-            return @"storage/data/" + fileName + ".json";
+        public bool Save() {
+            try {
+                StorageHelper.SaveFile("data", this.GetFileName(), this);
+                return true;
+            } catch(IOException) {
+                return false;
+            }
         }
 
     }

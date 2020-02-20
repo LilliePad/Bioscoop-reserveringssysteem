@@ -1,18 +1,39 @@
+using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Project_Base;
 
 namespace Project_Helpers {
 
     class StorageHelper {
 
-        public static T LoadFile<T>(string path, T clazz) where T : class {
-            string content = File.ReadAllText(path);
-            return (T) JsonConvert.DeserializeObject<T>(path);
+        public static void LoadFile(string category, string fileName, object obj) {
+            StorageFile file = new StorageFile(category, fileName);
+
+            // Create file
+            if(!File.Exists(file.location)) {
+                Directory.CreateDirectory(file.directory);
+                File.Create(file.location).Close();
+                return;
+            }
+
+            // Read file and fill object
+            string json = File.ReadAllText(file.location);
+            JsonConvert.PopulateObject(json, obj);
         }
 
-        public static void SaveFile(string path, object data) {
-            string content = JsonConvert.SerializeObject(data);
-            File.WriteAllText(path, content);
+        public static void SaveFile(string category, string fileName, object obj) {
+            StorageFile file = new StorageFile(category, fileName);
+            string json = JsonConvert.SerializeObject(obj);
+            
+            // Create file
+            if(!File.Exists(file.location)) {
+                Directory.CreateDirectory(file.directory);
+                File.Create(file.location).Close();
+            }
+
+            File.WriteAllText(file.location, json);
         }
 
     }

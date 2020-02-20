@@ -4,8 +4,7 @@ namespace Project_Data {
 
     class Database : BaseDatabase {
 
-        public string test;
-        public string test2;
+        public int test;
 
         public override string GetFileName() {
             return "test";
