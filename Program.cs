@@ -38,7 +38,7 @@ namespace Bioscoop_reserveringssysteem {
             }
         }
 
-        public Program getInstance() {
+        public static Program getInstance() {
             return instance;
         }
 
