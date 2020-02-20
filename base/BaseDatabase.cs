@@ -1,4 +1,4 @@
-using System.IO;
+using System;
 using Project_Helpers;
 
 namespace Project_Base {
@@ -11,7 +11,7 @@ namespace Project_Base {
             try {
                 StorageHelper.LoadFile("data", this.GetFileName(), this);
                 return true;
-            } catch(IOException) {
+            } catch(Exception) {
                 return false;
             }
         }
@@ -20,7 +20,7 @@ namespace Project_Base {
             try {
                 StorageHelper.SaveFile("data", this.GetFileName(), this);
                 return true;
-            } catch(IOException) {
+            } catch(Exception) {
                 return false;
             }
         }
