@@ -18,28 +18,32 @@ namespace Bioscoop_reserveringssysteem {
         }
 
         public Program() {
-            this.database = new Database();
+            database = new Database();
 
             // Try to load
-            if(!this.database.Load()) {
+            if(!database.Load()) {
                 LogHelper.log(LogType.Error, "Failed to load database");
             }
 
-            Console.WriteLine("Loaded data: " + this.database.test);
+            Console.WriteLine("Loaded data: " + database.test);
 
             // Set random value
             Random random = new Random();
-            this.database.test = random.Next(1, 100);
-            Console.WriteLine("Set data: " + this.database.test);
+            database.test = random.Next(1, 100);
+            Console.WriteLine("Set data: " + database.test);
 
             // Try to save
-            if(!this.database.Save()) {
+            if(!database.Save()) {
                 LogHelper.log(LogType.Error, "Failed to save database");
             }
         }
 
+        public Program getInstance() {
+            return instance;
+        }
+
         public Database GetDatabase() {
-            return this.database;
+            return database;
         }
 
     }
