@@ -1,8 +1,8 @@
 using System.IO;
 using Newtonsoft.Json;
-using Project_Base;
+using Project.Base;
 
-namespace Project_Helpers {
+namespace Project.Helpers {
 
     class StorageHelper {
 

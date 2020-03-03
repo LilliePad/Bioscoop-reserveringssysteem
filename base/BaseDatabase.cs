@@ -1,7 +1,7 @@
 using System;
-using Project_Helpers;
+using Project.Helpers;
 
-namespace Project_Base {
+namespace Project.Base {
 
     abstract class BaseDatabase {
 

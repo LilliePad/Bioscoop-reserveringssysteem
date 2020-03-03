@@ -1,4 +1,4 @@
-namespace Project_Enums {
+namespace Project.Enums {
 
     enum LogType {
 

@@ -1,4 +1,4 @@
-namespace Project_Base {
+namespace Project.Base {
 
     class StorageFile {
 

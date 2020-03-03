@@ -1,13 +1,15 @@
-using Project_Base;
+using System.Collections.Generic;
+using Project.Base;
+using Project.Models;
 
-namespace Project_Data {
+namespace Project.Data {
 
     class Database : BaseDatabase {
 
-        public int test;
+        public List<User> user;
 
         public override string GetFileName() {
-            return "test";
+            return "data";
         }
 
     }

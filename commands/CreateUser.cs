@@ -1,12 +1,16 @@
 ﻿using System;
-using Project_Base;
+using Project.Base;
 
-namespace Project_Commands {
+namespace Project.Commands {
 
     class CreateUser : Command {
 
+        public override string GetCategory() {
+            return "user";
+        }
+
         public override string GetName() {
-            return "create-user";
+            return "create";
         }
 
         public override void RunCommand(string[] args) {

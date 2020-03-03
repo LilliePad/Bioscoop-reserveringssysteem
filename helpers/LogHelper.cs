@@ -1,7 +1,7 @@
 using System;
-using Project_Enums;
+using Project.Enums;
 
-namespace Project_Helpers {
+namespace Project.Helpers {
 
     class LogHelper {
 

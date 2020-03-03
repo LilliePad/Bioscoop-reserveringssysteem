@@ -1,13 +1,16 @@
 ﻿using System;
-using Project;
-using Project_Base;
+using Project.Base;
 
-namespace Project_Commands {
+namespace Project.Commands {
 
     class Stop : Command {
 
         public override string GetName() {
             return "stop";
+        }
+
+        public override bool RequireAdmin() {
+            return true;
         }
 
         public override void RunCommand(string[] args) {

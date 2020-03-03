@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Collections.Generic;
 using Project;
-using Project_Base;
-using Project_Enums;
-using Project_Helpers;
+using Project.Base;
+using Project.Enums;
+using Project.Helpers;
 
-namespace Project_Managers {
+namespace Project.Managers {
 
     class CommandManager {
 
@@ -41,7 +41,9 @@ namespace Project_Managers {
         }
 
         public void RegisterCommand(Command command) {
-            commands.Add(command.GetName(), command);
+            string category = command.GetCategory();
+            string name = (category != null ? (category + "/") : "") + command.GetName();
+            commands.Add(name, command);
         }
 
     }
