@@ -1,46 +1,35 @@
-﻿using System;
-using Project.Base;
+﻿using Project.Base;
 using Project.Commands;
-using Project.Data;
-using Project.Enums;
-using Project.Helpers;
-using Project.Managers;
+using Project.Services;
 
 namespace Project {
 
     class Program : Application {
 
-        // Services
-        private Database database;
-        private CommandManager commandManager;
+        private static Program instance;
 
         static void Main(string[] args) {
-            Program.Run(new Program());
+            instance = new Program();
+            instance.Start();
         }
 
         protected override void Load() {
-            database = new Database();
+            // Register users service
+            registerService(new UserManager());
 
-            // Try to load
-            if(!database.Load()) {
-                LogHelper.Log(LogType.Error, "Failed to load database");
-            }
-
-            commandManager = new CommandManager();
+            // Register commands service
+            CommandManager commandManager = new CommandManager();
             commandManager.RegisterCommand(new Stop());
             commandManager.RegisterCommand(new CreateUser());
-            commandManager.Start();
+            registerService(commandManager);
         }
 
         protected override void Unload() {
-            // Try to save
-            if (!database.Save()) {
-                LogHelper.Log(LogType.Error, "Failed to save database");
-            }
+
         }
 
-        public Database GetDatabase() {
-            return database;
+        public static Program GetInstance() {
+            return instance;
         }
 
     }

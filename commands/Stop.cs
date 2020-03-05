@@ -1,5 +1,6 @@
-﻿using System;
-using Project.Base;
+﻿using Project.Base;
+using Project.Enums;
+using Project.Helpers;
 
 namespace Project.Commands {
 
@@ -14,7 +15,7 @@ namespace Project.Commands {
         }
 
         public override void RunCommand(string[] args) {
-            Console.WriteLine("Stopping application...");
+            LogHelper.Log(LogType.Info, "Stopping application...");
             Program.GetInstance().Stop();
         }
 

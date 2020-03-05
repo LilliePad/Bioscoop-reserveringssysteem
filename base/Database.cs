@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
 using Project.Helpers;
 
 namespace Project.Base {
 
-    abstract class BaseDatabase {
+    abstract class Database {
+
+        private Dictionary<string, int> newIds = new Dictionary<string, int>();
 
         public abstract string GetFileName();
 
@@ -23,6 +26,22 @@ namespace Project.Base {
             } catch(Exception) {
                 return false;
             }
+        }
+
+        public int GetNewId(string category) {
+            if(category == null) {
+                category = "__global__";
+            }
+
+            // Grab id
+            int newId;
+            if(!newIds.TryGetValue(category, out newId)) {
+                newId = 1;
+            }
+
+            // Increase and return
+            newIds[category] = newId + 1;
+            return newId;
         }
 
     }

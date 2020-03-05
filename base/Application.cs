@@ -1,26 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Project.Enums;
+using Project.Helpers;
 
 namespace Project.Base {
 
     abstract class Application {
 
         // Program variables
-        private static Application instance;
         private bool running = false;
+        private Dictionary<string, Service> services = new Dictionary<string, Service>();
 
         protected abstract void Load();
         protected abstract void Unload();
-
-        protected static void Run(Application app) {
-            instance = app;
-            instance.Start();
-        }
-
-        public static Application GetInstance() {
-            return instance;
-        }
 
         public bool IsRunning() {
             return this.running;
@@ -31,11 +23,16 @@ namespace Project.Base {
                 throw new Exception("Application is already running.");
             }
 
+            // Set running to true
+            this.running = true;
+
             // Load app
             this.Load();
 
-            // Set running to true
-            this.running = true;
+            // Load services
+            foreach (Service service in services.Values) {
+                service.Load();
+            }
         }
 
         public void Stop() {
@@ -43,11 +40,30 @@ namespace Project.Base {
                 throw new Exception("Application is not running.");
             }
 
+            // Unload services
+            foreach (Service service in services.Values) {
+                service.Unload();
+            }
+
             // Unload app
             this.Unload();
 
             this.running = false;
             System.Environment.Exit(1);
+        }
+
+        public void registerService(Service service) {
+            this.services.Add(service.getHandle(), service);
+        }
+
+        public T getService<T>(string handle) {
+            Service service;
+
+            if (!services.TryGetValue(handle, out service)) {
+                return default(T);
+            }
+
+            return (T)Convert.ChangeType(service, typeof(T));
         }
 
     }
