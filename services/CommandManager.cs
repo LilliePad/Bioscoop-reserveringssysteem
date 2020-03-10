@@ -45,7 +45,7 @@ namespace Project.Services {
                             continue;
                         }
 
-                        if (command.RequireLogin() && userManager.GetCurrentUser() == null) {
+                        if ((command.RequireLogin() || command.RequireAdmin()) && userManager.GetCurrentUser() == null) {
                             LogHelper.Log(LogType.Error, "Je moet ingelogd zijn om dit command te gebruiken.");
                             continue;
                         }

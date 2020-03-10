@@ -7,7 +7,7 @@ using Project.Services;
 
 namespace Project.Commands {
 
-    class LoginUser : Command {
+    class UserLogin : Command {
 
         public override string GetCategory() {
             return "user";
