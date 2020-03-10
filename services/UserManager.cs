@@ -33,6 +33,19 @@ namespace Project.Services {
             }
 
             LogHelper.Log(LogType.Info, "Loaded user database.");
+
+            // Creating default user if we need to
+            if (database.users.Count == 0) {
+                User admin = this.RegisterUser("Admin user", "admin", "admin", true);
+
+                if (admin == null) {
+                    LogHelper.Log(LogType.Error, "Failed to create default user");
+                    return;
+                }
+
+                this.SetCurrentUser(admin);
+                LogHelper.Log(LogType.Warning, "Created default admin user, please configure it.");
+            }
         }
 
         public override void Unload() {
@@ -61,7 +74,8 @@ namespace Project.Services {
 
         public User RegisterUser(string fullName, string username, string password, bool admin) {
             int id = database.GetNewId("users");
-            User user = new User(id, fullName, username, password, admin);
+            string hashedPassword = EncryptionHelper.CreateHash(password);
+            User user = new User(id, fullName, username, hashedPassword, admin);
 
             // Validate
             if(!user.Validate()) {

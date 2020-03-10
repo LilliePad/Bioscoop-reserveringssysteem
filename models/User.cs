@@ -1,4 +1,5 @@
 ﻿using Project.Base;
+using Project.Helpers;
 
 namespace Project.Models {
 
@@ -19,7 +20,8 @@ namespace Project.Models {
         }
 
         public bool Authenticate(string password) {
-            return this.password.Equals(password);
+            string hash = EncryptionHelper.CreateHash(password);
+            return this.password.Equals(hash);
         }
 
     }
