@@ -20,7 +20,7 @@ namespace Project.Services {
         // Start listening for commands
         public override void Load() {
             Program app = Program.GetInstance();
-            UserManager userManager = app.getService<UserManager>("users");
+            UserManager userManager = app.GetService<UserManager>("users");
             string line;
 
             while ((line = Console.ReadLine()) != null && Program.GetInstance().IsRunning()) {

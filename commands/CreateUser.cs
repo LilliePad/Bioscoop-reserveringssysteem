@@ -1,4 +1,5 @@
-﻿using Project.Base;
+﻿using System.Collections.Generic;
+using Project.Base;
 using Project.Enums;
 using Project.Helpers;
 using Project.Models;
@@ -23,7 +24,7 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            UserManager userManager = app.getService<UserManager>("users");
+            UserManager userManager = app.GetService<UserManager>("users");
             User currentUser = userManager.GetCurrentUser();
 
             // Get input
@@ -40,11 +41,17 @@ namespace Project.Commands {
             // Try to register
             User user = userManager.RegisterUser(fullName, username, password, admin);
 
-            if (user != null) {
+            if (!user.HasErrors()) {
                 userManager.SetCurrentUser(user);
                 LogHelper.Log(LogType.Info, "Gebruiker succesvol aangemaakt en ingelogd.");
             } else {
-                LogHelper.Log(LogType.Info, "Kon gebruiker niet aanmaken.");
+                LogHelper.Log(LogType.Info, "Kon gebruiker niet aanmaken. Errors:");
+
+                foreach(KeyValuePair<string, List<string>> attribute in user.GetErrors()) {
+                    foreach(string error in attribute.Value) {
+                        LogHelper.Log(LogType.Error, attribute.Key + " -> " + error);
+                    }
+                }
             }
         }
 

@@ -24,8 +24,8 @@ namespace Project.Base {
 
         protected string AskQuestion(string questionText) {
             Program app = Program.GetInstance();
-            CommandManager commandManager = app.getService<CommandManager>("commands");
-            UserManager userManager = app.getService<UserManager>("users");
+            CommandManager commandManager = app.GetService<CommandManager>("commands");
+            UserManager userManager = app.GetService<UserManager>("users");
 
             LogHelper.Log(LogType.Info, questionText);
 

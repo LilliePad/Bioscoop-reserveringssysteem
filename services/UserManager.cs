@@ -77,13 +77,12 @@ namespace Project.Services {
             string hashedPassword = EncryptionHelper.CreateHash(password);
             User user = new User(id, fullName, username, hashedPassword, admin);
 
-            // Validate
-            if(!user.Validate()) {
-                return null;
+            // Validate and add if valid
+            if(user.Validate()) {
+                database.users.Add(user);
             }
 
-            // Add and return
-            database.users.Add(user);
+            // Return user
             return user;
         }
 

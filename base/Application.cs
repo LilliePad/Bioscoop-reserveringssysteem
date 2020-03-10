@@ -52,11 +52,11 @@ namespace Project.Base {
             System.Environment.Exit(1);
         }
 
-        public void registerService(Service service) {
+        public void RegisterService(Service service) {
             this.services.Add(service.getHandle(), service);
         }
 
-        public T getService<T>(string handle) {
+        public T GetService<T>(string handle) {
             Service service;
 
             if (!services.TryGetValue(handle, out service)) {

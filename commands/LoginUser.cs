@@ -23,7 +23,7 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            UserManager userManager = app.getService<UserManager>("users");
+            UserManager userManager = app.GetService<UserManager>("users");
             
             if(args.Length != 2) {
                 LogHelper.Log(LogType.Error, "Usage: user/login <username> <password>");

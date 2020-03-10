@@ -15,14 +15,14 @@ namespace Project {
 
         protected override void Load() {
             // Register users service
-            registerService(new UserManager());
+            RegisterService(new UserManager());
 
             // Register commands service
             CommandManager commandManager = new CommandManager();
             commandManager.RegisterCommand(new Stop());
             commandManager.RegisterCommand(new CreateUser());
             commandManager.RegisterCommand(new LoginUser());
-            registerService(commandManager);
+            RegisterService(commandManager);
         }
 
         protected override void Unload() {
