@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using Project.Base;
+using Project.Commands;
 using Project.Enums;
 using Project.Helpers;
 
@@ -23,7 +24,7 @@ namespace Project.Services {
             UserManager userManager = app.GetService<UserManager>("users");
             string line;
 
-            while ((line = Console.ReadLine()) != null && Program.GetInstance().IsRunning()) {
+            while (Program.GetInstance().IsRunning() && (line = Console.ReadLine()) != null) {
                 // Answer question
                 if (question != null) {
                     question.SetAnswer(line);
@@ -56,9 +57,13 @@ namespace Project.Services {
                         }
 
                         // Create thread which the command can block
-                        new Thread(() => {
+                        if(command is InteractiveCommand) {
+                            new Thread(() => {
+                                command.RunCommand(args);
+                            }).Start();
+                        } else {
                             command.RunCommand(args);
-                        }).Start();
+                        }
                     }
                 }
             }

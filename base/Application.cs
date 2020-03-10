@@ -11,13 +11,16 @@ namespace Project.Base {
         private bool running = false;
         private Dictionary<string, Service> services = new Dictionary<string, Service>();
 
+        // Called on load/unload
         protected abstract void Load();
         protected abstract void Unload();
 
+        // Returns whether the application is running
         public bool IsRunning() {
             return this.running;
         }
 
+        // Loads the application and its services
         public void Start() {
             if (this.IsRunning()) {
                 throw new Exception("Application is already running.");
@@ -35,6 +38,7 @@ namespace Project.Base {
             }
         }
 
+        // Unload all services and the application
         public void Stop() {
             if (!this.IsRunning()) {
                 throw new Exception("Application is not running.");
@@ -49,13 +53,14 @@ namespace Project.Base {
             this.Unload();
 
             this.running = false;
-            System.Environment.Exit(1);
         }
 
+        // Register a service
         public void RegisterService(Service service) {
             this.services.Add(service.getHandle(), service);
         }
 
+        // Returns a service by its handle
         public T GetService<T>(string handle) {
             Service service;
 

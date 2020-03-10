@@ -8,7 +8,7 @@ using Project.Services;
 
 namespace Project.Commands {
 
-    class UserCreate : Command {
+    class UserCreate : InteractiveCommand {
 
         public override string GetCategory() {
             return "user";
