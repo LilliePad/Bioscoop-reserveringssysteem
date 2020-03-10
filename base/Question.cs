@@ -5,6 +5,8 @@
         private string question;
         private string answer;
 
+        private object answerLock = new object();
+
         public Question(string question) {
             this.question = question;
         }
@@ -14,11 +16,15 @@
         }
 
         public string GetAnswer() {
-            return this.answer;
+            lock(this.answerLock) {
+                return this.answer;
+            }
         }
 
         public void SetAnswer(string answer) {
-            this.answer = answer;
+            lock (this.answerLock) {
+                this.answer = answer;
+            }
         }
 
     }
