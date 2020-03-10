@@ -56,11 +56,12 @@ namespace Project.Services {
                             continue;
                         }
 
-                        // Create thread which the command can block
+                        // Create thread to be blocked while waiting for an answer
                         if(command is InteractiveCommand) {
                             new Thread(() => {
                                 command.RunCommand(args);
                             }).Start();
+                        // Run command code on main thread
                         } else {
                             command.RunCommand(args);
                         }
