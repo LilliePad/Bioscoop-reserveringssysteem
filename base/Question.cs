@@ -5,7 +5,7 @@
         private string question;
         private string answer;
 
-        private object answerLock = new object();
+        private readonly object answerLock = new object();
 
         public Question(string question) {
             this.question = question;
