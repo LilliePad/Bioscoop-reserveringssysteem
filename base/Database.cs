@@ -6,7 +6,7 @@ namespace Project.Base {
 
     abstract class Database {
 
-        private Dictionary<string, int> newIds = new Dictionary<string, int>();
+        public Dictionary<string, int> newIds { get; set; } = new Dictionary<string, int>();
 
         public abstract string GetFileName();
 

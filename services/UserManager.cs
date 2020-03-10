@@ -1,4 +1,5 @@
-﻿using Project.Base;
+﻿using System.Collections.Generic;
+using Project.Base;
 using Project.Data;
 using Project.Enums;
 using Project.Helpers;
@@ -41,6 +42,10 @@ namespace Project.Services {
             LogHelper.Log(LogType.Info, "Saved user database.");
         }
 
+        public IList<User> GetUsers() {
+            return database.users;
+        }
+
         public bool RegisterUser(string fullName, string username, string password, bool admin) {
             int id = database.GetNewId("users");
             User user = new User(id, fullName, username, password, admin);
@@ -51,7 +56,7 @@ namespace Project.Services {
             }
 
             // Add and return
-            database.AddUser(user);
+            database.users.Add(user);
             return true;
         }
 

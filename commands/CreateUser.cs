@@ -25,8 +25,8 @@ namespace Project.Commands {
                 return;
             }
 
-            string answer = askQuestion("test 123?");
-            LogHelper.Log(LogType.Info, "Answer: " + answer);
+            //string answer = askQuestion("test 123?");
+            //LogHelper.Log(LogType.Info, "Answer: " + answer);
 
             if (userManager.RegisterUser(args[0], args[1], args[2], false)) {
                 LogHelper.Log(LogType.Info, "Gebruiker succesvol aangemaakt.");

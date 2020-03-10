@@ -6,22 +6,10 @@ namespace Project.Data {
 
     class UserDatabase : Database {
 
-        public List<User> users = new List<User>();
+        public IList<User> users { get; set; } = new List<User>();
 
         public override string GetFileName() {
             return "users";
-        }
-
-        public List<User> GetUsers() {
-            return this.users;
-        }
-
-        public void AddUser(User user) {
-            users.Add(user);
-        }
-
-        public void RemoveUser(User user) {
-            users.Remove(user);
         }
 
     }
