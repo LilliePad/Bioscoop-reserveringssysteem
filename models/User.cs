@@ -18,6 +18,10 @@ namespace Project.Models {
             this.admin = admin;
         }
 
+        public bool Authenticate(string password) {
+            return this.password.Equals(password);
+        }
+
     }
 
 }

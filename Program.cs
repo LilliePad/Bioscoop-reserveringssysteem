@@ -21,6 +21,7 @@ namespace Project {
             CommandManager commandManager = new CommandManager();
             commandManager.RegisterCommand(new Stop());
             commandManager.RegisterCommand(new CreateUser());
+            commandManager.RegisterCommand(new LoginUser());
             registerService(commandManager);
         }
 

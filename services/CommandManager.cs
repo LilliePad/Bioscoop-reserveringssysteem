@@ -19,6 +19,8 @@ namespace Project.Services {
 
         // Start listening for commands
         public override void Load() {
+            Program app = Program.GetInstance();
+            UserManager userManager = app.getService<UserManager>("users");
             string line;
 
             while ((line = Console.ReadLine()) != null && Program.GetInstance().IsRunning()) {
@@ -40,6 +42,16 @@ namespace Project.Services {
 
                         if (!commands.TryGetValue(name, out command)) {
                             LogHelper.Log(LogType.Error, "Unknown command");
+                            continue;
+                        }
+
+                        if (command.RequireLogin() && userManager.GetCurrentUser() == null) {
+                            LogHelper.Log(LogType.Error, "Je moet ingelogd zijn om dit command te gebruiken.");
+                            continue;
+                        }
+
+                        if (command.RequireAdmin() && !userManager.GetCurrentUser().admin) {
+                            LogHelper.Log(LogType.Error, "Je moet admin zijn om dit command te gebruiken.");
                             continue;
                         }
 

@@ -14,13 +14,18 @@ namespace Project.Base {
             return null;
         }
 
+        public virtual bool RequireLogin() {
+            return true;
+        }
+
         public virtual bool RequireAdmin() {
             return false;
         }
 
-        protected string askQuestion(string questionText) {
+        protected string AskQuestion(string questionText) {
             Program app = Program.GetInstance();
             CommandManager commandManager = app.getService<CommandManager>("commands");
+            UserManager userManager = app.getService<UserManager>("users");
 
             LogHelper.Log(LogType.Info, questionText);
 
@@ -28,13 +33,9 @@ namespace Project.Base {
             Question question = new Question(questionText);
             commandManager.SetQuestion(question);
 
-            LogHelper.Log(LogType.Debug, "Waiting for answer...");
-
             while(question.GetAnswer() == null) {
                 Thread.Sleep(1);
             }
-
-            LogHelper.Log(LogType.Debug, "Got answer.");
 
             return question.GetAnswer();
         }

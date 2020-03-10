@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Project.Base;
 using Project.Data;
 using Project.Enums;
@@ -11,6 +13,9 @@ namespace Project.Services {
 
         // Database
         private UserDatabase database;
+
+        // Current user
+        private User currentUser;
 
         public override string getHandle() {
             return "users";
@@ -46,18 +51,34 @@ namespace Project.Services {
             return database.users;
         }
 
-        public bool RegisterUser(string fullName, string username, string password, bool admin) {
+        public User GetUserByUsername(string username) {
+            try {
+                return GetUsers().Where(user => user.username.Equals(username)).First();
+            } catch(InvalidOperationException) {
+                return null;
+            }
+        }
+
+        public User RegisterUser(string fullName, string username, string password, bool admin) {
             int id = database.GetNewId("users");
             User user = new User(id, fullName, username, password, admin);
 
             // Validate
             if(!user.Validate()) {
-                return false;
+                return null;
             }
 
             // Add and return
             database.users.Add(user);
-            return true;
+            return user;
+        }
+
+        public User GetCurrentUser() {
+            return currentUser;
+        }
+
+        public void SetCurrentUser(User currentUser) {
+            this.currentUser = currentUser;
         }
 
     }

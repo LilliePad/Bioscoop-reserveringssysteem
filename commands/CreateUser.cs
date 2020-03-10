@@ -1,6 +1,7 @@
 ﻿using Project.Base;
 using Project.Enums;
 using Project.Helpers;
+using Project.Models;
 using Project.Services;
 
 
@@ -12,6 +13,10 @@ namespace Project.Commands {
             return "user";
         }
 
+        public override bool RequireLogin() {
+            return false;
+        }
+
         public override string GetName() {
             return "create";
         }
@@ -19,17 +24,25 @@ namespace Project.Commands {
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
             UserManager userManager = app.getService<UserManager>("users");
+            User currentUser = userManager.GetCurrentUser();
 
-            if(args.Length < 3) {
-                LogHelper.Log(LogType.Error, "Usage: user/create <fullName> <username> <password>");
-                return;
+            // Get input
+            string fullName = AskQuestion("Wat is uw volledige naam?");
+            string username = AskQuestion("Welke username wilt u gebruiken?");
+            string password = AskQuestion("Welk wachtwoord wilt u gebruiken?");
+            bool admin = false;
+
+            if(currentUser != null && currentUser.admin) {
+                string adminValue = AskQuestion("Moet deze gebruiker een admin worden (ja/nee)?");
+                admin = adminValue.ToLower() == "ja" ? true : false;
             }
 
-            //string answer = askQuestion("test 123?");
-            //LogHelper.Log(LogType.Info, "Answer: " + answer);
+            // Try to register
+            User user = userManager.RegisterUser(fullName, username, password, admin);
 
-            if (userManager.RegisterUser(args[0], args[1], args[2], false)) {
-                LogHelper.Log(LogType.Info, "Gebruiker succesvol aangemaakt.");
+            if (user != null) {
+                userManager.SetCurrentUser(user);
+                LogHelper.Log(LogType.Info, "Gebruiker succesvol aangemaakt en ingelogd.");
             } else {
                 LogHelper.Log(LogType.Info, "Kon gebruiker niet aanmaken.");
             }
