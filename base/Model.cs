@@ -4,12 +4,15 @@ namespace Project.Base {
 
     class Model {
 
+        // List of validation errors
         private Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();
 
+        // Validates the model
         public virtual bool Validate() {
             return true;
         }
 
+        // Adds an error to this model
         public void AddError(string attribute, string error) {
             List<string> errors = this.GetErrors(attribute);
 
@@ -20,10 +23,12 @@ namespace Project.Base {
             }
         }
 
+        // Returns all errors
         public Dictionary<string, List<string>> GetErrors() {
             return this.errors;
         }
 
+        // Returns all errors for the specified attribute
         public List<string> GetErrors(string attribute) {
             List<string> errors;
 
@@ -35,6 +40,7 @@ namespace Project.Base {
             return errors;
         }
 
+        // Returns whether this model has valiation errors
         public bool HasErrors() {
             return this.errors.Count > 0;
         }

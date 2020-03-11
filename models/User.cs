@@ -6,11 +6,11 @@ namespace Project.Models {
 
     class User : Model {
 
-        public int id { get; }
-        public string fullName { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public bool admin { get; set; }
+        public int id;
+        public string fullName;
+        public string username;
+        public string password;
+        public bool admin;
 
         public User(int id, string fullName, string username, string password, bool admin) {
             this.id = id;
@@ -46,6 +46,7 @@ namespace Project.Models {
             return true;
         }
 
+        // Returns whether the specified password is correct
         public bool Authenticate(string password) {
             string hash = EncryptionHelper.CreateHash(password);
             return this.password.Equals(hash);

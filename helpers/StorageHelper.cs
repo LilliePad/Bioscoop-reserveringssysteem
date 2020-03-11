@@ -6,6 +6,7 @@ namespace Project.Helpers {
 
     class StorageHelper {
 
+        // Fill an objects properties from a json file
         public static void LoadFile(string category, string fileName, object obj) {
             StorageFile file = new StorageFile(category, fileName);
 
@@ -21,6 +22,7 @@ namespace Project.Helpers {
             JsonConvert.PopulateObject(json, obj);
         }
 
+        // Saves the object properties to a file
         public static void SaveFile(string category, string fileName, object obj) {
             StorageFile file = new StorageFile(category, fileName);
             string json = JsonConvert.SerializeObject(obj);
@@ -31,6 +33,7 @@ namespace Project.Helpers {
                 File.Create(file.location).Close();
             }
 
+            // Write contents
             File.WriteAllText(file.location, json);
         }
 

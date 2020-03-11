@@ -6,10 +6,14 @@ namespace Project.Base {
 
     abstract class Database {
 
+        // List to keep track of the used ids
+        // You can get a new unique id using GetNewId()
         public Dictionary<string, int> newIds { get; set; } = new Dictionary<string, int>();
 
+        // Returns the name of the database file
         public abstract string GetFileName();
 
+        // Loads the database file into this object
         public bool Load() {
             try {
                 StorageHelper.LoadFile("data", this.GetFileName(), this);
@@ -19,6 +23,7 @@ namespace Project.Base {
             }
         }
 
+        // Saves this object into the database file
         public bool Save() {
             try {
                 StorageHelper.SaveFile("data", this.GetFileName(), this);
@@ -28,6 +33,7 @@ namespace Project.Base {
             }
         }
 
+        // Returns a new unique id for the specified category
         public int GetNewId(string category) {
             if(category == null) {
                 category = "__global__";

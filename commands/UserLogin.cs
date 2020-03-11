@@ -25,22 +25,24 @@ namespace Project.Commands {
             Program app = Program.GetInstance();
             UserManager userManager = app.GetService<UserManager>("users");
             
+            // Check args length
             if(args.Length != 2) {
-                LogHelper.Log(LogType.Error, "Usage: user/login <username> <password>");
+                ConsoleHelper.Print(LogType.Error, "Usage: user/login <username> <password>");
                 return;
             }
 
             // Find user
             User user = userManager.GetUserByUsername(args[0]);
 
+            // Error if user or password invalid
             if(user == null || !user.Authenticate(args[1])) {
-                LogHelper.Log(LogType.Error, "Ongeldige gebruikersnaam en wachtwoord combinatie.");
+                ConsoleHelper.Print(LogType.Error, "Ongeldige gebruikersnaam en wachtwoord combinatie.");
                 return;
             }
 
             // Everything ok, login
             userManager.SetCurrentUser(user);
-            LogHelper.Log(LogType.Info, "Succesvol ingelogd.");
+            ConsoleHelper.Print(LogType.Info, "Succesvol ingelogd.");
         }
 
     }

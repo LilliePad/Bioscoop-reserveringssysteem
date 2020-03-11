@@ -11,19 +11,22 @@ namespace Project.Services {
 
     class CommandManager : Service {
 
+        // All registered commands
         private readonly Dictionary<String, Command> commands = new Dictionary<String, Command>();
+
+        // The current question
         private Question question;
 
         public override string getHandle() {
             return "commands";
         }
 
-        // Start listening for commands
         public override void Load() {
             Program app = Program.GetInstance();
             UserManager userManager = app.GetService<UserManager>("users");
             string line;
 
+            // Start listening for commands
             while (Program.GetInstance().IsRunning() && (line = Console.ReadLine()) != null) {
                 // Answer question
                 if (question != null) {
@@ -41,18 +44,21 @@ namespace Project.Services {
                         // Find command
                         Command command;
 
+                        // Check if command exists
                         if (!commands.TryGetValue(name, out command)) {
-                            LogHelper.Log(LogType.Error, "Unknown command");
+                            ConsoleHelper.Print(LogType.Error, "Unknown command");
                             continue;
                         }
 
+                        // Check if the user is logged in
                         if ((command.RequireLogin() || command.RequireAdmin()) && userManager.GetCurrentUser() == null) {
-                            LogHelper.Log(LogType.Error, "Je moet ingelogd zijn om dit command te gebruiken.");
+                            ConsoleHelper.Print(LogType.Error, "Je moet ingelogd zijn om dit command te gebruiken.");
                             continue;
                         }
 
+                        // Check if the user is an admin
                         if (command.RequireAdmin() && !userManager.GetCurrentUser().admin) {
-                            LogHelper.Log(LogType.Error, "Je moet admin zijn om dit command te gebruiken.");
+                            ConsoleHelper.Print(LogType.Error, "Je moet admin zijn om dit command te gebruiken.");
                             continue;
                         }
 
@@ -76,8 +82,13 @@ namespace Project.Services {
             commands.Add(name, command);
         }
 
-        public void SetQuestion(Question question) {
+        public bool SetQuestion(Question question) {
+            if(this.question != null) {
+                return false;
+            }
+
             this.question = question;
+            return true;
         }
 
     }

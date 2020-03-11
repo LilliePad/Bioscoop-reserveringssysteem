@@ -52,6 +52,7 @@ namespace Project.Base {
             // Unload app
             this.Unload();
 
+            // Set running to false to stop any running loops
             this.running = false;
         }
 
@@ -64,11 +65,13 @@ namespace Project.Base {
         public T GetService<T>(string handle) {
             Service service;
 
+            // Return empty value if service does not exist
             if (!services.TryGetValue(handle, out service)) {
                 return default(T);
             }
 
-            return (T)Convert.ChangeType(service, typeof(T));
+            // Cast service and return
+            return (T) Convert.ChangeType(service, typeof(T));
         }
 
     }

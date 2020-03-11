@@ -6,6 +6,7 @@ namespace Project {
 
     class Program : Application {
 
+        // Main class instance
         private static Program instance;
 
         static void Main(string[] args) {
@@ -30,6 +31,7 @@ namespace Project {
 
         }
 
+        // Returns the main class instance
         public static Program GetInstance() {
             return instance;
         }

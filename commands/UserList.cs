@@ -24,10 +24,11 @@ namespace Project.Commands {
             Program app = Program.GetInstance();
             UserManager userManager = app.GetService<UserManager>("users");
 
-            LogHelper.Log(LogType.Info, "User list (id - username - fullname - admin):");
+            ConsoleHelper.Print(LogType.Info, "User list (id - username - fullname - admin):");
 
+            // Print users
             foreach(User user in userManager.GetUsers()) {
-                LogHelper.Log(LogType.Info, user.id + " - " + user.username + " - " + user.fullName + " - " + user.admin);
+                ConsoleHelper.Print(LogType.Info, user.id + " - " + user.username + " - " + user.fullName + " - " + user.admin);
             }
         }
 

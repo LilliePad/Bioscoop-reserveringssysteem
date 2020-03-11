@@ -33,6 +33,7 @@ namespace Project.Commands {
             string password = AskQuestion("Welk wachtwoord wilt u gebruiken?");
             bool admin = false;
 
+            // Get extra input if the user is an admin
             if(currentUser != null && currentUser.admin) {
                 string adminValue = AskQuestion("Moet deze gebruiker een admin worden (ja/nee)?");
                 admin = adminValue.ToLower() == "ja" ? true : false;
@@ -41,15 +42,17 @@ namespace Project.Commands {
             // Try to register
             User user = userManager.RegisterUser(fullName, username, password, admin);
 
+            // Login if registration successful
             if (!user.HasErrors()) {
                 userManager.SetCurrentUser(user);
-                LogHelper.Log(LogType.Info, "Gebruiker succesvol aangemaakt en ingelogd.");
+                ConsoleHelper.Print(LogType.Info, "Gebruiker succesvol aangemaakt en ingelogd.");
             } else {
-                LogHelper.Log(LogType.Info, "Kon gebruiker niet aanmaken. Errors:");
+                ConsoleHelper.Print(LogType.Info, "Kon gebruiker niet aanmaken. Errors:");
 
+                // Print errors
                 foreach(KeyValuePair<string, List<string>> attribute in user.GetErrors()) {
                     foreach(string error in attribute.Value) {
-                        LogHelper.Log(LogType.Error, attribute.Key + " -> " + error);
+                        ConsoleHelper.Print(LogType.Error, attribute.Key + " -> " + error);
                     }
                 }
             }

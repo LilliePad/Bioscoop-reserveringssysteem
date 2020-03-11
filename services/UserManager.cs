@@ -14,7 +14,7 @@ namespace Project.Services {
         // Database
         private UserDatabase database;
 
-        // Current user
+        // Current user (logged in user)
         private User currentUser;
 
         public override string getHandle() {
@@ -24,46 +24,48 @@ namespace Project.Services {
         public override void Load() {
             database = new UserDatabase();
 
-            LogHelper.Log(LogType.Info, "Loading user database...");
+            ConsoleHelper.Print(LogType.Info, "Loading user database...");
 
             // Try to load
             if (!database.Load()) {
-                LogHelper.Log(LogType.Error, "Failed to load users");
+                ConsoleHelper.Print(LogType.Error, "Failed to load users");
                 return;
             }
 
-            LogHelper.Log(LogType.Info, "Loaded user database.");
+            ConsoleHelper.Print(LogType.Info, "Loaded user database.");
 
             // Creating default user if we need to
             if (database.users.Count == 0) {
                 User admin = this.RegisterUser("Admin user", "admin", "admin", true);
 
                 if (admin == null) {
-                    LogHelper.Log(LogType.Error, "Failed to create default user");
+                    ConsoleHelper.Print(LogType.Error, "Failed to create default user");
                     return;
                 }
 
                 this.SetCurrentUser(admin);
-                LogHelper.Log(LogType.Warning, "Created default admin user, please configure it.");
+                ConsoleHelper.Print(LogType.Warning, "Created default admin user, please configure it.");
             }
         }
 
         public override void Unload() {
-            LogHelper.Log(LogType.Info, "Saving user database...");
+            ConsoleHelper.Print(LogType.Info, "Saving user database...");
 
             // Try to save
             if (!database.Save()) {
-                LogHelper.Log(LogType.Error, "Failed to save user database.");
+                ConsoleHelper.Print(LogType.Error, "Failed to save user database.");
                 return;
             }
 
-            LogHelper.Log(LogType.Info, "Saved user database.");
+            ConsoleHelper.Print(LogType.Info, "Saved user database.");
         }
 
-        public IList<User> GetUsers() {
+        // Returns all users
+        public List<User> GetUsers() {
             return database.users;
         }
 
+        // Returns a user by its username
         public User GetUserByUsername(string username) {
             try {
                 return GetUsers().Where(user => user.username.Equals(username)).First();
@@ -72,6 +74,7 @@ namespace Project.Services {
             }
         }
 
+        // Tries to create a new user with the specified params 
         public User RegisterUser(string fullName, string username, string password, bool admin) {
             int id = database.GetNewId("users");
             string hashedPassword = EncryptionHelper.CreateHash(password);
@@ -86,10 +89,12 @@ namespace Project.Services {
             return user;
         }
 
+        // Returns current user
         public User GetCurrentUser() {
             return currentUser;
         }
 
+        // Sets the current user
         public void SetCurrentUser(User currentUser) {
             this.currentUser = currentUser;
         }
