@@ -6,13 +6,20 @@ namespace Project.Models {
 
     class User : Model {
 
-        public int id;
+        public int id = -1;
         public string fullName;
         public string username;
         public string password;
         public bool admin;
 
-        public User(int id, string fullName, string username, string password, bool admin) {
+        public User(string fullName, string username, string password, bool admin) {
+            this.fullName = fullName;
+            this.username = username;
+            this.password = password;
+            this.admin = admin;
+        }
+
+        private User(int id, string fullName, string username, string password, bool admin) {
             this.id = id;
             this.fullName = fullName;
             this.username = username;
@@ -33,7 +40,9 @@ namespace Project.Models {
                 return false;
             }
 
-            if (userManager.GetUserByUsername(username) != null) {
+            User existing = userManager.GetUserByUsername(username);
+
+            if (existing != null && existing.id != id) {
                 this.AddError("username", "Username is al in gebruik.");
                 return false;
             }
@@ -50,6 +59,10 @@ namespace Project.Models {
         public bool Authenticate(string password) {
             string hash = EncryptionHelper.CreateHash(password);
             return this.password.Equals(hash);
+        }
+
+        public User Clone() {
+            return new User(id, fullName, username, password, admin);
         }
 
     }

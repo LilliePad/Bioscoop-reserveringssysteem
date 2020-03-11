@@ -35,15 +35,16 @@ namespace Project.Commands {
 
             // Get extra input if the user is an admin
             if(currentUser != null && currentUser.admin) {
-                string adminValue = AskQuestion("Moet deze gebruiker een admin worden (ja/nee)?");
-                admin = adminValue.ToLower() == "ja" ? true : false;
+                string adminValue = AskQuestion("Moet deze gebruiker een admin worden?", Question.OPTIONS_BOOL, Question.OPTION_NO);
+                admin = adminValue == Question.OPTION_YES ? true : false;
             }
 
             // Try to register
-            User user = userManager.RegisterUser(fullName, username, password, admin);
+            string hashedPassword = EncryptionHelper.CreateHash(password);
+            User user = new User(fullName, username, hashedPassword, admin);
 
             // Login if registration successful
-            if (!user.HasErrors()) {
+            if (userManager.SaveUser(user)) {
                 userManager.SetCurrentUser(user);
                 ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol aangemaakt en ingelogd.");
             } else {

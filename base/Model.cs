@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Project.Base {
 
-    class Model {
+    abstract class Model {
 
         // List of validation errors
         private Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();

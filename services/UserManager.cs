@@ -36,9 +36,9 @@ namespace Project.Services {
 
             // Creating default user if we need to
             if (database.users.Count == 0) {
-                User admin = this.RegisterUser("Admin user", "admin", "admin", true);
+                User admin = new User("Admin user", "admin", "admin", true);
 
-                if (admin == null) {
+                if (!this.SaveUser(admin)) {
                     ConsoleHelper.Print(PrintType.Error, "Failed to create default user");
                     return;
                 }
@@ -62,36 +62,52 @@ namespace Project.Services {
 
         // Returns all users
         public List<User> GetUsers() {
-            return database.users;
+            List<User> clonedList = new List<User>();
+
+            foreach(User user in database.users) {
+                clonedList.Add(user.Clone());
+            }
+
+            return clonedList;
         }
 
         // Returns a user by its username
         public User GetUserByUsername(string username) {
             try {
-                return GetUsers().Where(user => user.username.Equals(username)).First();
+                User user = GetUsers().Where(i => i.username.Equals(username)).First();
+                return user.Clone();
             } catch(InvalidOperationException) {
                 return null;
             }
         }
 
-        // Tries to create a new user with the specified params 
-        public User RegisterUser(string fullName, string username, string password, bool admin) {
-            int id = database.GetNewId("users");
-            string hashedPassword = EncryptionHelper.CreateHash(password);
-            User user = new User(id, fullName, username, hashedPassword, admin);
+        // Saves the specified user
+        public bool SaveUser(User user) {
+            bool isNew = user.id == -1;
 
-            // Validate and add if valid
-            if(user.Validate()) {
-                database.users.Add(user);
+            // Set id if its a new user
+            if (isNew) {
+                user.id = database.GetNewId("users");
             }
 
-            // Return user
-            return user;
+            // Validate and add if valid
+            if(!user.Validate()) {
+                return false;
+            }
+
+            // Find and remove existing object
+            User current = database.users.SingleOrDefault(i => i.id == user.id);
+            database.users.Remove(current);
+
+            // Add new object
+            database.users.Add(user);
+
+            return true;
         }
 
         // Returns current user
         public User GetCurrentUser() {
-            return currentUser;
+            return currentUser.Clone();
         }
 
         // Sets the current user
