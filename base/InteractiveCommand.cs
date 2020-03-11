@@ -14,7 +14,7 @@ namespace Project.Base {
             CommandManager commandManager = app.GetService<CommandManager>("commands");
             UserManager userManager = app.GetService<UserManager>("users");
 
-            ConsoleHelper.Print(LogType.Info, questionText);
+            ConsoleHelper.Print(PrintType.Info, questionText);
 
             // Create question and wait for an answer
             Question question = new Question(questionText);

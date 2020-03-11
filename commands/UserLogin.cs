@@ -27,7 +27,7 @@ namespace Project.Commands {
             
             // Check args length
             if(args.Length != 2) {
-                ConsoleHelper.Print(LogType.Error, "Usage: user/login <username> <password>");
+                ConsoleHelper.Print(PrintType.Error, "Usage: user/login <username> <password>");
                 return;
             }
 
@@ -36,13 +36,13 @@ namespace Project.Commands {
 
             // Error if user or password invalid
             if(user == null || !user.Authenticate(args[1])) {
-                ConsoleHelper.Print(LogType.Error, "Ongeldige gebruikersnaam en wachtwoord combinatie.");
+                ConsoleHelper.Print(PrintType.Error, "Ongeldige gebruikersnaam en wachtwoord combinatie.");
                 return;
             }
 
             // Everything ok, login
             userManager.SetCurrentUser(user);
-            ConsoleHelper.Print(LogType.Info, "Succesvol ingelogd.");
+            ConsoleHelper.Print(PrintType.Info, "Succesvol ingelogd.");
         }
 
     }

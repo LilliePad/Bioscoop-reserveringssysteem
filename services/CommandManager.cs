@@ -46,19 +46,19 @@ namespace Project.Services {
 
                         // Check if command exists
                         if (!commands.TryGetValue(name, out command)) {
-                            ConsoleHelper.Print(LogType.Error, "Unknown command");
+                            ConsoleHelper.Print(PrintType.Error, "Unknown command");
                             continue;
                         }
 
                         // Check if the user is logged in
                         if ((command.RequireLogin() || command.RequireAdmin()) && userManager.GetCurrentUser() == null) {
-                            ConsoleHelper.Print(LogType.Error, "Je moet ingelogd zijn om dit command te gebruiken.");
+                            ConsoleHelper.Print(PrintType.Error, "Je moet ingelogd zijn om dit command te gebruiken.");
                             continue;
                         }
 
                         // Check if the user is an admin
                         if (command.RequireAdmin() && !userManager.GetCurrentUser().admin) {
-                            ConsoleHelper.Print(LogType.Error, "Je moet admin zijn om dit command te gebruiken.");
+                            ConsoleHelper.Print(PrintType.Error, "Je moet admin zijn om dit command te gebruiken.");
                             continue;
                         }
 

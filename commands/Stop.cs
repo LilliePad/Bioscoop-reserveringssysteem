@@ -15,7 +15,7 @@ namespace Project.Commands {
         }
 
         public override void RunCommand(string[] args) {
-            ConsoleHelper.Print(LogType.Info, "Stopping application...");
+            ConsoleHelper.Print(PrintType.Info, "Stopping application...");
             Program.GetInstance().Stop();
         }
 

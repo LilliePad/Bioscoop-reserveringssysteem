@@ -45,14 +45,14 @@ namespace Project.Commands {
             // Login if registration successful
             if (!user.HasErrors()) {
                 userManager.SetCurrentUser(user);
-                ConsoleHelper.Print(LogType.Info, "Gebruiker succesvol aangemaakt en ingelogd.");
+                ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol aangemaakt en ingelogd.");
             } else {
-                ConsoleHelper.Print(LogType.Info, "Kon gebruiker niet aanmaken. Errors:");
+                ConsoleHelper.Print(PrintType.Info, "Kon gebruiker niet aanmaken. Errors:");
 
                 // Print errors
                 foreach(KeyValuePair<string, List<string>> attribute in user.GetErrors()) {
                     foreach(string error in attribute.Value) {
-                        ConsoleHelper.Print(LogType.Error, attribute.Key + " -> " + error);
+                        ConsoleHelper.Print(PrintType.Error, attribute.Key + " -> " + error);
                     }
                 }
             }

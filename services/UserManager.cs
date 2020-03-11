@@ -24,40 +24,40 @@ namespace Project.Services {
         public override void Load() {
             database = new UserDatabase();
 
-            ConsoleHelper.Print(LogType.Info, "Loading user database...");
+            ConsoleHelper.Print(PrintType.Info, "Loading user database...");
 
             // Try to load
             if (!database.Load()) {
-                ConsoleHelper.Print(LogType.Error, "Failed to load users");
+                ConsoleHelper.Print(PrintType.Error, "Failed to load users");
                 return;
             }
 
-            ConsoleHelper.Print(LogType.Info, "Loaded user database.");
+            ConsoleHelper.Print(PrintType.Info, "Loaded user database.");
 
             // Creating default user if we need to
             if (database.users.Count == 0) {
                 User admin = this.RegisterUser("Admin user", "admin", "admin", true);
 
                 if (admin == null) {
-                    ConsoleHelper.Print(LogType.Error, "Failed to create default user");
+                    ConsoleHelper.Print(PrintType.Error, "Failed to create default user");
                     return;
                 }
 
                 this.SetCurrentUser(admin);
-                ConsoleHelper.Print(LogType.Warning, "Created default admin user, please configure it.");
+                ConsoleHelper.Print(PrintType.Warning, "Created default admin user, please configure it.");
             }
         }
 
         public override void Unload() {
-            ConsoleHelper.Print(LogType.Info, "Saving user database...");
+            ConsoleHelper.Print(PrintType.Info, "Saving user database...");
 
             // Try to save
             if (!database.Save()) {
-                ConsoleHelper.Print(LogType.Error, "Failed to save user database.");
+                ConsoleHelper.Print(PrintType.Error, "Failed to save user database.");
                 return;
             }
 
-            ConsoleHelper.Print(LogType.Info, "Saved user database.");
+            ConsoleHelper.Print(PrintType.Info, "Saved user database.");
         }
 
         // Returns all users
