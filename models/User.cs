@@ -1,5 +1,6 @@
 ﻿using Project.Base;
 using Project.Helpers;
+using Project.Records;
 using Project.Services;
 
 namespace Project.Models {
@@ -11,6 +12,14 @@ namespace Project.Models {
         public string username;
         public string password;
         public bool admin;
+
+        public User(UserRecord record) {
+            this.id = record.id;
+            this.fullName = record.fullName;
+            this.username = record.username;
+            this.password = record.password;
+            this.admin = record.admin;
+        }
 
         public User(string fullName, string username, string password, bool admin) {
             this.fullName = fullName;
@@ -59,10 +68,6 @@ namespace Project.Models {
         public bool Authenticate(string password) {
             string hash = EncryptionHelper.CreateHash(password);
             return this.password.Equals(hash);
-        }
-
-        public User Clone() {
-            return new User(id, fullName, username, password, admin);
         }
 
     }

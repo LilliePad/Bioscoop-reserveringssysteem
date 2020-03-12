@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Project.Base;
-using Project.Models;
+using Project.Records;
 
 namespace Project.Data {
 
     class UserDatabase : Database {
 
-        public List<User> users = new List<User>();
+        public List<UserRecord> users = new List<UserRecord>();
 
         public override string GetFileName() {
             return "users";

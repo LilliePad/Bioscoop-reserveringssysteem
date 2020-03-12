@@ -6,6 +6,7 @@ using Project.Data;
 using Project.Enums;
 using Project.Helpers;
 using Project.Models;
+using Project.Records;
 
 namespace Project.Services {
 
@@ -62,20 +63,19 @@ namespace Project.Services {
 
         // Returns all users
         public List<User> GetUsers() {
-            List<User> clonedList = new List<User>();
+            List<User> models = new List<User>();
 
-            foreach(User user in database.users) {
-                clonedList.Add(user.Clone());
+            foreach(UserRecord record in database.users) {
+                models.Add(new User(record));
             }
 
-            return clonedList;
+            return models;
         }
 
         // Returns a user by its username
         public User GetUserByUsername(string username) {
             try {
-                User user = GetUsers().Where(i => i.username.Equals(username)).First();
-                return user.Clone();
+                return GetUsers().Where(i => i.username.Equals(username)).First();
             } catch(InvalidOperationException) {
                 return null;
             }
@@ -96,18 +96,18 @@ namespace Project.Services {
             }
 
             // Find and remove existing object
-            User current = database.users.SingleOrDefault(i => i.id == user.id);
+            UserRecord current = database.users.SingleOrDefault(i => i.id == user.id);
             database.users.Remove(current);
 
             // Add new object
-            database.users.Add(user);
+            database.users.Add(new UserRecord(user));
 
             return true;
         }
 
         // Returns current user
         public User GetCurrentUser() {
-            return currentUser.Clone();
+            return currentUser;
         }
 
         // Sets the current user

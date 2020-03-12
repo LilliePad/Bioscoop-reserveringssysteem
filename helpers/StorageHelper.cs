@@ -10,10 +10,8 @@ namespace Project.Helpers {
         public static void LoadFile(string category, string fileName, object obj) {
             StorageFile file = new StorageFile(category, fileName);
 
-            // Create file
+            // Ignore if file does not exist
             if(!File.Exists(file.location)) {
-                Directory.CreateDirectory(file.directory);
-                File.Create(file.location).Close();
                 return;
             }
 

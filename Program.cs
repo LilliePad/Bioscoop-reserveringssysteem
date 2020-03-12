@@ -25,6 +25,7 @@ namespace Project {
             commandManager.RegisterCommand(new UserLogin());
             commandManager.RegisterCommand(new UserList());
             commandManager.RegisterCommand(new UserEdit());
+            commandManager.RegisterCommand(new UserChangePassword());
             RegisterService(commandManager);
         }
 

@@ -14,7 +14,7 @@ namespace Project.Base {
             Question question = new Question(questionText, options, defaultValue);
 
             // Print question
-            ConsoleHelper.Print(PrintType.Info, question.GetMessage());
+            ConsoleHelper.Print(PrintType.Default, question.GetMessage());
 
             // Get answer and return
             return this.WaitForAnswer(question);
