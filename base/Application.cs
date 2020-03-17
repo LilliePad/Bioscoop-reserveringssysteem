@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Project.Enums;
-using Project.Helpers;
 
 namespace Project.Base {
 

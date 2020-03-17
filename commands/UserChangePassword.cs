@@ -6,7 +6,6 @@ using Project.Helpers;
 using Project.Models;
 using Project.Services;
 
-
 namespace Project.Commands {
 
     class UserChangePassword : InteractiveCommand {

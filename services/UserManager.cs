@@ -95,12 +95,21 @@ namespace Project.Services {
                 return false;
             }
 
-            // Find and remove existing object
-            UserRecord current = database.users.SingleOrDefault(i => i.id == user.id);
-            database.users.Remove(current);
+            // Find and remove existing record
+            UserRecord record = database.users.SingleOrDefault(i => i.id == user.id);
+            
+            // Add if no record exists
+            if(record == null) {
+                record = new UserRecord();
+                database.users.Add(record);
+            }
 
-            // Add new object
-            database.users.Add(new UserRecord(user));
+            // Update record
+            record.id = user.id;
+            record.fullName = user.fullName;
+            record.username = user.username;
+            record.password = user.password;
+            record.admin = user.admin;
 
             return true;
         }
