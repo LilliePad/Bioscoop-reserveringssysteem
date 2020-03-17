@@ -95,7 +95,7 @@ namespace Project.Services {
                 return false;
             }
 
-            // Find and remove existing record
+            // Find existing record
             UserRecord record = database.users.SingleOrDefault(i => i.id == user.id);
             
             // Add if no record exists
