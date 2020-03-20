@@ -28,8 +28,8 @@ namespace Project.Commands {
 
 
             // Get input
-            string Movie = AskQuestion("Wat is uw volledige naam?");
-            string Room = AskQuestion("Welke username wilt u gebruiken?");
+            string Movie = AskQuestion("wat is de naam van de film");
+            string Room = AskQuestion("wat is de room");
             string Time = AskQuestion("welke tijd is de film");
 
 

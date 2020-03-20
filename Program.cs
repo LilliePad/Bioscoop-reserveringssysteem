@@ -20,6 +20,8 @@ namespace Project {
 
             // Register commands service
             CommandManager commandManager = new CommandManager();
+            commandManager.RegisterCommand(new ShowCreate());
+            commandManager.RegisterCommand(new ShowList());
             commandManager.RegisterCommand(new Stop());
             commandManager.RegisterCommand(new UserCreate());
             commandManager.RegisterCommand(new UserLogin());

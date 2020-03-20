@@ -48,8 +48,8 @@ namespace Project.Services {
             ConsoleHelper.Print(PrintType.Info, "Saved user database.");
         }
 
-        // Returns all users
-        public List<Show> GetUsers() {
+        // Returns all shows
+        public List<Show> GetShows() {
             List<Show> models = new List<Show>();
 
             foreach(ShowRecord record in database.shows){
