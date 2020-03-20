@@ -4,7 +4,7 @@ using Project.Records;
 
 namespace Project.Data {
 
-    class ChairDatabasee : Database {
+    class ChairDatabase : Database {
 
         public List<ChairRecord> chairs = new List<ChairRecord>();
 

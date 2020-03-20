@@ -13,7 +13,7 @@ namespace Project.Services {
     class ChairManager : Service {
 
         // Database
-        private UserDatabase database;
+        private ChairDatabase database;
 
         // Current user (logged in user)
         private User currentUser;
@@ -23,30 +23,10 @@ namespace Project.Services {
         }
 
         public override void Load() {
-            database = new UserDatabase();
+            database = new ChairDatabase();
 
             ConsoleHelper.Print(PrintType.Info, "Loading user database...");
 
-            // Try to load
-            if (!database.Load()) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to load users");
-                return;
-            }
-
-            ConsoleHelper.Print(PrintType.Info, "Loaded user database.");
-
-            // Creating default user if we need to
-            if (database.users.Count == 0) {
-                User admin = new User("Admin user", "admin", EncryptionHelper.CreateHash("admin"), true);
-
-                if (!this.SaveUser(admin)) {
-                    ConsoleHelper.Print(PrintType.Error, "Failed to create default user");
-                    return;
-                }
-
-                this.SetCurrentUser(admin);
-                ConsoleHelper.Print(PrintType.Warning, "Created default admin user, please configure it.");
-            }
         }
 
         public override void Unload() {
@@ -61,26 +41,6 @@ namespace Project.Services {
             ConsoleHelper.Print(PrintType.Info, "Saved user database.");
         }
 
-        // Returns all users
-        public List<User> GetUsers() {
-            List<User> models = new List<User>();
-
-            foreach (UserRecord record in database.users) {
-                models.Add(new User(record));
-            }
-
-            return models;
-        }
-
-        // Returns a user by its username
-        public User GetUserByUsername(string username) {
-            try {
-                return GetUsers().Where(i => i.username.Equals(username)).First();
-            }
-            catch (InvalidOperationException) {
-                return null;
-            }
-        }
 
         // Saves the specified user
         public bool SaveChair(Chair chair) {
@@ -97,20 +57,20 @@ namespace Project.Services {
             }
 
             // Find existing record
-            UserRecord record = database.users.SingleOrDefault(i => i.id == user.id);
+            ChairRecord record = database.chairs.SingleOrDefault(i => i.id == chair.id);
 
             // Add if no record exists
             if (record == null) {
-                record = new UserRecord();
-                database.users.Add(record);
+                record = new ChairRecord();
+                database.chairs.Add(record);
             }
 
             // Update record
-            record.id = user.id;
-            record.fullName = user.fullName;
-            record.username = user.username;
-            record.password = user.password;
-            record.admin = user.admin;
+            record.id = chair.id;
+            record.row = chair.row;
+            record.number = chair.number;
+            record.price = chair.price;
+            record.type = chair.type;
 
             return true;
         }
