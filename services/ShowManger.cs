@@ -15,7 +15,7 @@ namespace Project.Services {
         // Database
         private ShowDatabase database;
 
-
+        
         public override string getHandle() {
             return "shows";
         }
