@@ -15,8 +15,6 @@ namespace Project.Services {
         // Database
         private ShowDatabase database;
 
-        // Current user (logged in user)
-        private User currentUser;
 
         public override string getHandle() {
             return "shows";
@@ -51,11 +49,11 @@ namespace Project.Services {
         }
 
         // Returns all users
-        public List<User> GetUsers() {
-            List<User> models = new List<User>();
+        public List<Show> GetUsers() {
+            List<Show> models = new List<Show>();
 
-            foreach(ShowRecord record in database.show){
-                models.Add(new User(record));
+            foreach(ShowRecord record in database.shows){
+                models.Add(new Show(record));
             }
 
             return models;
@@ -74,7 +72,7 @@ namespace Project.Services {
 
 
             // Find existing record
-            ShowRecord record = database.users.SingleOrDefault(i => i.id == Show.id);
+            ShowRecord record = database.shows.SingleOrDefault(i => i.id == show.id);
             
             // Add if no record exists
             if(record == null) {
@@ -84,10 +82,10 @@ namespace Project.Services {
 
             // Update record
             record.id = show.id;
-            record.fullName = show.fullName;
-            record.username = show.username;
-            record.password = show.password;
-            record.admin = show.admin;
+            record.Movie = show.Movie;
+            record.Room = show.Room;
+            record.Time = show.Time;
+  
 
             return true;
         }

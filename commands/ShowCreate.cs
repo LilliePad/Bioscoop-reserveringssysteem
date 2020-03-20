@@ -28,27 +28,15 @@ namespace Project.Commands {
 
 
             // Get input
-            string fullName = AskQuestion("Wat is uw volledige naam?");
-            string username = AskQuestion("Welke username wilt u gebruiken?");
-            string password = AskQuestion("Welk wachtwoord wilt u gebruiken?");
-            bool admin = false;
+            string Movie = AskQuestion("Wat is uw volledige naam?");
+            string Room = AskQuestion("Welke username wilt u gebruiken?");
+            string Time = AskQuestion("welke tijd is de film");
 
 
-            User show = new User(fullName, username, hashedPassword, admin);
+            Show show = new Show(Movie, Room, Time);
 
-            // Login if registration successful
-            if (ShowManager.SaveShow(show)) {
-                ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol aangemaakt en ingelogd.");
-            } else {
-                ConsoleHelper.Print(PrintTpe.Info, "Kon gebruiker niet aanmaken. Errors:");
 
-                // Print errors
-                foreach(KeyValuePair<string, List<string>> attribute in show.GetErrors()) {
-                    foreach(string error in attribute.Value) {
-                        ConsoleHelper.Print(PrintType.Error, attribute.Key + " -> " + error);
-                    }
-                }
-            }
+  
         }
 
     }
