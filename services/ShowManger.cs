@@ -23,7 +23,7 @@ namespace Project.Services {
         public override void Load() {
             database = new ShowDatabase();
 
-            ConsoleHelper.Print(PrintType.Info, "Loading user database...");
+            ConsoleHelper.Print(PrintType.Info, "Loading show database...");
 
             // Try to load
             if (!database.Load()) {
@@ -31,7 +31,7 @@ namespace Project.Services {
                 return;
             }
 
-            ConsoleHelper.Print(PrintType.Info, "Loaded user database.");
+            ConsoleHelper.Print(PrintType.Info, "Loaded show database.");
 
 
         }

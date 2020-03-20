@@ -17,6 +17,8 @@ namespace Project {
         protected override void Load() {
             // Register users service
             RegisterService(new UserManager());
+            // Register shows service
+            RegisterService(new ShowManager());
 
             // Register commands service
             CommandManager commandManager = new CommandManager();
