@@ -15,32 +15,41 @@ namespace Project.Services {
         // Database
         private ChairDatabase database;
 
-        // Current user (logged in user)
-        private User currentUser;
 
         public override string getHandle() {
-            return "users";
+            return "chairs";
         }
 
         public override void Load() {
             database = new ChairDatabase();
-
-            ConsoleHelper.Print(PrintType.Info, "Loading user database...");
-
+            if (!database.Load()) {
+                ConsoleHelper.Print(PrintType.Error, "Failed to load chair database.");
+                return;
+            }
+            ConsoleHelper.Print(PrintType.Info, "Loading chair database");
         }
 
         public override void Unload() {
-            ConsoleHelper.Print(PrintType.Info, "Saving user database...");
+            ConsoleHelper.Print(PrintType.Info, "Saving chair database...");
 
             // Try to save
             if (!database.Save()) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to save user database.");
+                ConsoleHelper.Print(PrintType.Error, "Failed to save chair database.");
                 return;
             }
 
-            ConsoleHelper.Print(PrintType.Info, "Saved user database.");
+            ConsoleHelper.Print(PrintType.Info, "Saved chair database.");
         }
 
+        public List<Chair> GetChairs() {
+            List<Chair> models = new List<Chair>();
+
+            foreach (ChairRecord record in database.chairs) {
+                models.Add(new Chair(record));
+            }
+
+            return models;
+        }
 
         // Saves the specified user
         public bool SaveChair(Chair chair) {
@@ -65,6 +74,7 @@ namespace Project.Services {
                 database.chairs.Add(record);
             }
 
+
             // Update record
             record.id = chair.id;
             record.row = chair.row;
@@ -75,15 +85,6 @@ namespace Project.Services {
             return true;
         }
 
-        // Returns current user
-        public User GetCurrentUser() {
-            return currentUser;
-        }
-
-        // Sets the current user
-        public void SetCurrentUser(User currentUser) {
-            this.currentUser = currentUser;
-        }
 
     }
 

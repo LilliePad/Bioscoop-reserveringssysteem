@@ -29,14 +29,6 @@ namespace Project.Models {
             this.type = type;
         }
 
-        private Chair(int id, int row, int number, double price, string type) {
-            this.id = id;
-            this.row = row;
-            this.number = number;
-            this.price = price;
-            this.type = type;
-        }
-
         public override bool Validate() {
             return true;
         }

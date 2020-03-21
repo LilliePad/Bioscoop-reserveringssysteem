@@ -20,14 +20,17 @@ namespace Project {
 
             // Register commands service
             CommandManager commandManager = new CommandManager();
-            commandManager.RegisterCommand(new Chair());
+            commandManager.RegisterCommand(new ChairCreate());
+            commandManager.RegisterCommand(new ChairList());
             commandManager.RegisterCommand(new Stop());
             commandManager.RegisterCommand(new UserCreate());
             commandManager.RegisterCommand(new UserLogin());
             commandManager.RegisterCommand(new UserList());
             commandManager.RegisterCommand(new UserEdit());
             commandManager.RegisterCommand(new UserChangePassword());
+            RegisterService(new ChairManager());
             RegisterService(commandManager);
+            
         }
 
         protected override void Unload() {
