@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Project.Base;
+﻿using Project.Base;
 using Project.Enums;
 using Project.Helpers;
 using Project.Models;
-using Project.UserEdit;
+using Project.Services;
 
 
 namespace Project.Commands {
@@ -25,15 +24,14 @@ namespace Project.Commands {
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
             MovieManager movieManager = app.GetService<MovieManager>("movies");
-            Movie currentMvoie = movieManager.GetCurrentMovie();
 
             // Get input
             string movieName = AskQuestion("Wat is uw film naam?");
-            string minage = AskQuestion("leeftijdsclassificatie?");
-            string time = AskQuestion("hoe lang duurt de film?");
+            string movieTime = AskQuestion("leeftijdsclassificatie?");
+            string genre = AskQuestion("hoe lang duurt de film?");
             
             // Try to registers
-            Movie movie = new Movie(movieName, minage, time);
+            Movie movie = new Movie(movieName, movieTime, genre);
 
             // Login if registration successful
             if (movieManager.SaveMovie(movie)) {
@@ -51,7 +49,3 @@ namespace Project.Commands {
             }
 
         }
-
-    }
-
-}

@@ -7,41 +7,41 @@ namespace Project.Models {
 
     class Movie : Model {
 
-        public int id = -1;s
+        public int id = -1;
         public string movieName;
-        public string minage;
-        public string time;
+        public string movieTime;
+        public string genre;
         public bool admin;
 
-        public Movie(UserRecord record) {
+        public Movie(MovieRecord record) {
             this.id = record.id;
             this.movieName = record.movieName;
-            this.minage = record.minage;
-            this.time = record.time;
+            this.movieTime = record.movieTime;
+            this.genre = record.genre;
         }
 
-        public Movie(string movieName, string minage, string time) {
+        public Movie(string movieName, string movieTime, string genre) {
             this.movieName = movieName;
-            this.minage = minage;
-            this.time = time;
+            this.movieTime = movieTime;
+            this.genre = genre;
         }
 
-        private Movie(int id, string movieName, string minage, string time) {
+        private Movie(int id, string movieName, string movieTime, string genre) {
             this.id = id;
             this.movieName = movieName;
-            this.minage = username;
-            this.time = time;
+            this.movieTime = movieTime;
+            this.genre = genre;
         }
 
         public override bool Validate() {
-            MovieManager movieManager = Program.GetInstance().GetService<MovieManager>("users");
+            MovieManager movieManager = Program.GetInstance().GetService<MovieManager>("films");
 
             if (movieName == null || movieName.Length == 0) {
                 this.AddError("fullName", "Volledige naam mag niet leeg zijn.");
                 return false;
             }
 
-            if (minage == null || minage.Length == 0) {
+            if (movieTime == null || movieTime.Length == 0) {
                 this.AddError("username", "Username mag niet leeg zijn.");
                 return false;
             }
@@ -53,18 +53,12 @@ namespace Project.Models {
                 return false;
             }
 
-            if (time == null || time.Length == 0) {
-                this.AddError("time", "Wachtwoord mag niet leeg zijn.");
+            if (genre == null || genre.Length == 0) {
+                this.AddError("genre", "Wachtwoord mag niet leeg zijn.");
                 return false;
             }
 
             return true;
-        }
-
-        // Returns whether the specified password is correct
-        public bool Authenticate(string password) {
-            string hash = EncryptionHelper.CreateHash(password);
-            return this.time.Equals(hash);
         }
 
     }

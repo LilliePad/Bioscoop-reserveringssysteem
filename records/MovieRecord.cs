@@ -1,8 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Project.Base;
 
-namespace Bioscoop_reserveringssysteem.records {
-    class MovieRecord {
+namespace Project.Records {
+
+    class MovieRecord : Record {
+
+        public string movieName;
+        public string moveiTime;
+        public string genre;
     }
+
 }

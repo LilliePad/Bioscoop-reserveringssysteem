@@ -10,36 +10,33 @@ using Project.Records;
 
 namespace Project.Services {
 
-    class UserManager : Service {
+    class MovieManager : Service {
 
         // Database
-        private UserDatabase database;
-
-        // Current user (logged in user)
-        private User currentUser;
+        private MovieManager database;
 
         public override string getHandle() {
-            return "users";
+            return "movies";
         }
 
         public override void Load() {
-            database = new UserDatabase();
+            database = new MovieDatabase();
 
-            ConsoleHelper.Print(PrintType.Info, "Loading user database...");
+            ConsoleHelper.Print(PrintType.Info, "Loading movie database...");
 
             // Try to load
             if (!database.Load()) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to load users");
+                ConsoleHelper.Print(PrintType.Error, "Failed to load movies");
                 return;
             }
 
             ConsoleHelper.Print(PrintType.Info, "Loaded user database.");
 
             // Creating default user if we need to
-            if (database.users.Count == 0) {
+            if (database.movies.Count == 0) {
                 User admin = new User("Admin user", "admin", EncryptionHelper.CreateHash("admin"), true);
 
-                if (!this.SaveUser(admin)) {
+                if (!this.SaveMovies(admin)) {
                     ConsoleHelper.Print(PrintType.Error, "Failed to create default user");
                     return;
                 }
@@ -62,31 +59,31 @@ namespace Project.Services {
         }
 
         // Returns all users
-        public List<User> GetUsers() {
-            List<User> models = new List<User>();
+        public List<Movie> GetUsers() {
+            List<Movie> models = new List<Movie>();
 
             foreach (MovieRecord record in database.movies) {
-                models.Add(new User(record));
+                models.Add(new Movie(record));
             }
 
             return models;
         }
 
         // Returns a user by its username
-        public User GetUserByUsername(string username) {
+        public Movie GetMovieByMoviename(string movieName) {
             try {
-                return GetMovies().Where(i => i.minage.Equals(username)).First();
+                return GetMovies().Where(i => i.movieTime.Equals(movieName)).First();
             }
             catch (InvalidOperationException) {
                 return null;
             }
         }
 
-        // Saves the specified user
+        // Saves the specified movie
         public bool SaveMovie(Movie movie) {
             bool isNew = movie.id == -1;
 
-            // Set id if its a new user
+            // Set id if its a new movie
             if (isNew) {
                 movie.id = database.GetNewId("movies");
             }
@@ -97,32 +94,31 @@ namespace Project.Services {
             }
 
             // Find existing record
-            UserRecord record = database.users.SingleOrDefault(i => i.id == user.id);
+            UserRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
 
             // Add if no record exists
             if (record == null) {
-                record = new UserRecord();
-                database.users.Add(record);
+                record = new movieRecord();
+                database.movies.Add(record);
             }
 
             // Update record
             record.id = movie.id;
-            record.fullName = movie.fullName;
-            record.username = movie.username;
-            record.password = movie.password;
-            record.admin = movie.admin;
+            record.movieName = movie.movieName;
+            record.movieTime = movie.movieTime;
+            record.genre = movie.genre;
 
             return true;
         }
 
         // Returns current user
-        public User GetCurrentUser() {
-            return currentUser;
+        public Movie GetCurrentUser() {
+            return currentMovie;
         }
-
+        
         // Sets the current user
-        public void SetCurrentUser(User currentUser) {
-            this.currentUser = currentUser;
+        public void SetCurrentUser(Movie currentmovie) {
+            this.currentMovie = currentMovie;
         }
 
     }
