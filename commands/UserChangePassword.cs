@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Project.Base;
 using Project.Enums;
 using Project.Helpers;
@@ -62,6 +61,7 @@ namespace Project.Commands {
                 ConsoleHelper.Print(PrintType.Info, "Wachtwoord succesvol aangepast.");
             } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon wachtwoord niet aanpassen. Errors:");
+                ConsoleHelper.PrintErrors(user);
             }
         }
 
