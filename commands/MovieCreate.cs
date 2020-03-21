@@ -3,7 +3,7 @@ using Project.Base;
 using Project.Enums;
 using Project.Helpers;
 using Project.Models;
-using Project.Services;
+using Project.UserEdit;
 
 
 namespace Project.Commands {
@@ -33,21 +33,18 @@ namespace Project.Commands {
             string time = AskQuestion("hoe lang duurt de film?");
             
             // Try to registers
-            Movie movie = new movie(movieName, minage, time);
+            Movie movie = new Movie(movieName, minage, time);
 
             // Login if registration successful
             if (movieManager.SaveMovie(movie)) {
-                movieManager.SetCurrentMovie(movie);
                 ConsoleHelper.Print(PrintType.Info, "Film succesvol aangemaakt.");
             }
             else {
                 ConsoleHelper.Print(PrintType.Info, "Kon film niet aanmaken. Errors:");
 
                 // Print errors
-                foreach (KeyValuePair<string, List<string>> attribute in movies.GetErrors()) {
-                    foreach (string error in attribute.Value) {
-                        ConsoleHelper.Print(PrintType.Error, attribute.Key + " -> " + error);
-                    }
+                ConsoleHelper.PrintErrors(movie);
+            }
 
                 }
 
