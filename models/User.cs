@@ -28,14 +28,6 @@ namespace Project.Models {
             this.admin = admin;
         }
 
-        private User(int id, string fullName, string username, string password, bool admin) {
-            this.id = id;
-            this.fullName = fullName;
-            this.username = username;
-            this.password = password;
-            this.admin = admin;
-        }
-
         public override bool Validate() {
             UserManager userManager = Program.GetInstance().GetService<UserManager>("users");
 
