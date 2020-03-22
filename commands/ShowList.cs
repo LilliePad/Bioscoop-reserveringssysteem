@@ -24,11 +24,11 @@ namespace Project.Commands {
             Program app = Program.GetInstance();
             ShowManager showManager = app.GetService<ShowManager>("shows");
 
-            ConsoleHelper.Print(PrintType.Info, "Show list (id - Movie - Room - Time):");
+            ConsoleHelper.Print(PrintType.Info, "Show list (id - Movie - Room - Date - Time):");
 
             // Print users
             foreach(Show show in showManager.GetShows()) {
-                ConsoleHelper.Print(PrintType.Info, show.id + " - " + show.Movie + " - " + show.Room + " - " + show.Time);
+                ConsoleHelper.Print(PrintType.Info, show.id + " - " + show.Movie + " - " + show.Room + " - " + show.Date + " - "  show.Time);
             }
         }
 

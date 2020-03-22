@@ -27,7 +27,7 @@ namespace Project.Services {
 
             // Try to load
             if (!database.Load()) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to load users");
+                ConsoleHelper.Print(PrintType.Error, "Failed to load shows");
                 return;
             }
 

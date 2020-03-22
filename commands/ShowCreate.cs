@@ -29,12 +29,13 @@ namespace Project.Commands {
 
             // Get input
             string Movie = AskQuestion("wat is de naam van de film");
-            string Room = AskQuestion("wat is de room");
-            string Time = AskQuestion("welke tijd is de film");
+            string Room = AskQuestion("in welke room speelt de film");
+            string Date = AskQuestion("wat is de datum van de film");
+            string Time = AskQuestion("welke tijd wordt de film afgespeelt");
 
 
             // Try to register
-            Show show = new Show(Movie, Room, Time);
+            Show show = new Show(Movie, Room, Date, Time);
 
             // Login if registration successful
             if (showManager.SaveShow(show)) {

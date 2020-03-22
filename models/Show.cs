@@ -10,6 +10,7 @@ namespace Project.Models {
         public int id = -1;
         public string Movie;
         public string Room;
+        public string Date;
         public string Time;
         
 
@@ -17,19 +18,22 @@ namespace Project.Models {
             this.id = record.id;
             this.Movie = record.Movie;
             this.Room = record.Room;
+            this.Date = record.Date;
             this.Time = record.Time;
         }
 
-        public Show(string Movie, string Room, string Time) {
+        public Show(string Movie, string Room, string Date, string Time) {
             this.Movie = Movie;
             this.Room = Room;
+            this.Date = Date;
             this.Time = Time;
         }
 
-        private Show(int id, string Movie, string Room, string Time) {
+        private Show(int id, string Movie, string Room, string Date, string Time) {
             this.id = id;
             this.Movie = Movie;
             this.Room = Room;
+            this.Date = Date;
             this.Time = Time;
         }
 
