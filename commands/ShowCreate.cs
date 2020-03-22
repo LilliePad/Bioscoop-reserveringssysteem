@@ -33,12 +33,17 @@ namespace Project.Commands {
             string Time = AskQuestion("welke tijd is de film");
 
 
+            // Try to register
             Show show = new Show(Movie, Room, Time);
 
-
-  
+            // Login if registration successful
+            if (showManager.SaveShow(show)) {
+                ConsoleHelper.Print(PrintType.Info, "show succesvol aangemaakt.");
+            }
+            else {
+                ConsoleHelper.Print(PrintType.Info, "Kon show niet aanmaken. Errors:");
+            }
         }
-
     }
 
 }
