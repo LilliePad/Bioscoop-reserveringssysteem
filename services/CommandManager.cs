@@ -64,23 +64,25 @@ namespace Project.Services {
                         // Create thread to be blocked while waiting for an answer
                         if(command is InteractiveCommand) {
                             new Thread(() => {
-                                command.RunCommand(args);
+                                this.RunCommand(command, args);
                             }).Start();
                         // Run command code on main thread
                         } else {
-                            command.RunCommand(args);
+                            this.RunCommand(command, args);
                         }
                     }
                 }
             }
         }
 
+        // Registers a command
         public void RegisterCommand(Command command) {
             string category = command.GetCategory();
             string name = (category != null ? (category + "/") : "") + command.GetName();
             commands.Add(name, command);
         }
 
+        // Sets the current question
         public bool SetQuestion(Question question) {
             if(this.question != null) {
                 return false;
@@ -88,6 +90,17 @@ namespace Project.Services {
 
             this.question = question;
             return true;
+        }
+
+        // Runs a command and handles exceptions
+        private void RunCommand(Command command, string[] args) {
+            try {
+                command.RunCommand(args);
+            } catch(ArgumentException e) {
+                ConsoleHelper.Print(PrintType.Error, e.Message);
+            } catch(Exception e) {
+                ConsoleHelper.Print(PrintType.Error, "Er is een fout opgetreden: " + e.Message);
+            }
         }
 
     }

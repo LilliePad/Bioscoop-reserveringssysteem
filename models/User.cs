@@ -31,16 +31,19 @@ namespace Project.Models {
         public override bool Validate() {
             UserManager userManager = Program.GetInstance().GetService<UserManager>("users");
 
-            if(fullName == null || fullName.Length == 0) {
+            // Make sure fullName is set
+            if (fullName == null || fullName.Length == 0) {
                 this.AddError("fullName", "Volledige naam mag niet leeg zijn.");
                 return false;
             }
 
+            // Make sure username is set
             if (username == null || username.Length == 0) {
                 this.AddError("username", "Username mag niet leeg zijn.");
                 return false;
             }
 
+            // Make sure username is unique
             User existing = userManager.GetUserByUsername(username);
 
             if (existing != null && existing.id != id) {
@@ -48,6 +51,7 @@ namespace Project.Models {
                 return false;
             }
 
+            // Make sure password is set
             if (password == null || password.Length == 0) {
                 this.AddError("password", "Wachtwoord mag niet leeg zijn.");
                 return false;

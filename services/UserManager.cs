@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Project.Base;
 using Project.Data;
@@ -25,15 +26,10 @@ namespace Project.Services {
         public override void Load() {
             database = new UserDatabase();
 
-            ConsoleHelper.Print(PrintType.Info, "Loading user database...");
-
-            // Try to load
-            if (!database.Load()) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to load users");
-                return;
+            // Stop if loading failed
+            if(!database.Load()) {
+                throw new InvalidDataException("Failed to load user database");
             }
-
-            ConsoleHelper.Print(PrintType.Info, "Loaded user database.");
 
             // Creating default user if we need to
             if (database.users.Count == 0) {
@@ -49,18 +45,6 @@ namespace Project.Services {
             }
         }
 
-        public override void Unload() {
-            ConsoleHelper.Print(PrintType.Info, "Saving user database...");
-
-            // Try to save
-            if (!database.Save()) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to save user database.");
-                return;
-            }
-
-            ConsoleHelper.Print(PrintType.Info, "Saved user database.");
-        }
-
         // Returns all users
         public List<User> GetUsers() {
             List<User> models = new List<User>();
@@ -70,6 +54,15 @@ namespace Project.Services {
             }
 
             return models;
+        }
+
+        // Returns a user by its id
+        public User GetUserById(int id) {
+            try {
+                return GetUsers().Where(i => i.id == id).First();
+            } catch (InvalidOperationException) {
+                return null;
+            }
         }
 
         // Returns a user by its username
@@ -110,6 +103,27 @@ namespace Project.Services {
             record.username = user.username;
             record.password = user.password;
             record.admin = user.admin;
+
+            // Try to save
+            database.TryToSave();
+
+            return true;
+        }
+
+        // Deletes the specified user
+        public bool DeleteUser(User user) {
+            UserRecord record = database.users.SingleOrDefault(i => i.id == user.id);
+
+            // Return false if room doesn't exist
+            if (record == null) {
+                return false;
+            }
+
+            // Remove record
+            database.users.Remove(record);
+
+            // Try to save
+            database.TryToSave();
 
             return true;
         }

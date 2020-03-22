@@ -18,17 +18,24 @@ namespace Project {
             // Register users service
             RegisterService(new UserManager());
 
+            // Register chairs manager
+            RegisterService(new ChairManager());
+
             // Register commands service
             CommandManager commandManager = new CommandManager();
-            commandManager.RegisterCommand(new ChairCreate());
-            commandManager.RegisterCommand(new ChairList());
+
             commandManager.RegisterCommand(new Stop());
-            commandManager.RegisterCommand(new UserCreate());
-            commandManager.RegisterCommand(new UserLogin());
+
             commandManager.RegisterCommand(new UserList());
+            commandManager.RegisterCommand(new UserCreate());
             commandManager.RegisterCommand(new UserEdit());
             commandManager.RegisterCommand(new UserChangePassword());
-            RegisterService(new ChairManager());
+            commandManager.RegisterCommand(new UserDelete());
+            commandManager.RegisterCommand(new UserLogin());
+
+            commandManager.RegisterCommand(new ChairCreate());
+            commandManager.RegisterCommand(new ChairList());
+
             RegisterService(commandManager);
             
         }
