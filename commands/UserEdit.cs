@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Project.Base;
 using Project.Enums;
 using Project.Helpers;
 using Project.Models;
 using Project.Services;
-
 
 namespace Project.Commands {
 
@@ -50,13 +48,7 @@ namespace Project.Commands {
                 ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol aangepast.");
             } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon gebruiker niet aanpassen. Errors:");
-
-                // Print errors
-                foreach (KeyValuePair<string, List<string>> attribute in user.GetErrors()) {
-                    foreach (string error in attribute.Value) {
-                        ConsoleHelper.Print(PrintType.Error, attribute.Key + " -> " + error);
-                    }
-                }
+                ConsoleHelper.PrintErrors(user);
             }
         }
 
