@@ -31,7 +31,6 @@ namespace Project {
             commandManager.RegisterCommand(new UserChangePassword());
             commandManager.RegisterCommand(new UserDelete());
             commandManager.RegisterCommand(new UserLogin());
-
             commandManager.RegisterCommand(new ShowCreate());
             commandManager.RegisterCommand(new ShowList());
 

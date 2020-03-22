@@ -33,6 +33,10 @@ namespace Project.Commands {
             string Date = AskQuestion("wat is de datum van de film");
             string Time = AskQuestion("welke tijd wordt de film afgespeelt");
 
+            
+            
+
+
 
             // Try to register
             Show show = new Show(Movie, Room, Date, Time);

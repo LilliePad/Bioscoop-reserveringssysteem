@@ -83,6 +83,7 @@ namespace Project.Services {
             // Update record
             record.id = show.id;
             record.Movie = show.Movie;
+            record.Date = show.Date;
             record.Room = show.Room;
             record.Time = show.Time;
   
