@@ -26,7 +26,8 @@ namespace Project.Commands {
             User user = currentUser;
 
             if(currentUser.admin && args.Length == 1) {
-                user = userManager.GetUserByUsername(args[0]);
+                int id = ConsoleHelper.ParseInt(args[0]);
+                user = userManager.GetUserById(id);
 
                 if(user == null) {
                     throw new Exception("Ongeldige gebruikersnaam");
@@ -40,7 +41,7 @@ namespace Project.Commands {
             // Get extra input if the current user is an admin
             if (currentUser.admin) {
                 string adminValue = AskQuestion("Moet deze gebruiker een admin worden?", Question.OPTIONS_BOOL, user.admin ? Question.OPTION_YES : Question.OPTION_NO);
-                user.admin = adminValue == Question.OPTION_YES ? true : false;
+                user.admin = ConsoleHelper.ParseBoolean(adminValue);
             }
 
             // Try to save

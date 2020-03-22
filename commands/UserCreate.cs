@@ -34,7 +34,7 @@ namespace Project.Commands {
             // Get extra input if the user is an admin
             if(currentUser != null && currentUser.admin) {
                 string adminValue = AskQuestion("Moet deze gebruiker een admin worden?", Question.OPTIONS_BOOL, Question.OPTION_NO);
-                admin = adminValue == Question.OPTION_YES ? true : false;
+                admin = ConsoleHelper.ParseBoolean(adminValue);
             }
 
             // Try to register
