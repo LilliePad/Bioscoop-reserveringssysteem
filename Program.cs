@@ -21,6 +21,9 @@ namespace Project {
             // Register chairs manager
             RegisterService(new ChairManager());
 
+            // Register rooms service
+            RegisterService(new RoomManager());
+
             // Register commands service
             CommandManager commandManager = new CommandManager();
 
@@ -32,6 +35,10 @@ namespace Project {
             commandManager.RegisterCommand(new UserChangePassword());
             commandManager.RegisterCommand(new UserDelete());
             commandManager.RegisterCommand(new UserLogin());
+
+            commandManager.RegisterCommand(new RoomList());
+            commandManager.RegisterCommand(new RoomCreate());
+            commandManager.RegisterCommand(new RoomDelete());
 
             commandManager.RegisterCommand(new ChairCreate());
             commandManager.RegisterCommand(new ChairList());
