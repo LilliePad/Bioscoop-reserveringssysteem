@@ -7,7 +7,7 @@ namespace Project.Base {
 
         // Program variables
         private bool running = false;
-        private Dictionary<string, Service> services = new Dictionary<string, Service>();
+        private readonly Dictionary<string, Service> services = new Dictionary<string, Service>();
 
         // Called on load/unload
         protected abstract void Load();
@@ -56,16 +56,14 @@ namespace Project.Base {
 
         // Register a service
         public void RegisterService(Service service) {
-            services.Add(service.getHandle(), service);
+            services.Add(service.GetHandle(), service);
         }
 
         // Returns a service by its handle
         public T GetService<T>(string handle) {
-            Service service;
-
             // Return empty value if service does not exist
-            if (!services.TryGetValue(handle, out service)) {
-                return default(T);
+            if (!services.TryGetValue(handle, out Service service)) {
+                return default;
             }
 
             // Cast service and return

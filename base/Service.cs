@@ -3,7 +3,7 @@
     abstract class Service {
 
         // The handle of this service
-        public abstract string getHandle();
+        public abstract string GetHandle();
 
         // Called after loading the app
         public virtual void Load() {  }

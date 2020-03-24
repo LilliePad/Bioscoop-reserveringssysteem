@@ -5,7 +5,7 @@ namespace Project.Base {
     abstract class Model {
 
         // List of validation errors
-        private Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();
+        private readonly Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();
 
         // Validates the model
         public virtual bool Validate() {
@@ -30,10 +30,8 @@ namespace Project.Base {
 
         // Returns all errors for the specified attribute
         public List<string> GetErrors(string attribute) {
-            List<string> errors;
-
             // Get the error list
-            if(!this.errors.TryGetValue(attribute, out errors)) {
+            if(!this.errors.TryGetValue(attribute, out List<string> errors)) {
                 errors = new List<string>();
             }
 

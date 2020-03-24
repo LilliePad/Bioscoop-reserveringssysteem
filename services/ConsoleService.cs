@@ -16,8 +16,8 @@ namespace Project.Services {
         // The current question
         private Question question;
 
-        public override string getHandle() {
-            return "commands";
+        public override string GetHandle() {
+            return "console";
         }
 
         public override void Load() {
@@ -40,11 +40,8 @@ namespace Project.Services {
                         string name = data[0];
                         string[] args = data.Skip(1).ToArray();
 
-                        // Find command
-                        Command command;
-
                         // Check if command exists
-                        if (!commands.TryGetValue(name, out command)) {
+                        if (!commands.TryGetValue(name, out Command command)) {
                             ConsoleHelper.Print(PrintType.Error, "Onbekend commando");
                             continue;
                         }

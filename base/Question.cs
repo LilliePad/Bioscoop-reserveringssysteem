@@ -7,13 +7,13 @@
         public static readonly string[] OPTIONS_BOOL = new string[] { OPTION_YES, OPTION_NO };
 
         // The question to be asked
-        private string question;
+        private readonly string question;
 
         // The valid options
-        private string[] options;
+        private readonly string[] options;
 
         // The default value
-        private string defaultValue;
+        private readonly string defaultValue;
 
         // The answer (null until answered)
         private string answer;

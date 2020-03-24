@@ -23,7 +23,6 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            RoomService roomService = app.GetService<RoomService>("rooms");
             ChairService chairService = app.GetService<ChairService>("chairs");
 
             // Check args length

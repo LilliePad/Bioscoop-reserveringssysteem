@@ -10,7 +10,7 @@ namespace Project.Services {
 
     class RoomService : Service {
 
-        public override string getHandle() {
+        public override string GetHandle() {
             return "rooms";
         }
 

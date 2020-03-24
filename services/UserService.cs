@@ -16,7 +16,7 @@ namespace Project.Services {
         // Current user (logged in user)
         private User currentUser;
 
-        public override string getHandle() {
+        public override string GetHandle() {
             return "users";
         }
 

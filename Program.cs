@@ -14,7 +14,7 @@ namespace Project {
         // Database
         private Database database;
 
-        static void Main(string[] args) {
+        static void Main() {
             instance = new Program();
             instance.Start();
         }
