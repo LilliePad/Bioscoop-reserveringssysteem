@@ -5,38 +5,49 @@ using Project.Helpers;
 using Project.Services;
 using Project.Models;
 
-namespace Project.Commands
-{
+namespace Project.Commands {
 
     class ChairCreate : Command {
 
-        public override string GetName() {
+        public override string GetCategory() {
             return "chair";
         }
-        
 
+        public override string GetName() {
+            return "create";
+        }
+        
         public override bool RequireAdmin() {
             return true;
         }
-        //format: chair row number price type
+
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            ChairManager chairManager = app.GetService<ChairManager>("chairs");
-            if (args.Length != 4) {
-                ConsoleHelper.Print(PrintType.Error, "Usage: chair <row> <number> <price> <type>");
-                return;
-            }
-            Chair chair = new Chair(Int32.Parse(args[0]), Int32.Parse(args[1]), Double.Parse(args[2]), args[3]);
+            RoomService roomService = app.GetService<RoomService>("rooms");
+            ChairService chairService = app.GetService<ChairService>("chairs");
 
-            // Login if registration successful
-            if (chairManager.SaveChair(chair)) {
-                ConsoleHelper.Print(PrintType.Info, "Stoel aangemaakt");
+            // Check args length
+            if (args.Length != 5) {
+                throw new ArgumentException("Gebruik: chair/create <roomId> <row> <number> <price> <type>");
             }
-            else {
+
+            // Parse params
+            int roomId = ConsoleHelper.ParseInt(args[0], "roomId");
+            int row = ConsoleHelper.ParseInt(args[1], "row");
+            int number = ConsoleHelper.ParseInt(args[2], "number");
+            double price = ConsoleHelper.ParseDouble(args[3], "price");
+
+            // Create chair object
+            Chair chair = new Chair(roomId, row, number, price, args[4]);
+
+            // Try to save it
+            if (chairService.SaveChair(chair)) {
+                ConsoleHelper.Print(PrintType.Info, "Stoel succesvol aangemaakt");
+            } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon stoel niet aanmaken. Errors:");
                 ConsoleHelper.PrintErrors(chair);
             }
- 
         }
+
     }
 }

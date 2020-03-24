@@ -1,5 +1,7 @@
-﻿using Project.Base;
+﻿using System.IO;
+using Project.Base;
 using Project.Commands;
+using Project.Data;
 using Project.Services;
 
 namespace Project {
@@ -9,41 +11,52 @@ namespace Project {
         // Main class instance
         private static Program instance;
 
+        // Database
+        private Database database;
+
         static void Main(string[] args) {
             instance = new Program();
             instance.Start();
         }
 
         protected override void Load() {
+            database = new Database();
+
+            // Stop if loading failed
+            if (!database.Load()) {
+                throw new InvalidDataException("Failed to load database");
+            }
+
             // Register users service
-            RegisterService(new UserManager());
+            RegisterService(new UserService());
 
             // Register chairs manager
-            RegisterService(new ChairManager());
+            RegisterService(new ChairService());
 
             // Register rooms service
-            RegisterService(new RoomManager());
+            RegisterService(new RoomService());
 
             // Register commands service
-            CommandManager commandManager = new CommandManager();
+            ConsoleService commandService = new ConsoleService();
 
-            commandManager.RegisterCommand(new Stop());
+            commandService.RegisterCommand(new Stop());
 
-            commandManager.RegisterCommand(new UserList());
-            commandManager.RegisterCommand(new UserCreate());
-            commandManager.RegisterCommand(new UserEdit());
-            commandManager.RegisterCommand(new UserChangePassword());
-            commandManager.RegisterCommand(new UserDelete());
-            commandManager.RegisterCommand(new UserLogin());
+            commandService.RegisterCommand(new UserList());
+            commandService.RegisterCommand(new UserCreate());
+            commandService.RegisterCommand(new UserEdit());
+            commandService.RegisterCommand(new UserChangePassword());
+            commandService.RegisterCommand(new UserDelete());
+            commandService.RegisterCommand(new UserLogin());
 
-            commandManager.RegisterCommand(new RoomList());
-            commandManager.RegisterCommand(new RoomCreate());
-            commandManager.RegisterCommand(new RoomDelete());
+            commandService.RegisterCommand(new RoomList());
+            commandService.RegisterCommand(new RoomCreate());
+            commandService.RegisterCommand(new RoomDelete());
 
-            commandManager.RegisterCommand(new ChairCreate());
-            commandManager.RegisterCommand(new ChairList());
+            commandService.RegisterCommand(new ChairList());
+            commandService.RegisterCommand(new ChairCreate());
+            commandService.RegisterCommand(new ChairDelete());
 
-            RegisterService(commandManager);
+            RegisterService(commandService);
             
         }
 
@@ -54,6 +67,11 @@ namespace Project {
         // Returns the main class instance
         public static Program GetInstance() {
             return instance;
+        }
+
+        // Return the database instance
+        public Database GetDatabase() {
+            return database;
         }
 
     }

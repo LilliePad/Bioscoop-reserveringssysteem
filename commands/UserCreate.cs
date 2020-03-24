@@ -22,8 +22,8 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            UserManager userManager = app.GetService<UserManager>("users");
-            User currentUser = userManager.GetCurrentUser();
+            UserService userService = app.GetService<UserService>("users");
+            User currentUser = userService.GetCurrentUser();
 
             // Get input
             string fullName = AskQuestion("Wat is uw volledige naam?");
@@ -42,9 +42,9 @@ namespace Project.Commands {
             User user = new User(fullName, username, hashedPassword, admin);
 
             // Login if registration successful
-            if (userManager.SaveUser(user)) {
-                userManager.SetCurrentUser(user);
-                ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol aangemaakt en ingelogd.");
+            if (userService.SaveUser(user)) {
+                userService.SetCurrentUser(user);
+                ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol aangemaakt en ingelogd");
             } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon gebruiker niet aanmaken. Errors:");
                 ConsoleHelper.PrintErrors(user);

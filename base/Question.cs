@@ -29,7 +29,7 @@
 
         // Returns the question
         public string GetQuestion() {
-            return this.question;
+            return question;
         }
 
         // Returns the message
@@ -51,24 +51,24 @@
 
         // Returns the options
         public string[] GetOptions() {
-            return this.options;
+            return options;
         }
 
         // Returns the default value
         public string GetDefaultValue() {
-            return this.defaultValue;
+            return defaultValue;
         }
 
         // Returns the answer or null
         public string GetAnswer() {
-            lock(this.answerLock) {
-                return this.answer;
+            lock(answerLock) {
+                return answer;
             }
         }
 
         // Sets the answer
         public void SetAnswer(string answer) {
-            lock (this.answerLock) {
+            lock (answerLock) {
                 this.answer = answer;
             }
         }

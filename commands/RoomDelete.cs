@@ -23,26 +23,25 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            RoomManager roomManager = app.GetService<RoomManager>("rooms");
+            RoomService roomService = app.GetService<RoomService>("rooms");
 
             // Check args length
             if (args.Length != 1) {
-                ConsoleHelper.Print(PrintType.Error, "Usage: room/delete <id>");
-                return;
+                throw new ArgumentException("Gebruik: room/delete <id>");
             }
 
             // Find room
             int id = ConsoleHelper.ParseInt(args[0], "id");
-            Room room = roomManager.GetRoomById(id);
+            Room room = roomService.GetRoomById(id);
 
             if(room == null) {
-                throw new ArgumentException("id moet een bestaand zaal-id zijn.");
+                throw new ArgumentException("Ongeldige zaal");
             }
 
-            if(roomManager.DeleteRoom(room)) {
-                ConsoleHelper.Print(PrintType.Info, "Zaal succesvol verwijderd.");
+            if(roomService.DeleteRoom(room)) {
+                ConsoleHelper.Print(PrintType.Info, "Zaal succesvol verwijderd");
             } else {
-                ConsoleHelper.Print(PrintType.Error, "Kon zaal niet verwijderen.");
+                ConsoleHelper.Print(PrintType.Error, "Kon zaal niet verwijderen");
             }
         }
 

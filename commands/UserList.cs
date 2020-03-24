@@ -22,12 +22,12 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            UserManager userManager = app.GetService<UserManager>("users");
+            UserService userService = app.GetService<UserService>("users");
 
             ConsoleHelper.Print(PrintType.Info, "User list (id - username - fullname - admin):");
 
             // Print users
-            foreach(User user in userManager.GetUsers()) {
+            foreach(User user in userService.GetUsers()) {
                 ConsoleHelper.Print(PrintType.Info, user.id + " - " + user.username + " - " + user.fullName + " - " + user.admin);
             }
         }

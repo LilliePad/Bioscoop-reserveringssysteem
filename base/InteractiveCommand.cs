@@ -17,15 +17,15 @@ namespace Project.Base {
             ConsoleHelper.Print(PrintType.Default, question.GetMessage());
 
             // Get answer and return
-            return this.WaitForAnswer(question);
+            return WaitForAnswer(question);
         }
 
         private string WaitForAnswer(Question question) {
             Program app = Program.GetInstance();
-            CommandManager commandManager = app.GetService<CommandManager>("commands");
+            ConsoleService commandService = app.GetService<ConsoleService>("commands");
 
             // Try to register the question
-            if (!commandManager.SetQuestion(question)) {
+            if (!commandService.SetQuestion(question)) {
                 throw new Exception("Failed to register question");
             }
 
@@ -45,7 +45,7 @@ namespace Project.Base {
             if (question.GetOptions() != null && !question.GetOptions().Contains(answer)) {
                 ConsoleHelper.Print(PrintType.Error, "Invalid answer: " + answer);
                 question.SetAnswer(null);
-                return this.WaitForAnswer(question);
+                return WaitForAnswer(question);
             }
 
             // Return answer

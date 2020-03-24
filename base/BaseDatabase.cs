@@ -1,36 +1,37 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Project.Enums;
 using Project.Helpers;
 
 namespace Project.Base {
 
-    abstract class Database {
+    class BaseDatabase {
+
+        // Settings
+        public static readonly string STORAGE_CATEGORY = null;
+        public static readonly string STORAGE_NAME = "database";
 
         // List to keep track of the used ids
         // You can get a new unique id using GetNewId()
         public Dictionary<string, int> newIds { get; set; } = new Dictionary<string, int>();
 
-        // Returns the name of the database file
-        public abstract string GetFileName();
-
         // Loads the database file into this object
         public bool Load() {
             try {
-                StorageHelper.LoadFile("data", this.GetFileName(), this);
+                StorageHelper.LoadFile(STORAGE_CATEGORY, STORAGE_NAME, this);
                 return true;
-            } catch(Exception) {
+            } catch (Exception) {
                 return false;
             }
         }
 
         // Tries to load and prints error on failure
         public bool TryToLoad() {
-            bool success = this.Load();
+            bool success = Load();
 
             // Try to save
             if (!success) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to load " + this.GetFileName() + " database.");
+                ConsoleHelper.Print(PrintType.Error, "Failed to load " + STORAGE_NAME + " database");
             }
 
             return success;
@@ -39,20 +40,20 @@ namespace Project.Base {
         // Saves this object into the database file
         public bool Save() {
             try {
-                StorageHelper.SaveFile("data", this.GetFileName(), this);
+                StorageHelper.SaveFile(STORAGE_CATEGORY, STORAGE_NAME, this);
                 return true;
-            } catch(Exception) {
+            } catch (Exception) {
                 return false;
             }
         }
 
         // Tries to save and prints error on failure
         public bool TryToSave() {
-            bool success = this.Save();
+            bool success = Save();
 
             // Try to save
             if (!success) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to save " + this.GetFileName() + " database.");
+                ConsoleHelper.Print(PrintType.Error, "Failed to save " + STORAGE_NAME + " database");
             }
 
             return success;
@@ -60,14 +61,14 @@ namespace Project.Base {
 
         // Returns a new unique id for the specified category
         public int GetNewId(string category) {
-            if(category == null) {
+            if (category == null) {
                 category = "__global__";
             }
 
             // Grab id
             int newId;
 
-            if(!newIds.TryGetValue(category, out newId)) {
+            if (!newIds.TryGetValue(category, out newId)) {
                 newId = 1;
             }
 
@@ -75,7 +76,7 @@ namespace Project.Base {
             newIds[category] = newId + 1;
 
             // Try to save
-            this.TryToSave();
+            TryToSave();
 
             return newId;
         }

@@ -22,18 +22,13 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            RoomManager roomManager = app.GetService<RoomManager>("rooms");
+            RoomService roomService = app.GetService<RoomService>("rooms");
 
             ConsoleHelper.Print(PrintType.Info, "Room list (id - number):");
 
             // Print rooms
-            foreach (Room room in roomManager.GetRooms()) {
+            foreach (Room room in roomService.GetRooms()) {
                 ConsoleHelper.Print(PrintType.Info, room.id + " - " + room.number);
-                ConsoleHelper.Print(PrintType.Info, "  Chairs:");
-
-                foreach(string chair in room.GetChairs()) {
-                    ConsoleHelper.Print(PrintType.Info, "  " + chair);
-                }
             }
         }
 

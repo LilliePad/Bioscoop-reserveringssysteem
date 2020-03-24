@@ -3,7 +3,7 @@ using Project.Enums;
 using Project.Helpers;
 using Project.Models;
 using Project.Services;
-
+using System;
 
 namespace Project.Commands {
 
@@ -23,26 +23,24 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            UserManager userManager = app.GetService<UserManager>("users");
+            UserService userService = app.GetService<UserService>("users");
             
             // Check args length
             if(args.Length != 2) {
-                ConsoleHelper.Print(PrintType.Error, "Usage: user/login <username> <password>");
-                return;
+                throw new ArgumentException("Gebruik: user/login <username> <password>");
             }
 
             // Find user
-            User user = userManager.GetUserByUsername(args[0]);
+            User user = userService.GetUserByUsername(args[0]);
 
             // Error if user or password invalid
             if(user == null || !user.Authenticate(args[1])) {
-                ConsoleHelper.Print(PrintType.Error, "Ongeldige gebruikersnaam en wachtwoord combinatie.");
-                return;
+                throw new ArgumentException("Ongeldige gebruikersnaam en wachtwoord combinatie");
             }
 
             // Everything ok, login
-            userManager.SetCurrentUser(user);
-            ConsoleHelper.Print(PrintType.Info, "Succesvol ingelogd.");
+            userService.SetCurrentUser(user);
+            ConsoleHelper.Print(PrintType.Info, "Succesvol ingelogd");
         }
 
     }

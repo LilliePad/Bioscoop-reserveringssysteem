@@ -12,9 +12,9 @@ namespace Project.Base {
         public string location;
 
         public StorageFile(string category, string fileName) {
-            this.directory =  @"storage/" + category + "/";
+            directory =  @"storage/" + (category != null ? (category + "/") : "");
             this.fileName = fileName + (fileName.EndsWith(".json") ? "" : ".json");
-            this.location = this.directory + this.fileName;
+            location = directory + this.fileName;
         }
 
     }

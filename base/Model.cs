@@ -14,7 +14,7 @@ namespace Project.Base {
 
         // Adds an error to this model
         public void AddError(string attribute, string error) {
-            List<string> errors = this.GetErrors(attribute);
+            List<string> errors = GetErrors(attribute);
 
             // Add error if not present already
             if(!errors.Contains(error)) {
@@ -25,7 +25,7 @@ namespace Project.Base {
 
         // Returns all errors
         public Dictionary<string, List<string>> GetErrors() {
-            return this.errors;
+            return errors;
         }
 
         // Returns all errors for the specified attribute
@@ -42,7 +42,7 @@ namespace Project.Base {
 
         // Returns whether this model has valiation errors
         public bool HasErrors() {
-            return this.errors.Count > 0;
+            return errors.Count > 0;
         }
 
     }

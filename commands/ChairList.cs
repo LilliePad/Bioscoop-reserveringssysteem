@@ -1,4 +1,5 @@
-﻿using Project.Base;
+﻿using System;
+using Project.Base;
 using Project.Enums;
 using Project.Helpers;
 using Project.Models;
@@ -22,16 +23,32 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            UserManager userManager = app.GetService<UserManager>("chair");
+            RoomService roomService = app.GetService<RoomService>("rooms");
+            ChairService chairService = app.GetService<ChairService>("chairs");
 
+            // Check args length
+            if (args.Length != 1) {
+                throw new ArgumentException("Gebruik: chair/list <roomId>");
+            }
+
+            // Parse params
+            int roomId = ConsoleHelper.ParseInt(args[0], "roomId");
+
+            // Find room
+            Room room = roomService.GetRoomById(roomId);
+
+            if(room == null) {
+                throw new ArgumentException("Ongeldige zaal");
+            }
+
+            // Print chairs
             ConsoleHelper.Print(PrintType.Info, "chair list (id - row - number - price - type):");
 
             // Print chairs
-            ChairManager chairManager = app.GetService<ChairManager>("chairs");
-            foreach(Chair chair in chairManager.GetChairs()) {
+            foreach(Chair chair in chairService.GetChairsByRoom(room)) {
                 ConsoleHelper.Print(PrintType.Info, chair.id + " - " + chair.row + " - " + chair.number + " - " + chair.price + " - " + chair.type);
             }
         }
-    }
 
+    }
 }

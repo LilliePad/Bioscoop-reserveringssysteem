@@ -14,11 +14,11 @@ namespace Project.Models {
         public bool admin;
 
         public User(UserRecord record) {
-            this.id = record.id;
-            this.fullName = record.fullName;
-            this.username = record.username;
-            this.password = record.password;
-            this.admin = record.admin;
+            id = record.id;
+            fullName = record.fullName;
+            username = record.username;
+            password = record.password;
+            admin = record.admin;
         }
 
         public User(string fullName, string username, string password, bool admin) {
@@ -29,31 +29,31 @@ namespace Project.Models {
         }
 
         public override bool Validate() {
-            UserManager userManager = Program.GetInstance().GetService<UserManager>("users");
+            UserService userService = Program.GetInstance().GetService<UserService>("users");
 
             // Make sure fullName is set
             if (fullName == null || fullName.Length == 0) {
-                this.AddError("fullName", "Volledige naam mag niet leeg zijn.");
+                AddError("fullName", "Dit veld is vereist");
                 return false;
             }
 
             // Make sure username is set
             if (username == null || username.Length == 0) {
-                this.AddError("username", "Username mag niet leeg zijn.");
+                AddError("username", "Dit veld is vereist");
                 return false;
             }
 
             // Make sure username is unique
-            User existing = userManager.GetUserByUsername(username);
+            User existing = userService.GetUserByUsername(username);
 
             if (existing != null && existing.id != id) {
-                this.AddError("username", "Username is al in gebruik.");
+                AddError("username", "Deze gebruikersnaam is al in gebruik");
                 return false;
             }
 
             // Make sure password is set
             if (password == null || password.Length == 0) {
-                this.AddError("password", "Wachtwoord mag niet leeg zijn.");
+                AddError("password", "Dit veld is vereist");
                 return false;
             }
 

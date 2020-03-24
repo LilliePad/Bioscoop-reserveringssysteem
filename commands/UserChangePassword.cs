@@ -19,17 +19,18 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            UserManager userManager = app.GetService<UserManager>("users");
-            User currentUser = userManager.GetCurrentUser();
+            UserService userService = app.GetService<UserService>("users");
+            User currentUser = userService.GetCurrentUser();
 
             // Find the user to edit
             User user = currentUser;
 
             if (currentUser.admin && args.Length == 1) {
-                user = userManager.GetUserByUsername(args[0]);
+                int id = ConsoleHelper.ParseInt(args[0]);
+                user = userService.GetUserById(id);
 
                 if (user == null) {
-                    throw new Exception("Ongeldige gebruikersnaam");
+                    throw new ArgumentException("Ongeldige gebruiker");
                 }
             }
 
@@ -38,27 +39,25 @@ namespace Project.Commands {
                 string currentPassword = AskQuestion("Wat is het huidige wachtwoord?");
 
                 if (!user.Authenticate(currentPassword)) {
-                    ConsoleHelper.Print(PrintType.Error, "Ongeldig wachtwoord.");
-                    return;
+                    throw new ArgumentException("Ongeldig wachtwoord");
                 }
             }
 
             // Ask for the new password
             string newPassword = AskQuestion("Wat moet het nieuwe wachtwoord worden?");
-            string confirmNewPassword = AskQuestion("Bevestig het nieuwe wachtwoord.");
+            string confirmNewPassword = AskQuestion("Bevestig het nieuwe wachtwoord");
 
             // Make sure the new passwords match
             if(newPassword != confirmNewPassword) {
-                ConsoleHelper.Print(PrintType.Error, "Het nieuwe wachtwoord en de bevestiging komen niet overeen.");
-                return;
+                throw new ArgumentException("Het nieuwe wachtwoord en de bevestiging komen niet overeen");
             }
 
             // Encrypt and set password
             user.password = EncryptionHelper.CreateHash(newPassword);
 
             // Try to save
-            if (userManager.SaveUser(user)) {
-                ConsoleHelper.Print(PrintType.Info, "Wachtwoord succesvol aangepast.");
+            if (userService.SaveUser(user)) {
+                ConsoleHelper.Print(PrintType.Info, "Wachtwoord succesvol aangepast");
             } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon wachtwoord niet aanpassen. Errors:");
                 ConsoleHelper.PrintErrors(user);

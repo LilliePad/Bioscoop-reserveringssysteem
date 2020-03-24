@@ -23,20 +23,19 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            RoomManager roomManager = app.GetService<RoomManager>("rooms");
+            RoomService roomService = app.GetService<RoomService>("rooms");
 
             // Check args length
             if (args.Length != 1) {
-                ConsoleHelper.Print(PrintType.Error, "Usage: room/create <number>");
-                return;
+                throw new ArgumentException("Gebruik: room/create <number>");
             }
 
             // Try to save
             int number = ConsoleHelper.ParseInt(args[0], "number");
             Room room = new Room(number);
 
-            if (roomManager.SaveRoom(room)) {
-                ConsoleHelper.Print(PrintType.Info, "Zaal succesvol aangemaakt en ingelogd.");
+            if (roomService.SaveRoom(room)) {
+                ConsoleHelper.Print(PrintType.Info, "Zaal succesvol aangemaakt en ingelogd");
             } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon zaal niet aanmaken. Errors:");
                 ConsoleHelper.PrintErrors(room);

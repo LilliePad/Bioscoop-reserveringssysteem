@@ -15,20 +15,20 @@ namespace Project.Base {
 
         // Returns whether the application is running
         public bool IsRunning() {
-            return this.running;
+            return running;
         }
 
         // Loads the application and its services
         public void Start() {
-            if (this.IsRunning()) {
+            if (IsRunning()) {
                 throw new Exception("Application is already running.");
             }
 
             // Set running to true
-            this.running = true;
+            running = true;
 
             // Load app
-            this.Load();
+            Load();
 
             // Load services
             foreach (Service service in services.Values) {
@@ -38,7 +38,7 @@ namespace Project.Base {
 
         // Unload all services and the application
         public void Stop() {
-            if (!this.IsRunning()) {
+            if (!IsRunning()) {
                 throw new Exception("Application is not running.");
             }
 
@@ -48,15 +48,15 @@ namespace Project.Base {
             }
 
             // Unload app
-            this.Unload();
+            Unload();
 
             // Set running to false to stop any running loops
-            this.running = false;
+            running = false;
         }
 
         // Register a service
         public void RegisterService(Service service) {
-            this.services.Add(service.getHandle(), service);
+            services.Add(service.getHandle(), service);
         }
 
         // Returns a service by its handle

@@ -9,12 +9,10 @@ namespace Project.Models {
 
         public int id = -1;
         public int number;
-        public List<string> chairs = new List<string>();
 
         public Room(RoomRecord record) {
-            this.id = record.id;
-            this.number = record.number;
-            this.chairs = record.chairs;
+            id = record.id;
+            number = record.number;
         }
 
         public Room(int number) {
@@ -22,35 +20,23 @@ namespace Project.Models {
         }
 
         public override bool Validate() {
-            RoomManager roomManager = Program.GetInstance().GetService<RoomManager>("rooms");
+            RoomService roomService = Program.GetInstance().GetService<RoomService>("rooms");
 
             // Make sure the number is unique
-            Room existing = roomManager.GetRoomByNumber(number);
+            Room existing = roomService.GetRoomByNumber(number);
 
             if (existing != null && existing.id != id) {
-                this.AddError("number", "Nummer is al in gebruik.");
+                AddError("number", "Nummer is al in gebruik");
                 return false;
             }
-
-            // TODO: Add chair validation
 
             return true;
         }
 
-        public List<string> GetChairs() {
-            return chairs;
-        }
-
-        public string GetChairById(int id) {
-            return "";
-        }
-
-        public void AddChair(string chair) {
-            chairs.Add(chair);
-        }
-
-        public void RemoveChair(string chair) {
-            chairs.Remove(chair);
+        // Returns all chairs that belong to this Room
+        public List<Chair> GetChairs() {
+            ChairService service = Program.GetInstance().GetService<ChairService>("chairs");
+            return service.GetChairsByRoom(this);
         }
 
     }

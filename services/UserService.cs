@@ -11,10 +11,7 @@ using Project.Records;
 
 namespace Project.Services {
 
-    class UserManager : Service {
-
-        // Database
-        private UserDatabase database;
+    class UserService : Service {
 
         // Current user (logged in user)
         private User currentUser;
@@ -24,29 +21,25 @@ namespace Project.Services {
         }
 
         public override void Load() {
-            database = new UserDatabase();
-
-            // Stop if loading failed
-            if(!database.Load()) {
-                throw new InvalidDataException("Failed to load user database");
-            }
+            Database database = Program.GetInstance().GetDatabase();
 
             // Creating default user if we need to
             if (database.users.Count == 0) {
                 User admin = new User("Admin user", "admin", EncryptionHelper.CreateHash("admin"), true);
 
-                if (!this.SaveUser(admin)) {
+                if (!SaveUser(admin)) {
                     ConsoleHelper.Print(PrintType.Error, "Failed to create default user");
                     return;
                 }
 
-                this.SetCurrentUser(admin);
+                SetCurrentUser(admin);
                 ConsoleHelper.Print(PrintType.Warning, "Created default admin user, please configure it.");
             }
         }
 
         // Returns all users
         public List<User> GetUsers() {
+            Database database = Program.GetInstance().GetDatabase();
             List<User> models = new List<User>();
 
             foreach(UserRecord record in database.users) {
@@ -58,8 +51,10 @@ namespace Project.Services {
 
         // Returns a user by its id
         public User GetUserById(int id) {
+            Database database = Program.GetInstance().GetDatabase();
+
             try {
-                return GetUsers().Where(i => i.id == id).First();
+                return new User(database.users.Where(i => i.id == id).First());
             } catch (InvalidOperationException) {
                 return null;
             }
@@ -67,8 +62,10 @@ namespace Project.Services {
 
         // Returns a user by its username
         public User GetUserByUsername(string username) {
+            Database database = Program.GetInstance().GetDatabase();
+
             try {
-                return GetUsers().Where(i => i.username.Equals(username)).First();
+                return new User(database.users.Where(i => i.username.Equals(username)).First());
             } catch(InvalidOperationException) {
                 return null;
             }
@@ -76,16 +73,17 @@ namespace Project.Services {
 
         // Saves the specified user
         public bool SaveUser(User user) {
+            Database database = Program.GetInstance().GetDatabase();
             bool isNew = user.id == -1;
-
-            // Set id if its a new user
-            if (isNew) {
-                user.id = database.GetNewId("users");
-            }
 
             // Validate and add if valid
             if(!user.Validate()) {
                 return false;
+            }
+
+            // Set id if its a new user
+            if (isNew) {
+                user.id = database.GetNewId("users");
             }
 
             // Find existing record
@@ -112,6 +110,7 @@ namespace Project.Services {
 
         // Deletes the specified user
         public bool DeleteUser(User user) {
+            Database database = Program.GetInstance().GetDatabase();
             UserRecord record = database.users.SingleOrDefault(i => i.id == user.id);
 
             // Return false if room doesn't exist

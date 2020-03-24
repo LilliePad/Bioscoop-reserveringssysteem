@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Project.Base;
+﻿using Project.Base;
 
 namespace Project.Records {
 
@@ -7,7 +6,6 @@ namespace Project.Records {
 
         public int id;
         public int number;
-        public List<string> chairs;
 
     }
 

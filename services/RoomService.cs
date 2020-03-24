@@ -1,36 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Project.Base;
 using Project.Data;
-using Project.Enums;
-using Project.Helpers;
 using Project.Models;
 using Project.Records;
 
 namespace Project.Services {
 
-    class RoomManager : Service {
-
-        // Database
-        private RoomDatabase database;
+    class RoomService : Service {
 
         public override string getHandle() {
             return "rooms";
         }
 
-        public override void Load() {
-            database = new RoomDatabase();
-
-            // Stop if loading failed
-            if (!database.Load()) {
-                throw new InvalidDataException("Failed to load room database");
-            }
-        }
-
         // Returns all rooms
         public List<Room> GetRooms() {
+            Database database = Program.GetInstance().GetDatabase();
             List<Room> models = new List<Room>();
 
             foreach (RoomRecord record in database.rooms) {
@@ -42,8 +28,10 @@ namespace Project.Services {
 
         // Returns a room by its id
         public Room GetRoomById(int id) {
+            Database database = Program.GetInstance().GetDatabase();
+
             try {
-                return GetRooms().Where(i => i.id == id).First();
+                return new Room(database.rooms.Where(i => i.id == id).First());
             } catch (InvalidOperationException) {
                 return null;
             }
@@ -51,8 +39,10 @@ namespace Project.Services {
 
         // Returns a room by its number
         public Room GetRoomByNumber(int number) {
+            Database database = Program.GetInstance().GetDatabase();
+
             try {
-                return GetRooms().Where(i => i.number == number).First();
+                return new Room(database.rooms.Where(i => i.number == number).First());
             } catch (InvalidOperationException) {
                 return null;
             }
@@ -60,16 +50,19 @@ namespace Project.Services {
 
         // Saves the specified room
         public bool SaveRoom(Room room) {
+            Program app = Program.GetInstance();
+            Database database = app.GetDatabase();
+            ChairService chairService = app.GetService<ChairService>("chairs");
             bool isNew = room.id == -1;
-
-            // Set id if its a new room
-            if (isNew) {
-                room.id = database.GetNewId("rooms");
-            }
 
             // Validate and add if valid
             if (!room.Validate()) {
                 return false;
+            }
+
+            // Set id if its a new room
+            if (isNew) {
+                room.id = database.GetNewId("rooms");
             }
 
             // Find existing record
@@ -84,7 +77,6 @@ namespace Project.Services {
             // Update record
             record.id = room.id;
             record.number = room.number;
-            record.chairs = room.chairs;
 
             // Try to save
             database.TryToSave();
@@ -94,6 +86,9 @@ namespace Project.Services {
 
         // Deletes the specified room
         public bool DeleteRoom(Room room) {
+            Program app = Program.GetInstance();
+            Database database = app.GetDatabase();
+            ChairService chairService = app.GetService<ChairService>("chairs");
             RoomRecord record = database.rooms.SingleOrDefault(i => i.id == room.id);
 
             // Return false if room doesn't exist
@@ -101,8 +96,12 @@ namespace Project.Services {
                 return false;
             }
 
-            // Remove record
+            // Remove record and chairs
             database.rooms.Remove(record);
+            
+            foreach(Chair chair in chairService.GetChairsByRoom(room)) {
+                chairService.DeleteChair(chair);
+            }
 
             // Try to save
             database.TryToSave();
