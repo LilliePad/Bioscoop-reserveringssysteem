@@ -19,10 +19,10 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            MovieManager movieManager = app.GetService<MovieManager>("films");
-            Movie currentUser = movieManager.GetCurrentUser();
+            MovieManager movieManager = app.GetService<MovieManager>("movies");
+           
 
-            // Find the user to edit
+            // Find the movie to edit
             Movie movie = movieName;
 
             if(currentUser.admin && args.Length == 1) {

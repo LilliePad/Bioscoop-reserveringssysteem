@@ -4,9 +4,11 @@ namespace Project.Records {
 
     class MovieRecord : Record {
 
+        public int id;
         public string movieName;
-        public string moveiTime;
+        public string movieTime;
         public string genre;
+
     }
 
 }

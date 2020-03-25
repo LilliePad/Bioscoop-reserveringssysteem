@@ -11,7 +11,6 @@ namespace Project.Models {
         public string movieName;
         public string movieTime;
         public string genre;
-        public bool admin;
 
         public Movie(MovieRecord record) {
             this.id = record.id;
@@ -43,13 +42,6 @@ namespace Project.Models {
 
             if (movieTime == null || movieTime.Length == 0) {
                 this.AddError("username", "Username mag niet leeg zijn.");
-                return false;
-            }
-
-            User existing = movieManager.GetMovieByMoviename(movieName);
-
-            if (existing != null && existing.id != id) {
-                this.AddError("moviename", "FIlm is al in gebruik.");
                 return false;
             }
 

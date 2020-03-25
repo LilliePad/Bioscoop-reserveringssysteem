@@ -13,7 +13,7 @@ namespace Project.Services {
     class MovieManager : Service {
 
         // Database
-        private MovieManager database;
+        private MovieDatabase database;
 
         public override string getHandle() {
             return "movies";
@@ -26,40 +26,30 @@ namespace Project.Services {
 
             // Try to load
             if (!database.Load()) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to load movies");
+                ConsoleHelper.Print(PrintType.Error, "Failed to load films");
                 return;
             }
 
-            ConsoleHelper.Print(PrintType.Info, "Loaded user database.");
+            ConsoleHelper.Print(PrintType.Info, "Loaded film database.");
 
-            // Creating default user if we need to
-            if (database.movies.Count == 0) {
-                User admin = new User("Admin user", "admin", EncryptionHelper.CreateHash("admin"), true);
 
-                if (!this.SaveMovies(admin)) {
-                    ConsoleHelper.Print(PrintType.Error, "Failed to create default user");
-                    return;
-                }
-
-                this.SetCurrentUser(admin);
-                ConsoleHelper.Print(PrintType.Warning, "Created default admin user, please configure it.");
             }
-        }
+        
 
         public override void Unload() {
-            ConsoleHelper.Print(PrintType.Info, "Saving user database...");
+            ConsoleHelper.Print(PrintType.Info, "Saving movie database...");
 
             // Try to save
             if (!database.Save()) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to save user database.");
+                ConsoleHelper.Print(PrintType.Error, "Failed to save movie database.");
                 return;
             }
 
-            ConsoleHelper.Print(PrintType.Info, "Saved user database.");
+            ConsoleHelper.Print(PrintType.Info, "Saved movie database.");
         }
 
-        // Returns all users
-        public List<Movie> GetUsers() {
+        // Returns all movies
+        public List<Movie> GetMovies() {
             List<Movie> models = new List<Movie>();
 
             foreach (MovieRecord record in database.movies) {
@@ -94,11 +84,11 @@ namespace Project.Services {
             }
 
             // Find existing record
-            UserRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
+            MovieRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
 
             // Add if no record exists
             if (record == null) {
-                record = new movieRecord();
+                record = new MovieRecord();
                 database.movies.Add(record);
             }
 
@@ -111,15 +101,7 @@ namespace Project.Services {
             return true;
         }
 
-        // Returns current user
-        public Movie GetCurrentUser() {
-            return currentMovie;
-        }
-        
-        // Sets the current user
-        public void SetCurrentUser(Movie currentmovie) {
-            this.currentMovie = currentMovie;
-        }
+
 
     }
 
