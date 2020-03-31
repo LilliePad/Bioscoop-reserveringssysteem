@@ -22,10 +22,10 @@ namespace Project.Base {
 
         private string WaitForAnswer(Question question) {
             Program app = Program.GetInstance();
-            ConsoleService commandService = app.GetService<ConsoleService>("console");
+            ConsoleService consoleService = app.GetService<ConsoleService>("console");
 
             // Try to register the question
-            if (!commandService.SetQuestion(question)) {
+            if (!consoleService.SetQuestion(question)) {
                 throw new Exception("Failed to register question");
             }
 
