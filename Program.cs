@@ -48,6 +48,7 @@ namespace Project {
             commandService.RegisterCommand(new UserChangePassword());
             commandService.RegisterCommand(new UserDelete());
             commandService.RegisterCommand(new UserLogin());
+            commandService.RegisterCommand(new UserLogout());
 
             commandService.RegisterCommand(new RoomList());
             commandService.RegisterCommand(new RoomCreate());
