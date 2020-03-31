@@ -22,7 +22,7 @@ namespace Project.Base {
 
         private string WaitForAnswer(Question question) {
             Program app = Program.GetInstance();
-            ConsoleService commandService = app.GetService<ConsoleService>("commands");
+            ConsoleService commandService = app.GetService<ConsoleService>("console");
 
             // Try to register the question
             if (!commandService.SetQuestion(question)) {

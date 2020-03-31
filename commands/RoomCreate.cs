@@ -35,7 +35,7 @@ namespace Project.Commands {
             Room room = new Room(number);
 
             if (roomService.SaveRoom(room)) {
-                ConsoleHelper.Print(PrintType.Info, "Zaal succesvol aangemaakt en ingelogd");
+                ConsoleHelper.Print(PrintType.Info, "Zaal succesvol aangemaakt");
             } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon zaal niet aanmaken. Errors:");
                 ConsoleHelper.PrintErrors(room);
