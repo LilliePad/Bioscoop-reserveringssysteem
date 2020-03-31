@@ -36,17 +36,17 @@ namespace Project.Models {
             MovieManager movieManager = Program.GetInstance().GetService<MovieManager>("films");
 
             if (movieName == null || movieName.Length == 0) {
-                this.AddError("fullName", "Volledige naam mag niet leeg zijn.");
+                this.AddError("movieName", "titel mag niet leeg zijn.");
                 return false;
             }
 
             if (movieTime == null || movieTime.Length == 0) {
-                this.AddError("username", "Username mag niet leeg zijn.");
+                this.AddError("movieTime", "moveTime mag niet leeg zijn.");
                 return false;
             }
 
             if (genre == null || genre.Length == 0) {
-                this.AddError("genre", "Wachtwoord mag niet leeg zijn.");
+                this.AddError("genre", "genre mag niet leeg zijn.");
                 return false;
             }
 

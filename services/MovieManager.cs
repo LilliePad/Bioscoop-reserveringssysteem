@@ -26,11 +26,11 @@ namespace Project.Services {
 
             // Try to load
             if (!database.Load()) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to load films");
+                ConsoleHelper.Print(PrintType.Error, "Failed to load movie");
                 return;
             }
 
-            ConsoleHelper.Print(PrintType.Info, "Loaded film database.");
+            ConsoleHelper.Print(PrintType.Info, "Loaded movie database.");
 
 
             }
@@ -58,51 +58,64 @@ namespace Project.Services {
 
             return models;
         }
-
-        // Returns a user by its username
-        public Movie GetMovieByMoviename(string movieName) {
+        // Returns a movie by its id
+        public Movie GetMovieById(int id) {
             try {
-                return GetMovies().Where(i => i.movieTime.Equals(movieName)).First();
-            }
-            catch (InvalidOperationException) {
+                return GetMovies().Where(i => i.id == id).First();
+            } catch (InvalidOperationException) {
                 return null;
+
+
+
+
+                // Returns a movie by its moveName
+                public Movie GetMovieByMoviename(string movieName) {
+                    try {
+                        return GetMovies().Where(i => i.movieTime.Equals(movieName)).First();
+                    }
+                    catch (InvalidOperationException) {
+                        return null;
+                    }
+                }
+
+                // Saves the specified movie
+                public bool SaveMovie(Movie movie) {
+                    bool isNew = movie.id == -1;
+
+                    // Set id if its a new movie
+                    if (isNew) {
+                        movie.id = database.GetNewId("movies");
+                    }
+
+                    // Validate and add if valid
+                    if (!movie.Validate()) {
+                        return false;
+                    }
+
+                    // Find existing record
+                    MovieRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
+
+                    // Add if no record exists
+                    if (record == null) {
+                        record = new MovieRecord();
+                        database.movies.Add(record);
+                    }
+
+                    // Update record
+                    record.id = movie.id;
+                    record.movieName = movie.movieName;
+                    record.movieTime = movie.movieTime;
+                    record.genre = movie.genre;
+
+                    return true;
+                }
+
+                // Deletes the specified user
+                public bool DeleteMovie(Movie movie) {
+                    MovieRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
+
+                }
             }
         }
-
-        // Saves the specified movie
-        public bool SaveMovie(Movie movie) {
-            bool isNew = movie.id == -1;
-
-            // Set id if its a new movie
-            if (isNew) {
-                movie.id = database.GetNewId("movies");
-            }
-
-            // Validate and add if valid
-            if (!movie.Validate()) {
-                return false;
-            }
-
-            // Find existing record
-            MovieRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
-
-            // Add if no record exists
-            if (record == null) {
-                record = new MovieRecord();
-                database.movies.Add(record);
-            }
-
-            // Update record
-            record.id = movie.id;
-            record.movieName = movie.movieName;
-            record.movieTime = movie.movieTime;
-            record.genre = movie.genre;
-
-            return true;
-        }
-
-
-
     }
-
 }
