@@ -13,12 +13,16 @@ namespace Project.Commands {
             return "user";
         }
 
-        public override bool RequireLogin() {
-            return false;
-        }
-
         public override string GetName() {
             return "login";
+        }
+
+        public override string GetUsage() {
+            return "user/login <username> <password>";
+        }
+
+        public override bool RequireLogin() {
+            return false;
         }
 
         public override void RunCommand(string[] args) {
@@ -27,7 +31,7 @@ namespace Project.Commands {
             
             // Check args length
             if(args.Length != 2) {
-                throw new ArgumentException("Gebruik: user/login <username> <password>");
+                throw new ArgumentException("Gebruik: " + GetUsage());
             }
 
             // Find user

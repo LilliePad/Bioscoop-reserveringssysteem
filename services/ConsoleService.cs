@@ -74,9 +74,7 @@ namespace Project.Services {
 
         // Registers a command
         public void RegisterCommand(Command command) {
-            string category = command.GetCategory();
-            string name = (category != null ? (category + "/") : "") + command.GetName();
-            commands.Add(name, command);
+            commands.Add(command.GetKey(), command);
         }
 
         // Sets the current question
@@ -98,6 +96,11 @@ namespace Project.Services {
             } catch(Exception e) {
                 ConsoleHelper.Print(PrintType.Error, "Er is een fout opgetreden: " + e.Message);
             }
+        }
+
+        // Returns all registeren commands
+        public List<Command> GetCommands() {
+            return commands.Values.ToList();
         }
 
     }

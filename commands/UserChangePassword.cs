@@ -17,6 +17,12 @@ namespace Project.Commands {
             return "change-password";
         }
 
+        public override string GetUsage() {
+            UserService userService = Program.GetInstance().GetService<UserService>("users");
+            User currentUser = userService.GetCurrentUser();
+            return "user/change-password" + (currentUser != null && currentUser.admin ? " (userId)" : "");
+        }
+
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
             UserService userService = app.GetService<UserService>("users");

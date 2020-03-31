@@ -16,7 +16,11 @@ namespace Project.Commands {
         public override string GetName() {
             return "create";
         }
-        
+
+        public override string GetUsage() {
+            return "chair/create <roomId> <row> <number> <price> <type>";
+        }
+
         public override bool RequireAdmin() {
             return true;
         }
@@ -27,7 +31,7 @@ namespace Project.Commands {
 
             // Check args length
             if (args.Length != 5) {
-                throw new ArgumentException("Gebruik: chair/create <roomId> <row> <number> <price> <type>");
+                throw new ArgumentException("Gebruik: " + GetUsage());
             }
 
             // Parse params

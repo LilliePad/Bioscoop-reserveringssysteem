@@ -17,6 +17,10 @@ namespace Project.Commands {
             return "create";
         }
 
+        public override string GetUsage() {
+            return "room/create <number>";
+        }
+
         public override bool RequireAdmin() {
             return true;
         }
@@ -27,7 +31,7 @@ namespace Project.Commands {
 
             // Check args length
             if (args.Length != 1) {
-                throw new ArgumentException("Gebruik: room/create <number>");
+                throw new ArgumentException("Gebruik: " + GetUsage());
             }
 
             // Try to save

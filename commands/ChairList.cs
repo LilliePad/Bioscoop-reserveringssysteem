@@ -17,6 +17,10 @@ namespace Project.Commands {
             return "list";
         }
 
+        public override string GetUsage() {
+            return "chair/list <roomId>";
+        }
+
         public override bool RequireAdmin() {
             return true;
         }
@@ -28,7 +32,7 @@ namespace Project.Commands {
 
             // Check args length
             if (args.Length != 1) {
-                throw new ArgumentException("Gebruik: chair/list <roomId>");
+                throw new ArgumentException("Gebruik: " + GetUsage());
             }
 
             // Parse params

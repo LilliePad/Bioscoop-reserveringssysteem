@@ -17,6 +17,10 @@ namespace Project.Commands {
             return "delete";
         }
 
+        public override string GetUsage() {
+            return "room/delete <id>";
+        }
+
         public override bool RequireAdmin() {
             return true;
         }
@@ -27,7 +31,7 @@ namespace Project.Commands {
 
             // Check args length
             if (args.Length != 1) {
-                throw new ArgumentException("Gebruik: room/delete <id>");
+                throw new ArgumentException("Gebruik: " + GetUsage());
             }
 
             // Find room

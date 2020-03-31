@@ -17,6 +17,12 @@ namespace Project.Commands {
             return "edit";
         }
 
+        public override string GetUsage() {
+            UserService userService = Program.GetInstance().GetService<UserService>("users");
+            User currentUser = userService.GetCurrentUser();
+            return "user/edit" + (currentUser != null && currentUser.admin ? " (userId)" : "");
+        }
+
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
             UserService userService = app.GetService<UserService>("users");
@@ -30,7 +36,7 @@ namespace Project.Commands {
                 user = userService.GetUserById(id);
 
                 if(user == null) {
-                    throw new Exception("Ongeldige gebruikersnaam");
+                    throw new Exception("Ongeldige gebruiker");
                 }
             }
 

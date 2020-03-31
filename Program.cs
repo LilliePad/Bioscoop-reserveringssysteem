@@ -39,6 +39,7 @@ namespace Project {
             // Register commands service
             ConsoleService commandService = new ConsoleService();
 
+            commandService.RegisterCommand(new Help());
             commandService.RegisterCommand(new Stop());
 
             commandService.RegisterCommand(new UserList());
