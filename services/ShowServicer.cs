@@ -65,7 +65,9 @@ namespace Project.Services {
 
             // Update record
             record.id = show.id;
-            record.number = show.number;
+            record.Movie = show.Movie;
+            record.DateTime = show.DateTime
+            
 
             // Try to save
             database.TryToSave();

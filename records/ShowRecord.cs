@@ -6,9 +6,8 @@ namespace Project.Records {
 
         public int id;
         public string Movie;
-        public string Room;
-        public string Date;
-        public string Time;
+        public string DateTime;
+
 
     }
 
