@@ -64,8 +64,8 @@ namespace Project.Services {
 
 
             // Update record
-            record.id = room.id;
-            record.number = room.number;
+            record.id = show.id;
+            record.number = show.number;
 
             // Try to save
             database.TryToSave();
@@ -73,10 +73,47 @@ namespace Project.Services {
             return true;
             }
 
+               // Saves the specified room
+                public bool SaveShow(Show show) {
+                Program app  = Program.GetInstance();
+                Database database = app.GetDatabase();
+                RoomService roomService = app.GetService<RoomService>("Rooms");
+                bool isNew = show.id == -1;
+
+                // Validate and add if valid
+                if (!show.Validate()) {
+                    return false;
+                }
+
+                // Set id if its a new room
+                if (isNew) {
+                    show.id = database.GetNewId("shows");
+                }
+
+                // Find existing record
+                ShowRecord record = database.shows.SingleOrDefault(i => i.id == show.id);
+
+                // Add if no record exists
+                if (record == null) {
+                    record = new ShowRecord();
+                    database.shows.Add(record);
+                }
+
+                // Update record
+                record.id = show.id;
+                record.number = show.number;
+
+                // Try to save
+                database.TryToSave();
+
+                return true;
+            }
+
             // Deletes the specified room
             public bool DeleteShow(Show show) {
             Program app = Program.GetInstance();
             Database database = app.GetDatabase();
+            RoomService roomService = app.GetService<RoomService>("Rooms");
             ShowRecord record = database.shows.SingleOrDefault(i => i.id == show.id);
 
             // Return false if room doesn't exist
@@ -86,7 +123,7 @@ namespace Project.Services {
 
             // Remove record and chairs
             database.shows.Remove(record);
-
+            database.rooms.
             // Try to save
              database.TryToSave();
 
