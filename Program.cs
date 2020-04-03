@@ -37,7 +37,7 @@ namespace Project {
             RegisterService(new RoomService());
 
             // Register shows service
-            RegisterService(new ShowManager());
+            RegisterService(new ShowService());
 
             // Register commands service
             ConsoleService commandService = new ConsoleService();
