@@ -37,8 +37,33 @@ namespace Project.Models {
             this.Time = Time;
         }
 
+        public override bool Validate() {
+            Program app = Program.GetInstance();
+            ShowService showService = app.GetService<ShowService>("shows");
+            RoomService roomService = app.GetService<RoomService>("rooms");
 
+            // Make sure the room exists
+            Room room = roomService.GetRoomById(roomId);
+            Show show = showService.GetRoomById(showId);
+
+            if (room == null) {
+                AddError("roomId", "Ongeldige zaal");
+                return false;
+            }
+
+
+            if (show != null && show.id != id) {
+                AddError("number", "Nummer moet uniek zijn voor de gekozen rij");
+                return false;
+            }
+
+
+            return true;
+        }
 
     }
 
 }
+
+
+   
