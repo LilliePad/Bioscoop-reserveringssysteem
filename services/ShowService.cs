@@ -46,7 +46,7 @@ namespace Project.Services {
             // Validate and add if valid
             if (!show.Validate()) {
             return false;
-        }
+        
 
             // Set id if its a new room
             if (isNew) {
@@ -79,7 +79,6 @@ namespace Project.Services {
                 public bool SaveShow(Show show) {
                 Program app  = Program.GetInstance();
                 Database database = app.GetDatabase();
-                RoomService roomService = app.GetService<RoomService>("Rooms");
                 bool isNew = show.id == -1;
 
                 // Validate and add if valid
@@ -103,7 +102,8 @@ namespace Project.Services {
 
                 // Update record
                 record.id = show.id;
-                record.number = show.number;
+                record.DateTime = show.DateTime;
+                record.Movie = show.Movie
 
                 // Try to save
                 database.TryToSave();
@@ -111,25 +111,24 @@ namespace Project.Services {
                 return true;
             }
 
-            // Deletes the specified room
-            public bool DeleteShow(Show show) {
+        // Deletes the specified room
+        public bool DeleteShow(Show show) {
             Program app = Program.GetInstance();
             Database database = app.GetDatabase();
-            RoomService roomService = app.GetService<RoomService>("Rooms");
             ShowRecord record = database.shows.SingleOrDefault(i => i.id == show.id);
 
             // Return false if room doesn't exist
             if (record == null) {
-                 return false;
+                return false;
             }
 
             // Remove record and chairs
             database.shows.Remove(record);
-            database.rooms.
-            // Try to save
+             // Try to save
              database.TryToSave();
 
             return true;
+
 }
 
 
