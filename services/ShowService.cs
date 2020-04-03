@@ -10,7 +10,7 @@ using Project.Records;
 
 namespace Project.Services {
 
-    class ShowSerice : Service {
+    class ShowService : Service {
 
         // Database
         private ShowDatabase database;
@@ -22,7 +22,7 @@ namespace Project.Services {
 
         // Returns all shows
         public List<Show> GetShows() {
-            List<Show> models = new List<Show>();
+            List<Show> models = new Lst<Show>();
 
             foreach (ShowRecord record in database.shows) {
                 models.Add(new Show(record));
