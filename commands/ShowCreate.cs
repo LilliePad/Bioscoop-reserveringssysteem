@@ -38,7 +38,7 @@ namespace Project.Commands {
 
 
             // Try to register
-            Show show = new Show(Movie, Room, Date, Time);
+            Show show = new Show(Movie, RoomId, DateTime);
 
             // Login if registration successful
             if (showService.SaveShow(Show show)) {
