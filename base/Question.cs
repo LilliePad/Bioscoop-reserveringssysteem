@@ -7,13 +7,13 @@
         public static readonly string[] OPTIONS_BOOL = new string[] { OPTION_YES, OPTION_NO };
 
         // The question to be asked
-        private string question;
+        private readonly string question;
 
         // The valid options
-        private string[] options;
+        private readonly string[] options;
 
         // The default value
-        private string defaultValue;
+        private readonly string defaultValue;
 
         // The answer (null until answered)
         private string answer;
@@ -29,7 +29,7 @@
 
         // Returns the question
         public string GetQuestion() {
-            return this.question;
+            return question;
         }
 
         // Returns the message
@@ -51,24 +51,24 @@
 
         // Returns the options
         public string[] GetOptions() {
-            return this.options;
+            return options;
         }
 
         // Returns the default value
         public string GetDefaultValue() {
-            return this.defaultValue;
+            return defaultValue;
         }
 
         // Returns the answer or null
         public string GetAnswer() {
-            lock(this.answerLock) {
-                return this.answer;
+            lock(answerLock) {
+                return answer;
             }
         }
 
         // Sets the answer
         public void SetAnswer(string answer) {
-            lock (this.answerLock) {
+            lock (answerLock) {
                 this.answer = answer;
             }
         }

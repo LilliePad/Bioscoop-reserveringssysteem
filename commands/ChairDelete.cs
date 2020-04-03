@@ -7,10 +7,10 @@ using System;
 
 namespace Project.Commands {
 
-    class UserDelete : Command {
+    class ChairDelete : Command {
 
         public override string GetCategory() {
-            return "user";
+            return "chair";
         }
 
         public override string GetName() {
@@ -18,7 +18,7 @@ namespace Project.Commands {
         }
 
         public override string GetUsage() {
-            return "user/delete <id>";
+            return "chair/delete <id>";
         }
 
         public override bool RequireAdmin() {
@@ -27,7 +27,7 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            UserService userService = app.GetService<UserService>("users");
+            ChairService chairService = app.GetService<ChairService>("chairs");
 
             // Check args length
             if (args.Length != 1) {
@@ -36,16 +36,16 @@ namespace Project.Commands {
 
             // Find room
             int id = ConsoleHelper.ParseInt(args[0], "id");
-            User user = userService.GetUserById(id);
+            Chair chair = chairService.GetChairById(id);
 
-            if (user == null) {
-                throw new ArgumentException("Ongeldige gebruiker");
+            if (chair == null) {
+                throw new ArgumentException("Ongeldige stoel");
             }
 
-            if (userService.DeleteUser(user)) {
-                ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol verwijderd");
+            if (chairService.DeleteChair(chair)) {
+                ConsoleHelper.Print(PrintType.Info, "Stoel succesvol verwijderd");
             } else {
-                ConsoleHelper.Print(PrintType.Error, "Kon gebruiker niet verwijderen");
+                ConsoleHelper.Print(PrintType.Error, "Kon stoel niet verwijderen");
             }
         }
 

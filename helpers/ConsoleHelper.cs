@@ -32,7 +32,7 @@ namespace Project.Helpers {
             try {
                 return Int32.Parse(value);
             } catch(FormatException) {
-                throw new ArgumentException((paramName ?? value) + " moet een integer zijn.");
+                throw new ArgumentException((paramName ?? value) + " moet een integer zijn");
             }
         }
 
@@ -41,7 +41,7 @@ namespace Project.Helpers {
             try {
                 return Double.Parse(value);
             } catch (FormatException) {
-                throw new ArgumentException((paramName ?? value) + " moet een double zijn.");
+                throw new ArgumentException((paramName ?? value) + " moet een double zijn");
             }
         }
 
@@ -57,7 +57,7 @@ namespace Project.Helpers {
                 case "false":
                     return false;
                 default:
-                    throw new ArgumentException((paramName ?? value) + " moet een boolean zijn.");
+                    throw new ArgumentException((paramName ?? value) + " moet een boolean zijn");
             }
         }
 

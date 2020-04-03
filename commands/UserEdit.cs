@@ -17,20 +17,26 @@ namespace Project.Commands {
             return "edit";
         }
 
+        public override string GetUsage() {
+            UserService userService = Program.GetInstance().GetService<UserService>("users");
+            User currentUser = userService.GetCurrentUser();
+            return "user/edit" + (currentUser != null && currentUser.admin ? " (userId)" : "");
+        }
+
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            UserManager userManager = app.GetService<UserManager>("users");
-            User currentUser = userManager.GetCurrentUser();
+            UserService userService = app.GetService<UserService>("users");
+            User currentUser = userService.GetCurrentUser();
 
             // Find the user to edit
             User user = currentUser;
 
             if(currentUser.admin && args.Length == 1) {
                 int id = ConsoleHelper.ParseInt(args[0]);
-                user = userManager.GetUserById(id);
+                user = userService.GetUserById(id);
 
                 if(user == null) {
-                    throw new Exception("Ongeldige gebruikersnaam");
+                    throw new Exception("Ongeldige gebruiker");
                 }
             }
 
@@ -45,8 +51,8 @@ namespace Project.Commands {
             }
 
             // Try to save
-            if (userManager.SaveUser(user)) {
-                ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol aangepast.");
+            if (userService.SaveUser(user)) {
+                ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol aangepast");
             } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon gebruiker niet aanpassen. Errors:");
                 ConsoleHelper.PrintErrors(user);

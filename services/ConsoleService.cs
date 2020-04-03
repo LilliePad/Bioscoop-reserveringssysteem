@@ -8,7 +8,7 @@ using Project.Helpers;
 
 namespace Project.Services {
 
-    class CommandManager : Service {
+    class ConsoleService : Service {
 
         // All registered commands
         private readonly Dictionary<String, Command> commands = new Dictionary<String, Command>();
@@ -16,13 +16,13 @@ namespace Project.Services {
         // The current question
         private Question question;
 
-        public override string getHandle() {
-            return "commands";
+        public override string GetHandle() {
+            return "console";
         }
 
         public override void Load() {
             Program app = Program.GetInstance();
-            UserManager userManager = app.GetService<UserManager>("users");
+            UserService userService = app.GetService<UserService>("users");
             string line;
 
             // Start listening for commands
@@ -40,24 +40,21 @@ namespace Project.Services {
                         string name = data[0];
                         string[] args = data.Skip(1).ToArray();
 
-                        // Find command
-                        Command command;
-
                         // Check if command exists
-                        if (!commands.TryGetValue(name, out command)) {
-                            ConsoleHelper.Print(PrintType.Error, "Unknown command");
+                        if (!commands.TryGetValue(name, out Command command)) {
+                            ConsoleHelper.Print(PrintType.Error, "Onbekend commando");
                             continue;
                         }
 
                         // Check if the user is logged in
-                        if ((command.RequireLogin() || command.RequireAdmin()) && userManager.GetCurrentUser() == null) {
-                            ConsoleHelper.Print(PrintType.Error, "Je moet ingelogd zijn om dit command te gebruiken.");
+                        if ((command.RequireLogin() || command.RequireAdmin()) && userService.GetCurrentUser() == null) {
+                            ConsoleHelper.Print(PrintType.Error, "Je moet ingelogd zijn om dit command te gebruiken");
                             continue;
                         }
 
                         // Check if the user is an admin
-                        if (command.RequireAdmin() && !userManager.GetCurrentUser().admin) {
-                            ConsoleHelper.Print(PrintType.Error, "Je moet admin zijn om dit command te gebruiken.");
+                        if (command.RequireAdmin() && !userService.GetCurrentUser().admin) {
+                            ConsoleHelper.Print(PrintType.Error, "Je moet admin zijn om dit command te gebruiken");
                             continue;
                         }
 
@@ -77,9 +74,7 @@ namespace Project.Services {
 
         // Registers a command
         public void RegisterCommand(Command command) {
-            string category = command.GetCategory();
-            string name = (category != null ? (category + "/") : "") + command.GetName();
-            commands.Add(name, command);
+            commands.Add(command.GetKey(), command);
         }
 
         // Sets the current question
@@ -101,6 +96,11 @@ namespace Project.Services {
             } catch(Exception e) {
                 ConsoleHelper.Print(PrintType.Error, "Er is een fout opgetreden: " + e.Message);
             }
+        }
+
+        // Returns all registeren commands
+        public List<Command> GetCommands() {
+            return commands.Values.ToList();
         }
 
     }

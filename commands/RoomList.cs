@@ -6,10 +6,10 @@ using Project.Services;
 
 namespace Project.Commands {
 
-    class UserList : Command {
+    class RoomList : Command {
 
         public override string GetCategory() {
-            return "user";
+            return "room";
         }
 
         public override string GetName() {
@@ -22,13 +22,13 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            UserService userService = app.GetService<UserService>("users");
+            RoomService roomService = app.GetService<RoomService>("rooms");
 
-            ConsoleHelper.Print(PrintType.Info, "User list (id - username - fullname - admin):");
+            ConsoleHelper.Print(PrintType.Info, "Room list (id - number):");
 
-            // Print users
-            foreach(User user in userService.GetUsers()) {
-                ConsoleHelper.Print(PrintType.Info, user.id + " - " + user.username + " - " + user.fullName + " - " + user.admin);
+            // Print rooms
+            foreach (Room room in roomService.GetRooms()) {
+                ConsoleHelper.Print(PrintType.Info, room.id + " - " + room.number);
             }
         }
 
