@@ -10,7 +10,7 @@ using Project.Records;
 
 namespace Project.Services {
 
-    class ShowManager : Service {
+    class ShowSerice : Service {
 
         // Database
         private ShowDatabase database;
