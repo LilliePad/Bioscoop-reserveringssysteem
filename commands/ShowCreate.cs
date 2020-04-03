@@ -10,21 +10,9 @@ namespace Project.Commands {
 
     class ShowCreate : InteractiveCommand {
 
-        public override string GetCategory() {
-            return "show";
-        }
-
-        public override bool RequireLogin() {
-            return true;
-        }
-
-        public override string GetName() {
-            return "create";
-        }
-
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            ShowManager showManager = app.GetService<ShowManager>("shows");
+            ShowService showService = app.GetService<ShowService>("shows");
 
 
             // Get input
@@ -42,13 +30,15 @@ namespace Project.Commands {
             Show show = new Show(Movie, Room, Date, Time);
 
             // Login if registration successful
-            if (showManager.SaveShow(show)) {
+            if (showService.SaveShow(show)) {
                 ConsoleHelper.Print(PrintType.Info, "show succesvol aangemaakt.");
             }
             else {
                 ConsoleHelper.Print(PrintType.Info, "Kon show niet aanmaken. Errors:");
             }
         }
+  
+
     }
 
 }
