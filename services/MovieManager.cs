@@ -62,16 +62,17 @@ namespace Project.Services {
         public Movie GetMovieById(int id) {
             try {
                 return GetMovies().Where(i => i.id == id).First();
-            } catch (InvalidOperationException) {
+            }
+            catch (InvalidOperationException) {
                 return null;
 
-
-
+            }
+        }
 
                 // Returns a movie by its moveName
-                public Movie GetMovieByMoviename(string movieName) {
+                 public Movie GetMovieByMoviename(string movieName) {
                     try {
-                        return GetMovies().Where(i => i.movieTime.Equals(movieName)).First();
+                        return GetMovies().Where(i => i.time.Equals(movieName)).First();
                     }
                     catch (InvalidOperationException) {
                         return null;
@@ -79,7 +80,7 @@ namespace Project.Services {
                 }
 
                 // Saves the specified movie
-                public bool SaveMovie(Movie movie) {
+                 public bool SaveMovie(Movie movie) {
                     bool isNew = movie.id == -1;
 
                     // Set id if its a new movie
@@ -103,19 +104,30 @@ namespace Project.Services {
 
                     // Update record
                     record.id = movie.id;
-                    record.movieName = movie.movieName;
-                    record.movieTime = movie.movieTime;
+                    record.name = movie.name;
+                    record.time = movie.time;
                     record.genre = movie.genre;
 
                     return true;
                 }
 
                 // Deletes the specified user
-                public bool DeleteMovie(Movie movie) {
+                 public bool DeleteMovie(Movie movie) {
                     MovieRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
 
+                // Return false if room doesn't exist
+                if (record == null) {
+                    return false;
                 }
+
+                // Remove record
+                database.movies.Remove(record);
+
+                // Try to save
+                database.TryToSave();
+
+                return true;
+
+        }
             }
         }
-    }
-}

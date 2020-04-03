@@ -8,40 +8,40 @@ namespace Project.Models {
     class Movie : Model {
 
         public int id = -1;
-        public string movieName;
-        public string movieTime;
+        public string name;
+        public string time;
         public string genre;
 
         public Movie(MovieRecord record) {
             this.id = record.id;
-            this.movieName = record.movieName;
-            this.movieTime = record.movieTime;
+            this.name = record.name;
+            this.time = record.time;
             this.genre = record.genre;
         }
 
         public Movie(string movieName, string movieTime, string genre) {
-            this.movieName = movieName;
-            this.movieTime = movieTime;
+            this.name = movieName;
+            this.time = movieTime;
             this.genre = genre;
         }
 
-        private Movie(int id, string movieName, string movieTime, string genre) {
+        private Movie(int id, string name, string time, string genre) {
             this.id = id;
-            this.movieName = movieName;
-            this.movieTime = movieTime;
+            this.name = name;
+            this.time = time;
             this.genre = genre;
         }
 
         public override bool Validate() {
             MovieManager movieManager = Program.GetInstance().GetService<MovieManager>("films");
 
-            if (movieName == null || movieName.Length == 0) {
+            if (name == null || name.Length == 0) {
                 this.AddError("movieName", "titel mag niet leeg zijn.");
                 return false;
             }
 
-            if (movieTime == null || movieTime.Length == 0) {
-                this.AddError("movieTime", "moveTime mag niet leeg zijn.");
+            if (time == null || time.Length == 0) {
+                this.AddError("time", "moveTime mag niet leeg zijn.");
                 return false;
             }
 

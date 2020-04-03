@@ -44,8 +44,8 @@ namespace Project.Commands {
                 ConsoleHelper.PrintErrors(movie);
             }
 
-                }
+          }
 
-            }
+       }
 
-        }
+    }

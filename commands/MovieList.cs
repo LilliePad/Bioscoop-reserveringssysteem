@@ -28,7 +28,7 @@ namespace Project.Commands {
 
             // Print movies
             foreach (Movie movie in movieManager.GetMovies()) {
-                ConsoleHelper.Print(PrintType.Info, movie.id + " - " + movie.movieName + " - " + movie.movieTime + " - " + movie.genre);
+                ConsoleHelper.Print(PrintType.Info, movie.id + " - " + movie.name + " - " + movie.time + " - " + movie.genre);
             }
         }
 

@@ -17,12 +17,17 @@ namespace Project {
         protected override void Load() {
             // Register users service
             RegisterService(new UserManager());
+            RegisterService(new MovieManager());
 
             // Register commands service
             CommandManager commandManager = new CommandManager();
 
             commandManager.RegisterCommand(new Stop());
 
+            commandManager.RegisterCommand(new MovieList());
+            commandManager.RegisterCommand(new MovieCreate());
+            commandManager.RegisterCommand(new MovieEdit());
+            commandManager.RegisterCommand(new MovieDelete());
             commandManager.RegisterCommand(new UserList());
             commandManager.RegisterCommand(new UserCreate());
             commandManager.RegisterCommand(new UserEdit());

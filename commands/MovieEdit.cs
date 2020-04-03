@@ -20,28 +20,29 @@ namespace Project.Commands {
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
             MovieManager movieManager = app.GetService<MovieManager>("movies");
-           
 
-            // Find the movie to edit
-            Movie movie = movieName;
+            // find movie
+            if (args.Length != 1) {
+                throw new ArgumentException("ongeldig film");
+            }
 
-            if(currentUser.admin && args.Length == 1) {
-                movie = movieManager.GetMovieByMoviename(args[0]);
+            int movieId = ConsoleHelper.ParseInt(args[0]);
 
-                if(movie == null) {
-                    throw new Exception("Ongeldige gebruikersnaam");
-                }
+            Movie movie = movieManager.GetMovieById(movieId);
+
+            if (movie == null) {
+                throw new ArgumentException("ongeldig film");
             }
 
             // Get input
-            movie.movieName = AskQuestion("Wat is uw volledige naam?", null, movie.movieName);
-            movie.movieTime= AskQuestion("Welke username wilt u gebruiken?", null, movie.movieTime);
+            movie.name = AskQuestion("Wat is de films voledige naam?", null, movie.name);
+            movie.time= AskQuestion("Welke film naam wilt u gebruiken?", null, movie.time);
 
             // Try to save
             if (movieManager.SaveMovie(movie)) {
-                ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol aangepast.");
+                ConsoleHelper.Print(PrintType.Info, "film succesvol aangepast.");
             } else {
-                ConsoleHelper.Print(PrintType.Info, "Kon gebruiker niet aanpassen. Errors:");
+                ConsoleHelper.Print(PrintType.Info, "Kon film niet aanpassen. Errors:");
                 ConsoleHelper.PrintErrors(movie);
             }
         }

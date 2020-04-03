@@ -23,7 +23,7 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            MovieManager userManager = app.GetService<MovieManager>("movies");
+            MovieManager movieManager = app.GetService<MovieManager>("movies");
 
             // Check args length
             if (args.Length != 1) {
