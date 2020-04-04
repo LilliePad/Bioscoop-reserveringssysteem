@@ -24,7 +24,7 @@ namespace Project.Commands {
             Program app = Program.GetInstance();
             ShowService showService = app.GetService<ShowService>("shows");
 
-            ConsoleHelper.Print(PrintType.Info, "Show list (id - Movie - Room - Date - Time):");
+            ConsoleHelper.Print(PrintType.Info, "Show list (id - Movie - RoomID - DateTime):");
 
             // Print users
             foreach(Show show in showService.GetShows()) {

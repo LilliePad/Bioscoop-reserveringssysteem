@@ -46,11 +46,6 @@ namespace Project.Services {
                 Database database = app.GetDatabase();
                 bool isNew = show.id == -1;
 
-                // Validate and add if valid
-                if (!show.Validate()) {
-                    return false;
-                }
-
                 // Set id if its a new room
                 if (isNew) {
                     show.id = database.GetNewId("shows");
@@ -68,7 +63,7 @@ namespace Project.Services {
                 // Update record
                 record.id = show.id;
                 record.DateTime = show.DateTime;
-            record.RoomId = show.RoomId;
+                record.RoomId = show.RoomId;
                 record.Movie = show.Movie;
 
                 // Try to save
