@@ -37,7 +37,7 @@ namespace Project {
             RegisterService(new RoomService());
 
             // Register shows service
-            RegisterService(new ShowManager());
+            RegisterService(new ShowService());
 
             // Register commands service
             ConsoleService commandService = new ConsoleService();
@@ -61,8 +61,8 @@ namespace Project {
             commandService.RegisterCommand(new ChairCreate());
             commandService.RegisterCommand(new ChairDelete());
 
-            commandManager.RegisterCommand(new ShowCreate());
-            commandManager.RegisterCommand(new ShowList());
+            commandService.RegisterCommand(new ShowCreate());
+            commandService.RegisterCommand(new ShowList());
 
             RegisterService(commandService);
             

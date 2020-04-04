@@ -22,13 +22,13 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            ShowManager showManager = app.GetService<ShowManager>("shows");
+            ShowService showService = app.GetService<ShowService>("shows");
 
             ConsoleHelper.Print(PrintType.Info, "Show list (id - Movie - Room - Date - Time):");
 
             // Print users
-            foreach(Show show in showManager.GetShows()) {
-                ConsoleHelper.Print(PrintType.Info, show.id + " - " + show.Movie + " - " + show.Room + " - " + show.Date + "-" + show.Time);
+            foreach(Show show in showService.GetShows()) {
+                ConsoleHelper.Print(PrintType.Info, show.id + " - " + show.Movie + " - " + show.RoomId + " - " + show.DateTime);
             }
         }
 

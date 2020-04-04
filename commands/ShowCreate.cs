@@ -28,10 +28,11 @@ namespace Project.Commands {
 
             // Get input
             string Movie = AskQuestion("wat is de naam van de film");
-            string Room = AskQuestion("in welke room speelt de film");
-            string Date = AskQuestion("wat is de datum van de film");
-            string Time = AskQuestion("welke tijd wordt de film afgespeelt");
+            string RoomIdstring = AskQuestion("in welke room speelt de film");
+            string DateTime = AskQuestion("wat is de datum van de film");
 
+
+            int RoomId = int.Parse(RoomIdstring);
             
             
 
@@ -41,7 +42,7 @@ namespace Project.Commands {
             Show show = new Show(Movie, RoomId, DateTime);
 
             // Login if registration successful
-            if (showService.SaveShow(Show show)) {
+            if (showService.SaveShow(show)) {
                 ConsoleHelper.Print(PrintType.Info, "show succesvol aangemaakt.");
             }
             else {

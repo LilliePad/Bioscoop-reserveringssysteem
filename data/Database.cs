@@ -15,6 +15,8 @@ namespace Project.Data {
         // Chairs
         public List<ChairRecord> chairs = new List<ChairRecord>();
 
+        // Show 
+        public List<ShowRecord> shows = new List<ShowRecord>();
     }
 
 }

@@ -12,18 +12,16 @@ namespace Project.Services {
 
     class ShowService : Service {
 
-        // Database
-        private ShowDatabase database;
 
-        
-        public override string getHandle() {
+
+        public override string GetHandle() {
             return "shows";
         }
 
         // Returns all shows
         public List<Show> GetShows() {
-            List<Show> models = new Lst<Show>();
-
+            Database database = Program.GetInstance().GetDatabase();
+            List<Show> models = new List<Show>();
             foreach (ShowRecord record in database.shows) {
                 models.Add(new Show(record));
             }
@@ -32,7 +30,7 @@ namespace Project.Services {
         }
 
         // Returns a show by its id
-        public Show GetRoomById(int id) {
+        public Show GetShowById(int id) {
             Database database = Program.GetInstance().GetDatabase();
 
             try {
@@ -41,9 +39,10 @@ namespace Project.Services {
             catch (InvalidOperationException) {
                 return null;
             }
-                // Saves the specified room
-                public bool SaveShow(Show show) {
-                Program app  = Program.GetInstance();
+        }
+            // Saves the specified room
+            public bool SaveShow(Show show) {
+                Program app = Program.GetInstance();
                 Database database = app.GetDatabase();
                 bool isNew = show.id == -1;
 
@@ -69,6 +68,7 @@ namespace Project.Services {
                 // Update record
                 record.id = show.id;
                 record.DateTime = show.DateTime;
+            record.RoomId = show.RoomId;
                 record.Movie = show.Movie;
 
                 // Try to save
@@ -82,7 +82,7 @@ namespace Project.Services {
                 Program app = Program.GetInstance();
                 Database database = app.GetDatabase();
                 ShowRecord record = database.shows.SingleOrDefault(i => i.id == show.id);
-
+                bool isNew = show.id == -1;
                 // Return false if room doesn't exist
                 if (record == null) {
                     return false;
@@ -90,11 +90,15 @@ namespace Project.Services {
 
                 // Remove record and chairs
                 database.shows.Remove(record);
-                 // Try to save
-                 database.TryToSave();
+                // Try to save
+                database.TryToSave();
 
                 return true;
+            }
 
-    }
+       }
+
+   }
+
 
 

@@ -42,7 +42,7 @@ namespace Project.Models {
             ShowService showService = app.GetService<ShowService>("shows");
 
           
-            Show show = showService.GetRoomById(showId);
+            Show show = showService.GetShowById(id);
 
             if (show == null) {
                 AddError("roomId", "Ongeldige zaal");
