@@ -43,7 +43,7 @@ namespace Project.Base {
             // Validate value
             QuestionValidator validator = question.GetValidator();
 
-            if (!validator.Validate(answer)) {
+            if (validator != null && !validator.Validate(answer)) {
                 ConsoleHelper.Print(PrintType.Error, "Invalid answer: " + answer);
                 question.SetAnswer(null);
                 return WaitForAnswer(question);
