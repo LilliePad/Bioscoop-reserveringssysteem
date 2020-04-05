@@ -2,6 +2,7 @@
 using Project.Helpers;
 using Project.Records;
 using Project.Services;
+using System;
 
 namespace Project.Models {
 
@@ -10,7 +11,7 @@ namespace Project.Models {
         public int id = -1;
         public string Movie;
         public int RoomId;
-        public string DateTime;
+        public DateTime dateTimeShow;
         
         
 
@@ -18,22 +19,22 @@ namespace Project.Models {
             this.id = record.id;
             this.Movie = record.Movie;
             this.RoomId = record.RoomId;
-            this.DateTime = record.DateTime;
+            this.dateTimeShow = record.dateTimeShow;
             
         }
 
-        public Show(string Movie, int RoomId, string DateTime) {
+        public Show(string Movie, int RoomId, DateTime dateTimeShow) {
             this.Movie = Movie;
             this.RoomId = RoomId;
-            this.DateTime = DateTime;
+            this.dateTimeShow = dateTimeShow;
             
         }
 
-        private Show(int id, string Movie, int RoomId, string DateTime) {
+        private Show(int id, string Movie, int RoomId, DateTime dateTimeShow) {
             this.id = id;
             this.Movie = Movie;
             this.RoomId = RoomId;
-            this.DateTime = DateTime;
+            this.dateTimeShow = dateTimeShow;
             
         }
 

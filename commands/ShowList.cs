@@ -28,7 +28,7 @@ namespace Project.Commands {
 
             // Print users
             foreach(Show show in showService.GetShows()) {
-                ConsoleHelper.Print(PrintType.Info, show.id + " - " + show.Movie + " - " + show.RoomId + " - " + show.DateTime);
+                ConsoleHelper.Print(PrintType.Info, show.id + " - " + show.Movie + " - " + show.RoomId + " - " + show.dateTimeShow);
             }
         }
 

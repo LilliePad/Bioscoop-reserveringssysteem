@@ -5,7 +5,7 @@ using Project.Helpers;
 using Project.Models;
 using Project.Services;
 
-
+using System;
 namespace Project.Commands {
 
     class ShowCreate : InteractiveCommand {
@@ -29,17 +29,19 @@ namespace Project.Commands {
             // Get input
             string Movie = AskQuestion("wat is de naam van de film");
             string RoomIdstring = AskQuestion("in welke room speelt de film");
-            string DateTime = AskQuestion("wat is de datum van de film");
-
-
-            int RoomId = int.Parse(RoomIdstring);
+            string Date = AskQuestion("wat is de datum van de film      (dd-MM-yyyy) ");
+            string Time = AskQuestion("op welke tijd begint de film     (HH:mm)");
             
+            //convert input into right type
+            int RoomId = int.Parse(RoomIdstring);
+            string dateWithTime = Date + " " + Time;
+            DateTime dateTimeShow = DateTime.ParseExact(dateWithTime, "dd-MM-yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture);
             
 
 
 
             // Try to register
-            Show show = new Show(Movie, RoomId, DateTime);
+            Show show = new Show(Movie, RoomId, dateTimeShow);
 
             // Login if registration successful
             if (showService.SaveShow(show)) {
