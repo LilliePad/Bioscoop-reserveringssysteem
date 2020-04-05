@@ -61,6 +61,41 @@ namespace Project.Helpers {
             }
         }
 
+        // Parses a date value
+        public static DateTime ParseDate(string value = null, string paramName = null) {
+            return ParseDatetime(value, null, paramName, "datum");
+        }
+
+        // Parses a time value
+        public static DateTime ParseTime(string value = null, string paramName = null) {
+            return ParseDatetime(null, value, paramName, "tijd");
+        }
+
+        // Parses an DateTime value
+        public static DateTime ParseDatetime(string date = null, string time = null, string paramName = null, string expected = "datum en tijd") {
+            DateTime now = DateTime.Now;
+
+            // Fill missing parts
+            if(date == null) {
+                date = now.ToString(Program.DATE_FORMAT);
+            }
+
+            if(time == null) {
+                time = now.ToString(Program.TIME_FORMAT);
+            }
+
+            // Prepare values
+            string dateTimeFormat = Program.DATE_FORMAT + " " + Program.TIME_FORMAT;
+            string dateTime = date + " " + time;
+
+            // Try to parse
+            try {
+                return DateTime.ParseExact(dateTime, dateTimeFormat, System.Globalization.CultureInfo.InvariantCulture);
+            } catch(Exception) {
+                throw new ArgumentException((paramName ?? dateTime) + " moet een " + expected + " zijn");
+            }
+        }
+
     }
 
 }
