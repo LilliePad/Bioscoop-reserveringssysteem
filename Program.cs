@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Project.Base;
 using Project.Commands;
 using Project.Data;
@@ -8,10 +9,12 @@ namespace Project {
 
     class Program : Application {
 
-        // Main class instance
-        private static Program instance;
+        // Constants
+        public static readonly string DATE_FORMAT = "dd-MM-yyyy";
+        public static readonly string TIME_FORMAT = "HH:mm";
 
-        // Database
+        // Program instance & database
+        private static Program instance;
         private Database database;
 
         static void Main() {
@@ -66,7 +69,6 @@ namespace Project {
             commandService.RegisterCommand(new ShowDelete());
 
             RegisterService(commandService);
-            
         }
 
         protected override void Unload() {
