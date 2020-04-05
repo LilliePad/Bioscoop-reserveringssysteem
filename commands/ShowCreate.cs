@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Project.Base;
+using Project.Commands.Validation;
 using Project.Enums;
 using Project.Helpers;
 using Project.Models;
 using Project.Services;
 
-using System;
 namespace Project.Commands {
 
     class ShowCreate : InteractiveCommand {
@@ -14,46 +14,37 @@ namespace Project.Commands {
             return "show";
         }
 
-        public override bool RequireLogin() {
-            return false;
-        }
-
         public override string GetName() {
             return "create";
         }
+
+        public override bool RequireAdmin() {
+            return true;
+        }
+
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
             ShowService showService = app.GetService<ShowService>("shows");
 
-
             // Get input
-            string movieIdString = AskQuestion("wat is de id van de film");
-            string RoomIdstring = AskQuestion("wat is de id van de zaal");
-            string Date = AskQuestion("wat is de datum van de film      (dd-MM-yyyy) ");
-            string Time = AskQuestion("op welke tijd begint de film     (HH:mm)");
+            int movieId = ConsoleHelper.ParseInt(AskQuestion("Wat is de id van de film?"));
+            int roomId = ConsoleHelper.ParseInt(AskQuestion("Wat is de id van de zaal?"));
+
+            string date = AskQuestion("Wat is de datum van de film?", new DateValidator());
+            string time = AskQuestion("Op welke tijd begint de film?", new TimeValidator());
+            DateTime dateTime = ConsoleHelper.ParseDatetime(date, time);
             
-            //convert input into right type
-            int roomId = int.Parse(RoomIdstring);
-            int movieId = int.Parse(movieIdString);
-            string dateWithTime = Date + " " + Time;
-            DateTime dateTimeShow = DateTime.ParseExact(dateWithTime, "dd-MM-yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-            
+            // Create show model
+            Show show = new Show(movieId, roomId, dateTime);
 
-
-
-            // Try to register
-            Show show = new Show(movieId, roomId, dateTimeShow);
-
-            // Login if registration successful
+            // Try to save
             if (showService.SaveShow(show)) {
-                ConsoleHelper.Print(PrintType.Info, "show succesvol aangemaakt.");
-            }
-            else {
+                ConsoleHelper.Print(PrintType.Info, "Show succesvol aangemaakt");
+            } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon show niet aanmaken. Errors:");
+                ConsoleHelper.PrintErrors(show);
             }
         }
-  
 
     }
-
 }
