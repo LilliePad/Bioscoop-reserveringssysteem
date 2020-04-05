@@ -10,11 +10,6 @@ namespace Project.Base {
     abstract class InteractiveCommand : Command {
 
         // Prints the question and blocks until we're got an answer
-        protected string AskQuestion(string questionText, string option = null, string defaultValue = null) {
-            return AskQuestion(questionText, new string[] { option }, defaultValue);
-        }
-
-        // Prints the question and blocks until we're got an answer
         protected string AskQuestion(string questionText, string[] options = null, string defaultValue = null) {
             Question question = new Question(questionText, options, defaultValue);
 
