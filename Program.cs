@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using Project.Base;
 using Project.Commands;
 using Project.Data;
@@ -11,7 +12,9 @@ namespace Project {
 
         // Constants
         public static readonly string DATE_FORMAT = "dd-MM-yyyy";
+        public static readonly Regex DATE_REGEX = new Regex(@"^([0-2][0-9]|(3)[0-1])(\-)(((0)[0-9])|((1)[0-2]))(\-)\d{4}$");
         public static readonly string TIME_FORMAT = "HH:mm";
+        public static readonly Regex TIME_REGEX = new Regex(@"^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$");
 
         // Program instance & database
         private static Program instance;
