@@ -63,8 +63,8 @@ namespace Project.Services {
                 // Update record
                 record.id = show.id;
                 record.dateTimeShow = show.dateTimeShow;
-                record.RoomId = show.RoomId;
-                record.Movie = show.Movie;
+                record.roomId = show.roomId;
+                record.movieId = show.movieId;
 
                 // Try to save
                 database.TryToSave();

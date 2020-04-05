@@ -27,13 +27,14 @@ namespace Project.Commands {
 
 
             // Get input
-            string Movie = AskQuestion("wat is de naam van de film");
-            string RoomIdstring = AskQuestion("in welke room speelt de film");
+            string movieIdString = AskQuestion("wat is de id van de film");
+            string RoomIdstring = AskQuestion("wat is de id van de zaal");
             string Date = AskQuestion("wat is de datum van de film      (dd-MM-yyyy) ");
             string Time = AskQuestion("op welke tijd begint de film     (HH:mm)");
             
             //convert input into right type
-            int RoomId = int.Parse(RoomIdstring);
+            int roomId = int.Parse(RoomIdstring);
+            int movieId = int.Parse(movieIdString);
             string dateWithTime = Date + " " + Time;
             DateTime dateTimeShow = DateTime.ParseExact(dateWithTime, "dd-MM-yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture);
             
@@ -41,7 +42,7 @@ namespace Project.Commands {
 
 
             // Try to register
-            Show show = new Show(Movie, RoomId, dateTimeShow);
+            Show show = new Show(movieId, roomId, dateTimeShow);
 
             // Login if registration successful
             if (showService.SaveShow(show)) {

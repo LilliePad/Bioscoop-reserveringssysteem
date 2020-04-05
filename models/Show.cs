@@ -9,31 +9,31 @@ namespace Project.Models {
     class Show: Model {
 
         public int id = -1;
-        public string Movie;
-        public int RoomId;
+        public int movieId;
+        public int roomId;
         public DateTime dateTimeShow;
         
         
 
         public Show(ShowRecord record) {
             this.id = record.id;
-            this.Movie = record.Movie;
-            this.RoomId = record.RoomId;
+            this.movieId = record.movieId;
+            this.roomId = record.roomId;
             this.dateTimeShow = record.dateTimeShow;
             
         }
 
-        public Show(string Movie, int RoomId, DateTime dateTimeShow) {
-            this.Movie = Movie;
-            this.RoomId = RoomId;
+        public Show(int movieId, int roomId, DateTime dateTimeShow) {
+            this.movieId = movieId;
+            this.roomId = roomId;
             this.dateTimeShow = dateTimeShow;
             
         }
 
-        private Show(int id, string Movie, int RoomId, DateTime dateTimeShow) {
+        private Show(int id, int movieId, int roomId, DateTime dateTimeShow) {
             this.id = id;
-            this.Movie = Movie;
-            this.RoomId = RoomId;
+            this.movieId = movieId;
+            this.roomId = roomId;
             this.dateTimeShow = dateTimeShow;
             
         }
