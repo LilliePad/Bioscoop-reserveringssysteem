@@ -1,5 +1,6 @@
 ﻿using System;
 using Project.Base;
+using Project.Commands.Validation;
 using Project.Enums;
 using Project.Helpers;
 using Project.Models;
@@ -46,7 +47,7 @@ namespace Project.Commands {
 
             // Get extra input if the current user is an admin
             if (currentUser.admin) {
-                string adminValue = AskQuestion("Moet deze gebruiker een admin worden?", Question.OPTIONS_BOOL, user.admin ? Question.OPTION_YES : Question.OPTION_NO);
+                string adminValue = AskQuestion("Moet deze gebruiker een admin worden?", new BooleanValidator(), user.admin ? "ja" : "nee");
                 user.admin = ConsoleHelper.ParseBoolean(adminValue);
             }
 

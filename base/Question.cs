@@ -2,15 +2,11 @@
 
     class Question {
 
-        public static readonly string OPTION_YES = "ja";
-        public static readonly string OPTION_NO = "nee";
-        public static readonly string[] OPTIONS_BOOL = new string[] { OPTION_YES, OPTION_NO };
-
         // The question to be asked
         private readonly string question;
 
-        // The valid options
-        private readonly string[] options;
+        // The validator
+        private readonly QuestionValidator validator;
 
         // The default value
         private readonly string defaultValue;
@@ -21,9 +17,9 @@
         // The object used for locking the answer variable
         private readonly object answerLock = new object();
 
-        public Question(string question, string[] options = null, string defaultValue = null) {
+        public Question(string question, QuestionValidator validator = null, string defaultValue = null) {
             this.question = question;
-            this.options = options;
+            this.validator = validator;
             this.defaultValue = defaultValue;
         }
 
@@ -37,8 +33,8 @@
             string message = question;
 
             // Append options to question text
-            if (options != null && options.Length > 0) {
-                message += " (" + string.Join(", ", options) + ")";
+            if (validator != null) {
+                message += " (" + validator.GetText() + ")";
             }
 
             // Append default value to question text
@@ -49,9 +45,9 @@
             return message;
         }
 
-        // Returns the options
-        public string[] GetOptions() {
-            return options;
+        // Returns the validator
+        public QuestionValidator GetValidator() {
+            return validator;
         }
 
         // Returns the default value
