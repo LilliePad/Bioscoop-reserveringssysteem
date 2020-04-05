@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using Project.Enums;
 using Project.Helpers;
@@ -10,8 +9,8 @@ namespace Project.Base {
     abstract class InteractiveCommand : Command {
 
         // Prints the question and blocks until we're got an answer
-        protected string AskQuestion(string questionText, string[] options = null, string defaultValue = null) {
-            Question question = new Question(questionText, options, defaultValue);
+        protected string AskQuestion(string questionText, QuestionValidator validator = null, string defaultValue = null) {
+            Question question = new Question(questionText, validator, defaultValue);
 
             // Print question
             ConsoleHelper.Print(PrintType.Default, question.GetMessage());
@@ -42,7 +41,9 @@ namespace Project.Base {
             }
 
             // Validate value
-            if (question.GetOptions() != null && !question.GetOptions().Contains(answer)) {
+            QuestionValidator validator = question.GetValidator();
+
+            if (!validator.Validate(answer)) {
                 ConsoleHelper.Print(PrintType.Error, "Invalid answer: " + answer);
                 question.SetAnswer(null);
                 return WaitForAnswer(question);
