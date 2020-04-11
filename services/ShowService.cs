@@ -18,6 +18,31 @@ namespace Project.Services {
             return "shows";
         }
 
+        // returns room by id
+        public Room GetRoomById(int id) {
+            Database database = Program.GetInstance().GetDatabase();
+
+            try {
+                return new Room(database.rooms.Where(i => i.id == id).First());
+            }
+            catch (InvalidOperationException) {
+                return null;
+            }
+        }
+
+        public Movie GetMovieById(int id) {
+            Database database = Program.GetInstance().GetDatabase();
+
+            try {
+                return new Movie(database.movies.Where(i => i.id == id).First());
+            }
+            catch (InvalidOperationException) {
+                return null;
+            }
+        }
+        
+
+
         // Returns all shows
         public List<Show> GetShows() {
             Database database = Program.GetInstance().GetDatabase();
