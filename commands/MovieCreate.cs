@@ -10,7 +10,7 @@ namespace Project.Commands {
     class MovieCreate : InteractiveCommand {
 
         public override string GetCategory() {
-            return "film";
+            return "movie";
         }
 
         public override bool RequireAdmin() {

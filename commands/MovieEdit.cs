@@ -10,7 +10,7 @@ namespace Project.Commands {
     class MovieEdit : InteractiveCommand {
 
         public override string GetCategory() {
-            return "film";
+            return "movie";
         }
 
         public override string GetName() {
@@ -36,8 +36,8 @@ namespace Project.Commands {
 
             // Get input
             movie.name = AskQuestion("Wat is de films voledige naam?", null, movie.name);
-            movie.time= AskQuestion("Welke film naam wilt u gebruiken?", null, movie.time);
-
+            movie.time= AskQuestion("Hoe lang gaat de film duren?", null, movie.time);
+            movie.time = AskQuestion("voor welke leeftijd is het?", null, movie.genre);
             // Try to save
             if (movieManager.SaveMovie(movie)) {
                 ConsoleHelper.Print(PrintType.Info, "film succesvol aangepast.");

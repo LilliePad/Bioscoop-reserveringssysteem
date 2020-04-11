@@ -9,7 +9,7 @@ namespace Project.Commands {
     class MovieList : Command {
 
         public override string GetCategory() {
-            return "film";
+            return "movie";
         }
 
         public override string GetName() {
@@ -22,12 +22,12 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            MovieManager movieManager = app.GetService<MovieManager>("films");
+            MovieManager movieManager = app.GetService<MovieManager>("movies");
 
             ConsoleHelper.Print(PrintType.Info, "movie list (id - film - duur - genre):");
 
             // Print movies
-            foreach (Movie movie in movieManager.GetMovies()) {
+            foreach(Movie movie in movieManager.GetMovies()) {
                 ConsoleHelper.Print(PrintType.Info, movie.id + " - " + movie.name + " - " + movie.time + " - " + movie.genre);
             }
         }
