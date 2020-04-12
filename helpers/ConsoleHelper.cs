@@ -30,7 +30,7 @@ namespace Project.Helpers {
         // Parses an int value
         public static int ParseInt(string value, string paramName = null) {
             try {
-                return Int32.Parse(value);
+                return int.Parse(value);
             } catch(FormatException) {
                 throw new ArgumentException((paramName ?? value) + " moet een integer zijn");
             }
@@ -39,7 +39,7 @@ namespace Project.Helpers {
         // Parses an double value
         public static double ParseDouble(string value, string paramName = null) {
             try {
-                return Double.Parse(value);
+                return double.Parse(value);
             } catch (FormatException) {
                 throw new ArgumentException((paramName ?? value) + " moet een double zijn");
             }
