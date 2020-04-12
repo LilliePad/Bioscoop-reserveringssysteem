@@ -32,11 +32,8 @@ namespace Project.Services {
             }
 
             ConsoleHelper.Print(PrintType.Info, "Loaded movie database.");
-
-
             }
         
-
         public override void Unload() {
             ConsoleHelper.Print(PrintType.Info, "Saving movie database...");
 
@@ -70,65 +67,65 @@ namespace Project.Services {
             }
         }
 
-                // Returns a movie by its moveName
-                 public Movie GetMovieByMoviename(string movieName) {
-                    try {
-                        return GetMovies().Where(i => i.time.Equals(movieName)).First();
-                    }
-                    catch (InvalidOperationException) {
-                        return null;
-                    }
-                }
-
-                // Saves the specified movie
-                 public bool SaveMovie(Movie movie) {
-                    bool isNew = movie.id == -1;
-
-                    // Set id if its a new movie
-                    if (isNew) {
-                        movie.id = database.GetNewId("movies");
-                    }
-
-                    // Validate and add if valid
-                    if (!movie.Validate()) {
-                        return false;
-                    }
-
-                    // Find existing record
-                    MovieRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
-
-                    // Add if no record exists
-                    if (record == null) {
-                        record = new MovieRecord();
-                        database.movies.Add(record);
-                    }
-
-                    // Update record
-                    record.id = movie.id;
-                    record.name = movie.name;
-                    record.time = movie.time;
-                    record.genre = movie.genre;
-
-                    return true;
-                }
-
-                // Deletes the specified user
-                 public bool DeleteMovie(Movie movie) {
-                    MovieRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
-
-                // Return false if room doesn't exist
-                if (record == null) {
-                    return false;
-                }
-
-                // Remove record
-                database.movies.Remove(record);
-
-                // Try to save
-                database.TryToSave();
-
-                return true;
-
-        }
+        // Returns a movie by its name
+            public Movie GetMovieByMoviename(string movieName) {
+            try {
+                return GetMovies().Where(i => i.time.Equals(movieName)).First();
+            }
+            catch (InvalidOperationException) {
+                return null;
             }
         }
+
+        // Saves the specified movie
+            public bool SaveMovie(Movie movie) {
+            bool isNew = movie.id == -1;
+
+        // Set id if its a new movie
+        if (isNew) {
+            movie.id = database.GetNewId("movies");
+        }
+
+        // Validate and add if valid
+        if (!movie.Validate()) {
+            return false;
+        }
+
+        // Find existing record
+        MovieRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
+
+        // Add if no record exists
+        if (record == null) {
+            record = new MovieRecord();
+            database.movies.Add(record);
+        }
+
+        // Update record
+        record.id = movie.id;
+        record.name = movie.name;
+        record.time = movie.time;
+        record.genre = movie.genre;
+
+        return true;
+        }
+
+        // Deletes the specified movie
+            public bool DeleteMovie(Movie movie) {
+            MovieRecord record = database.movies.SingleOrDefault(i => i.id == movie.id);
+
+        // Return false if room doesn't exist
+        if (record == null) {
+            return false;
+        }
+
+        // Remove record
+        database.movies.Remove(record);
+
+        // Try to save
+        database.TryToSave();
+
+        return true;
+
+        }
+    }
+}

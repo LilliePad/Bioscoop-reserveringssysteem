@@ -9,7 +9,7 @@ namespace Project.Models {
 
         public int id = -1;
         public string name;
-        public string time;
+        public int time;
         public string genre;
 
         public Movie(MovieRecord record) {
@@ -19,13 +19,13 @@ namespace Project.Models {
             this.genre = record.genre;
         }
 
-        public Movie(string movieName, string movieTime, string genre) {
-            this.name = movieName;
-            this.time = movieTime;
+        public Movie(string name, int time, string genre) {
+            this.name = name;
+            this.time = time;
             this.genre = genre;
         }
 
-        private Movie(int id, string name, string time, string genre) {
+        private Movie(int id, string name, int time, string genre) {
             this.id = id;
             this.name = name;
             this.time = time;
@@ -40,8 +40,8 @@ namespace Project.Models {
                 return false;
             }
 
-            if (time == null || time.Length == 0) {
-                this.AddError("time", "moveTime mag niet leeg zijn.");
+            if (time == 0) {
+                this.AddError("time", "moveTime mag 0 leeg zijn.");
                 return false;
             }
 

@@ -36,8 +36,9 @@ namespace Project.Commands {
 
             // Get input
             movie.name = AskQuestion("Wat is de films voledige naam?", null, movie.name);
-            movie.time= AskQuestion("Hoe lang gaat de film duren?", null, movie.time);
-            movie.time = AskQuestion("voor welke leeftijd is het?", null, movie.genre);
+            movie.time= ConsoleHelper.ParseInt(AskQuestion("Hoe lang gaat de film duren?", null, movie.time.ToString()),"duration");
+            movie.genre = AskQuestion("voor welke leeftijd is het?", null, movie.genre);
+
             // Try to save
             if (movieManager.SaveMovie(movie)) {
                 ConsoleHelper.Print(PrintType.Info, "film succesvol aangepast.");

@@ -26,12 +26,12 @@ namespace Project.Commands {
             MovieManager movieManager = app.GetService<MovieManager>("movies");
 
             // Get input
-            string movieName = AskQuestion("Wat is uw film naam?");
-            string movieTime = AskQuestion("leeftijdsclassificatie?");
+            string name = AskQuestion("Wat is uw film naam?");
+            int time = ConsoleHelper.ParseInt(AskQuestion("leeftijdsclassificatie?"));
             string genre = AskQuestion("hoe lang duurt de film?");
             
             // Try to registers
-            Movie movie = new Movie(movieName, movieTime, genre);
+            Movie movie = new Movie(name, time, genre);
 
             // Login if registration successful
             if (movieManager.SaveMovie(movie)) {
