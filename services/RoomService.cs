@@ -107,11 +107,6 @@ namespace Project.Services {
 
             // Try to save
             database.TryToSave();
-            
-            // Remove related shows
-            foreach(Show show in showService.GetShowsByRoom(room)) {
-                showService.DeleteShow(show);
-            }
 
             return true;
         }

@@ -101,6 +101,7 @@ namespace Project.Services {
 
             // Remove record
             database.chairs.Remove(record);
+            // TODO: Remove related reservations
 
             // Try to save
             database.TryToSave();
