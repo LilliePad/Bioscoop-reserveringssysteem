@@ -89,9 +89,11 @@ namespace Project.Services {
             Program app = Program.GetInstance();
             Database database = app.GetDatabase();
             ChairService chairService = app.GetService<ChairService>("chairs");
+            ShowService showService = app.GetService<ShowService>("shows");
+
+            // Find record
             RoomRecord record = database.rooms.SingleOrDefault(i => i.id == room.id);
 
-            // Return false if room doesn't exist
             if (record == null) {
                 return false;
             }
@@ -105,6 +107,11 @@ namespace Project.Services {
 
             // Try to save
             database.TryToSave();
+            
+            // Remove related shows
+            foreach(Show show in showService.GetShowsByRoom(room)) {
+                showService.DeleteShow(show);
+            }
 
             return true;
         }

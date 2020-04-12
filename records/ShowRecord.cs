@@ -1,5 +1,5 @@
-﻿using Project.Base;
-using System;
+﻿using System;
+using Project.Base;
 
 namespace Project.Records {
 
@@ -8,8 +8,7 @@ namespace Project.Records {
         public int id;
         public int roomId;
         public int movieId;
-        public DateTime dateTimeShow;
-
+        public DateTime startTime;
 
     }
 

@@ -29,7 +29,6 @@ namespace Project.Commands {
             // Get input
             int movieId = ConsoleHelper.ParseInt(AskQuestion("Wat is de id van de film?"));
             int roomId = ConsoleHelper.ParseInt(AskQuestion("Wat is de id van de zaal?"));
-
             string date = AskQuestion("Wat is de datum van de film?", new DateValidator());
             string time = AskQuestion("Op welke tijd begint de film?", new TimeValidator());
             DateTime dateTime = ConsoleHelper.ParseDatetime(date, time);
