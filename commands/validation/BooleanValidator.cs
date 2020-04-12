@@ -1,6 +1,4 @@
-﻿using Project.Base;
-
-namespace Project.Commands.Validation {
+﻿namespace Project.Commands.Validation {
 
     class BooleanValidator : OptionsValidator {
 
