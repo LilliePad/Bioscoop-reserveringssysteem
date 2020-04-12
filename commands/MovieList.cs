@@ -22,13 +22,13 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            MovieManager movieManager = app.GetService<MovieManager>("movies");
+            MovieService movieManager = app.GetService<MovieService>("movies");
 
-            ConsoleHelper.Print(PrintType.Info, "movie list (id - film - duur - genre):");
+            ConsoleHelper.Print(PrintType.Info, "Movie list (id - film - genre - duur):");
 
             // Print movies
             foreach(Movie movie in movieManager.GetMovies()) {
-                ConsoleHelper.Print(PrintType.Info, movie.id + " - " + movie.name + " - " + movie.time + " - " + movie.genre);
+                ConsoleHelper.Print(PrintType.Info, movie.id + " - " + movie.name + " - " + movie.genre + " - " + movie.duration);
             }
         }
 

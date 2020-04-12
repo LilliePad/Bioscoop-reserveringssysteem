@@ -42,6 +42,7 @@ namespace Project.Commands {
                 throw new ArgumentException("Ongeldige gebruiker");
             }
 
+            // Try to delete
             if (userService.DeleteUser(user)) {
                 ConsoleHelper.Print(PrintType.Info, "Gebruiker succesvol verwijderd");
             } else {
