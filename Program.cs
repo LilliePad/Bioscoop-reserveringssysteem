@@ -35,11 +35,13 @@ namespace Project {
             // Register users service
             RegisterService(new UserService());
 
-            // Register chairs manager
-            RegisterService(new ChairService());
+            RegisterService(new MovieManager());
 
             // Register rooms service
             RegisterService(new RoomService());
+
+            // Register chairs manager
+            RegisterService(new ChairService());
 
             // Register shows service
             RegisterService(new ShowService());
@@ -57,6 +59,11 @@ namespace Project {
             commandService.RegisterCommand(new UserDelete());
             commandService.RegisterCommand(new UserLogin());
             commandService.RegisterCommand(new UserLogout());
+
+            commandManager.RegisterCommand(new MovieList());
+            commandManager.RegisterCommand(new MovieCreate());
+            commandManager.RegisterCommand(new MovieEdit());
+            commandManager.RegisterCommand(new MovieDelete());
 
             commandService.RegisterCommand(new RoomList());
             commandService.RegisterCommand(new RoomCreate());
