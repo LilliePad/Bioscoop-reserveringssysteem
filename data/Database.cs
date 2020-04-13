@@ -9,9 +9,6 @@ namespace Project.Data {
         // Users
         public List<UserRecord> users = new List<UserRecord>();
 
-        // Movies
-        public List<MovieRecord> movies = new List<MovieRecord>();
-
         // Rooms
         public List<RoomRecord> rooms = new List<RoomRecord>();
 

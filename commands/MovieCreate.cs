@@ -4,6 +4,7 @@ using Project.Helpers;
 using Project.Models;
 using Project.Services;
 
+
 namespace Project.Commands {
 
     class MovieCreate : InteractiveCommand {
@@ -12,35 +13,39 @@ namespace Project.Commands {
             return "movie";
         }
 
-        public override string GetName() {
-            return "create";
-        }
-
         public override bool RequireAdmin() {
             return true;
         }
 
-        public override void RunCommand(string[] args) {
-            Program app = Program.GetInstance();
-            MovieService movieManager = app.GetService<MovieService>("movies");
-
-            // Get input
-            string name = AskQuestion("Wat is de naam?");
-            string genre = AskQuestion("Wat is het genre?");
-            int duration = ConsoleHelper.ParseInt(AskQuestion("Hoelang duurt de film in minuten?"));
-
-            // Create show model
-            Movie movie = new Movie(name, genre, duration);
-
-            // Try to save
-            if (movieManager.SaveMovie(movie)) {
-                ConsoleHelper.Print(PrintType.Info, "Film succesvol aangemaakt.");
-            } else {
-                ConsoleHelper.Print(PrintType.Info, "Kon film niet aanmaken. Errors:");
-                ConsoleHelper.PrintErrors(movie);
-            }
+        public override string GetName() {
+            return "create";
         }
 
-    }
+        public override void RunCommand(string[] args) {
+            Program app = Program.GetInstance();
+            MovieManager movieManager = app.GetService<MovieManager>("movies");
 
-}
+            // Get input
+            string name = AskQuestion("Wat is uw film naam?");
+            int time = ConsoleHelper.ParseInt(AskQuestion("leeftijdsclassificatie?"));
+            string genre = AskQuestion("hoe lang duurt de film?");
+            
+            // Try to registers
+            Movie movie = new Movie(name, time, genre);
+
+            // Login if registration successful
+            if (movieManager.SaveMovie(movie)) {
+                ConsoleHelper.Print(PrintType.Info, "Film succesvol aangemaakt.");
+            }
+            else {
+                ConsoleHelper.Print(PrintType.Info, "Kon film niet aanmaken. Errors:");
+
+                // Print errors
+                ConsoleHelper.PrintErrors(movie);
+            }
+
+          }
+
+       }
+
+    }

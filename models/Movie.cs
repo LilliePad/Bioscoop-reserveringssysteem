@@ -1,5 +1,7 @@
 ﻿using Project.Base;
+using Project.Helpers;
 using Project.Records;
+using Project.Services;
 
 namespace Project.Models {
 
@@ -7,35 +9,44 @@ namespace Project.Models {
 
         public int id = -1;
         public string name;
+        public int time;
         public string genre;
-        public int duration;
 
         public Movie(MovieRecord record) {
-            id = record.id;
-            name = record.name;
-            genre = record.genre;
-            duration = record.duration;
+            this.id = record.id;
+            this.name = record.name;
+            this.time = record.time;
+            this.genre = record.genre;
         }
 
-        public Movie(string name, string genre, int duration) {
+        public Movie(string name, int time, string genre) {
             this.name = name;
-            this.duration = duration;
+            this.time = time;
+            this.genre = genre;
+        }
+
+        private Movie(int id, string name, int time, string genre) {
+            this.id = id;
+            this.name = name;
+            this.time = time;
             this.genre = genre;
         }
 
         public override bool Validate() {
+            MovieManager movieManager = Program.GetInstance().GetService<MovieManager>("films");
+
             if (name == null || name.Length == 0) {
-                AddError("name", "Naam mag niet leeg zijn.");
+                this.AddError("movieName", "titel mag niet leeg zijn.");
+                return false;
+            }
+
+            if (time == 0) {
+                this.AddError("time", "moveTime mag 0 leeg zijn.");
                 return false;
             }
 
             if (genre == null || genre.Length == 0) {
-                AddError("genre", "Genre mag niet leeg zijn.");
-                return false;
-            }
-
-            if (duration < 1) {
-                AddError("duration", "duration moet groter dan 0 zijn.");
+                this.AddError("genre", "genre mag niet leeg zijn.");
                 return false;
             }
 

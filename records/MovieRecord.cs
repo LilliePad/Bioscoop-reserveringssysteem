@@ -6,8 +6,8 @@ namespace Project.Records {
 
         public int id;
         public string name;
+        public string time;
         public string genre;
-        public int duration;
 
     }
 

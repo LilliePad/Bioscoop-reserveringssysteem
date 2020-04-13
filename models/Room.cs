@@ -35,8 +35,8 @@ namespace Project.Models {
 
         // Returns all chairs that belong to this Room
         public List<Chair> GetChairs() {
-            ChairService chairService = Program.GetInstance().GetService<ChairService>("chairs");
-            return chairService.GetChairsByRoom(this);
+            ChairService service = Program.GetInstance().GetService<ChairService>("chairs");
+            return service.GetChairsByRoom(this);
         }
 
     }

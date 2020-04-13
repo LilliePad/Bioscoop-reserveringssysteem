@@ -27,16 +27,9 @@ namespace Project.Models {
 
         public override bool Validate() {
             Program app = Program.GetInstance();
-            MovieService movieService = app.GetService<MovieService>("movies");
             RoomService roomService = app.GetService<RoomService>("rooms");
 
-            // Validate movie
-            Movie movie = movieService.GetMovieById(movieId);
-
-            if (movie == null) {
-                AddError("movieId", "Ongeldige film");
-                return false;
-            }
+            // TODO: Add movie validation
 
             // Validate room
             Room room = roomService.GetRoomById(roomId);
@@ -47,18 +40,6 @@ namespace Project.Models {
             }
 
             return true;
-        }
-
-        // Returns the movie which this chair belongs to
-        public Movie GetMovie() {
-            MovieService movieService = Program.GetInstance().GetService<MovieService>("movies");
-            return movieService.GetMovieById(movieId);
-        }
-
-        // Returns the room which this chair belongs to
-        public Room GetRoom() {
-            RoomService roomService = Program.GetInstance().GetService<RoomService>("rooms");
-            return roomService.GetRoomById(roomId);
         }
 
     }

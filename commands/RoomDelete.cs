@@ -42,8 +42,7 @@ namespace Project.Commands {
                 throw new ArgumentException("Ongeldige zaal");
             }
 
-            // Try to delete
-            if (roomService.DeleteRoom(room)) {
+            if(roomService.DeleteRoom(room)) {
                 ConsoleHelper.Print(PrintType.Info, "Zaal succesvol verwijderd");
             } else {
                 ConsoleHelper.Print(PrintType.Error, "Kon zaal niet verwijderen");

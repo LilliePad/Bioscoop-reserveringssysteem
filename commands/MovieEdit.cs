@@ -17,39 +17,31 @@ namespace Project.Commands {
             return "edit";
         }
 
-        public override string GetUsage() {
-            return "movie/edit <id>";
-        }
-
-        public override bool RequireAdmin() {
-            return true;
-        }
-
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            MovieService movieManager = app.GetService<MovieService>("movies");
+            MovieManager movieManager = app.GetService<MovieManager>("movies");
 
-            // Check args length
+            // find movie
             if (args.Length != 1) {
-                throw new ArgumentException("Gebruik: " + GetUsage());
+                throw new ArgumentException("ongeldig film");
             }
 
-            // Find movie
             int movieId = ConsoleHelper.ParseInt(args[0]);
+
             Movie movie = movieManager.GetMovieById(movieId);
 
             if (movie == null) {
-                throw new ArgumentException("Ongeldig film");
+                throw new ArgumentException("ongeldig film");
             }
 
             // Get input
-            movie.name = AskQuestion("Wat is de naam?", null, movie.name);
-            movie.genre = AskQuestion("Wat is het genre?", null, movie.genre);
-            movie.duration = ConsoleHelper.ParseInt(AskQuestion("Hoelang duurt de film in minuten?", null, movie.duration.ToString()), "duration");
+            movie.name = AskQuestion("Wat is de films voledige naam?", null, movie.name);
+            movie.time= ConsoleHelper.ParseInt(AskQuestion("Hoe lang gaat de film duren?", null, movie.time.ToString()),"duration");
+            movie.genre = AskQuestion("voor welke leeftijd is het?", null, movie.genre);
 
             // Try to save
             if (movieManager.SaveMovie(movie)) {
-                ConsoleHelper.Print(PrintType.Info, "Film succesvol aangepast");
+                ConsoleHelper.Print(PrintType.Info, "film succesvol aangepast.");
             } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon film niet aanpassen. Errors:");
                 ConsoleHelper.PrintErrors(movie);

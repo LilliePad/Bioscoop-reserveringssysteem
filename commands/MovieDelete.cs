@@ -1,9 +1,9 @@
-﻿using System;
-using Project.Base;
+﻿using Project.Base;
 using Project.Enums;
 using Project.Helpers;
 using Project.Models;
 using Project.Services;
+using System;
 
 namespace Project.Commands {
 
@@ -17,36 +17,32 @@ namespace Project.Commands {
             return "delete";
         }
 
-        public override string GetUsage() {
-            return "movie/delete <id>";
-        }
-
         public override bool RequireAdmin() {
             return true;
         }
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            MovieService movieManager = app.GetService<MovieService>("movies");
+            MovieManager movieManager = app.GetService<MovieManager>("movies");
 
             // Check args length
             if (args.Length != 1) {
-                throw new ArgumentException("Gebruik: " + GetUsage());
+                ConsoleHelper.Print(PrintType.Error, "Usage: movie/delete <id>");
+                return;
             }
 
-            // Find movie
+            // Find room
             int id = ConsoleHelper.ParseInt(args[0], "id");
             Movie movie = movieManager.GetMovieById(id);
 
             if (movie == null) {
-                throw new ArgumentException("Ongeldige film");
+                throw new ArgumentException("id moet een bestaand film-id zijn.");
             }
 
-            // Try to delete
             if (movieManager.DeleteMovie(movie)) {
-                ConsoleHelper.Print(PrintType.Info, "film succesvol verwijderd");
+                ConsoleHelper.Print(PrintType.Info, "film succesvol verwijderd.");
             } else {
-                ConsoleHelper.Print(PrintType.Error, "Kon film niet verwijderen");
+                ConsoleHelper.Print(PrintType.Error, "Kon film niet verwijderen.");
             }
         }
 
