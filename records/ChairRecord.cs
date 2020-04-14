@@ -10,7 +10,6 @@ namespace Project.Records {
         public int number;
         public double price;
         public string type;
-        public bool available;
 
     }
 

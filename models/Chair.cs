@@ -17,7 +17,6 @@ namespace Project.Models {
         public int number;
         public double price;
         public string type;
-        public bool available;
 
 
         public Chair(ChairRecord record) {
@@ -27,16 +26,14 @@ namespace Project.Models {
             number = record.number;
             price = record.price;
             type = record.type;
-            available = record.available;
         }
 
-        public Chair(int roomId, int row, int number, double price, string type, bool available) {
+        public Chair(int roomId, int row, int number, double price, string type) {
             this.roomId = roomId;
             this.row = row;
             this.number = number;
             this.price = price;
             this.type = type;
-            this.available =available;
         }
 
         public override bool Validate() {

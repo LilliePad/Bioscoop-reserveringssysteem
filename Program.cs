@@ -51,8 +51,7 @@ namespace Project {
 
             commandService.RegisterCommand(new Help());
             commandService.RegisterCommand(new Stop());
-            
-            commandService.RegisterCommand(new UserReservation());
+
             commandService.RegisterCommand(new UserList());
             commandService.RegisterCommand(new UserCreate());
             commandService.RegisterCommand(new UserEdit());
