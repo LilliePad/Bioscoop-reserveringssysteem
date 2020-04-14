@@ -37,6 +37,22 @@ namespace Project.Services {
             }
         }
 
+        // Returns all shows by its movie
+        public List<Show> GetShowsByMovie(Movie movie) {
+            Database database = Program.GetInstance().GetDatabase();
+            List<Show> models = new List<Show>();
+
+            // Find records
+            IEnumerable<ShowRecord> records = database.shows.Where(i => i.movieId == movie.id);
+
+            // Create models
+            foreach (ShowRecord record in records) {
+                models.Add(new Show(record));
+            }
+
+            return models;
+        }
+
         // Returns all shows by its room
         public List<Show> GetShowsByRoom(Room room) {
             Database database = Program.GetInstance().GetDatabase();

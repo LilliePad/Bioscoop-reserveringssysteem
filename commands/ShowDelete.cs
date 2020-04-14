@@ -42,7 +42,8 @@ namespace Project.Commands {
                 throw new ArgumentException("Ongeldige show");
             }
 
-            if(showService.DeleteShow(show)) {
+            // Try to delete
+            if (showService.DeleteShow(show)) {
                 ConsoleHelper.Print(PrintType.Info, "Show succesvol verwijderd");
             } else {
                 ConsoleHelper.Print(PrintType.Error, "Kon show niet verwijderen");

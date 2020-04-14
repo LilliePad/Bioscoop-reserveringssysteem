@@ -42,6 +42,7 @@ namespace Project.Commands {
                 throw new ArgumentException("Ongeldige stoel");
             }
 
+            // Try to delete
             if (chairService.DeleteChair(chair)) {
                 ConsoleHelper.Print(PrintType.Info, "Stoel succesvol verwijderd");
             } else {

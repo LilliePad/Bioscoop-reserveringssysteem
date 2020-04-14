@@ -74,7 +74,13 @@ namespace Project.Models {
 
             return true;
         }
-    
+
+        // Returns the room which this chair belongs to
+        public Room GetRoom() {
+            RoomService roomService = Program.GetInstance().GetService<RoomService>("rooms");
+            return roomService.GetRoomById(roomId);
+        }
+
     }
 
 }

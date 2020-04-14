@@ -4,7 +4,6 @@ using Project.Helpers;
 using Project.Models;
 using Project.Services;
 
-
 namespace Project.Commands {
 
     class MovieCreate : InteractiveCommand {
@@ -13,39 +12,35 @@ namespace Project.Commands {
             return "movie";
         }
 
-        public override bool RequireAdmin() {
-            return true;
-        }
-
         public override string GetName() {
             return "create";
         }
 
+        public override bool RequireAdmin() {
+            return true;
+        }
+
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            MovieManager movieManager = app.GetService<MovieManager>("movies");
+            MovieService movieManager = app.GetService<MovieService>("movies");
 
             // Get input
-            string name = AskQuestion("Wat is uw film naam?");
-            int time = ConsoleHelper.ParseInt(AskQuestion("leeftijdsclassificatie?"));
-            string genre = AskQuestion("hoe lang duurt de film?");
-            
-            // Try to registers
-            Movie movie = new Movie(name, time, genre);
+            string name = AskQuestion("Wat is de naam?");
+            string genre = AskQuestion("Wat is het genre?");
+            int duration = ConsoleHelper.ParseInt(AskQuestion("Hoelang duurt de film in minuten?"));
 
-            // Login if registration successful
+            // Create show model
+            Movie movie = new Movie(name, genre, duration);
+
+            // Try to save
             if (movieManager.SaveMovie(movie)) {
                 ConsoleHelper.Print(PrintType.Info, "Film succesvol aangemaakt.");
-            }
-            else {
+            } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon film niet aanmaken. Errors:");
-
-                // Print errors
                 ConsoleHelper.PrintErrors(movie);
             }
-
-          }
-
-       }
+        }
 
     }
+
+}
