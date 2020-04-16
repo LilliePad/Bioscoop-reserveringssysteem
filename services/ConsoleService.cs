@@ -26,7 +26,7 @@ namespace Project.Services {
             string line;
 
             // Start listening for commands
-            while (Program.GetInstance().IsRunning() && (line = Console.ReadLine()) != null) {
+            while ((line = Console.ReadLine()) != null) {
                 // Answer question
                 if (question != null) {
                     question.SetAnswer(line);
