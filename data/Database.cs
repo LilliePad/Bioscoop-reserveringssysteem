@@ -20,6 +20,9 @@ namespace Project.Data {
 
         // Show 
         public List<ShowRecord> shows = new List<ShowRecord>();
+
+        // Reservations
+        public List<ReservationRecord> reservations = new List<ReservationRecord>();
     }
 
 }
