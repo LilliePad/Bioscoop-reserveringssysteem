@@ -6,7 +6,7 @@ using Project.Services;
 using Project.Models;
 
 
-namespace Bioscoop_reserveringssysteem.commands {
+namespace Project.commands {
     class ReservationDelete : Command {
 
         public override string GetCategory() {
@@ -24,9 +24,10 @@ namespace Bioscoop_reserveringssysteem.commands {
         public override bool RequireAdmin() {
             return true;
         }
+
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            ReservationService reservationService = app.GetService<ReservationService>("s");
+            ReservationService reservationService = app.GetService<ReservationService>("reservation");
 
             // Check args length
             if (args.Length != 1) {
@@ -42,7 +43,7 @@ namespace Bioscoop_reserveringssysteem.commands {
             }
 
             // Try to delete
-            if (reservationService.DeleteReservation(reservation)) {
+            if (reservationService.RemoveReservation(reservation)) {
                 ConsoleHelper.Print(PrintType.Info, "Zaal succesvol verwijderd");
             }
             else {
