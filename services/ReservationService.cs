@@ -15,7 +15,7 @@ namespace Project.Services {
         }
 
         // Returns a reservation by its id
-        public Reservation GetChairById(int id) {
+        public Reservation GetReservationById(int id) {
             Database database = Program.GetInstance().GetDatabase();
 
             try {
