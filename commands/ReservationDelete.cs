@@ -6,16 +6,17 @@ using Project.Services;
 using Project.Models;
 
 
-namespace Project.commands {
+namespace Project {
     class ReservationDelete : Command {
+
+        public override string GetName() {
+            return "delete";
+        }
 
         public override string GetCategory() {
             return "reservation";
         }
 
-        public override string GetName() {
-            return "delete";
-        }
         public override bool RequireLogin() {
             return true;
         }
@@ -24,9 +25,6 @@ namespace Project.commands {
             return "reservation/delete <id>";
         }
 
-        public override bool RequireAdmin() {
-            return true;
-        }
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
@@ -37,7 +35,7 @@ namespace Project.commands {
                 throw new ArgumentException("Gebruik: " + GetUsage());
             }
 
-            // Find room
+            // Find Reservation
             int id = ConsoleHelper.ParseInt(args[0], "id");
             Reservation reservation = reservationService.GetReservationById(id);
 
@@ -46,14 +44,12 @@ namespace Project.commands {
             }
 
             // Try to delete
-            if (reservationService.RemoveReservation(reservation)) {
+            if (reservationService.DeleteReservation(reservation)) {
                 ConsoleHelper.Print(PrintType.Info, "Zaal succesvol verwijderd");
             }
             else {
                 ConsoleHelper.Print(PrintType.Error, "Kon zaal niet verwijderen");
             }
         }
-
-
     }
 }

@@ -42,7 +42,6 @@ namespace Project.Commands {
             int room = ConsoleHelper.ParseInt(args[1], "room");
 
             // Gets current user
-
             int userId = userService.GetCurrentUserId();
             
 
