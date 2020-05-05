@@ -91,7 +91,7 @@ namespace Project.Services {
         }
 
         // Deletes the specified chair
-        public bool RemoveReservation(Reservation reservation) {
+        public bool DeleteReservation(Reservation reservation) {
             Database database = Program.GetInstance().GetDatabase();
             ReservationRecord record = database.reservations.SingleOrDefault(i => i.id == reservation.id);
 
