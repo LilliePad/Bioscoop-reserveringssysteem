@@ -41,7 +41,7 @@ namespace Project.Commands {
             int room = ConsoleHelper.ParseInt(args[2], "room");
 
             // Gets current user
-            int userId = (userService.GetCurrentUserId());
+            int userId = userService.GetCurrentUserId();
             
 
             // Create chair object

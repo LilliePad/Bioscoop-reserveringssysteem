@@ -100,6 +100,12 @@ namespace Project.Services {
                 return false;
             }
 
+            // returns if users and the user is not an admin
+            //  if ( userService.GetCurrentUserId() !=) {
+            //      return false
+            //  }
+
+
             // Remove record
             database.reservations.Remove(record);
             // TODO: Remove related reservations

@@ -37,7 +37,7 @@ namespace Project.commands {
                 throw new ArgumentException("Gebruik: " + GetUsage());
             }
 
-            // Find room
+            // Find Reservation
             int id = ConsoleHelper.ParseInt(args[0], "id");
             Reservation reservation = reservationService.GetReservationById(id);
 
