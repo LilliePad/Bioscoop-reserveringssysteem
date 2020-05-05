@@ -14,6 +14,18 @@ namespace Project.Services {
             return "reservation";
         }
 
+        // Returns all reservations
+        public List<Reservation> GetReservation() {
+            Database database = Program.GetInstance().GetDatabase();
+            List<Reservation> models = new List<Reservation>();
+
+            foreach (ReservationRecord record in database.reservations) {
+                models.Add(new Reservation(record));
+            }
+
+            return models;
+        }
+
         // Returns a reservation by its id
         public Reservation GetReservationById(int id) {
             Database database = Program.GetInstance().GetDatabase();
@@ -91,7 +103,7 @@ namespace Project.Services {
         }
 
         // Deletes the specified chair
-        public bool RemoveReservation(Reservation reservation) {
+        public bool DeleteReservation(Reservation reservation) {
             Database database = Program.GetInstance().GetDatabase();
             ReservationRecord record = database.reservations.SingleOrDefault(i => i.id == reservation.id);
 
@@ -99,6 +111,12 @@ namespace Project.Services {
             if (record == null) {
                 return false;
             }
+
+            // returns if users and the user is not an admin
+            //  if ( userService.GetCurrentUserId() !=) {
+            //      return false
+            //  }
+
 
             // Remove record
             database.reservations.Remove(record);
