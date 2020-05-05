@@ -6,7 +6,7 @@ using Project.Services;
 using Project.Models;
 
 
-namespace Project{
+namespace Project {
     class ReservationDelete : Command {
 
         public override string GetName() {
@@ -21,7 +21,9 @@ namespace Project{
             return true;
         }
 
-
+        public override string GetUsage() {
+            return "reservation/delete <id>";
+        }
 
 
         public override void RunCommand(string[] args) {
