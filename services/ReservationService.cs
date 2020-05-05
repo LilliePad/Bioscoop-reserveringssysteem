@@ -81,7 +81,7 @@ namespace Project.Services {
             record.id = reservation.id;
             record.chair = reservation.chair;
             record.room = reservation.room;
-            record.user = reservation.user;
+            record.userId = reservation.userId;
             record.show = reservation.show;
 
             // Try to save

@@ -8,7 +8,7 @@ namespace Project.Models {
         public int id;
         public int chair;
         public int room;
-        public string user;
+        public int userId;
         public string show;
 
 
@@ -16,15 +16,15 @@ namespace Project.Models {
             id = record.id;
             chair = record.chair;
             room = record.room;
-            user = record.user;
+            userId = record.userId;
             show = record.show;
         }
 
-        public Reservation(int id, int chair, int room, string user, string show) {
+        public Reservation(int id, int chair, int room, int userId, string show) {
             this.id = id;
             this.chair = chair;
             this.room = room;
-            this.user = user;
+            this.userId = userId;
             this.show = show;
         }
     }

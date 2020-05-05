@@ -22,15 +22,16 @@ namespace Project.Commands {
         }
 
         public override string GetUsage() {
-            return "reservation/create <id> <chair> <room> <user> <show>";
+            return "reservation/create <id> <chair> <room> <show>";
         }
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
             ReservationService reservationService = app.GetService<ReservationService>("reservation");
+            UserService userService = app.GetService<UserService>("user");
 
             // Check args length
-            if (args.Length != 5) {
+            if (args.Length != 4) {
                 throw new ArgumentException("Gebruik: " + GetUsage());
             }
 
@@ -39,9 +40,12 @@ namespace Project.Commands {
             int chair = ConsoleHelper.ParseInt(args[1], "chair");
             int room = ConsoleHelper.ParseInt(args[2], "room");
 
+            // Gets current user
+            int userId = (userService.GetCurrentUserId());
+            
 
             // Create chair object
-            Reservation reservation = new Reservation(id, chair, room, args[3], args[4]);
+            Reservation reservation = new Reservation(id, chair, room, userId, args[3]);
 
             // Try to save it
             if (reservationService.SaveReservation(reservation)) {

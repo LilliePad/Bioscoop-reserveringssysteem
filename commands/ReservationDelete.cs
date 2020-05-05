@@ -16,6 +16,9 @@ namespace Project.commands {
         public override string GetName() {
             return "delete";
         }
+        public override bool RequireLogin() {
+            return true;
+        }
 
         public override string GetUsage() {
             return "reservation/delete <id>";

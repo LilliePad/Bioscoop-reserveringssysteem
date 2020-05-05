@@ -6,7 +6,7 @@ namespace Project.Records {
             public int id;
             public int chair;
             public int room;
-            public string user;
+            public int userId;
             public string show;
     }
 
