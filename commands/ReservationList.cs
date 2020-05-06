@@ -23,11 +23,11 @@ namespace Project.Commands {
             Program app = Program.GetInstance();
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
 
-            ConsoleHelper.Print(PrintType.Info, "Reservation list (id - chair - room - userId):");
+            ConsoleHelper.Print(PrintType.Info, "Reservation list (id - chair - show - userId):");
 
             // Print reservations
             foreach (Reservation reservation in reservationService.GetReservation()) {
-                ConsoleHelper.Print(PrintType.Info, reservation.id + " - " + reservation.chair + " - " + reservation.room + " - " + reservation.userId);
+                ConsoleHelper.Print(PrintType.Info, reservation.id + " - " + reservation.chair + " - " + reservation.show + " - " + reservation.userId);
             }
         }
     }

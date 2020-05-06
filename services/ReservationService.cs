@@ -92,7 +92,6 @@ namespace Project.Services {
             // Update record
             record.id = reservation.id;
             record.chair = reservation.chair;
-            record.room = reservation.room;
             record.userId = reservation.userId;
             record.show = reservation.show;
 
