@@ -5,6 +5,7 @@ using Project.Helpers;
 using Project.Services;
 using Project.Models;
 using Project.Data;
+using Project.Records;
 
 namespace Project.Commands {
 
@@ -42,11 +43,11 @@ namespace Project.Commands {
             int room = ConsoleHelper.ParseInt(args[1], "room");
 
             // Gets current user
-            
+            User user = userService.GetCurrentUser();
             
 
             // Create chair object
-            Reservation reservation = new Reservation(-1, chair, room, userId, args[3]);
+            Reservation reservation = new Reservation(chair, room, user.id, args[3]);
 
             // Try to save it
             if (reservationService.SaveReservation(reservation)) {

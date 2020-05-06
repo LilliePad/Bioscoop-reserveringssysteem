@@ -19,8 +19,7 @@ namespace Project.Models {
             show = record.show;
         }
 
-        public Reservation(int id, int chair, int room, int userId, string show) {
-            this.id = id;
+        public Reservation(int chair, int room, int userId, string show) {
             this.chair = chair;
             this.room = room;
             this.userId = userId;
