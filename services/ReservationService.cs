@@ -14,6 +14,18 @@ namespace Project.Services {
             return "reservation";
         }
 
+        // Returns all reservations
+        public List<Reservation> GetReservation() {
+            Database database = Program.GetInstance().GetDatabase();
+            List<Reservation> models = new List<Reservation>();
+
+            foreach (ReservationRecord record in database.reservations) {
+                models.Add(new Reservation(record));
+            }
+
+            return models;
+        }
+
         // Returns a reservation by its id
         public Reservation GetReservationById(int id) {
             Database database = Program.GetInstance().GetDatabase();
