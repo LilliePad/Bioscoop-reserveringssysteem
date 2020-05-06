@@ -11,7 +11,7 @@ namespace Project.Services {
     class ReservationService : Service {
 
         public override string GetHandle() {
-            return "reservation";
+            return "reservations";
         }
 
         // Returns all reservations

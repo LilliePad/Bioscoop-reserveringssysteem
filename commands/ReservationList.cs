@@ -21,7 +21,7 @@ namespace Project.Commands {
         }
                     public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            ReservationService reservationService = app.GetService<ReservationService>("Reservations");
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
 
             ConsoleHelper.Print(PrintType.Info, "Reservation list (id - chair - room - userId):");
 

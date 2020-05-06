@@ -30,8 +30,8 @@ namespace Project.Commands {
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            ReservationService reservationService = app.GetService<ReservationService>("reservation");
-            UserService userService = app.GetService<UserService>("user");
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
+            UserService userService = app.GetService<UserService>("users");
 
             // Check args length
             if (args.Length != 3) {
@@ -47,7 +47,7 @@ namespace Project.Commands {
             
 
             // Create chair object
-            Reservation reservation = new Reservation(chair, room, user.id, args[3]);
+            Reservation reservation = new Reservation(chair, room, user.id, args[2]);
 
             // Try to save it
             if (reservationService.SaveReservation(reservation)) {
