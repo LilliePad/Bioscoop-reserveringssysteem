@@ -108,17 +108,23 @@ namespace Project.Services {
 
         // Deletes the specified user
         public bool DeleteUser(User user) {
+            Program app = Program.GetInstance();
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
             Database database = Program.GetInstance().GetDatabase();
+
+            // Find record
             UserRecord record = database.users.SingleOrDefault(i => i.id == user.id);
 
-            // Return false if room doesn't exist
             if (record == null) {
                 return false;
             }
 
-            // Remove record
+            // Remove record and related reservations
             database.users.Remove(record);
-            // TODO: Remove related reservations
+
+            foreach (Reservation reservation in reservationService.GetReservationsByUser(user)) {
+                reservationService.DeleteReservation(reservation);
+            }
 
             // Try to save
             database.TryToSave();

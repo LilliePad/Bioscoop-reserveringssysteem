@@ -37,6 +37,51 @@ namespace Project.Services {
             }
         }
 
+        public List<Reservation> GetReservationsByChair(Chair chair) {
+            Database database = Program.GetInstance().GetDatabase();
+            List<Reservation> models = new List<Reservation>();
+
+            // Get records for the specified room
+            List<ReservationRecord> records = database.reservations.Where(i => i.chairId == chair.id).ToList();
+
+            // Turn records into models
+            foreach (ReservationRecord record in records) {
+                models.Add(new Reservation(record));
+            }
+
+            return models;
+        }
+
+        public List<Reservation> GetReservationsByUser(User user) {
+            Database database = Program.GetInstance().GetDatabase();
+            List<Reservation> models = new List<Reservation>();
+
+            // Get records for the specified room
+            List<ReservationRecord> records = database.reservations.Where(i => i.userId == user.id).ToList();
+
+            // Turn records into models
+            foreach (ReservationRecord record in records) {
+                models.Add(new Reservation(record));
+            }
+
+            return models;
+        }
+
+        public List<Reservation> GetReservationsByShow(Show show) {
+            Database database = Program.GetInstance().GetDatabase();
+            List<Reservation> models = new List<Reservation>();
+
+            // Get records for the specified room
+            List<ReservationRecord> records = database.reservations.Where(i => i.showId == show.id).ToList();
+
+            // Turn records into models
+            foreach (ReservationRecord record in records) {
+                models.Add(new Reservation(record));
+            }
+
+            return models;
+        }
+
         // Returns whether the specified chair is taken for the specified show
         public bool IsChairTaken(Chair chair, Show show) {
             Database database = Program.GetInstance().GetDatabase();

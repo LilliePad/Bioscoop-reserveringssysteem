@@ -109,6 +109,7 @@ namespace Project.Services {
         // Deletes the specified room
         public bool DeleteShow(Show show) {
             Program app = Program.GetInstance();
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
             Database database = app.GetDatabase();
 
             // Find record
@@ -118,9 +119,12 @@ namespace Project.Services {
                 return false;
             }
 
-            // Remove record
+            // Remove record and related reservations
             database.shows.Remove(record);
-            // TODO: Remove related reservations
+
+            foreach (Reservation reservation in reservationService.GetReservationsByShow(show)) {
+                reservationService.DeleteReservation(reservation);
+            }
 
             // Try to save
             database.TryToSave();

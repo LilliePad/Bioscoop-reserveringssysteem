@@ -98,11 +98,15 @@ namespace Project.Services {
                 return false;
             }
 
-            // Remove record and chairs
+            // Remove record and related chairs/shows
             database.rooms.Remove(record);
             
             foreach(Chair chair in chairService.GetChairsByRoom(room)) {
                 chairService.DeleteChair(chair);
+            }
+
+            foreach (Show show in showService.GetShowsByRoom(room)) {
+                showService.DeleteShow(show);
             }
 
             // Try to save

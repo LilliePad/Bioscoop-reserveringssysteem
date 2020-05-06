@@ -91,17 +91,23 @@ namespace Project.Services {
 
         // Deletes the specified chair
         public bool DeleteChair(Chair chair) {
-            Database database = Program.GetInstance().GetDatabase();
+            Program app = Program.GetInstance();
+            Database database = app.GetDatabase();
+            ReservationService reservationService = Program.GetInstance().GetService<ReservationService>("reservations");
+
+            // Find record
             ChairRecord record = database.chairs.SingleOrDefault(i => i.id == chair.id);
 
-            // Return false if room doesn't exist
             if (record == null) {
                 return false;
             }
 
-            // Remove record
+            // Remove record and related reservations
             database.chairs.Remove(record);
-            // TODO: Remove related reservations
+
+            foreach (Reservation reservation in reservationService.GetReservationsByChair(chair)) {
+                reservationService.DeleteReservation(reservation);
+            }
 
             // Try to save
             database.TryToSave();
