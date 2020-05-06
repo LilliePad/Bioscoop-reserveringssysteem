@@ -16,18 +16,23 @@ namespace Project.Commands {
             return "list";
         }
 
-        public override bool RequireAdmin() {
-            return true;
-        }
-                    public override void RunCommand(string[] args) {
+        public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
+            UserService userService = app.GetService<UserService>("users");
 
-            ConsoleHelper.Print(PrintType.Info, "Reservation list (id - chair - show - userId):");
+            // Get current user
+            User currentUser = userService.GetCurrentUser();
+
+            ConsoleHelper.Print(PrintType.Info, "Reserveringen (Id - Voorstelling id - Gebruiker id - Stoel id):");
 
             // Print reservations
-            foreach (Reservation reservation in reservationService.GetReservation()) {
-                ConsoleHelper.Print(PrintType.Info, reservation.id + " - " + reservation.chair + " - " + reservation.show + " - " + reservation.userId);
+            foreach (Reservation reservation in reservationService.GetReservations()) {
+                if(reservation.userId != currentUser.id && !currentUser.admin) {
+                    continue;
+                }
+
+                ConsoleHelper.Print(PrintType.Info, reservation.id + " - " + reservation.showId + " - " + reservation.userId + " - " + reservation.chairId);
             }
         }
     }

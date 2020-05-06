@@ -24,7 +24,7 @@ namespace Project.Commands {
             Program app = Program.GetInstance();
             RoomService roomService = app.GetService<RoomService>("rooms");
 
-            ConsoleHelper.Print(PrintType.Info, "Room list (id - number):");
+            ConsoleHelper.Print(PrintType.Info, "Zalen (Id - Nummer):");
 
             // Print rooms
             foreach (Room room in roomService.GetRooms()) {

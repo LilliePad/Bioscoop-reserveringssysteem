@@ -18,7 +18,6 @@ namespace Project.Models {
         public double price;
         public string type;
 
-
         public Chair(ChairRecord record) {
             id = record.id;
             roomId = record.roomId;
@@ -79,7 +78,6 @@ namespace Project.Models {
         }
 
     }
-
 }
 
 

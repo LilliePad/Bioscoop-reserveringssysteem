@@ -4,28 +4,21 @@ using Project.Enums;
 using Project.Helpers;
 using Project.Services;
 using Project.Models;
-using Project.Data;
-using Project.Records;
 
 namespace Project.Commands {
 
     class ReservationCreate : Command {
-        
-
-        public override string GetName() {
-            return "create";
-        }
 
         public override string GetCategory() {
             return "reservation";
         }
 
-        public override bool RequireLogin() {
-            return true;
+        public override string GetName() {
+            return "create";
         }
 
         public override string GetUsage() {
-            return "reservation/create <chair> <show>";
+            return "reservation/create <chairId> <showId>";
         }
 
         public override void RunCommand(string[] args) {
@@ -39,24 +32,21 @@ namespace Project.Commands {
             }
 
             // Parse params
-            int chair = ConsoleHelper.ParseInt(args[0], "chair");
-            int show = ConsoleHelper.ParseInt(args[1], "show");
-
-            // Gets current user
+            int showId = ConsoleHelper.ParseInt(args[1], "showId");
             User user = userService.GetCurrentUser();
+            int chairId = ConsoleHelper.ParseInt(args[0], "chairId");
             
-
-            // Create chair object
-            Reservation reservation = new Reservation(chair, show, user.id);
+            // Create reservation object
+            Reservation reservation = new Reservation(showId, user.id, chairId);
 
             // Try to save it
             if (reservationService.SaveReservation(reservation)) {
-                ConsoleHelper.Print(PrintType.Info, "Tickets succesvol gereserveerd");
-            }
-            else {
+                ConsoleHelper.Print(PrintType.Info, "Reservering succesvol aangemaakt");
+            } else {
                 ConsoleHelper.Print(PrintType.Info, "Kon reservering niet aanmaken. Errors:");
                 ConsoleHelper.PrintErrors(reservation);
             }
         }
+
     }
 }

@@ -24,7 +24,7 @@ namespace Project.Commands {
             Program app = Program.GetInstance();
             MovieService movieManager = app.GetService<MovieService>("movies");
 
-            ConsoleHelper.Print(PrintType.Info, "Movie list (id - film - genre - duur):");
+            ConsoleHelper.Print(PrintType.Info, "Films (Id - Film - Genre - Duur):");
 
             // Print movies
             foreach(Movie movie in movieManager.GetMovies()) {

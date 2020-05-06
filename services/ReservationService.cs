@@ -15,7 +15,7 @@ namespace Project.Services {
         }
 
         // Returns all reservations
-        public List<Reservation> GetReservation() {
+        public List<Reservation> GetReservations() {
             Database database = Program.GetInstance().GetDatabase();
             List<Reservation> models = new List<Reservation>();
 
@@ -32,39 +32,18 @@ namespace Project.Services {
 
             try {
                 return new Reservation(database.reservations.Where(i => i.id == id).First());
-            }
-            catch (InvalidOperationException) {
+            } catch (InvalidOperationException) {
                 return null;
             }
         }
 
-        public List<Chair> GetChairsByRoom(Room room) {
+        // Returns whether the specified chair is taken for the specified show
+        public bool IsChairTaken(Chair chair, Show show) {
             Database database = Program.GetInstance().GetDatabase();
-            List<Chair> models = new List<Chair>();
-
-            // Get records for the specified room
-            List<ChairRecord> records = database.chairs.Where(i => i.roomId == room.id).ToList();
-
-            // Turn records into models
-            foreach (ChairRecord record in records) {
-                models.Add(new Chair(record));
-            }
-
-            return models;
+            return database.reservations.Any(i => i.chairId == chair.id && i.showId == show.id);
         }
 
-        public Chair GetChairByRoomAndPosition(Room room, int row, int number) {
-            Database database = Program.GetInstance().GetDatabase();
-
-            try {
-                return new Chair(database.chairs.Where(i => i.roomId == room.id && i.row == row && i.number == number).First());
-            }
-            catch (InvalidOperationException) {
-                return null;
-            }
-        }
-
-        // Saves the specified user
+        // Saves the specified reservation
         public bool SaveReservation(Reservation reservation) {
             Database database = Program.GetInstance().GetDatabase();
             bool isNew = reservation.id == -1;
@@ -88,12 +67,11 @@ namespace Project.Services {
                 database.reservations.Add(record);
             }
 
-
             // Update record
             record.id = reservation.id;
-            record.chair = reservation.chair;
+            record.showId = reservation.showId;
             record.userId = reservation.userId;
-            record.show = reservation.show;
+            record.chairId = reservation.chairId;
 
             // Try to save
             database.TryToSave();
@@ -111,12 +89,6 @@ namespace Project.Services {
                 return false;
             }
 
-            // returns if users and the user is not an admin
-            //  if ( userService.GetCurrentUserId() !=) {
-            //      return false
-            //  }
-
-
             // Remove record
             database.reservations.Remove(record);
             // TODO: Remove related reservations
@@ -127,7 +99,5 @@ namespace Project.Services {
             return true;
         }
 
-
     }
-
 }

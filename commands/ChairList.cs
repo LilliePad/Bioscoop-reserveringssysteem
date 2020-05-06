@@ -46,7 +46,7 @@ namespace Project.Commands {
             }
 
             // Print chairs
-            ConsoleHelper.Print(PrintType.Info, "chair list (id - row - number - price - type):");
+            ConsoleHelper.Print(PrintType.Info, "Stoelen (Id - Rij - Nummer - Prijs - Type):");
 
             // Print chairs
             foreach(Chair chair in chairService.GetChairsByRoom(room)) {
