@@ -132,6 +132,11 @@ namespace Project.Services {
             return currentUser;
         }
 
+        // Returns current userId
+        public int GetCurrentUserId() {
+            return currentUser.id;
+        }
+
         // Sets the current user
         public void SetCurrentUser(User currentUser) {
             this.currentUser = currentUser;

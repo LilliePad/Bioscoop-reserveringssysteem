@@ -1,5 +1,7 @@
 ﻿using System.IO;
+using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
+using Bioscoop_reserveringssysteem.commands;
 using Project.Base;
 using Project.Commands;
 using Project.Data;
@@ -46,6 +48,9 @@ namespace Project {
             // Register shows service
             RegisterService(new ShowService());
 
+            //Register Reservation service
+            RegisterService(new ReservationService());
+
             // Register commands service
             ConsoleService commandService = new ConsoleService();
 
@@ -73,9 +78,13 @@ namespace Project {
             commandService.RegisterCommand(new ChairCreate());
             commandService.RegisterCommand(new ChairDelete());
 
-            commandService.RegisterCommand(new ShowCreate());
             commandService.RegisterCommand(new ShowList());
+            commandService.RegisterCommand(new ShowCreate());
             commandService.RegisterCommand(new ShowDelete());
+
+            commandService.RegisterCommand(new ReservationList());
+            commandService.RegisterCommand(new ReservationCreate());
+            commandService.RegisterCommand(new ReservationDelete());
 
             RegisterService(commandService);
         }

@@ -41,7 +41,7 @@ namespace Project.Commands {
             double price = ConsoleHelper.ParseDouble(args[3], "price");
 
             // Create chair object
-            Chair chair = new Chair(roomId, row, number, price, args[4]);
+            Chair chair = new Chair(roomId, row, number, price, args[4], false);
 
             // Try to save it
             if (chairService.SaveChair(chair)) {
