@@ -58,8 +58,10 @@ namespace Project {
             commandService.RegisterCommand(new Stop());
             
             commandService.RegisterCommand(new ReservationCreate());
-            //commandService.RegisterCommand(new ReservationDelete());
+
+            commandService.RegisterCommand(new ReservationDelete());
             commandService.RegisterCommand(new ReservationList());
+
 
             commandService.RegisterCommand(new UserList());
             commandService.RegisterCommand(new UserCreate());
@@ -86,6 +88,7 @@ namespace Project {
             commandService.RegisterCommand(new ShowList());
             commandService.RegisterCommand(new ShowDelete());
 
+            
             
             
             RegisterService(commandService);
