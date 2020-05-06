@@ -1,7 +1,5 @@
 ﻿using System.IO;
-using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
-using Bioscoop_reserveringssysteem.commands;
 using Project.Base;
 using Project.Commands;
 using Project.Data;

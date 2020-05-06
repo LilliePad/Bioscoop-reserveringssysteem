@@ -11,7 +11,19 @@ namespace Project.Services {
     class ReservationService : Service {
 
         public override string GetHandle() {
-            return "reservation";
+            return "reservations";
+        }
+
+        // Returns all reservations
+        public List<Reservation> GetReservation() {
+            Database database = Program.GetInstance().GetDatabase();
+            List<Reservation> models = new List<Reservation>();
+
+            foreach (ReservationRecord record in database.reservations) {
+                models.Add(new Reservation(record));
+            }
+
+            return models;
         }
 
         // Returns a reservation by its id
@@ -64,7 +76,7 @@ namespace Project.Services {
 
             // Set id if its a new user
             if (isNew) {
-                reservation.id = database.GetNewId("chairs");
+                reservation.id = database.GetNewId("reservations");
             }
 
             // Find existing record
@@ -80,7 +92,6 @@ namespace Project.Services {
             // Update record
             record.id = reservation.id;
             record.chair = reservation.chair;
-            record.room = reservation.room;
             record.userId = reservation.userId;
             record.show = reservation.show;
 

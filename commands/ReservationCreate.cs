@@ -4,6 +4,8 @@ using Project.Enums;
 using Project.Helpers;
 using Project.Services;
 using Project.Models;
+using Project.Data;
+using Project.Records;
 
 namespace Project.Commands {
 
@@ -23,30 +25,29 @@ namespace Project.Commands {
         }
 
         public override string GetUsage() {
-            return "reservation/create <chair> <room> <show>";
+            return "reservation/create <chair> <show>";
         }
 
         public override void RunCommand(string[] args) {
             Program app = Program.GetInstance();
-            ReservationService reservationService = app.GetService<ReservationService>("reservation");
-            UserService userService = app.GetService<UserService>("user");
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
+            UserService userService = app.GetService<UserService>("users");
 
             // Check args length
-            if (args.Length != 3) {
+            if (args.Length != 2) {
                 throw new ArgumentException("Gebruik: " + GetUsage());
             }
 
             // Parse params
             int chair = ConsoleHelper.ParseInt(args[0], "chair");
-
-            int room = ConsoleHelper.ParseInt(args[1], "room");
+            int show = ConsoleHelper.ParseInt(args[1], "show");
 
             // Gets current user
-            int userId = userService.GetCurrentUserId();
+            User user = userService.GetCurrentUser();
             
 
             // Create chair object
-            Reservation reservation = new Reservation(userId, chair, room, userId, args[3]);
+            Reservation reservation = new Reservation(chair, show, user.id);
 
             // Try to save it
             if (reservationService.SaveReservation(reservation)) {
