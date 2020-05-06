@@ -5,15 +5,14 @@ using System.Linq;
 namespace Project.Models {
     class Reservation : Model {
         //Properties
-        public int id;
+        public int id = -1;
         public int chair;
         public int room;
-        public int userId;
+        public int userId = 0;
         public string show;
 
 
         public Reservation(ReservationRecord record) {
-            id = record.id;
             chair = record.chair;
             room = record.room;
             userId = record.userId;

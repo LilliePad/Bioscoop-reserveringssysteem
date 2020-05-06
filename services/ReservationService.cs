@@ -64,7 +64,7 @@ namespace Project.Services {
 
             // Set id if its a new user
             if (isNew) {
-                reservation.id = database.GetNewId("chairs");
+                reservation.id = database.GetNewId("reservations");
             }
 
             // Find existing record
