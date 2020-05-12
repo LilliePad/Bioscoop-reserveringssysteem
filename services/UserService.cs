@@ -137,8 +137,6 @@ namespace Project.Services {
             return currentUser;
         }
 
-
-
         // Sets the current user
         public void SetCurrentUser(User currentUser) {
             this.currentUser = currentUser;

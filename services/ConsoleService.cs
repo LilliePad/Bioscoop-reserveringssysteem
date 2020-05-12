@@ -11,7 +11,7 @@ namespace Project.Services {
     class ConsoleService : Service {
 
         // All registered commands
-        private readonly Dictionary<String, Command> commands = new Dictionary<String, Command>();
+        private readonly Dictionary<string, Command> commands = new Dictionary<string, Command>();
 
         // The current question
         private Question question;
@@ -61,11 +61,11 @@ namespace Project.Services {
                         // Create thread to be blocked while waiting for an answer
                         if(command is InteractiveCommand) {
                             new Thread(() => {
-                                this.RunCommand(command, args);
+                                RunCommand(command, args);
                             }).Start();
                         // Run command code on main thread
                         } else {
-                            this.RunCommand(command, args);
+                            RunCommand(command, args);
                         }
                     }
                 }
