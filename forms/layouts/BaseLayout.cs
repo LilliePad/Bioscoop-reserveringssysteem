@@ -194,14 +194,9 @@ namespace Project.Forms.Layouts {
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.navBar);
             this.Name = "BaseLayout";
-            this.Load += new System.EventHandler(this.MovieList_Load);
             this.navBar.ResumeLayout(false);
             this.navBar.PerformLayout();
             this.ResumeLayout(false);
-
-        }
-
-        private void MovieList_Load(object sender, System.EventArgs e) {
 
         }
 

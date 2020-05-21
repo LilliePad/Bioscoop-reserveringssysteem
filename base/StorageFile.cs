@@ -13,7 +13,7 @@ namespace Project.Base {
 
         public StorageFile(string category, string fileName) {
             directory =  @"storage/" + (category != null ? (category + "/") : "");
-            this.fileName = fileName + (fileName.EndsWith(".json") ? "" : ".json");
+            this.fileName = fileName;
             location = directory + this.fileName;
         }
 

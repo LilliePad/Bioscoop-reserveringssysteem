@@ -8,7 +8,7 @@ namespace Project.Helpers {
 
         // Fill an objects properties from a json file
         public static void LoadFile(string category, string fileName, object obj) {
-            StorageFile file = new StorageFile(category, fileName);
+            StorageFile file = new StorageFile(category, fileName + ".json");
 
             // Ignore if file does not exist
             if(!File.Exists(file.location)) {
@@ -22,7 +22,7 @@ namespace Project.Helpers {
 
         // Saves the object properties to a file
         public static void SaveFile(string category, string fileName, object obj) {
-            StorageFile file = new StorageFile(category, fileName);
+            StorageFile file = new StorageFile(category, fileName + ".json");
             string json = JsonConvert.SerializeObject(obj);
             
             // Create file

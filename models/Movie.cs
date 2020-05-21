@@ -53,8 +53,10 @@ namespace Project.Models {
         }
 
         public Image GetImage() {
+            StorageFile file = new StorageFile("images", imagePath);
+
             try {
-                return Image.FromFile(imagePath);
+                return Image.FromFile(file.location);
             } catch(Exception) {
                 return null;
             }
