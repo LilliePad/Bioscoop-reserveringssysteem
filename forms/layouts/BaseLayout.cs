@@ -1,4 +1,9 @@
 ﻿using System.Windows.Forms;
+using Project.Base;
+using Project.Enums;
+using Project.Helpers;
+using Project.Models;
+using Project.Services;
 using System;
 
 namespace Project.Forms.Layouts {
@@ -174,7 +179,21 @@ namespace Project.Forms.Layouts {
         }
 
         private void NavLoginButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            UserService userService = app.GetService<UserService>("users");
 
+            // Find user
+            User user = userService.GetUserByUsername(usernameValue);
+
+            // Error if user or password invalid
+            if (user == null || !user.Authenticate(passwordValue)) {
+                MessageBox.Show("Invalid username or password");
+                return;
+            }
+
+            // Everything ok, login
+            userService.SetCurrentUser(user);
+            MessageBox.Show("Succesvol ingelogd, welkom " + user.fullName);
         }
     }
 
