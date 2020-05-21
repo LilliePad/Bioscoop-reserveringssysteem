@@ -1,12 +1,12 @@
 ﻿using System.Windows.Forms;
 using System;
+using Project.Models;
 
 namespace Project.Forms {
 
     public partial class MovieList : Form {
         private Panel panel1;
         private Panel panel2;
-        private Button button7;
         private Button button6;
         private Button button5;
         private Button button4;
@@ -17,7 +17,11 @@ namespace Project.Forms {
         private CheckBox checkBox1;
         private GroupBox groupBox1;
         private HScrollBar hScrollBar1;
+        private TextBox textBox2;
+        private TextBox textBox1;
         private int number = 0;
+        private string username;
+        private string password;
 
         public MovieList() {
             InitializeComponent();
@@ -26,7 +30,6 @@ namespace Project.Forms {
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -36,6 +39,8 @@ namespace Project.Forms {
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +62,8 @@ namespace Project.Forms {
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.Controls.Add(this.button7);
+            this.panel2.Controls.Add(this.textBox2);
+            this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.button6);
             this.panel2.Controls.Add(this.button5);
             this.panel2.Controls.Add(this.button4);
@@ -69,19 +75,6 @@ namespace Project.Forms {
             this.panel2.Size = new System.Drawing.Size(1280, 100);
             this.panel2.TabIndex = 1;
             // 
-            // button7
-            // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button7.BackColor = System.Drawing.Color.White;
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(1073, 55);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(155, 30);
-            this.button7.TabIndex = 6;
-            this.button7.UseVisualStyleBackColor = false;
-            // 
             // button6
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -89,12 +82,13 @@ namespace Project.Forms {
             this.button6.BackColor = System.Drawing.Color.White;
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(1073, 12);
+            this.button6.Location = new System.Drawing.Point(1151, 32);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(155, 30);
+            this.button6.Size = new System.Drawing.Size(99, 30);
             this.button6.TabIndex = 5;
             this.button6.Text = "Login";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -161,7 +155,7 @@ namespace Project.Forms {
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(0, 0);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(98, 21);
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -183,6 +177,23 @@ namespace Project.Forms {
             this.hScrollBar1.Size = new System.Drawing.Size(248, 21);
             this.hScrollBar1.TabIndex = 0;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(1035, 12);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 7;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(1035, 38);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.PasswordChar = '*';
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 8;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
             // MovieList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
@@ -193,6 +204,7 @@ namespace Project.Forms {
             this.Name = "MovieList";
             this.Load += new System.EventHandler(this.MovieList_Load);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -213,6 +225,19 @@ namespace Project.Forms {
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e) {
+            username = textBox1.Text;
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e) {
+            password = textBox2.Text;
+        }
+
+        private void button6_Click(object sender, EventArgs e) {
 
         }
     }
