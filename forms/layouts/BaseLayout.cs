@@ -20,6 +20,8 @@ namespace Project.Forms.Layouts {
         private Button navLoginButton;
 
         private string usernameValue;
+        private Button button2;
+        private Button button1;
         private string passwordValue;
 
         public BaseLayout() {
@@ -36,6 +38,8 @@ namespace Project.Forms.Layouts {
             this.navLoginUsername = new System.Windows.Forms.TextBox();
             this.navLoginPassword = new System.Windows.Forms.TextBox();
             this.navLoginButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.navBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,6 +49,8 @@ namespace Project.Forms.Layouts {
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.navBar.BackColor = System.Drawing.Color.Black;
+            this.navBar.Controls.Add(this.button2);
+            this.navBar.Controls.Add(this.button1);
             this.navBar.Controls.Add(this.navLink1);
             this.navBar.Controls.Add(this.navLink2);
             this.navBar.Controls.Add(this.navLink3);
@@ -122,7 +128,7 @@ namespace Project.Forms.Layouts {
             // 
             this.navLoginUsername.Location = new System.Drawing.Point(1035, 12);
             this.navLoginUsername.Name = "navLoginUsername";
-            this.navLoginUsername.Size = new System.Drawing.Size(100, 29);
+            this.navLoginUsername.Size = new System.Drawing.Size(100, 22);
             this.navLoginUsername.TabIndex = 7;
             this.navLoginUsername.TextChanged += new System.EventHandler(this.NavLoginUsername_TextChanged);
             // 
@@ -131,7 +137,7 @@ namespace Project.Forms.Layouts {
             this.navLoginPassword.Location = new System.Drawing.Point(1035, 38);
             this.navLoginPassword.Name = "navLoginPassword";
             this.navLoginPassword.PasswordChar = '*';
-            this.navLoginPassword.Size = new System.Drawing.Size(100, 29);
+            this.navLoginPassword.Size = new System.Drawing.Size(100, 22);
             this.navLoginPassword.TabIndex = 8;
             this.navLoginPassword.TextChanged += new System.EventHandler(this.NavLoginPassword_TextChanged);
             // 
@@ -142,13 +148,46 @@ namespace Project.Forms.Layouts {
             this.navLoginButton.BackColor = System.Drawing.Color.White;
             this.navLoginButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.navLoginButton.Location = new System.Drawing.Point(1151, 37);
+            this.navLoginButton.Location = new System.Drawing.Point(1151, 67);
             this.navLoginButton.Name = "navLoginButton";
             this.navLoginButton.Size = new System.Drawing.Size(99, 30);
             this.navLoginButton.TabIndex = 5;
             this.navLoginButton.Text = "Login";
             this.navLoginButton.UseVisualStyleBackColor = false;
             this.navLoginButton.Click += new System.EventHandler(this.NavLoginButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.Color.Black;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(1151, 38);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 22);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Password";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button2.BackColor = System.Drawing.Color.Black;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(1150, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(100, 22);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Username";
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.button2.UseVisualStyleBackColor = false;
             // 
             // BaseLayout
             // 
