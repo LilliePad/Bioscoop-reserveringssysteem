@@ -54,6 +54,9 @@
     <Compile Include="base\StorageFile.cs" />
     <Compile Include="data\Database.cs" />
     <Compile Include="enums\PrintType.cs" />
+    <Compile Include="forms\layouts\BaseLayout.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="forms\MovieList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +83,9 @@
     <Compile Include="services\RoomService.cs" />
     <Compile Include="services\ShowService.cs" />
     <Compile Include="services\UserService.cs" />
+    <EmbeddedResource Include="forms\layouts\BaseLayout.resx">
+      <DependentUpon>BaseLayout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\MovieList.resx">
       <DependentUpon>MovieList.cs</DependentUpon>
     </EmbeddedResource>
