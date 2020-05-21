@@ -1,5 +1,5 @@
 ﻿namespace Bioscoop_reserveringssysteem {
-    partial class Form1 {
+    partial class MovieCreate {
         /// <summary>
         /// Required designer variable.
         /// </summary>
