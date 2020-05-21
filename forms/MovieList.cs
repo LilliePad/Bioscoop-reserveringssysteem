@@ -36,13 +36,6 @@ namespace Project.Forms {
             // listView1
             // 
             this.listView1.HideSelection = false;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5,
-            listViewItem6});
             this.listView1.Location = new System.Drawing.Point(40, 106);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(1193, 486);
