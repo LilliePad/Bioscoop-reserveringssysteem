@@ -54,11 +54,11 @@
     <Compile Include="base\StorageFile.cs" />
     <Compile Include="data\Database.cs" />
     <Compile Include="enums\PrintType.cs" />
-    <Compile Include="forms\Form1.cs">
+    <Compile Include="forms\MovieCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="forms\MovieCreate.Designer.cs">
+      <DependentUpon>MovieCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\layouts\BaseLayout.cs">
       <SubType>Form</SubType>
