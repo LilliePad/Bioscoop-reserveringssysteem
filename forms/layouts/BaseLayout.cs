@@ -1,8 +1,7 @@
 ﻿using System.Windows.Forms;
 using System;
-using Project.Models;
 
-namespace Project.Forms {
+namespace Project.Forms.Layouts {
 
     public partial class BaseLayout : Form {
 

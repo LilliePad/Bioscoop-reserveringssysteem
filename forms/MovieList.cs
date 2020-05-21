@@ -1,4 +1,6 @@
-﻿namespace Project.Forms {
+﻿using Project.Forms.Layouts;
+
+namespace Project.Forms {
 
     public partial class MovieList : BaseLayout {
 
