@@ -1,4 +1,6 @@
-﻿using Project.Base;
+﻿using System;
+using System.Drawing;
+using Project.Base;
 using Project.Records;
 
 namespace Project.Models {
@@ -9,18 +11,21 @@ namespace Project.Models {
         public string name;
         public string genre;
         public int duration;
+        public string imagePath;
 
         public Movie(MovieRecord record) {
             id = record.id;
             name = record.name;
             genre = record.genre;
             duration = record.duration;
+            imagePath = record.imagePath;
         }
 
-        public Movie(string name, string genre, int duration) {
+        public Movie(string name, string genre, int duration, string imagePath) {
             this.name = name;
             this.duration = duration;
             this.genre = genre;
+            this.imagePath = imagePath;
         }
 
         public override bool Validate() {
@@ -35,11 +40,24 @@ namespace Project.Models {
             }
 
             if (duration < 1) {
-                AddError("duration", "duration moet groter dan 0 zijn.");
+                AddError("duration", "Tijd moet groter dan 0 zijn.");
+                return false;
+            }
+
+            if (GetImage() == null) {
+                AddError("imagePath", "Afbeelding moet een geldige afbeelding zijn.");
                 return false;
             }
 
             return true;
+        }
+
+        public Image GetImage() {
+            try {
+                return Image.FromFile(imagePath);
+            } catch(Exception) {
+                return null;
+            }
         }
 
     }
