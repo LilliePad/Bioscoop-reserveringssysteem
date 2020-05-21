@@ -29,7 +29,7 @@ namespace Project.Forms {
             this.Movie1.AutoSize = true;
             this.Movie1.Location = new System.Drawing.Point(59, 169);
             this.Movie1.Name = "Movie1";
-            this.Movie1.Size = new System.Drawing.Size(0, 13);
+            this.Movie1.Size = new System.Drawing.Size(0, 17);
             this.Movie1.TabIndex = 2;
             this.Movie1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
