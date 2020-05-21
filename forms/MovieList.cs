@@ -15,6 +15,7 @@ namespace Project.Forms {
 
         public MovieList() {
             InitializeComponent();
+            this.Populate();
         }
 
         private void InitializeComponent() {
@@ -31,8 +32,6 @@ namespace Project.Forms {
             this.container.Size = new System.Drawing.Size(670, 499);
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
-
-            this.Populate();
 
             // 
             // MovieList
