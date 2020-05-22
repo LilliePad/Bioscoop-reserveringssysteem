@@ -45,7 +45,7 @@ namespace Project.Forms {
 
         private void MovieList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Films", 600);
+            container.Columns.Add("Films", 250);
         }
 
         private void Populate() {
