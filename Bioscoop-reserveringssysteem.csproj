@@ -89,6 +89,9 @@
     <EmbeddedResource Include="forms\layouts\BaseLayout.resx">
       <DependentUpon>BaseLayout.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\MovieCreate.resx">
+      <DependentUpon>MovieCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
