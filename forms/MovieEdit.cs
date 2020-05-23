@@ -30,5 +30,9 @@ namespace Bioscoop_reserveringssysteem.forms {
         private void Discription_input_TextChanged(object sender, EventArgs e) {
 
         }
+
+        private void Edit_movie_text_Click(object sender, EventArgs e) {
+
+        }
     }
 }

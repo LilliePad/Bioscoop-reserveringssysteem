@@ -146,12 +146,13 @@
             // Edit_movie_text
             // 
             this.Edit_movie_text.AutoSize = true;
-            this.Edit_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.Edit_movie_text.Font = new System.Drawing.Font("Modum", 39.25F);
             this.Edit_movie_text.Location = new System.Drawing.Point(24, 15);
             this.Edit_movie_text.Name = "Edit_movie_text";
-            this.Edit_movie_text.Size = new System.Drawing.Size(206, 46);
+            this.Edit_movie_text.Size = new System.Drawing.Size(228, 64);
             this.Edit_movie_text.TabIndex = 20;
             this.Edit_movie_text.Text = "Edit movie";
+            this.Edit_movie_text.Click += new System.EventHandler(this.Edit_movie_text_Click);
             // 
             // Movie_Picture
             // 
