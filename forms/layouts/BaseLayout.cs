@@ -128,8 +128,7 @@ namespace Project.Forms.Layouts {
             // 
             // navLoginPassword
             // 
-            this.navLoginPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.navLoginPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.navLoginPassword.Location = new System.Drawing.Point(1035, 38);
             this.navLoginPassword.Name = "navLoginPassword";
             this.navLoginPassword.PasswordChar = '*';

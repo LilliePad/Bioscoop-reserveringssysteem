@@ -272,7 +272,7 @@ namespace Project.Forms {
                 MessageBox.Show("Movie Created", "noError", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else {
-                MessageBox.Show("an Error Ocured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("an Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
             }
         }
