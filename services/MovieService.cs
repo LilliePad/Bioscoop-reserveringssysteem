@@ -66,7 +66,7 @@ namespace Project.Services {
             record.name = movie.name;
             record.duration = movie.duration;
             record.genre = movie.genre;
-            record.imagePath = movie.imagePath;
+            record.image = movie.image;
 
             // Try to save
             database.TryToSave();

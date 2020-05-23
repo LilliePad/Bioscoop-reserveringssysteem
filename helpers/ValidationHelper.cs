@@ -5,26 +5,26 @@ using Project.Enums;
 
 namespace Project.Helpers {
 
-    class ConsoleHelper {
-
-        // Prints a typed message to the console
-        public static void Print(PrintType type, string message) {
-            string prefix = type == PrintType.Default ? "" : ("[" + type + "] ");
-            System.Console.WriteLine(prefix + message);
-        }
-
-        // Prints a message to the console
-        public static void Print(string message) {
-            Print(PrintType.Default, message);
-        }
+    class ValidationHelper {
 
         // Prints all errors for the specified model
-        public static void PrintErrors(Model model) {
+        public static string GetErrorList(Model model) {
+            bool first = true;
+            string list = "";
+
             foreach (KeyValuePair<string, List<string>> attribute in model.GetErrors()) {
                 foreach (string error in attribute.Value) {
-                    Print(PrintType.Error, attribute.Key + " -> " + error);
+                    if(first) {
+                        first = false;
+                    } else {
+                        list += ", ";
+                    }
+
+                    list += attribute + " -> " + error;
                 }
             }
+
+            return list;
         }
 
         // Parses an int value

@@ -11,21 +11,21 @@ namespace Project.Models {
         public string name;
         public string genre;
         public int duration;
-        public string imagePath;
+        public StorageFile image;
 
         public Movie(MovieRecord record) {
             id = record.id;
             name = record.name;
             genre = record.genre;
             duration = record.duration;
-            imagePath = record.imagePath;
+            image = record.image;
         }
 
-        public Movie(string name, string genre, int duration, string imagePath) {
+        public Movie(string name, string genre, int duration, StorageFile image) {
             this.name = name;
             this.duration = duration;
             this.genre = genre;
-            this.imagePath = imagePath;
+            this.image = image;
         }
 
         public override bool Validate() {
@@ -53,10 +53,8 @@ namespace Project.Models {
         }
 
         public Image GetImage() {
-            StorageFile file = new StorageFile("images", imagePath);
-
             try {
-                return Image.FromFile(file.location);
+                return Image.FromFile(image.location);
             } catch(Exception) {
                 return null;
             }
