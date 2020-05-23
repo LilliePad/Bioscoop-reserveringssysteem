@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using Project.Base;
 using Project.Data;
 using Project.Enums;
@@ -26,12 +27,12 @@ namespace Project.Services {
                 User admin = new User("Admin user", "admin", EncryptionHelper.CreateHash("admin"), true);
 
                 if (!SaveUser(admin)) {
-                    ConsoleHelper.Print(PrintType.Error, "Failed to create default user");
+                    MessageBox.Show("Failed to create default user", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 SetCurrentUser(admin);
-                ConsoleHelper.Print(PrintType.Warning, "Created default admin user, please configure it.");
+                MessageBox.Show("Created default admin user, please configure it", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

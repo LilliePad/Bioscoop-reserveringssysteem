@@ -8,6 +8,7 @@ using Project.Data;
 using Project.Models;
 using Project.Records;
 using Project.Services;
+using Project.Helpers;
 
 namespace Project.Forms {
 
@@ -31,7 +32,7 @@ namespace Project.Forms {
         private string movieGenre;
         private int movieDuration;
         private string movieDurationStr;
-        private string Image;
+        private StorageFile image;
 
         public MovieCreate() {
             InitializeComponent();
@@ -237,23 +238,25 @@ namespace Project.Forms {
 
         }
 
-        private void button2_Click(object sender, System.EventArgs e) {
-            System.String imageLocation = "";
+        private void button2_Click(object sender, EventArgs args) {
+            string imageLocation = "";
+
             try {
                 OpenFileDialog dialog = new OpenFileDialog();
+
                 dialog.Filter = "jpg files(*.jpg)|*.jpg| PNG files(*.png)|*.png| All Files(*,*)|*,*";
 
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                     imageLocation = dialog.FileName;
                     pictureBox1.ImageLocation = imageLocation;
-                    Image = pictureBox1.ImageLocation;
+                    image = StorageHelper.UploadImage(pictureBox1.ImageLocation);
                 }
-            }
-            catch (System.Exception) {
-                MessageBox.Show("an Error Ocured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } catch (Exception e) {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
+
         private void TextChanged_Tostring(object sender, EventArgs e) {
               
         }
@@ -268,13 +271,12 @@ namespace Project.Forms {
             Program app = Program.GetInstance();
             MovieService movieManager = app.GetService<MovieService>("movies");
 
-            Movie movie = new Movie(movieName, movieGenre, movieDuration, Image);
+            Movie movie = new Movie(movieName, movieGenre, movieDuration, image);
+
             if (movieManager.SaveMovie(movie)) {
                 MessageBox.Show("Movie Created", "noError", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else {
-                MessageBox.Show("an Error Occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
+            } else {
+                MessageBox.Show("Error: " + ValidationHelper.GetErrorList(movie), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void label4_Click(object sender, EventArgs e) {

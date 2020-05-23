@@ -8,7 +8,7 @@ namespace Project.Records {
         public string name;
         public string genre;
         public int duration;
-        public string imagePath;
+        public StorageFile image;
 
     }
 

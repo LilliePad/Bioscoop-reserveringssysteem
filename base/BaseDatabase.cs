@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Project.Enums;
+using System.Windows.Forms;
 using Project.Helpers;
 
 namespace Project.Base {
@@ -31,7 +31,7 @@ namespace Project.Base {
 
             // Try to save
             if (!success) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to load " + STORAGE_NAME + " database");
+                MessageBox.Show("Failed to load " + STORAGE_NAME + " database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return success;
@@ -53,7 +53,7 @@ namespace Project.Base {
 
             // Try to save
             if (!success) {
-                ConsoleHelper.Print(PrintType.Error, "Failed to save " + STORAGE_NAME + " database");
+                MessageBox.Show("Failed to save " + STORAGE_NAME + " database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return success;
