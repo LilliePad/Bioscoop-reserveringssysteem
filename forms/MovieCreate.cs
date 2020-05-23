@@ -71,7 +71,7 @@ namespace Project.Forms {
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.label1.Location = new System.Drawing.Point(58, 132);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(364, 58);
+            this.label1.Size = new System.Drawing.Size(289, 46);
             this.label1.TabIndex = 3;
             this.label1.Text = "Create a Movie";
             // 
@@ -81,7 +81,7 @@ namespace Project.Forms {
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label2.Location = new System.Drawing.Point(65, 214);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 20);
+            this.label2.Size = new System.Drawing.Size(45, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "Name";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -92,7 +92,7 @@ namespace Project.Forms {
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label3.Location = new System.Drawing.Point(65, 263);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 20);
+            this.label3.Size = new System.Drawing.Size(74, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Discription";
             // 
@@ -102,7 +102,7 @@ namespace Project.Forms {
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label4.Location = new System.Drawing.Point(64, 492);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 20);
+            this.label4.Size = new System.Drawing.Size(61, 17);
             this.label4.TabIndex = 6;
             this.label4.Text = "Playtime";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -113,7 +113,7 @@ namespace Project.Forms {
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label5.Location = new System.Drawing.Point(755, 214);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(105, 20);
+            this.label5.Size = new System.Drawing.Size(88, 17);
             this.label5.TabIndex = 11;
             this.label5.Text = "Movie Pictue";
             this.label5.Click += new System.EventHandler(this.label5_Click);
@@ -142,9 +142,9 @@ namespace Project.Forms {
             // 
             this.Name.Location = new System.Drawing.Point(180, 214);
             this.Name.Name = "Name";
-            this.Name.Size = new System.Drawing.Size(495, 22);
+            this.Name.Size = new System.Drawing.Size(495, 20);
             this.Name.TabIndex = 14;
-            this.Name.Text = "Name of the movie";
+            this.Name.TextChanged += new System.EventHandler(this.Name_TextChanged);
             // 
             // Discription
             // 
@@ -153,23 +153,22 @@ namespace Project.Forms {
             this.Discription.Name = "Discription";
             this.Discription.Size = new System.Drawing.Size(495, 206);
             this.Discription.TabIndex = 15;
-            this.Discription.Text = "Discription of the movie";
             // 
             // Duration
             // 
             this.Duration.Location = new System.Drawing.Point(180, 492);
             this.Duration.Name = "Duration";
-            this.Duration.Size = new System.Drawing.Size(495, 22);
+            this.Duration.Size = new System.Drawing.Size(495, 20);
             this.Duration.TabIndex = 16;
-            this.Duration.Text = "Playtime of the movie";
+            this.Duration.TextChanged += new System.EventHandler(this.Duration_TextChanged);
             // 
             // Genre
             // 
             this.Genre.Location = new System.Drawing.Point(180, 526);
             this.Genre.Name = "Genre";
-            this.Genre.Size = new System.Drawing.Size(495, 22);
+            this.Genre.Size = new System.Drawing.Size(495, 20);
             this.Genre.TabIndex = 17;
-            this.Genre.Text = "Genre of the movie";
+            this.Genre.TextChanged += new System.EventHandler(this.Genre_TextChanged);
             // 
             // label6
             // 
@@ -177,7 +176,7 @@ namespace Project.Forms {
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label6.Location = new System.Drawing.Point(65, 526);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 20);
+            this.label6.Size = new System.Drawing.Size(48, 17);
             this.label6.TabIndex = 18;
             this.label6.Text = "Genre";
             // 
@@ -197,7 +196,6 @@ namespace Project.Forms {
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-           
             this.Load += new System.EventHandler(this.MovieCreate_Load);
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.label1, 0);
@@ -256,21 +254,11 @@ namespace Project.Forms {
 
         }
         private void TextChanged_Tostring(object sender, EventArgs e) {
-            movieName = Name.Text;
-            movieGenre = Genre.Text;
-            
+              
         }
 
         private void TextChanged_ToString(object sender, EventArgs e) {
-
-            movieDurationStr = Duration.Text;
-            try {
-                movieDuration = int.Parse(movieDurationStr);
-                
-            }
-            catch (FormatException) {
-                MessageBox.Show("Int werkt niet", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+         
         }
 
 
@@ -290,6 +278,25 @@ namespace Project.Forms {
         }
         private void label4_Click(object sender, EventArgs e) {
 
+        }
+
+        private void Duration_TextChanged(object sender, EventArgs e) {
+            movieDurationStr = Duration.Text;
+            try {
+                movieDuration = int.Parse(movieDurationStr);
+
+            }
+            catch (FormatException) {
+                MessageBox.Show("Int werkt niet", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Name_TextChanged(object sender, EventArgs e) {
+            movieName = Name.Text;
+        }
+
+        private void Genre_TextChanged(object sender, EventArgs e) {
+            movieGenre = Genre.Text;
         }
     }
 }

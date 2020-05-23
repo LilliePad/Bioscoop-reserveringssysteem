@@ -41,9 +41,6 @@ namespace Project.Forms.Layouts {
             // 
             // navBar
             // 
-            this.navBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.navBar.BackColor = System.Drawing.Color.Black;
             this.navBar.Controls.Add(this.navLink1);
             this.navBar.Controls.Add(this.navLink2);
@@ -53,10 +50,12 @@ namespace Project.Forms.Layouts {
             this.navBar.Controls.Add(this.navLoginUsername);
             this.navBar.Controls.Add(this.navLoginPassword);
             this.navBar.Controls.Add(this.navLoginButton);
+            this.navBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.navBar.Location = new System.Drawing.Point(0, 0);
             this.navBar.Name = "navBar";
-            this.navBar.Size = new System.Drawing.Size(1261, 100);
+            this.navBar.Size = new System.Drawing.Size(1260, 100);
             this.navBar.TabIndex = 1;
+            this.navBar.Paint += new System.Windows.Forms.PaintEventHandler(this.navBar_Paint);
             // 
             // navLink1
             // 
@@ -120,18 +119,21 @@ namespace Project.Forms.Layouts {
             // 
             // navLoginUsername
             // 
+            this.navLoginUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.navLoginUsername.Location = new System.Drawing.Point(1035, 12);
             this.navLoginUsername.Name = "navLoginUsername";
-            this.navLoginUsername.Size = new System.Drawing.Size(100, 29);
+            this.navLoginUsername.Size = new System.Drawing.Size(100, 20);
             this.navLoginUsername.TabIndex = 7;
             this.navLoginUsername.TextChanged += new System.EventHandler(this.NavLoginUsername_TextChanged);
             // 
             // navLoginPassword
             // 
+            this.navLoginPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.navLoginPassword.Location = new System.Drawing.Point(1035, 38);
             this.navLoginPassword.Name = "navLoginPassword";
             this.navLoginPassword.PasswordChar = '*';
-            this.navLoginPassword.Size = new System.Drawing.Size(100, 29);
+            this.navLoginPassword.Size = new System.Drawing.Size(100, 20);
             this.navLoginPassword.TabIndex = 8;
             this.navLoginPassword.TextChanged += new System.EventHandler(this.NavLoginPassword_TextChanged);
             // 
@@ -142,7 +144,7 @@ namespace Project.Forms.Layouts {
             this.navLoginButton.BackColor = System.Drawing.Color.White;
             this.navLoginButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.navLoginButton.Location = new System.Drawing.Point(1151, 38);
+            this.navLoginButton.Location = new System.Drawing.Point(1150, 38);
             this.navLoginButton.Name = "navLoginButton";
             this.navLoginButton.Size = new System.Drawing.Size(99, 30);
             this.navLoginButton.TabIndex = 5;
@@ -152,7 +154,7 @@ namespace Project.Forms.Layouts {
             // 
             // BaseLayout
             // 
-            this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.ClientSize = new System.Drawing.Size(1260, 673);
             this.Controls.Add(this.navBar);
             this.Name = "BaseLayout";
             this.navBar.ResumeLayout(false);
@@ -186,6 +188,10 @@ namespace Project.Forms.Layouts {
             // Everything ok, login
             userService.SetCurrentUser(user);
             MessageBox.Show("Succesvol ingelogd, welkom " + user.fullName);
+        }
+
+        private void navBar_Paint(object sender, PaintEventArgs e) {
+
         }
     }
 

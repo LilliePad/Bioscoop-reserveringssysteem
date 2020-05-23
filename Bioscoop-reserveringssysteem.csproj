@@ -54,6 +54,12 @@
     <Compile Include="base\StorageFile.cs" />
     <Compile Include="data\Database.cs" />
     <Compile Include="enums\PrintType.cs" />
+    <Compile Include="forms\MovieEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\MovieEdit.Designer.cs">
+      <DependentUpon>MovieEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\MovieCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MovieCreate.resx">
       <DependentUpon>MovieCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\MovieEdit.resx">
+      <DependentUpon>MovieEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
