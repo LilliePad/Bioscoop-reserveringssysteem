@@ -20,7 +20,7 @@ namespace Project.Forms {
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
 
-        private TextBox Name;
+        private TextBox NameMovie;
         private TextBox Discription;
         private TextBox Duration;
         private TextBox Genre;
@@ -47,7 +47,7 @@ namespace Project.Forms {
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.Name = new System.Windows.Forms.TextBox();
+            this.NameMovie = new System.Windows.Forms.TextBox();
             this.Discription = new System.Windows.Forms.TextBox();
             this.Duration = new System.Windows.Forms.TextBox();
             this.Genre = new System.Windows.Forms.TextBox();
@@ -71,7 +71,7 @@ namespace Project.Forms {
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.label1.Location = new System.Drawing.Point(58, 132);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(289, 46);
+            this.label1.Size = new System.Drawing.Size(364, 58);
             this.label1.TabIndex = 3;
             this.label1.Text = "Create a Movie";
             // 
@@ -81,7 +81,7 @@ namespace Project.Forms {
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label2.Location = new System.Drawing.Point(65, 214);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 17);
+            this.label2.Size = new System.Drawing.Size(53, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Name";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -92,7 +92,7 @@ namespace Project.Forms {
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label3.Location = new System.Drawing.Point(65, 263);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 17);
+            this.label3.Size = new System.Drawing.Size(90, 20);
             this.label3.TabIndex = 5;
             this.label3.Text = "Discription";
             // 
@@ -102,7 +102,7 @@ namespace Project.Forms {
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label4.Location = new System.Drawing.Point(64, 492);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 17);
+            this.label4.Size = new System.Drawing.Size(73, 20);
             this.label4.TabIndex = 6;
             this.label4.Text = "Playtime";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -113,7 +113,7 @@ namespace Project.Forms {
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label5.Location = new System.Drawing.Point(755, 214);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 17);
+            this.label5.Size = new System.Drawing.Size(105, 20);
             this.label5.TabIndex = 11;
             this.label5.Text = "Movie Pictue";
             this.label5.Click += new System.EventHandler(this.label5_Click);
@@ -138,13 +138,13 @@ namespace Project.Forms {
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Name
+            // NameMovie
             // 
-            this.Name.Location = new System.Drawing.Point(180, 214);
-            this.Name.Name = "Name";
-            this.Name.Size = new System.Drawing.Size(495, 20);
-            this.Name.TabIndex = 14;
-            this.Name.TextChanged += new System.EventHandler(this.Name_TextChanged);
+            this.NameMovie.Location = new System.Drawing.Point(180, 214);
+            this.NameMovie.Name = "NameMovie";
+            this.NameMovie.Size = new System.Drawing.Size(495, 22);
+            this.NameMovie.TabIndex = 14;
+            this.NameMovie.TextChanged += new System.EventHandler(this.Name_TextChanged);
             // 
             // Discription
             // 
@@ -158,7 +158,7 @@ namespace Project.Forms {
             // 
             this.Duration.Location = new System.Drawing.Point(180, 492);
             this.Duration.Name = "Duration";
-            this.Duration.Size = new System.Drawing.Size(495, 20);
+            this.Duration.Size = new System.Drawing.Size(495, 22);
             this.Duration.TabIndex = 16;
             this.Duration.TextChanged += new System.EventHandler(this.Duration_TextChanged);
             // 
@@ -166,7 +166,7 @@ namespace Project.Forms {
             // 
             this.Genre.Location = new System.Drawing.Point(180, 526);
             this.Genre.Name = "Genre";
-            this.Genre.Size = new System.Drawing.Size(495, 20);
+            this.Genre.Size = new System.Drawing.Size(495, 22);
             this.Genre.TabIndex = 17;
             this.Genre.TextChanged += new System.EventHandler(this.Genre_TextChanged);
             // 
@@ -176,7 +176,7 @@ namespace Project.Forms {
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label6.Location = new System.Drawing.Point(65, 526);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 17);
+            this.label6.Size = new System.Drawing.Size(55, 20);
             this.label6.TabIndex = 18;
             this.label6.Text = "Genre";
             // 
@@ -187,7 +187,7 @@ namespace Project.Forms {
             this.Controls.Add(this.Genre);
             this.Controls.Add(this.Duration);
             this.Controls.Add(this.Discription);
-            this.Controls.Add(this.Name);
+            this.Controls.Add(this.NameMovie);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
@@ -196,6 +196,7 @@ namespace Project.Forms {
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
+            this.Name = "MovieCreate";
             this.Load += new System.EventHandler(this.MovieCreate_Load);
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.label1, 0);
@@ -205,7 +206,7 @@ namespace Project.Forms {
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.button2, 0);
-            this.Controls.SetChildIndex(this.Name, 0);
+            this.Controls.SetChildIndex(this.NameMovie, 0);
             this.Controls.SetChildIndex(this.Discription, 0);
             this.Controls.SetChildIndex(this.Duration, 0);
             this.Controls.SetChildIndex(this.Genre, 0);
@@ -287,12 +288,12 @@ namespace Project.Forms {
 
             }
             catch (FormatException) {
-                MessageBox.Show("Int werkt niet", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void Name_TextChanged(object sender, EventArgs e) {
-            movieName = Name.Text;
+            movieName = NameMovie.Text;
         }
 
         private void Genre_TextChanged(object sender, EventArgs e) {
