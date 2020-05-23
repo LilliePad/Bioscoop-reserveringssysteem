@@ -59,5 +59,15 @@ namespace Bioscoop_reserveringssysteem.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1d648b5d3817b4c62eb7af7b59e6ff74 {
+            get {
+                object obj = ResourceManager.GetObject("1d648b5d3817b4c62eb7af7b59e6ff74", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

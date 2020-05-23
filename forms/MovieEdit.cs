@@ -14,5 +14,21 @@ namespace Bioscoop_reserveringssysteem.forms {
         public MovieEdit() {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e) {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e) {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e) {
+
+        }
+
+        private void Discription_input_TextChanged(object sender, EventArgs e) {
+
+        }
     }
 }
