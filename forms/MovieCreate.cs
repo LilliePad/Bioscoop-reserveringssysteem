@@ -29,6 +29,7 @@ namespace Project.Forms {
         private System.Windows.Forms.PictureBox pictureBox1;
 
         private string movieName;
+        private string movieDiscription;
         private string movieGenre;
         private int movieDuration;
         private string movieDurationStr;
@@ -72,7 +73,7 @@ namespace Project.Forms {
             this.Create_a_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Create_a_movie_text.Location = new System.Drawing.Point(58, 132);
             this.Create_a_movie_text.Name = "Create_a_movie_text";
-            this.Create_a_movie_text.Size = new System.Drawing.Size(289, 46);
+            this.Create_a_movie_text.Size = new System.Drawing.Size(364, 58);
             this.Create_a_movie_text.TabIndex = 3;
             this.Create_a_movie_text.Text = "Create a movie";
             // 
@@ -82,7 +83,7 @@ namespace Project.Forms {
             this.Name_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Name_text.Location = new System.Drawing.Point(65, 214);
             this.Name_text.Name = "Name_text";
-            this.Name_text.Size = new System.Drawing.Size(45, 17);
+            this.Name_text.Size = new System.Drawing.Size(53, 20);
             this.Name_text.TabIndex = 4;
             this.Name_text.Text = "Name";
             this.Name_text.Click += new System.EventHandler(this.label2_Click);
@@ -93,7 +94,7 @@ namespace Project.Forms {
             this.Discription_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Discription_text.Location = new System.Drawing.Point(65, 263);
             this.Discription_text.Name = "Discription_text";
-            this.Discription_text.Size = new System.Drawing.Size(74, 17);
+            this.Discription_text.Size = new System.Drawing.Size(90, 20);
             this.Discription_text.TabIndex = 5;
             this.Discription_text.Text = "Discription";
             // 
@@ -103,7 +104,7 @@ namespace Project.Forms {
             this.Playtime_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Playtime_text.Location = new System.Drawing.Point(64, 492);
             this.Playtime_text.Name = "Playtime_text";
-            this.Playtime_text.Size = new System.Drawing.Size(61, 17);
+            this.Playtime_text.Size = new System.Drawing.Size(73, 20);
             this.Playtime_text.TabIndex = 6;
             this.Playtime_text.Text = "Playtime";
             this.Playtime_text.Click += new System.EventHandler(this.label4_Click);
@@ -114,7 +115,7 @@ namespace Project.Forms {
             this.Movie_Picture_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Movie_Picture_text.Location = new System.Drawing.Point(755, 214);
             this.Movie_Picture_text.Name = "Movie_Picture_text";
-            this.Movie_Picture_text.Size = new System.Drawing.Size(93, 17);
+            this.Movie_Picture_text.Size = new System.Drawing.Size(111, 20);
             this.Movie_Picture_text.TabIndex = 11;
             this.Movie_Picture_text.Text = "Movie Picture";
             this.Movie_Picture_text.Click += new System.EventHandler(this.label5_Click);
@@ -143,7 +144,7 @@ namespace Project.Forms {
             // 
             this.NameMovie_input.Location = new System.Drawing.Point(180, 214);
             this.NameMovie_input.Name = "NameMovie_input";
-            this.NameMovie_input.Size = new System.Drawing.Size(495, 20);
+            this.NameMovie_input.Size = new System.Drawing.Size(495, 22);
             this.NameMovie_input.TabIndex = 14;
             this.NameMovie_input.TextChanged += new System.EventHandler(this.Name_TextChanged);
             // 
@@ -154,12 +155,13 @@ namespace Project.Forms {
             this.Discription_input.Name = "Discription_input";
             this.Discription_input.Size = new System.Drawing.Size(495, 206);
             this.Discription_input.TabIndex = 15;
+            this.Discription_input.TextChanged += new System.EventHandler(this.Discription_input_TextChanged);
             // 
             // Duration_input
             // 
             this.Duration_input.Location = new System.Drawing.Point(180, 492);
             this.Duration_input.Name = "Duration_input";
-            this.Duration_input.Size = new System.Drawing.Size(495, 20);
+            this.Duration_input.Size = new System.Drawing.Size(495, 22);
             this.Duration_input.TabIndex = 16;
             this.Duration_input.TextChanged += new System.EventHandler(this.Duration_TextChanged);
             // 
@@ -167,7 +169,7 @@ namespace Project.Forms {
             // 
             this.Genre_input.Location = new System.Drawing.Point(180, 526);
             this.Genre_input.Name = "Genre_input";
-            this.Genre_input.Size = new System.Drawing.Size(495, 20);
+            this.Genre_input.Size = new System.Drawing.Size(495, 22);
             this.Genre_input.TabIndex = 17;
             this.Genre_input.TextChanged += new System.EventHandler(this.Genre_TextChanged);
             // 
@@ -177,7 +179,7 @@ namespace Project.Forms {
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label6.Location = new System.Drawing.Point(65, 526);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 17);
+            this.label6.Size = new System.Drawing.Size(55, 20);
             this.label6.TabIndex = 18;
             this.label6.Text = "Genre";
             // 
@@ -257,13 +259,7 @@ namespace Project.Forms {
 
         }
 
-        private void TextChanged_Tostring(object sender, EventArgs e) {
-              
-        }
 
-        private void TextChanged_ToString(object sender, EventArgs e) {
-         
-        }
 
 
 
@@ -271,7 +267,7 @@ namespace Project.Forms {
             Program app = Program.GetInstance();
             MovieService movieManager = app.GetService<MovieService>("movies");
 
-            Movie movie = new Movie(movieName, movieGenre, movieDuration, image);
+            Movie movie = new Movie(movieName, movieDiscription, movieGenre, movieDuration, image);
 
             if (movieManager.SaveMovie(movie)) {
                 MessageBox.Show("Movie Created", "noError", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -300,6 +296,10 @@ namespace Project.Forms {
 
         private void Genre_TextChanged(object sender, EventArgs e) {
             movieGenre = Genre_input.Text;
+        }
+
+        private void Discription_input_TextChanged(object sender, EventArgs e) {
+            movieDiscription = Discription_input.Text;
         }
     }
 }

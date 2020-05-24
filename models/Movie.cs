@@ -9,6 +9,7 @@ namespace Project.Models {
 
         public int id = -1;
         public string name;
+        public string discription;
         public string genre;
         public int duration;
         public StorageFile image;
@@ -16,13 +17,15 @@ namespace Project.Models {
         public Movie(MovieRecord record) {
             id = record.id;
             name = record.name;
+            discription = record.discription;
             genre = record.genre;
             duration = record.duration;
             image = record.image;
         }
 
-        public Movie(string name, string genre, int duration, StorageFile image) {
+        public Movie(string name, string discription, string genre, int duration, StorageFile image) {
             this.name = name;
+            this.discription = discription;
             this.duration = duration;
             this.genre = genre;
             this.image = image;
