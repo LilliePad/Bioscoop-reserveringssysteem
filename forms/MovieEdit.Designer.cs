@@ -29,7 +29,6 @@
             this.Discription_input = new System.Windows.Forms.TextBox();
             this.NameMovie_input = new System.Windows.Forms.TextBox();
             this.Search_Picture = new System.Windows.Forms.Button();
-            this.Create_Movie = new System.Windows.Forms.Button();
             this.Movie_Picture_text = new System.Windows.Forms.Label();
             this.Playtime_text = new System.Windows.Forms.Label();
             this.Discription_text = new System.Windows.Forms.Label();
@@ -90,16 +89,6 @@
             this.Search_Picture.TabIndex = 26;
             this.Search_Picture.Text = "Search Picture";
             this.Search_Picture.UseVisualStyleBackColor = true;
-            // 
-            // Create_Movie
-            // 
-            this.Create_Movie.Location = new System.Drawing.Point(146, 487);
-            this.Create_Movie.Name = "Create_Movie";
-            this.Create_Movie.Size = new System.Drawing.Size(133, 39);
-            this.Create_Movie.TabIndex = 25;
-            this.Create_Movie.Text = "Create Movie";
-            this.Create_Movie.UseVisualStyleBackColor = true;
-            this.Create_Movie.Click += new System.EventHandler(this.button1_Click);
             // 
             // Movie_Picture_text
             // 
@@ -181,7 +170,6 @@
             this.Edit_panel.Controls.Add(this.Discription_input);
             this.Edit_panel.Controls.Add(this.NameMovie_input);
             this.Edit_panel.Controls.Add(this.Search_Picture);
-            this.Edit_panel.Controls.Add(this.Create_Movie);
             this.Edit_panel.Controls.Add(this.Movie_Picture_text);
             this.Edit_panel.Controls.Add(this.Playtime_text);
             this.Edit_panel.Controls.Add(this.Discription_text);
