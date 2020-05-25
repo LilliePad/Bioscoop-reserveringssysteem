@@ -40,6 +40,7 @@ namespace Bioscoop_reserveringssysteem.forms {
         private void Edit_movie_text_Click(object sender, EventArgs e) {
 
         }
+<<<<<<< HEAD
 
 
         private void NameMovie_input_TextChanged(object sender, EventArgs e) {
@@ -58,5 +59,7 @@ namespace Bioscoop_reserveringssysteem.forms {
             movie.genre = Genre_input.Text;
         }
 
+=======
+>>>>>>> parent of 3ed2b53... functional add to list and edit list button for the movies
     }
 }
