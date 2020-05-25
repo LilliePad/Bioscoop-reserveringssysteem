@@ -13,8 +13,8 @@ namespace Project.Base {
         private readonly Dictionary<string, Service> services = new Dictionary<string, Service>();
 
         private readonly Dictionary<string, BaseScreen> screens = new Dictionary<string, BaseScreen>();
-        private BaseScreen defaultScreen = null;
-        private BaseScreen currentScreen = null;
+        private BaseScreen defaultScreen;
+        private BaseScreen currentScreen;
 
         // Called on load/unload
         protected abstract void Load();
@@ -54,6 +54,7 @@ namespace Project.Base {
 
             Application.EnableVisualStyles();
             Application.Run(defaultScreen);
+            currentScreen = defaultScreen;
         }
 
         // Unload all services and the application

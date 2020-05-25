@@ -10,10 +10,8 @@ namespace Project.Forms {
 
     public class MovieList : BaseLayout {
 
-        private Panel panel1;
-        private Button Edit_list;
-        private Button Add_to_list;
         private ListView container;
+        private Button movieCreateButton;
 
         public MovieList() {
             InitializeComponent();
@@ -30,27 +28,39 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.container = new System.Windows.Forms.ListView();
+            this.movieCreateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-
             // 
-            // Container
+            // container
             // 
             this.container.HideSelection = false;
             this.container.Location = new System.Drawing.Point(40, 129);
             this.container.Name = "container";
-            this.Load += new System.EventHandler(this.MovieList_Load);
-            this.container.Size = new System.Drawing.Size(670, 499);
+            this.container.Size = new System.Drawing.Size(670, 452);
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
-
+            // 
+            // movieCreateButton
+            // 
+            this.movieCreateButton.Location = new System.Drawing.Point(40, 601);
+            this.movieCreateButton.Name = "movieCreateButton";
+            this.movieCreateButton.Size = new System.Drawing.Size(110, 51);
+            this.movieCreateButton.TabIndex = 3;
+            this.movieCreateButton.Text = "Nieuw";
+            this.movieCreateButton.UseVisualStyleBackColor = true;
+            this.movieCreateButton.Click += new System.EventHandler(this.ButtonNew_Click);
             // 
             // MovieList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.movieCreateButton);
             this.Controls.Add(this.container);
             this.Name = "MovieList";
+            this.Load += new System.EventHandler(this.MovieList_Load);
             this.Controls.SetChildIndex(this.container, 0);
+            this.Controls.SetChildIndex(this.movieCreateButton, 0);
             this.ResumeLayout(false);
+
         }
 
         private void MovieList_Load(object sender, System.EventArgs e) {
@@ -77,13 +87,14 @@ namespace Project.Forms {
             container.SmallImageList = imgs;
         }
 
-        private void Add_to_list_Click(object sender, EventArgs e) {
-            MovieCreate Movie_create = new MovieCreate();
-            Movie_create.Show();
-            this.Hide();
+        private void ButtonNew_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            MovieCreate editScreen = app.GetScreen<MovieCreate>("movieCreate");
+
+            app.ShowScreen(editScreen);
         }
 
-        private void Edit_list_Click(object sender, EventArgs e) {
+        private void ButtonEdit_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             MovieEdit editScreen = app.GetScreen<MovieEdit>("movieEdit");
 
