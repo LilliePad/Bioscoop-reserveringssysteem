@@ -29,7 +29,7 @@
             this.Discription_input = new System.Windows.Forms.TextBox();
             this.NameMovie_input = new System.Windows.Forms.TextBox();
             this.Search_Picture = new System.Windows.Forms.Button();
-            this.Create_Movie = new System.Windows.Forms.Button();
+            this.Save_Changes = new System.Windows.Forms.Button();
             this.Movie_Picture_text = new System.Windows.Forms.Label();
             this.Playtime_text = new System.Windows.Forms.Label();
             this.Discription_text = new System.Windows.Forms.Label();
@@ -58,6 +58,7 @@
             this.Genre_input.Name = "Genre_input";
             this.Genre_input.Size = new System.Drawing.Size(495, 20);
             this.Genre_input.TabIndex = 30;
+            this.Genre_input.TextChanged += new System.EventHandler(this.Genre_input_TextChanged);
             // 
             // Duration_input
             // 
@@ -65,6 +66,7 @@
             this.Duration_input.Name = "Duration_input";
             this.Duration_input.Size = new System.Drawing.Size(495, 20);
             this.Duration_input.TabIndex = 29;
+            this.Duration_input.TextChanged += new System.EventHandler(this.Duration_input_TextChanged);
             // 
             // Discription_input
             // 
@@ -81,6 +83,7 @@
             this.NameMovie_input.Name = "NameMovie_input";
             this.NameMovie_input.Size = new System.Drawing.Size(495, 20);
             this.NameMovie_input.TabIndex = 27;
+            this.NameMovie_input.TextChanged += new System.EventHandler(this.NameMovie_input_TextChanged);
             // 
             // Search_Picture
             // 
@@ -91,15 +94,15 @@
             this.Search_Picture.Text = "Search Picture";
             this.Search_Picture.UseVisualStyleBackColor = true;
             // 
-            // Create_Movie
+            // Save_Changes
             // 
-            this.Create_Movie.Location = new System.Drawing.Point(146, 487);
-            this.Create_Movie.Name = "Create_Movie";
-            this.Create_Movie.Size = new System.Drawing.Size(133, 39);
-            this.Create_Movie.TabIndex = 25;
-            this.Create_Movie.Text = "Create Movie";
-            this.Create_Movie.UseVisualStyleBackColor = true;
-            this.Create_Movie.Click += new System.EventHandler(this.button1_Click);
+            this.Save_Changes.Location = new System.Drawing.Point(146, 487);
+            this.Save_Changes.Name = "Save_Changes";
+            this.Save_Changes.Size = new System.Drawing.Size(133, 39);
+            this.Save_Changes.TabIndex = 25;
+            this.Save_Changes.Text = "Create Movie";
+            this.Save_Changes.UseVisualStyleBackColor = true;
+            this.Save_Changes.Click += new System.EventHandler(this.button1_Click);
             // 
             // Movie_Picture_text
             // 
@@ -146,10 +149,10 @@
             // Edit_movie_text
             // 
             this.Edit_movie_text.AutoSize = true;
-            this.Edit_movie_text.Font = new System.Drawing.Font("Modum", 39.25F);
+            this.Edit_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.25F);
             this.Edit_movie_text.Location = new System.Drawing.Point(24, 15);
             this.Edit_movie_text.Name = "Edit_movie_text";
-            this.Edit_movie_text.Size = new System.Drawing.Size(228, 64);
+            this.Edit_movie_text.Size = new System.Drawing.Size(275, 61);
             this.Edit_movie_text.TabIndex = 20;
             this.Edit_movie_text.Text = "Edit movie";
             this.Edit_movie_text.Click += new System.EventHandler(this.Edit_movie_text_Click);
@@ -181,7 +184,7 @@
             this.Edit_panel.Controls.Add(this.Discription_input);
             this.Edit_panel.Controls.Add(this.NameMovie_input);
             this.Edit_panel.Controls.Add(this.Search_Picture);
-            this.Edit_panel.Controls.Add(this.Create_Movie);
+            this.Edit_panel.Controls.Add(this.Save_Changes);
             this.Edit_panel.Controls.Add(this.Movie_Picture_text);
             this.Edit_panel.Controls.Add(this.Playtime_text);
             this.Edit_panel.Controls.Add(this.Discription_text);
@@ -192,6 +195,7 @@
             this.Edit_panel.Name = "Edit_panel";
             this.Edit_panel.Size = new System.Drawing.Size(980, 539);
             this.Edit_panel.TabIndex = 33;
+            this.Edit_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Edit_panel_Paint);
             // 
             // MovieEdit
             // 
@@ -217,7 +221,7 @@
         private System.Windows.Forms.TextBox Discription_input;
         private System.Windows.Forms.TextBox NameMovie_input;
         private System.Windows.Forms.Button Search_Picture;
-        private System.Windows.Forms.Button Create_Movie;
+        private System.Windows.Forms.Button Save_Changes;
         private System.Windows.Forms.Label Movie_Picture_text;
         private System.Windows.Forms.Label Playtime_text;
         private System.Windows.Forms.Label Discription_text;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Forms.Layouts;
+using System;
 using System.Collections.Generic;
 
 namespace Project.Base {
@@ -70,6 +71,11 @@ namespace Project.Base {
             return (T) Convert.ChangeType(service, typeof(T));
         }
 
+        public static void ScreenManager() {
+            BaseLayout startScreen = new BaseLayout();
+            startScreen.Show();
+
+        }
     }
 
 }

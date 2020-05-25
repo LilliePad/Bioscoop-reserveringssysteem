@@ -28,7 +28,8 @@ namespace Project {
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MovieCreate());
+            Application.Run(new MovieList());
+
         }
 
         protected override void Load() {
