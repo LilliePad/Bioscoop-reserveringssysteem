@@ -274,6 +274,10 @@ namespace Project.Forms {
             } else {
                 MessageBox.Show("Error: " + ValidationHelper.GetErrorList(movie), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            MovieList Movie_list = new MovieList();
+            Movie_list.Show();
+            this.Hide();
         }
         private void label4_Click(object sender, EventArgs e) {
 
