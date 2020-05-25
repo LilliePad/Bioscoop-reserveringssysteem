@@ -6,7 +6,7 @@ using Project.Services;
 
 namespace Project.Forms.Layouts {
 
-    public abstract class BaseLayout : BaseScreen {
+    public class BaseLayout : BaseScreen {
 
         private Panel navBar;
 
@@ -25,6 +25,9 @@ namespace Project.Forms.Layouts {
 
         public BaseLayout() {
             InitializeComponent();
+        }
+
+        public override void Init() {
             UpdateUserControls();
         }
 

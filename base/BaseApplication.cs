@@ -42,6 +42,11 @@ namespace Project.Base {
                 service.Load();
             }
 
+            // Init screens
+            foreach (BaseScreen screen in screens.Values) {
+                screen.Init();
+            }
+
             // Show default screen
             if (defaultScreen == null) {
                 throw new Exception("No default screen could be found");
