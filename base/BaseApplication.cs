@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Windows.Forms;
 
 namespace Project.Base {
 
@@ -8,6 +10,10 @@ namespace Project.Base {
         // Program variables
         private bool running = false;
         private readonly Dictionary<string, Service> services = new Dictionary<string, Service>();
+
+        private readonly Dictionary<string, BaseScreen> screens = new Dictionary<string, BaseScreen>();
+        private BaseScreen defaultScreen = null;
+        private BaseScreen currentScreen = null;
 
         // Called on load/unload
         protected abstract void Load();
@@ -34,6 +40,14 @@ namespace Project.Base {
             foreach (Service service in services.Values) {
                 service.Load();
             }
+
+            // Show default screen
+            if (defaultScreen == null) {
+                throw new Exception("No default screen could be found");
+            }
+
+            Application.EnableVisualStyles();
+            Application.Run(defaultScreen);
         }
 
         // Unload all services and the application
@@ -60,7 +74,7 @@ namespace Project.Base {
         }
 
         // Returns a service by its handle
-        public T GetService<T>(string handle) {
+        public T GetService<T>(string handle) where T: Service {
             // Return empty value if service does not exist
             if (!services.TryGetValue(handle, out Service service)) {
                 return default;
@@ -68,6 +82,38 @@ namespace Project.Base {
 
             // Cast service and return
             return (T) Convert.ChangeType(service, typeof(T));
+        }
+
+        // Register a screen
+        public void RegisterScreen(BaseScreen screen) {
+            screens.Add(screen.GetHandle(), screen);
+
+            // Set as default if its the default screen
+            if(screen.IsDefault()) {
+                defaultScreen = screen;
+            }
+        }
+
+        // Returns a screen by its handle
+        public T GetScreen<T>(string handle) where T: BaseScreen {
+            // Return empty value if screen does not exist
+            if (!screens.TryGetValue(handle, out BaseScreen screen)) {
+                return default;
+            }
+
+            // Cast screen and return
+            return (T) Convert.ChangeType(screen, typeof(T));
+        }
+
+        public void ShowScreen(BaseScreen screen) {
+            string currentHandle = currentScreen != null ? currentScreen.GetHandle() : null;
+
+            // Show if not already visible
+            if(screen.GetHandle() != currentHandle) {
+                currentScreen.Hide();
+                screen.Show();
+                currentScreen = screen;
+            }
         }
 
     }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using Project.Forms.Layouts;
 using Project.Models;
@@ -9,15 +8,24 @@ using Project.Services;
 
 namespace Project.Forms {
 
-    public partial class MovieList : BaseLayout {
+    public class MovieList : BaseLayout {
+
         private Panel panel1;
         private Button Edit_list;
         private Button Add_to_list;
-        private System.Windows.Forms.ListView container;
+        private ListView container;
 
         public MovieList() {
             InitializeComponent();
             this.Populate();
+        }
+
+        public override string GetHandle() {
+            return "movieList";
+        }
+
+        public override bool IsDefault() {
+            return true;
         }
 
         private void InitializeComponent() {
@@ -111,10 +119,12 @@ namespace Project.Forms {
         }
 
         private void Edit_list_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            MovieEdit editScreen = app.GetScreen<MovieEdit>("movieEdit");
 
-            MovieEdit Movie_edit = new MovieEdit();
-            Movie_edit.Show();
-            this.Hide();
+            app.ShowScreen(editScreen);
         }
+
     }
+
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using Project.Base;
 using Project.Data;
 using Project.Forms;
@@ -25,10 +24,6 @@ namespace Project {
         static void Main() {
             instance = new Program();
             instance.Start();
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MovieCreate());
         }
 
         protected override void Load() {
@@ -39,22 +34,18 @@ namespace Project {
                 throw new InvalidDataException("Failed to load database");
             }
 
-            // Register users service
+            // Register services
             RegisterService(new UserService());
-
             RegisterService(new MovieService());
-
-            // Register rooms service
             RegisterService(new RoomService());
-
-            // Register chairs manager
             RegisterService(new ChairService());
-
-            // Register shows service
             RegisterService(new ShowService());
-
-            //Register Reservation service
             RegisterService(new ReservationService());
+
+            // Register screens
+            RegisterScreen(new MovieList());
+            RegisterScreen(new MovieCreate());
+            RegisterScreen(new MovieEdit());
         }
 
         protected override void Unload() {

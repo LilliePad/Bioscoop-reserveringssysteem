@@ -1,18 +1,15 @@
 ﻿using Project.Forms.Layouts;
 using System.Windows.Forms;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Project.Base;
-using Project.Data;
 using Project.Models;
-using Project.Records;
 using Project.Services;
 using Project.Helpers;
 
 namespace Project.Forms {
 
     public partial class MovieCreate : BaseLayout {
+
         private System.Windows.Forms.Label Create_a_movie_text;
         private System.Windows.Forms.Label Name_text;
         private System.Windows.Forms.Label Discription_text;
@@ -37,7 +34,10 @@ namespace Project.Forms {
 
         public MovieCreate() {
             InitializeComponent();
-            
+        }
+
+        public override string GetHandle() {
+            return "movieCreate";
         }
 
         private void InitializeComponent() {
@@ -259,10 +259,6 @@ namespace Project.Forms {
 
         }
 
-
-
-
-
         private void button1_Click(object sender, System.EventArgs e) {
             Program app = Program.GetInstance();
             MovieService movieManager = app.GetService<MovieService>("movies");
@@ -279,6 +275,7 @@ namespace Project.Forms {
             Movie_list.Show();
             this.Hide();
         }
+
         private void label4_Click(object sender, EventArgs e) {
 
         }
@@ -305,6 +302,8 @@ namespace Project.Forms {
         private void Discription_input_TextChanged(object sender, EventArgs e) {
             movieDiscription = Discription_input.Text;
         }
+
     }
+
 }
 

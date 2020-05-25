@@ -1,19 +1,18 @@
-﻿using Project.Forms.Layouts;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System;
+using Project.Forms.Layouts;
 
 namespace Project.Forms {
+
     public partial class MovieEdit : BaseLayout {
+
         public MovieEdit() {
             InitializeComponent();
         }
+
+        public override string GetHandle() {
+            return "movieEdit";
+        }
+
         private void InitializeComponent() {
             this.Genre_text = new System.Windows.Forms.Label();
             this.Genre_input = new System.Windows.Forms.TextBox();
@@ -226,5 +225,7 @@ namespace Project.Forms {
         private void Delete_movie_Click(object sender, EventArgs e) {
 
         }
+
     }
+
 }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
+using Project.Base;
 using Project.Models;
 using Project.Services;
 
 namespace Project.Forms.Layouts {
 
-    public partial class BaseLayout : Form {
+    public abstract class BaseLayout : BaseScreen {
 
         private Panel navBar;
 
@@ -24,6 +25,7 @@ namespace Project.Forms.Layouts {
 
         public BaseLayout() {
             InitializeComponent();
+            UpdateUserControls();
         }
 
         private void InitializeComponent() {
@@ -55,7 +57,6 @@ namespace Project.Forms.Layouts {
             this.navBar.Name = "navBar";
             this.navBar.Size = new System.Drawing.Size(1260, 100);
             this.navBar.TabIndex = 1;
-            this.navBar.Paint += new System.Windows.Forms.PaintEventHandler(this.navBar_Paint);
             // 
             // navLink1
             // 
@@ -120,21 +121,28 @@ namespace Project.Forms.Layouts {
             // navLoginUsername
             // 
             this.navLoginUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.navLoginUsername.Location = new System.Drawing.Point(1035, 12);
+            this.navLoginUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            this.navLoginUsername.Location = new System.Drawing.Point(1000, 23);
             this.navLoginUsername.Name = "navLoginUsername";
-            this.navLoginUsername.Size = new System.Drawing.Size(100, 20);
+            this.navLoginUsername.Size = new System.Drawing.Size(132, 26);
             this.navLoginUsername.TabIndex = 7;
+            this.navLoginUsername.Text = "Gebruikersnaam";
             this.navLoginUsername.TextChanged += new System.EventHandler(this.NavLoginUsername_TextChanged);
+            this.navLoginUsername.Enter += new System.EventHandler(this.LoginUsernameRemoveText);
+            this.navLoginUsername.Leave += new System.EventHandler(this.LoginUsernameAddText);
             // 
             // navLoginPassword
             // 
             this.navLoginPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.navLoginPassword.Location = new System.Drawing.Point(1035, 38);
+            this.navLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            this.navLoginPassword.Location = new System.Drawing.Point(1000, 58);
             this.navLoginPassword.Name = "navLoginPassword";
-            this.navLoginPassword.PasswordChar = '*';
-            this.navLoginPassword.Size = new System.Drawing.Size(100, 20);
+            this.navLoginPassword.Size = new System.Drawing.Size(132, 26);
             this.navLoginPassword.TabIndex = 8;
+            this.navLoginPassword.Text = "Wachtwoord";
             this.navLoginPassword.TextChanged += new System.EventHandler(this.NavLoginPassword_TextChanged);
+            this.navLoginPassword.Enter += new System.EventHandler(this.LoginPasswordRemoveText);
+            this.navLoginPassword.Leave += new System.EventHandler(this.LoginPasswordAddText);
             // 
             // navLoginButton
             // 
@@ -143,9 +151,11 @@ namespace Project.Forms.Layouts {
             this.navLoginButton.BackColor = System.Drawing.Color.White;
             this.navLoginButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.navLoginButton.Location = new System.Drawing.Point(1150, 38);
+            this.navLoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            this.navLoginButton.Location = new System.Drawing.Point(1141, 23);
             this.navLoginButton.Name = "navLoginButton";
-            this.navLoginButton.Size = new System.Drawing.Size(99, 30);
+            this.navLoginButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
+            this.navLoginButton.Size = new System.Drawing.Size(99, 62);
             this.navLoginButton.TabIndex = 5;
             this.navLoginButton.Text = "Login";
             this.navLoginButton.UseVisualStyleBackColor = false;
@@ -159,7 +169,6 @@ namespace Project.Forms.Layouts {
             this.navBar.ResumeLayout(false);
             this.navBar.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         private void NavLoginUsername_TextChanged(object sender, EventArgs e) {
@@ -172,8 +181,7 @@ namespace Project.Forms.Layouts {
         }
 
         private void NavLoginButton_Click(object sender, EventArgs e) {
-            Program app = Program.GetInstance();
-            UserService userService = app.GetService<UserService>("users");
+            UserService userService = Program.GetInstance().GetService<UserService>("users");
 
             // Find user
             User user = userService.GetUserByUsername(usernameValue);
@@ -186,12 +194,47 @@ namespace Project.Forms.Layouts {
 
             // Everything ok, login
             userService.SetCurrentUser(user);
+            UpdateUserControls();
             MessageBox.Show("Succesvol ingelogd, welkom " + user.fullName);
         }
 
-        private void navBar_Paint(object sender, PaintEventArgs e) {
+        public void LoginUsernameRemoveText(object sender, EventArgs e) {
+            if (navLoginUsername.Text == "Gebruikersnaam")
+                navLoginUsername.Text = "";
+        }
+
+        public void LoginUsernameAddText(object sender, EventArgs e) {
+            if (string.IsNullOrWhiteSpace(navLoginUsername.Text))
+                navLoginUsername.Text = "Gebruikersnaam";
+        }
+
+        public void LoginPasswordRemoveText(object sender, EventArgs e) {
+            if (navLoginPassword.Text == "Wachtwoord") {
+                navLoginPassword.Text = "";
+                navLoginPassword.PasswordChar = '*';
+            }
+        }
+
+        public void LoginPasswordAddText(object sender, EventArgs e) {
+            if (string.IsNullOrWhiteSpace(navLoginPassword.Text)) {
+                navLoginPassword.Text = "Wachtwoord";
+                navLoginPassword.PasswordChar = '\0';
+            }
+        }
+
+        private void UpdateUserControls() {
+            UserService userService = Program.GetInstance().GetService<UserService>("users");
+            bool loggedIn = userService.GetCurrentUser() != null;
+
+            // Update login visibillity
+            navLoginUsername.Visible = !loggedIn;
+            navLoginPassword.Visible = !loggedIn;
+            navLoginButton.Visible = !loggedIn;
+
+            // Update account visibillity
 
         }
+
     }
 
 }
