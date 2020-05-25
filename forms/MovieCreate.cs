@@ -265,15 +265,14 @@ namespace Project.Forms {
 
             Movie movie = new Movie(movieName, movieDiscription, movieGenre, movieDuration, image);
 
-            if (movieManager.SaveMovie(movie)) {
-                MessageBox.Show("Movie Created", "noError", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } else {
+            if (!movieManager.SaveMovie(movie)) {
                 MessageBox.Show("Error: " + ValidationHelper.GetErrorList(movie), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            MovieList Movie_list = new MovieList();
-            Movie_list.Show();
-            this.Hide();
+            // Go back to list view
+            MovieList listScreen = app.GetScreen<MovieList>("movieList");
+            app.ShowScreen(listScreen);
         }
 
         private void label4_Click(object sender, EventArgs e) {

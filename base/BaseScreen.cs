@@ -13,9 +13,9 @@ namespace Project.Base {
             return false;
         }
 
-        public virtual void Init() {
+        public virtual void Init() {  }
 
-        }
+        public virtual void OnShow() {  }
 
     }   
 

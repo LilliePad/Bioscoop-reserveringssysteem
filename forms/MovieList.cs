@@ -15,7 +15,6 @@ namespace Project.Forms {
 
         public MovieList() {
             InitializeComponent();
-            this.Populate();
         }
 
         public override string GetHandle() {
@@ -24,6 +23,26 @@ namespace Project.Forms {
 
         public override bool IsDefault() {
             return true;
+        }
+
+        public override void OnShow() {
+            Program app = Program.GetInstance();
+            MovieService movieService = app.GetService<MovieService>("movies");
+            ImageList imgs = new ImageList();
+            List<Movie> movies = movieService.GetMovies();
+
+            container.Items.Clear();
+            imgs.ImageSize = new Size(50, 50);
+
+            for (int i = 0; i < movies.Count; i++) {
+                Movie movie = movies[i];
+
+                imgs.Images.Add(movie.GetImage());
+                container.Items.Add(movie.name, i);
+            }
+
+            //BIND IMGS TO LISTVIEW
+            container.SmallImageList = imgs;
         }
 
         private void InitializeComponent() {
@@ -66,25 +85,6 @@ namespace Project.Forms {
         private void MovieList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
             container.Columns.Add("Films", 250);
-        }
-
-        private void Populate() {
-            Program app = Program.GetInstance();
-            MovieService movieService = app.GetService<MovieService>("movies");
-            ImageList imgs = new ImageList();
-            List<Movie> movies = movieService.GetMovies();
-
-            imgs.ImageSize = new Size(50, 50);
-
-            for (int i = 0; i < movies.Count; i++) {
-                Movie movie = movies[i];
-
-                imgs.Images.Add(movie.GetImage());
-                container.Items.Add(movie.name, i);
-            }
-
-            //BIND IMGS TO LISTVIEW
-            container.SmallImageList = imgs;
         }
 
         private void ButtonNew_Click(object sender, EventArgs e) {

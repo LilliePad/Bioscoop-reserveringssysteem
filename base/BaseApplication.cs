@@ -53,8 +53,8 @@ namespace Project.Base {
             }
 
             Application.EnableVisualStyles();
+            ShowScreen(defaultScreen);
             Application.Run(defaultScreen);
-            currentScreen = defaultScreen;
         }
 
         // Unload all services and the application
@@ -113,13 +113,19 @@ namespace Project.Base {
         }
 
         public void ShowScreen(BaseScreen screen) {
-            string currentHandle = currentScreen != null ? currentScreen.GetHandle() : null;
+            if(screen == null) {
+                throw new ArgumentException("Screen can't be null");
+            }
 
             // Show if not already visible
-            if(screen.GetHandle() != currentHandle) {
-                currentScreen.Hide();
+            if(currentScreen == null || screen.GetHandle() != currentScreen.GetHandle()) {
+                if(currentScreen != null) {
+                    currentScreen.Hide();
+                }
+
                 screen.Show();
                 currentScreen = screen;
+                screen.OnShow();
             }
         }
 
