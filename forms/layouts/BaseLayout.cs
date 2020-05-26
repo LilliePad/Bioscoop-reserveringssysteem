@@ -3,14 +3,16 @@ using System.Windows.Forms;
 using Project.Base;
 using Project.Models;
 using Project.Services;
+using System.Runtime.InteropServices;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Project.Forms.Layouts {
 
     public class BaseLayout : BaseScreen {
 
         private Panel navBar;
-
-        private Button navLink1;
+        private RoundedButton navLink1;
         private Button navLink2;
         private Button navLink3;
         private Button navLink4;
@@ -23,8 +25,22 @@ namespace Project.Forms.Layouts {
         private string usernameValue;
         private string passwordValue;
 
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,     // x-coordinate of upper-left corner
+            int nTopRect,      // y-coordinate of upper-left corner
+            int nRightRect,    // x-coordinate of lower-right corner
+            int nBottomRect,   // y-coordinate of lower-right corner
+            int nWidthEllipse, // height of ellipse
+            int nHeightEllipse // width of ellipse
+        );
+        
+
         public BaseLayout() {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20  , 20));
         }
 
         public override void Init() {
@@ -33,11 +49,11 @@ namespace Project.Forms.Layouts {
 
         private void InitializeComponent() {
             this.navBar = new System.Windows.Forms.Panel();
-            this.navLink1 = new System.Windows.Forms.Button();
-            this.navLink2 = new System.Windows.Forms.Button();
-            this.navLink3 = new System.Windows.Forms.Button();
-            this.navLink4 = new System.Windows.Forms.Button();
-            this.navLink5 = new System.Windows.Forms.Button();
+            this.navLink1 = new Project.Forms.Layouts.BaseLayout.RoundedButton();
+            this.navLink2 = new Project.Forms.Layouts.BaseLayout.RoundedButton();
+            this.navLink3 = new Project.Forms.Layouts.BaseLayout.RoundedButton();
+            this.navLink4 = new Project.Forms.Layouts.BaseLayout.RoundedButton();
+            this.navLink5 = new Project.Forms.Layouts.BaseLayout.RoundedButton();
             this.navLoginUsername = new System.Windows.Forms.TextBox();
             this.navLoginPassword = new System.Windows.Forms.TextBox();
             this.navLoginButton = new System.Windows.Forms.Button();
@@ -127,7 +143,7 @@ namespace Project.Forms.Layouts {
             this.navLoginUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             this.navLoginUsername.Location = new System.Drawing.Point(1000, 23);
             this.navLoginUsername.Name = "navLoginUsername";
-            this.navLoginUsername.Size = new System.Drawing.Size(132, 26);
+            this.navLoginUsername.Size = new System.Drawing.Size(132, 21);
             this.navLoginUsername.TabIndex = 7;
             this.navLoginUsername.Text = "Gebruikersnaam";
             this.navLoginUsername.TextChanged += new System.EventHandler(this.NavLoginUsername_TextChanged);
@@ -140,7 +156,7 @@ namespace Project.Forms.Layouts {
             this.navLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             this.navLoginPassword.Location = new System.Drawing.Point(1000, 58);
             this.navLoginPassword.Name = "navLoginPassword";
-            this.navLoginPassword.Size = new System.Drawing.Size(132, 26);
+            this.navLoginPassword.Size = new System.Drawing.Size(132, 21);
             this.navLoginPassword.TabIndex = 8;
             this.navLoginPassword.Text = "Wachtwoord";
             this.navLoginPassword.TextChanged += new System.EventHandler(this.NavLoginPassword_TextChanged);
@@ -172,6 +188,7 @@ namespace Project.Forms.Layouts {
             this.navBar.ResumeLayout(false);
             this.navBar.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         private void NavLoginUsername_TextChanged(object sender, EventArgs e) {
@@ -235,9 +252,48 @@ namespace Project.Forms.Layouts {
             navLoginButton.Visible = !loggedIn;
 
             // Update account visibillity
+          
+        }
 
+
+        class RoundedButton : Button {
+            GraphicsPath GetRoundPath(RectangleF Rect, int radius) {
+                float r2 = radius / 2f;
+                GraphicsPath GraphPath = new GraphicsPath();
+                GraphPath.AddArc(Rect.X, Rect.Y, radius, radius, 180, 90);
+                GraphPath.AddLine(Rect.X + r2, Rect.Y, Rect.Width - r2, Rect.Y);
+                GraphPath.AddArc(Rect.X + Rect.Width - radius, Rect.Y, radius, radius, 270, 90);
+                GraphPath.AddLine(Rect.Width, Rect.Y + r2, Rect.Width, Rect.Height - r2);
+                GraphPath.AddArc(Rect.X + Rect.Width - radius,
+                                 Rect.Y + Rect.Height - radius, radius, radius, 0, 90);
+                GraphPath.AddLine(Rect.Width - r2, Rect.Height, Rect.X + r2, Rect.Height);
+                GraphPath.AddArc(Rect.X, Rect.Y + Rect.Height - radius, radius, radius, 90, 90);
+                GraphPath.AddLine(Rect.X, Rect.Height - r2, Rect.X, Rect.Y + r2);
+                GraphPath.CloseFigure();
+                return GraphPath;
+            }
+
+            protected override void OnPaint(PaintEventArgs e) {
+                base.OnPaint(e);
+                RectangleF Rect = new RectangleF(0, 0, this.Width, this.Height);
+                using (GraphicsPath GraphPath = GetRoundPath(Rect, 10)) {
+                    this.Region = new Region(GraphPath);
+                    using (Pen pen = new Pen(Color.CadetBlue, 1.75f)) {
+                        pen.Alignment = PenAlignment.Inset;
+                        e.Graphics.DrawPath(pen, GraphPath);
+                    }
+                }
+            }
         }
 
     }
 
 }
+
+
+
+
+        
+            
+       
+    
