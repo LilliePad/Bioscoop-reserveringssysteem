@@ -49,6 +49,7 @@ namespace Project.Forms.Layouts {
 
         private void InitializeComponent() {
             this.navBar = new System.Windows.Forms.Panel();
+            this.exitButton = new System.Windows.Forms.Button();
             this.navLink1 = new Project.Forms.Layouts.BaseLayout.RoundedButton();
             this.navLink2 = new Project.Forms.Layouts.BaseLayout.RoundedButton();
             this.navLink3 = new Project.Forms.Layouts.BaseLayout.RoundedButton();
@@ -57,7 +58,6 @@ namespace Project.Forms.Layouts {
             this.navLoginUsername = new System.Windows.Forms.TextBox();
             this.navLoginPassword = new System.Windows.Forms.TextBox();
             this.navLoginButton = new System.Windows.Forms.Button();
-            this.exitButton = new System.Windows.Forms.Button();
             this.navBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,17 +80,40 @@ namespace Project.Forms.Layouts {
             this.navBar.Size = new System.Drawing.Size(1902, 100);
             this.navBar.TabIndex = 1;
             // 
+            // exitButton
+            // 
+            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.exitButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.exitButton.BackColor = System.Drawing.Color.Black;
+            this.exitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.exitButton.FlatAppearance.BorderSize = 0;
+            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.exitButton.ForeColor = System.Drawing.Color.DarkRed;
+            this.exitButton.Location = new System.Drawing.Point(1844, 3);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
+            this.exitButton.Size = new System.Drawing.Size(55, 28);
+            this.exitButton.TabIndex = 9;
+            this.exitButton.Text = "X";
+            this.exitButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // navLink1
             // 
             this.navLink1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.navLink1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.navLink1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.navLink1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navLink1.Location = new System.Drawing.Point(40, 55);
             this.navLink1.Name = "navLink1";
             this.navLink1.Size = new System.Drawing.Size(110, 30);
             this.navLink1.TabIndex = 0;
+            this.navLink1.Text = "Movie";
             this.navLink1.UseVisualStyleBackColor = false;
+            this.navLink1.Click += new System.EventHandler(this.navLink1_Click);
             // 
             // navLink2
             // 
@@ -98,10 +121,12 @@ namespace Project.Forms.Layouts {
             this.navLink2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.navLink2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.navLink2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
             this.navLink2.Location = new System.Drawing.Point(180, 55);
             this.navLink2.Name = "navLink2";
             this.navLink2.Size = new System.Drawing.Size(110, 30);
             this.navLink2.TabIndex = 1;
+            this.navLink2.Text = "Design";
             this.navLink2.UseVisualStyleBackColor = false;
             // 
             // navLink3
@@ -184,26 +209,6 @@ namespace Project.Forms.Layouts {
             this.navLoginButton.Text = "Login";
             this.navLoginButton.UseVisualStyleBackColor = false;
             this.navLoginButton.Click += new System.EventHandler(this.NavLoginButton_Click);
-            // 
-            // exitButton
-            // 
-            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.exitButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.exitButton.BackColor = System.Drawing.Color.Black;
-            this.exitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.exitButton.FlatAppearance.BorderSize = 0;
-            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.exitButton.ForeColor = System.Drawing.Color.DarkRed;
-            this.exitButton.Location = new System.Drawing.Point(1844, 3);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
-            this.exitButton.Size = new System.Drawing.Size(55, 28);
-            this.exitButton.TabIndex = 9;
-            this.exitButton.Text = "X";
-            this.exitButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.exitButton.UseVisualStyleBackColor = false;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // BaseLayout
             // 
@@ -316,6 +321,9 @@ namespace Project.Forms.Layouts {
             Application.Exit();
         }
 
+        private void navLink1_Click(object sender, EventArgs e) {
+            
+        }
     }
 
 }
