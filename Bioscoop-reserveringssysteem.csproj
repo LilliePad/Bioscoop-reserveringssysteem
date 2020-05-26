@@ -57,6 +57,21 @@
     <Compile Include="base\StorageFile.cs" />
     <Compile Include="data\Database.cs" />
     <Compile Include="enums\PrintType.cs" />
+    <Compile Include="forms\UserCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\RoomDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\UserEditDesign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\UserChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\RoomCreateDesign.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="forms\MovieEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +107,12 @@
     <Compile Include="services\RoomService.cs" />
     <Compile Include="services\ShowService.cs" />
     <Compile Include="services\UserService.cs" />
+    <EmbeddedResource Include="forms\RoomDelete.resx">
+      <DependentUpon>RoomDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\UserChangePassword.resx">
+      <DependentUpon>UserChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\layouts\BaseLayout.resx">
       <DependentUpon>BaseLayout.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,6 +121,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MovieList.resx">
       <DependentUpon>MovieList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\RoomCreateDesign.resx">
+      <DependentUpon>RoomCreateDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\UserCreate.resx">
+      <DependentUpon>UserCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\UserEditDesign.resx">
+      <DependentUpon>UserEditDesign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
