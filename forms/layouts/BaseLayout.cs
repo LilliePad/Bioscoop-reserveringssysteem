@@ -79,7 +79,6 @@ namespace Project.Forms.Layouts {
             this.navBar.Name = "navBar";
             this.navBar.Size = new System.Drawing.Size(1902, 100);
             this.navBar.TabIndex = 1;
-            this.navBar.Paint += new System.Windows.Forms.PaintEventHandler(this.navBar_Paint);
             // 
             // navLink1
             // 
@@ -142,7 +141,6 @@ namespace Project.Forms.Layouts {
             this.navLink5.Size = new System.Drawing.Size(110, 30);
             this.navLink5.TabIndex = 2;
             this.navLink5.UseVisualStyleBackColor = false;
-            this.navLink5.Click += new System.EventHandler(this.navLink5_Click);
             // 
             // navLoginUsername
             // 
@@ -214,7 +212,6 @@ namespace Project.Forms.Layouts {
             this.Name = "BaseLayout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.BaseLayout_Load);
             this.navBar.ResumeLayout(false);
             this.navBar.PerformLayout();
             this.ResumeLayout(false);
