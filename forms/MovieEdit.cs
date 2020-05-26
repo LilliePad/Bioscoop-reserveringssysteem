@@ -11,7 +11,7 @@ namespace Project.Forms {
         private Movie movie;
 
         public MovieEdit() {
-
+            
         }
 
         public override string GetHandle() {
@@ -20,6 +20,10 @@ namespace Project.Forms {
 
         public void SetMovie(Movie movie) {
             this.movie = movie;
+        }
+
+        public override void OnShow() {
+            MessageBox.Show("Movie: " + movie.name, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button1_Click(object sender, EventArgs e) {

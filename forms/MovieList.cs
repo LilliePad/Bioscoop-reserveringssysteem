@@ -36,9 +36,8 @@ namespace Project.Forms {
 
             for (int i = 0; i < movies.Count; i++) {
                 Movie movie = movies[i];
-                ListViewItem item = new ListViewItem();
+                ListViewItem item = new ListViewItem(movie.name, i);
 
-                item.Name = movie.name;
                 item.Tag = movie.id;
 
                 imgs.Images.Add(movie.GetImage());
@@ -46,7 +45,7 @@ namespace Project.Forms {
             }
 
             //BIND IMGS TO LISTVIEW
-            container.LargeImageList = imgs;
+            container.SmallImageList = imgs;
         }
 
         private void InitializeComponent() {
@@ -62,6 +61,7 @@ namespace Project.Forms {
             this.container.Size = new System.Drawing.Size(670, 452);
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
+            this.container.Click += new System.EventHandler(this.ButtonEdit_Click);
             // 
             // movieCreateButton
             // 
@@ -107,6 +107,7 @@ namespace Project.Forms {
             ListViewItem item = container.SelectedItems[0];
 
             if(item == null) {
+                MessageBox.Show("Error: Geen item geselecteerd", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
