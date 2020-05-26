@@ -212,6 +212,7 @@ namespace Project.Forms {
             this.ClientSize = new System.Drawing.Size(1360, 807);
             this.Controls.Add(this.panel1);
             this.Name = "MovieCreate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.MovieCreate_Load);
             this.Controls.SetChildIndex(this.panel1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
