@@ -20,6 +20,7 @@ namespace Project.Forms.Layouts {
         private TextBox navLoginUsername;
         private TextBox navLoginPassword;
         private Button navLoginButton;
+        private Button exitButton;
 
         private string usernameValue;
         private string passwordValue;
@@ -56,6 +57,7 @@ namespace Project.Forms.Layouts {
             this.navLoginUsername = new System.Windows.Forms.TextBox();
             this.navLoginPassword = new System.Windows.Forms.TextBox();
             this.navLoginButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
             this.navBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +65,7 @@ namespace Project.Forms.Layouts {
             // 
             this.navBar.BackColor = System.Drawing.Color.Black;
             this.navBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.navBar.Controls.Add(this.exitButton);
             this.navBar.Controls.Add(this.navLink1);
             this.navBar.Controls.Add(this.navLink2);
             this.navBar.Controls.Add(this.navLink3);
@@ -76,6 +79,7 @@ namespace Project.Forms.Layouts {
             this.navBar.Name = "navBar";
             this.navBar.Size = new System.Drawing.Size(1902, 100);
             this.navBar.TabIndex = 1;
+            this.navBar.Paint += new System.Windows.Forms.PaintEventHandler(this.navBar_Paint);
             // 
             // navLink1
             // 
@@ -143,7 +147,7 @@ namespace Project.Forms.Layouts {
             // 
             this.navLoginUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.navLoginUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navLoginUsername.Location = new System.Drawing.Point(1642, 23);
+            this.navLoginUsername.Location = new System.Drawing.Point(1642, 37);
             this.navLoginUsername.Name = "navLoginUsername";
             this.navLoginUsername.Size = new System.Drawing.Size(132, 21);
             this.navLoginUsername.TabIndex = 7;
@@ -156,7 +160,7 @@ namespace Project.Forms.Layouts {
             // 
             this.navLoginPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.navLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navLoginPassword.Location = new System.Drawing.Point(1642, 58);
+            this.navLoginPassword.Location = new System.Drawing.Point(1642, 64);
             this.navLoginPassword.Name = "navLoginPassword";
             this.navLoginPassword.Size = new System.Drawing.Size(132, 21);
             this.navLoginPassword.TabIndex = 8;
@@ -173,14 +177,34 @@ namespace Project.Forms.Layouts {
             this.navLoginButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navLoginButton.Location = new System.Drawing.Point(1783, 23);
+            this.navLoginButton.Location = new System.Drawing.Point(1783, 37);
             this.navLoginButton.Name = "navLoginButton";
             this.navLoginButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
-            this.navLoginButton.Size = new System.Drawing.Size(99, 62);
+            this.navLoginButton.Size = new System.Drawing.Size(99, 48);
             this.navLoginButton.TabIndex = 5;
             this.navLoginButton.Text = "Login";
             this.navLoginButton.UseVisualStyleBackColor = false;
             this.navLoginButton.Click += new System.EventHandler(this.NavLoginButton_Click);
+            // 
+            // exitButton
+            // 
+            this.exitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.exitButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.exitButton.BackColor = System.Drawing.Color.Black;
+            this.exitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.exitButton.FlatAppearance.BorderSize = 0;
+            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.exitButton.ForeColor = System.Drawing.Color.DarkRed;
+            this.exitButton.Location = new System.Drawing.Point(1844, 3);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
+            this.exitButton.Size = new System.Drawing.Size(55, 28);
+            this.exitButton.TabIndex = 9;
+            this.exitButton.Text = "X";
+            this.exitButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // BaseLayout
             // 
@@ -189,6 +213,7 @@ namespace Project.Forms.Layouts {
             this.Name = "BaseLayout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.BaseLayout_Load);
             this.navBar.ResumeLayout(false);
             this.navBar.PerformLayout();
             this.ResumeLayout(false);
@@ -290,6 +315,17 @@ namespace Project.Forms.Layouts {
             }
         }
 
+        private void navBar_Paint(object sender, PaintEventArgs e) {
+
+        }
+
+        private void BaseLayout_Load(object sender, EventArgs e) {
+
+        }
+
+        private void exitButton_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
     }
 
 }
