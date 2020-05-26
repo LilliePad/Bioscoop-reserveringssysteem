@@ -4,7 +4,7 @@ using Project.Services;
 
 namespace Project.Models {
 
-    class Reservation : Model {
+    public class Reservation : Model {
 
         public int id = -1;
         public int showId;

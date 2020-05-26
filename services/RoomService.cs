@@ -8,7 +8,7 @@ using Project.Records;
 
 namespace Project.Services {
 
-    class RoomService : Service {
+    public class RoomService : Service {
 
         public override string GetHandle() {
             return "rooms";

@@ -5,7 +5,7 @@ using Project.Services;
 
 namespace Project.Models {
 
-    class User : Model {
+    public class User : Model {
 
         public int id = -1;
         public string fullName;

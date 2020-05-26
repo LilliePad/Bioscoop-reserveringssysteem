@@ -5,7 +5,7 @@ using Project.Records;
 
 namespace Project.Models {
 
-    class Movie : Model {
+    public class Movie : Model {
 
         public int id = -1;
         public string name;

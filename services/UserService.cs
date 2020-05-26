@@ -11,7 +11,7 @@ using Project.Records;
 
 namespace Project.Services {
 
-    class UserService : Service {
+    public class UserService : Service {
 
         // Current user (logged in user)
         private User currentUser;

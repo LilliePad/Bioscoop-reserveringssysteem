@@ -2,7 +2,7 @@
 
 namespace Project.Records {
 
-    class ChairRecord : Record {
+    public class ChairRecord : Record {
 
         public int id;
         public int roomId;

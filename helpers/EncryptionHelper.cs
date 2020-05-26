@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace Project.Helpers {
 
-    class EncryptionHelper {
+    public class EncryptionHelper {
 
         // Creates a hash value for the specified value
         public static string CreateHash(string value) {

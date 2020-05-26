@@ -18,6 +18,10 @@ namespace Project.Forms {
             return "movieEdit";
         }
 
+        public void SetMovie(Movie movie) {
+            this.movie = movie;
+        }
+
         private void button1_Click(object sender, EventArgs e) {
          
         }

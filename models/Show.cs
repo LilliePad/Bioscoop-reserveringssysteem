@@ -5,7 +5,7 @@ using Project.Services;
 
 namespace Project.Models {
 
-    class Show: Model {
+    public class Show : Model {
 
         public int id = -1;
         public int movieId;

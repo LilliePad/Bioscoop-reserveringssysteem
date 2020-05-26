@@ -8,7 +8,7 @@ using Project.Helpers;
 
 namespace Project.Forms {
 
-    public partial class MovieCreate : BaseLayout {
+    public class MovieCreate : BaseLayout {
 
         private System.Windows.Forms.Label Create_a_movie_text;
         private System.Windows.Forms.Label Name_text;

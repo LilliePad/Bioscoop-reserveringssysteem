@@ -36,13 +36,17 @@ namespace Project.Forms {
 
             for (int i = 0; i < movies.Count; i++) {
                 Movie movie = movies[i];
+                ListViewItem item = new ListViewItem();
+
+                item.Name = movie.name;
+                item.Tag = movie.id;
 
                 imgs.Images.Add(movie.GetImage());
-                container.Items.Add(movie.name, i);
+                container.Items.Add(item);
             }
 
             //BIND IMGS TO LISTVIEW
-            container.SmallImageList = imgs;
+            container.LargeImageList = imgs;
         }
 
         private void InitializeComponent() {
@@ -89,15 +93,33 @@ namespace Project.Forms {
 
         private void ButtonNew_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            MovieCreate editScreen = app.GetScreen<MovieCreate>("movieCreate");
+            MovieCreate newScreen = app.GetScreen<MovieCreate>("movieCreate");
 
-            app.ShowScreen(editScreen);
+            app.ShowScreen(newScreen);
         }
 
         private void ButtonEdit_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
+            MovieService movieService = app.GetService<MovieService>("movies");
             MovieEdit editScreen = app.GetScreen<MovieEdit>("movieEdit");
 
+            // Get the clicked item
+            ListViewItem item = container.SelectedItems[0];
+
+            if(item == null) {
+                return;
+            }
+
+            // Find the movie
+            int id = (int) item.Tag;
+            Movie movie = movieService.GetMovieById(id);
+
+            if(movie == null) {
+                MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            editScreen.SetMovie(movie);
             app.ShowScreen(editScreen);
         }
 

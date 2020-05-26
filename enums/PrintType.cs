@@ -1,6 +1,6 @@
 namespace Project.Enums {
 
-    enum PrintType {
+    public enum PrintType {
 
         Default,
         Debug,

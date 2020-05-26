@@ -8,7 +8,7 @@ using Project.Services;
 
 namespace Project {
 
-    class Program : BaseApplication {
+    public class Program : BaseApplication {
 
         // Constants
         public static readonly string DATE_FORMAT = "dd-MM-yyyy";

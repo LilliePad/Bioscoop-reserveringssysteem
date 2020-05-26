@@ -2,7 +2,7 @@
 
 namespace Project.Records {
 
-    class UserRecord : Record {
+    public class UserRecord : Record {
 
         public int id;
         public string fullName;

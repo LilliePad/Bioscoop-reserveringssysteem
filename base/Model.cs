@@ -2,7 +2,7 @@
 
 namespace Project.Base {
 
-    abstract class Model {
+    public abstract class Model {
 
         // List of validation errors
         private readonly Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();

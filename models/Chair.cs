@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Project.Models {
 
-    class Chair : Model {
+    public class Chair : Model {
 
         // Valid chair types
         public static readonly string[] TYPES = { "default" };

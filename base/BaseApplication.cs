@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Project.Base {
 
-    abstract class BaseApplication {
+    public abstract class BaseApplication {
 
         // Program variables
         private bool running = false;

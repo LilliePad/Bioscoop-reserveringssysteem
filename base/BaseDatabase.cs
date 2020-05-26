@@ -5,7 +5,7 @@ using Project.Helpers;
 
 namespace Project.Base {
 
-    class BaseDatabase {
+    public class BaseDatabase {
 
         // Settings
         public static readonly string STORAGE_CATEGORY = null;

@@ -5,7 +5,7 @@ using Project.Enums;
 
 namespace Project.Helpers {
 
-    class ValidationHelper {
+    public class ValidationHelper {
 
         // Prints all errors for the specified model
         public static string GetErrorList(Model model) {

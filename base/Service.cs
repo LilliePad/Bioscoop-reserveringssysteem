@@ -1,6 +1,6 @@
 ﻿namespace Project.Base {
 
-    abstract class Service {
+    public abstract class Service {
 
         // The handle of this service
         public abstract string GetHandle();

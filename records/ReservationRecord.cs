@@ -2,7 +2,7 @@
 
 namespace Project.Records {
 
-    class ReservationRecord : Record {
+    public class ReservationRecord : Record {
 
         public int id;
         public int showId;

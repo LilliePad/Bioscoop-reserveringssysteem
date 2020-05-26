@@ -1,6 +1,6 @@
 namespace Project.Base {
 
-    class StorageFile {
+    public class StorageFile {
 
         // The file directory
         public string directory;

@@ -3,7 +3,7 @@ using Project.Base;
 
 namespace Project.Records {
 
-    class ShowRecord: Record {
+    public class ShowRecord : Record {
 
         public int id;
         public int roomId;

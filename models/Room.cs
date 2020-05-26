@@ -5,7 +5,7 @@ using Project.Services;
 
 namespace Project.Models {
 
-    class Room : Model {
+    public class Room : Model {
 
         public int id = -1;
         public int number;

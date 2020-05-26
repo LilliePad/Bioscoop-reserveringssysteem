@@ -4,7 +4,7 @@ using Project.Records;
 
 namespace Project.Data {
 
-    class Database : BaseDatabase {
+    public class Database : BaseDatabase {
 
         // Users
         public List<UserRecord> users = new List<UserRecord>();

@@ -1,11 +1,10 @@
-using System;
 using System.IO;
 using Newtonsoft.Json;
 using Project.Base;
 
 namespace Project.Helpers {
 
-    class StorageHelper {
+    public class StorageHelper {
 
         // Fill an objects properties from a json file
         public static void LoadFile(string category, string fileName, object obj) {
@@ -38,15 +37,17 @@ namespace Project.Helpers {
 
         // Uploads an image, returns StorageFile on success.
         public static StorageFile UploadImage(string source) {
-            string fileName = Path.GetFileName(source);
-    
+            string[] fileInfo = Path.GetFileName(source).Split('.');
+            string fileExt = fileInfo[1];
+
             // Make sure the source exists 
             if (!File.Exists(source)) {
                 throw new FileNotFoundException("Unable to find file: " + source);
             }
 
             // Create storage object
-            StorageFile storage = new StorageFile("images", fileName);
+            string randomId = StringHelper.RandomString(50);
+            StorageFile storage = new StorageFile("images", randomId + '.' + fileExt);
 
             if(!File.Exists(storage.directory)) {
                 Directory.CreateDirectory(storage.directory);
