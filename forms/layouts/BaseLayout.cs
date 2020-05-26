@@ -13,11 +13,10 @@ namespace Project.Forms.Layouts {
 
         private Panel navBar;
         private RoundedButton navLink1;
-        private Button navLink2;
-        private Button navLink3;
-        private Button navLink4;
-        private Button navLink5;
-
+        private RoundedButton navLink2;
+        private RoundedButton navLink3;
+        private RoundedButton navLink4;
+        private RoundedButton navLink5;
         private TextBox navLoginUsername;
         private TextBox navLoginPassword;
         private Button navLoginButton;
@@ -40,7 +39,7 @@ namespace Project.Forms.Layouts {
         public BaseLayout() {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20  , 20));
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 1  , 1));
         }
 
         public override void Init() {
@@ -63,6 +62,7 @@ namespace Project.Forms.Layouts {
             // navBar
             // 
             this.navBar.BackColor = System.Drawing.Color.Black;
+            this.navBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navBar.Controls.Add(this.navLink1);
             this.navBar.Controls.Add(this.navLink2);
             this.navBar.Controls.Add(this.navLink3);
@@ -74,7 +74,7 @@ namespace Project.Forms.Layouts {
             this.navBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.navBar.Location = new System.Drawing.Point(0, 0);
             this.navBar.Name = "navBar";
-            this.navBar.Size = new System.Drawing.Size(1260, 100);
+            this.navBar.Size = new System.Drawing.Size(1902, 100);
             this.navBar.TabIndex = 1;
             // 
             // navLink1
@@ -130,6 +130,8 @@ namespace Project.Forms.Layouts {
             this.navLink5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.navLink5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.navLink5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.navLink5.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.navLink5.FlatAppearance.BorderSize = 0;
             this.navLink5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLink5.Location = new System.Drawing.Point(600, 55);
             this.navLink5.Name = "navLink5";
@@ -141,7 +143,7 @@ namespace Project.Forms.Layouts {
             // 
             this.navLoginUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.navLoginUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navLoginUsername.Location = new System.Drawing.Point(1000, 23);
+            this.navLoginUsername.Location = new System.Drawing.Point(1642, 23);
             this.navLoginUsername.Name = "navLoginUsername";
             this.navLoginUsername.Size = new System.Drawing.Size(132, 21);
             this.navLoginUsername.TabIndex = 7;
@@ -154,7 +156,7 @@ namespace Project.Forms.Layouts {
             // 
             this.navLoginPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.navLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navLoginPassword.Location = new System.Drawing.Point(1000, 58);
+            this.navLoginPassword.Location = new System.Drawing.Point(1642, 58);
             this.navLoginPassword.Name = "navLoginPassword";
             this.navLoginPassword.Size = new System.Drawing.Size(132, 21);
             this.navLoginPassword.TabIndex = 8;
@@ -171,7 +173,7 @@ namespace Project.Forms.Layouts {
             this.navLoginButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navLoginButton.Location = new System.Drawing.Point(1141, 23);
+            this.navLoginButton.Location = new System.Drawing.Point(1783, 23);
             this.navLoginButton.Name = "navLoginButton";
             this.navLoginButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
             this.navLoginButton.Size = new System.Drawing.Size(99, 62);
@@ -182,9 +184,11 @@ namespace Project.Forms.Layouts {
             // 
             // BaseLayout
             // 
-            this.ClientSize = new System.Drawing.Size(1260, 673);
+            this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.Controls.Add(this.navBar);
             this.Name = "BaseLayout";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.navBar.ResumeLayout(false);
             this.navBar.PerformLayout();
             this.ResumeLayout(false);

@@ -200,6 +200,7 @@ namespace Project.Forms {
             this.Controls.Add(this.Create_a_movie_text);
             this.Controls.Add(this.pictureBox1);
             this.Name = "MovieCreate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.MovieCreate_Load);
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.Create_a_movie_text, 0);
