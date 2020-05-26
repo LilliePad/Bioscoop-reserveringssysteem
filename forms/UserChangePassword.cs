@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Forms.Layouts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,11 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Project.Forms.Layouts;
-
 
 namespace Project.forms {
-    public partial class RoomDelete : BaseLayout {
+    public partial class UserChangePassword : BaseLayout {
         private Panel panel1;
         private Label Create_a_movie_text;
         private Label Discription_text;
@@ -32,7 +31,7 @@ namespace Project.forms {
         private Button Confirm;
         private Label Name_text;
 
-        public RoomDelete() {
+        public UserChangePassword() {
             InitializeComponent();
         }
 

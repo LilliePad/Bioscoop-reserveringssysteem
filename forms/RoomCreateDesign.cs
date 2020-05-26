@@ -73,7 +73,7 @@ namespace Project.Forms {
             // 
             this.Playtime_text.AutoSize = true;
             this.Playtime_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Playtime_text.Location = new System.Drawing.Point(9, 118);
+            this.Playtime_text.Location = new System.Drawing.Point(9, 125);
             this.Playtime_text.Name = "Playtime_text";
             this.Playtime_text.Size = new System.Drawing.Size(35, 17);
             this.Playtime_text.TabIndex = 6;
@@ -98,14 +98,14 @@ namespace Project.Forms {
             // 
             // Duration_input
             // 
-            this.Duration_input.Location = new System.Drawing.Point(125, 118);
+            this.Duration_input.Location = new System.Drawing.Point(125, 125);
             this.Duration_input.Name = "Duration_input";
             this.Duration_input.Size = new System.Drawing.Size(495, 20);
             this.Duration_input.TabIndex = 16;
             // 
             // Genre_input
             // 
-            this.Genre_input.Location = new System.Drawing.Point(125, 152);
+            this.Genre_input.Location = new System.Drawing.Point(125, 159);
             this.Genre_input.Name = "Genre_input";
             this.Genre_input.Size = new System.Drawing.Size(495, 20);
             this.Genre_input.TabIndex = 17;
@@ -114,7 +114,7 @@ namespace Project.Forms {
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label6.Location = new System.Drawing.Point(10, 152);
+            this.label6.Location = new System.Drawing.Point(10, 159);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 17);
             this.label6.TabIndex = 18;
