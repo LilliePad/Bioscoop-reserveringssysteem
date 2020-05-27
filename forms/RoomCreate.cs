@@ -39,12 +39,19 @@ namespace Project.Forms {
             InitializeComponent();
         }
 
+        public override string GetHandle() {
+            return "roomCreate";
+        }
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
 
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Price_Input = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.CreateButton = new System.Windows.Forms.Button();
             this.Create_a_movie_text = new System.Windows.Forms.Label();
             this.Playtime_text = new System.Windows.Forms.Label();
@@ -54,9 +61,6 @@ namespace Project.Forms {
             this.Colum_input = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Name_text = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Price_Input = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,13 +84,40 @@ namespace Project.Forms {
             this.panel1.TabIndex = 20;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label2.Location = new System.Drawing.Point(10, 279);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 20);
+            this.label2.TabIndex = 22;
+            // 
+            // Price_Input
+            // 
+            this.Price_Input.Location = new System.Drawing.Point(125, 224);
+            this.Price_Input.Name = "Price_Input";
+            this.Price_Input.Size = new System.Drawing.Size(495, 22);
+            this.Price_Input.TabIndex = 21;
+            this.Price_Input.TextChanged += new System.EventHandler(this.Price_Input_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Location = new System.Drawing.Point(9, 224);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Price";
+            // 
             // CreateButton
             // 
             this.CreateButton.Location = new System.Drawing.Point(125, 279);
             this.CreateButton.Name = "CreateButton";
             this.CreateButton.Size = new System.Drawing.Size(75, 23);
             this.CreateButton.TabIndex = 19;
-            this.CreateButton.Text = "Create Room";
+            this.CreateButton.Text = "Create ";
             this.CreateButton.UseVisualStyleBackColor = true;
             this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
@@ -151,9 +182,9 @@ namespace Project.Forms {
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label6.Location = new System.Drawing.Point(10, 171);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 20);
+            this.label6.Size = new System.Drawing.Size(57, 20);
             this.label6.TabIndex = 18;
-            this.label6.Text = "Chairs";
+            this.label6.Text = "Colum";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // Name_text
@@ -165,33 +196,6 @@ namespace Project.Forms {
             this.Name_text.Size = new System.Drawing.Size(114, 20);
             this.Name_text.TabIndex = 4;
             this.Name_text.Text = "Room number";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(9, 224);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Price";
-            // 
-            // Price_Input
-            // 
-            this.Price_Input.Location = new System.Drawing.Point(125, 224);
-            this.Price_Input.Name = "Price_Input";
-            this.Price_Input.Size = new System.Drawing.Size(495, 22);
-            this.Price_Input.TabIndex = 21;
-            this.Price_Input.TextChanged += new System.EventHandler(this.Price_Input_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.Location = new System.Drawing.Point(10, 279);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 20);
-            this.label2.TabIndex = 22;
             // 
             // RoomCreateDesign
             // 

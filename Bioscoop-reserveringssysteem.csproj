@@ -69,7 +69,7 @@
     <Compile Include="forms\UserChangePassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\RoomCreateDesign.cs">
+    <Compile Include="forms\RoomCreate.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\MovieEdit.cs">
@@ -123,8 +123,8 @@
     <EmbeddedResource Include="forms\MovieList.resx">
       <DependentUpon>MovieList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\RoomCreateDesign.resx">
-      <DependentUpon>RoomCreateDesign.cs</DependentUpon>
+    <EmbeddedResource Include="forms\RoomCreate.resx">
+      <DependentUpon>RoomCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\UserCreate.resx">
       <DependentUpon>UserCreate.cs</DependentUpon>
