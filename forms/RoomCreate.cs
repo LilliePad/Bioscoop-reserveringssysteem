@@ -17,7 +17,6 @@ namespace Project.Forms {
         private Panel panel1;
         private Label Create_a_movie_text;
         private Label Playtime_text;
-        private Button Movie_create_button;
         private TextBox Room_input;
         private TextBox Row_input;
         private TextBox Colum_input;
@@ -55,7 +54,6 @@ namespace Project.Forms {
             this.CreateButton = new System.Windows.Forms.Button();
             this.Create_a_movie_text = new System.Windows.Forms.Label();
             this.Playtime_text = new System.Windows.Forms.Label();
-            this.Movie_create_button = new System.Windows.Forms.Button();
             this.Room_input = new System.Windows.Forms.TextBox();
             this.Row_input = new System.Windows.Forms.TextBox();
             this.Colum_input = new System.Windows.Forms.TextBox();
@@ -72,7 +70,6 @@ namespace Project.Forms {
             this.panel1.Controls.Add(this.CreateButton);
             this.panel1.Controls.Add(this.Create_a_movie_text);
             this.panel1.Controls.Add(this.Playtime_text);
-            this.panel1.Controls.Add(this.Movie_create_button);
             this.panel1.Controls.Add(this.Room_input);
             this.panel1.Controls.Add(this.Row_input);
             this.panel1.Controls.Add(this.Colum_input);
@@ -141,16 +138,6 @@ namespace Project.Forms {
             this.Playtime_text.Size = new System.Drawing.Size(42, 20);
             this.Playtime_text.TabIndex = 6;
             this.Playtime_text.Text = "Row";
-            // 
-            // Movie_create_button
-            // 
-            this.Movie_create_button.Location = new System.Drawing.Point(125, 472);
-            this.Movie_create_button.Name = "Movie_create_button";
-            this.Movie_create_button.Size = new System.Drawing.Size(133, 39);
-            this.Movie_create_button.TabIndex = 12;
-            this.Movie_create_button.Text = "Create room";
-            this.Movie_create_button.UseVisualStyleBackColor = true;
-            this.Movie_create_button.Click += new System.EventHandler(this.Movie_create_button_Click);
             // 
             // Room_input
             // 
@@ -271,12 +258,17 @@ namespace Project.Forms {
                 MessageBox.Show("Error: " + ValidationHelper.GetErrorList(room), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             RoomId = room.id;
-            Type = "normal";
+            Type = "default";
         
-            for (int i = 0; i == Row; i++) {
-                for(int j = 0; j == Colum; j++) {
-                    Chair chair = new Chair(RoomId, Row, Colum, Price, Type);
+            for (int i = 1; i <= Row; i++) {
+                for(int j = 1; j <= Colum; j++) {
+                    Chair chair = new Chair(RoomId, i, j, Price, Type);
+                    if (!chairManager.SaveChair(chair)) {
+                        MessageBox.Show("Error: " + ValidationHelper.GetErrorList(room), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
             }
             
@@ -286,7 +278,14 @@ namespace Project.Forms {
         }
 
         private void Price_Input_TextChanged(object sender, EventArgs e) {
-            Price = double.Parse(Price_Input.Text);
+
+            try {
+                Price = double.Parse(Price_Input.Text);
+
+            }
+            catch (FormatException) {
+                MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
