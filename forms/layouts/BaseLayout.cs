@@ -106,10 +106,12 @@ namespace Project.Forms.Layouts {
             this.navLink1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.navLink1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.navLink1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navLink1.Location = new System.Drawing.Point(40, 55);
             this.navLink1.Name = "navLink1";
             this.navLink1.Size = new System.Drawing.Size(110, 30);
             this.navLink1.TabIndex = 0;
+            this.navLink1.Text = "Movie";
             this.navLink1.UseVisualStyleBackColor = false;
             this.navLink1.Click += new System.EventHandler(this.navLink1_Click);
             // 
@@ -119,10 +121,12 @@ namespace Project.Forms.Layouts {
             this.navLink2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.navLink2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.navLink2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navLink2.Location = new System.Drawing.Point(180, 55);
             this.navLink2.Name = "navLink2";
             this.navLink2.Size = new System.Drawing.Size(110, 30);
             this.navLink2.TabIndex = 1;
+            this.navLink2.Text = "Room";
             this.navLink2.UseVisualStyleBackColor = false;
             this.navLink2.Click += new System.EventHandler(this.navLink2_Click);
             // 
