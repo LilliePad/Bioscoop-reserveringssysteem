@@ -30,7 +30,7 @@ namespace Project.forms {
         private Label Old_password_label;
         private Button Confirm;
         private RadioButton Secretbutton;
-        private Label label1;
+        private Label First_last_name;
         private TextBox textBox1;
         private Label Name_text;
 
@@ -44,6 +44,9 @@ namespace Project.forms {
 
         private void InitializeComponent() {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.First_last_name = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Secretbutton = new System.Windows.Forms.RadioButton();
             this.Confirm = new System.Windows.Forms.Button();
             this.New_password_label = new System.Windows.Forms.Label();
             this.New_password_input = new System.Windows.Forms.TextBox();
@@ -51,15 +54,12 @@ namespace Project.forms {
             this.New_password_again_input = new System.Windows.Forms.TextBox();
             this.Old_password_label = new System.Windows.Forms.Label();
             this.Old_password_input = new System.Windows.Forms.TextBox();
-            this.Secretbutton = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.First_last_name);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.Secretbutton);
             this.panel2.Controls.Add(this.Confirm);
@@ -74,6 +74,34 @@ namespace Project.forms {
             this.panel2.Size = new System.Drawing.Size(715, 443);
             this.panel2.TabIndex = 2;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // First_last_name
+            // 
+            this.First_last_name.AutoSize = true;
+            this.First_last_name.Location = new System.Drawing.Point(137, 84);
+            this.First_last_name.Name = "First_last_name";
+            this.First_last_name.Size = new System.Drawing.Size(95, 13);
+            this.First_last_name.TabIndex = 9;
+            this.First_last_name.Text = "First and last name";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(258, 81);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(272, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // Secretbutton
+            // 
+            this.Secretbutton.AutoSize = true;
+            this.Secretbutton.Location = new System.Drawing.Point(697, 413);
+            this.Secretbutton.Name = "Secretbutton";
+            this.Secretbutton.Size = new System.Drawing.Size(120, 17);
+            this.Secretbutton.TabIndex = 7;
+            this.Secretbutton.TabStop = true;
+            this.Secretbutton.Text = "Secret admin button";
+            this.Secretbutton.UseVisualStyleBackColor = true;
+            this.Secretbutton.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // Confirm
             // 
@@ -134,34 +162,6 @@ namespace Project.forms {
             this.Old_password_input.Name = "Old_password_input";
             this.Old_password_input.Size = new System.Drawing.Size(272, 20);
             this.Old_password_input.TabIndex = 0;
-            // 
-            // Secretbutton
-            // 
-            this.Secretbutton.AutoSize = true;
-            this.Secretbutton.Location = new System.Drawing.Point(697, 413);
-            this.Secretbutton.Name = "Secretbutton";
-            this.Secretbutton.Size = new System.Drawing.Size(120, 17);
-            this.Secretbutton.TabIndex = 7;
-            this.Secretbutton.TabStop = true;
-            this.Secretbutton.Text = "Secret admin button";
-            this.Secretbutton.UseVisualStyleBackColor = true;
-            this.Secretbutton.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(137, 84);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "First and last name";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(258, 81);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(272, 20);
-            this.textBox1.TabIndex = 8;
             // 
             // UserCreate
             // 
