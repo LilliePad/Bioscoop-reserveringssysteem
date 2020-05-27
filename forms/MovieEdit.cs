@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Project.Models;
 using Project.Forms.Layouts;
 using Project.Helpers;
+using Project.Services;
 
 namespace Project.Forms {
 
@@ -67,6 +68,7 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.Create_a_movie_text = new System.Windows.Forms.Label();
             this.Discription_text = new System.Windows.Forms.Label();
             this.Playtime_text = new System.Windows.Forms.Label();
@@ -80,7 +82,6 @@ namespace Project.Forms {
             this.label6 = new System.Windows.Forms.Label();
             this.Name_text = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -105,6 +106,16 @@ namespace Project.Forms {
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(993, 534);
             this.panel1.TabIndex = 20;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(487, 472);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(133, 39);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Delete Movie";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Create_a_movie_text
             // 
@@ -156,6 +167,7 @@ namespace Project.Forms {
             this.Movie_create_button.TabIndex = 12;
             this.Movie_create_button.Text = "Edit Movie";
             this.Movie_create_button.UseVisualStyleBackColor = true;
+            this.Movie_create_button.Click += new System.EventHandler(this.Movie_create_button_Click);
             // 
             // Search_picture_button
             // 
@@ -224,16 +236,6 @@ namespace Project.Forms {
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(487, 472);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 39);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Delete Movie";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // MovieEdit
             // 
             this.ClientSize = new System.Drawing.Size(1260, 673);
@@ -249,6 +251,13 @@ namespace Project.Forms {
 
         private void button1_Click(object sender, EventArgs e) {
 
+        }
+
+        private void Movie_create_button_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            MovieService movieManager = app.GetService<MovieService>("movies");
+
+            // Find movie
         }
     }
     
