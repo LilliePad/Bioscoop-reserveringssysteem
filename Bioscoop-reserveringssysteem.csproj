@@ -111,11 +111,15 @@
     <Compile Include="services\RoomService.cs" />
     <Compile Include="services\ShowService.cs" />
     <Compile Include="services\UserService.cs" />
+
     <EmbeddedResource Include="forms\RoomList.resx">
       <DependentUpon>RoomList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\RoomEdit.resx">
       <DependentUpon>RoomEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\MovieEdit.resx">
+      <DependentUpon>MovieEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\UserChangePassword.resx">
       <DependentUpon>UserChangePassword.cs</DependentUpon>
