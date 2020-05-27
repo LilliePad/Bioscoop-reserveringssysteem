@@ -46,6 +46,7 @@ namespace Project {
             RegisterScreen(new MovieList());
             RegisterScreen(new MovieCreate());
             RegisterScreen(new MovieEdit());
+            
         }
 
         protected override void Unload() {
