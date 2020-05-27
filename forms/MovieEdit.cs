@@ -26,7 +26,7 @@ namespace Project.Forms {
         private Movie movie;
 
         public MovieEdit() {
-            
+
         }
 
         public override string GetHandle() {
@@ -252,13 +252,11 @@ namespace Project.Forms {
         private void button1_Click(object sender, EventArgs e) {
 
         }
-<<<<<<< HEAD
 
         private void Movie_create_button_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             MovieService movieManager = app.GetService<MovieService>("movies");
-
-            // Find movie
+        }
         private void label1_Click(object sender, EventArgs e) {
 
         }
@@ -274,8 +272,7 @@ namespace Project.Forms {
         private void Name_text_Click(object sender, EventArgs e) {
 
         }
-=======
->>>>>>> parent of b782819... movie ID to edit
+
     }
-    
+
 }
