@@ -324,7 +324,7 @@ namespace Project.Forms.Layouts {
 
         private void navLink2_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            RoomCreateDesign newScreen = app.GetScreen<RoomCreateDesign>("roomCreate");
+            RoomList newScreen = app.GetScreen<RoomList>("roomList");
 
             app.ShowScreen(newScreen);
         }

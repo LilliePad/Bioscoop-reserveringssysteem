@@ -8,17 +8,17 @@ using Project.Services;
 
 namespace Project.Forms {
 
-    public class MovieList : BaseLayout {
+    public class RoomList : BaseLayout {
 
         private ListView container;
         private Button movieCreateButton;
 
-        public MovieList() {
+        public RoomList() {
             InitializeComponent();
         }
 
         public override string GetHandle() {
-            return "movieList";
+            return "roomList";
         }
 
         public override bool IsDefault() {
@@ -27,25 +27,24 @@ namespace Project.Forms {
 
         public override void OnShow() {
             Program app = Program.GetInstance();
-            MovieService movieService = app.GetService<MovieService>("movies");
-            ImageList imgs = new ImageList();
-            List<Movie> movies = movieService.GetMovies();
+            RoomService roomService = app.GetService<RoomService>("rooms");
+            
+            List<Room> rooms = roomService.GetRooms();
 
             container.Items.Clear();
-            imgs.ImageSize = new Size(100, 100);
+            
 
-            for (int i = 0; i < movies.Count; i++) {
-                Movie movie = movies[i];
-                ListViewItem item = new ListViewItem(movie.name, i);
+            for (int i = 0; i < rooms.Count; i++) {
+                Room room = rooms[i];
+                ListViewItem item = new ListViewItem("Room " + room.number, i);
 
-                item.Tag = movie.id;
+                item.Tag = room.id;
 
-                imgs.Images.Add(movie.GetImage());
+
                 container.Items.Add(item);
             }
 
-            //BIND IMGS TO LISTVIEW
-            container.SmallImageList = imgs;
+
         }
 
         private void InitializeComponent() {
@@ -88,20 +87,20 @@ namespace Project.Forms {
 
         private void MovieList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Films", 250);
+            container.Columns.Add("Rooms", 100);
         }
 
         private void ButtonNew_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            MovieCreate newScreen = app.GetScreen<MovieCreate>("movieCreate");
+            RoomCreateDesign newScreen = app.GetScreen<RoomCreateDesign>("roomCreate");
 
             app.ShowScreen(newScreen);
         }
 
         private void ButtonEdit_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            MovieService movieService = app.GetService<MovieService>("movies");
-            MovieEdit editScreen = app.GetScreen<MovieEdit>("movieEdit");
+            RoomService roomService = app.GetService<RoomService>("rooms");
+            RoomEdit editScreen = app.GetScreen<RoomEdit>("roomEdit");
 
             // Get the clicked item
             ListViewItem item = container.SelectedItems[0];
@@ -113,15 +112,15 @@ namespace Project.Forms {
 
             // Find the movie
             int id = (int) item.Tag;
-            Movie movie = movieService.GetMovieById(id);
+            Room room = roomService.GetRoomById(id);
 
-            if(movie == null) {
+            if(room == null) {
                 MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            editScreen.SetMovie(movie);
-            app.ShowScreen(editScreen);
+            RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit"); ;
+            app.ShowScreen(newScreen);
         }
 
     }

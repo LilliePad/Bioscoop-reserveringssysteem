@@ -46,7 +46,9 @@ namespace Project {
             RegisterScreen(new MovieList());
             RegisterScreen(new MovieCreate());
             RegisterScreen(new MovieEdit());
+            RegisterScreen(new RoomList());
             RegisterScreen(new RoomCreateDesign());
+            RegisterScreen(new RoomEdit());
             
         }
 

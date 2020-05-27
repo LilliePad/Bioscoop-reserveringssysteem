@@ -57,10 +57,13 @@
     <Compile Include="base\StorageFile.cs" />
     <Compile Include="data\Database.cs" />
     <Compile Include="enums\PrintType.cs" />
-    <Compile Include="forms\UserCreate.cs">
+    <Compile Include="forms\RoomList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\RoomDelete.cs">
+    <Compile Include="forms\RoomEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\UserCreate.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\UserEditDesign.cs">
@@ -108,8 +111,11 @@
     <Compile Include="services\RoomService.cs" />
     <Compile Include="services\ShowService.cs" />
     <Compile Include="services\UserService.cs" />
-    <EmbeddedResource Include="forms\RoomDelete.resx">
-      <DependentUpon>RoomDelete.cs</DependentUpon>
+    <EmbeddedResource Include="forms\RoomList.resx">
+      <DependentUpon>RoomList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\RoomEdit.resx">
+      <DependentUpon>RoomEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\UserChangePassword.resx">
       <DependentUpon>UserChangePassword.cs</DependentUpon>

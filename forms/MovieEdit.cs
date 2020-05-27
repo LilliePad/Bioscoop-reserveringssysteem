@@ -63,6 +63,21 @@ namespace Project.Forms {
 
         }
 
+        private void InitializeComponent() {
+            this.SuspendLayout();
+            // 
+            // MovieEdit
+            // 
+            this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Name = "MovieEdit";
+            this.Load += new System.EventHandler(this.MovieEdit_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void MovieEdit_Load(object sender, EventArgs e) {
+
+        }
     }
     
 }
