@@ -119,7 +119,7 @@ namespace Project.Forms {
                 return;
             }
 
-            RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit"); ;
+            RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit"); 
             app.ShowScreen(newScreen);
         }
 

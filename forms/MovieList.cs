@@ -120,7 +120,7 @@ namespace Project.Forms {
                 return;
             }
 
-            editScreen.SetMovie(movie);
+            MovieEdit newScreen = app.GetScreen<MovieEdit>("movieEdit");
             app.ShowScreen(editScreen);
         }
 

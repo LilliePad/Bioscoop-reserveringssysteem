@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Project.Models;
+using Project.Services;
 using Project.Forms.Layouts;
 using Project.Helpers;
 
@@ -27,7 +28,7 @@ namespace Project.Forms {
         private Movie movie;
 
         public MovieEdit() {
-
+            InitializeComponent();
         }
 
         public override string GetHandle() {
@@ -38,9 +39,7 @@ namespace Project.Forms {
             this.movie = movie;
         }
 
-        public override void OnShow() {
-            MessageBox.Show("Movie: " + movie.name, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+      
 
         private void label3_Click(object sender, EventArgs e) {
 
