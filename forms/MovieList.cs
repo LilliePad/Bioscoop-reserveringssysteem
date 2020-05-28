@@ -61,6 +61,7 @@ namespace Project.Forms {
             this.container.Size = new System.Drawing.Size(670, 452);
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
+            this.container.SelectedIndexChanged += new System.EventHandler(this.container_SelectedIndexChanged);
             this.container.Click += new System.EventHandler(this.ButtonEdit_Click);
             // 
             // movieCreateButton
@@ -120,10 +121,13 @@ namespace Project.Forms {
                 return;
             }
 
-            MovieEdit newScreen = app.GetScreen<MovieEdit>("movieEdit");
+            editScreen.SetMovie(movie);
             app.ShowScreen(editScreen);
         }
 
+        private void container_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
     }
 
 }
