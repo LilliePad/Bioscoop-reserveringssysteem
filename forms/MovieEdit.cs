@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Project.Forms.Layouts;
 using System.Windows.Forms;
+using System;
+using Project.Base;
 using Project.Models;
 using Project.Services;
-using Project.Forms.Layouts;
 using Project.Helpers;
 
 namespace Project.Forms {
@@ -13,7 +14,7 @@ namespace Project.Forms {
         private Label Discription_text;
         private Label Playtime_text;
         private Label Movie_Picture_text;
-        private Button Movie_create_button;
+        private Button Movie_edit_button;
         private Button Search_picture_button;
         private TextBox NameMovie_input;
         private TextBox Discription_input;
@@ -22,10 +23,11 @@ namespace Project.Forms {
         private Label label6;
         private Label Name_text;
         private PictureBox pictureBox1;
-        private Button button1;
+        private Button Delete_movie_button;
         private TextBox Movie_ID_input;
         private Label label1;
         private Movie movie;
+        private StorageFile image;
 
         public MovieEdit() {
             InitializeComponent();
@@ -70,12 +72,12 @@ namespace Project.Forms {
             this.panel1 = new System.Windows.Forms.Panel();
             this.Movie_ID_input = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Delete_movie_button = new System.Windows.Forms.Button();
             this.Create_a_movie_text = new System.Windows.Forms.Label();
             this.Discription_text = new System.Windows.Forms.Label();
             this.Playtime_text = new System.Windows.Forms.Label();
             this.Movie_Picture_text = new System.Windows.Forms.Label();
-            this.Movie_create_button = new System.Windows.Forms.Button();
+            this.Movie_edit_button = new System.Windows.Forms.Button();
             this.Search_picture_button = new System.Windows.Forms.Button();
             this.NameMovie_input = new System.Windows.Forms.TextBox();
             this.Discription_input = new System.Windows.Forms.TextBox();
@@ -92,12 +94,12 @@ namespace Project.Forms {
             // 
             this.panel1.Controls.Add(this.Movie_ID_input);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.Delete_movie_button);
             this.panel1.Controls.Add(this.Create_a_movie_text);
             this.panel1.Controls.Add(this.Discription_text);
             this.panel1.Controls.Add(this.Playtime_text);
             this.panel1.Controls.Add(this.Movie_Picture_text);
-            this.panel1.Controls.Add(this.Movie_create_button);
+            this.panel1.Controls.Add(this.Movie_edit_button);
             this.panel1.Controls.Add(this.Search_picture_button);
             this.panel1.Controls.Add(this.NameMovie_input);
             this.panel1.Controls.Add(this.Discription_input);
@@ -130,15 +132,15 @@ namespace Project.Forms {
             this.label1.Text = "Movie ID";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // button1
+            // Delete_movie_button
             // 
-            this.button1.Location = new System.Drawing.Point(487, 472);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 39);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Delete Movie";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Delete_movie_button.Location = new System.Drawing.Point(487, 472);
+            this.Delete_movie_button.Name = "Delete_movie_button";
+            this.Delete_movie_button.Size = new System.Drawing.Size(133, 39);
+            this.Delete_movie_button.TabIndex = 19;
+            this.Delete_movie_button.Text = "Delete Movie";
+            this.Delete_movie_button.UseVisualStyleBackColor = true;
+            this.Delete_movie_button.Click += new System.EventHandler(this.button1_Click);
             // 
             // Create_a_movie_text
             // 
@@ -182,14 +184,15 @@ namespace Project.Forms {
             this.Movie_Picture_text.TabIndex = 11;
             this.Movie_Picture_text.Text = "Movie Picture";
             // 
-            // Movie_create_button
+            // Movie_edit_button
             // 
-            this.Movie_create_button.Location = new System.Drawing.Point(125, 472);
-            this.Movie_create_button.Name = "Movie_create_button";
-            this.Movie_create_button.Size = new System.Drawing.Size(133, 39);
-            this.Movie_create_button.TabIndex = 12;
-            this.Movie_create_button.Text = "Edit Movie";
-            this.Movie_create_button.UseVisualStyleBackColor = true;
+            this.Movie_edit_button.Location = new System.Drawing.Point(125, 472);
+            this.Movie_edit_button.Name = "Movie_edit_button";
+            this.Movie_edit_button.Size = new System.Drawing.Size(133, 39);
+            this.Movie_edit_button.TabIndex = 12;
+            this.Movie_edit_button.Text = "Edit Movie";
+            this.Movie_edit_button.UseVisualStyleBackColor = true;
+            this.Movie_edit_button.Click += new System.EventHandler(this.Movie_create_button_Click_1);
             // 
             // Search_picture_button
             // 
@@ -199,6 +202,7 @@ namespace Project.Forms {
             this.Search_picture_button.TabIndex = 13;
             this.Search_picture_button.Text = "Search Picture";
             this.Search_picture_button.UseVisualStyleBackColor = true;
+            this.Search_picture_button.Click += new System.EventHandler(this.Search_picture_button_Click);
             // 
             // NameMovie_input
             // 
@@ -215,6 +219,7 @@ namespace Project.Forms {
             this.Discription_input.Name = "Discription_input";
             this.Discription_input.Size = new System.Drawing.Size(495, 206);
             this.Discription_input.TabIndex = 15;
+            this.Discription_input.TextChanged += new System.EventHandler(this.Discription_input_TextChanged);
             // 
             // Duration_input
             // 
@@ -222,6 +227,7 @@ namespace Project.Forms {
             this.Duration_input.Name = "Duration_input";
             this.Duration_input.Size = new System.Drawing.Size(495, 20);
             this.Duration_input.TabIndex = 16;
+            this.Duration_input.TextChanged += new System.EventHandler(this.Duration_input_TextChanged_1);
             // 
             // Genre_input
             // 
@@ -229,6 +235,7 @@ namespace Project.Forms {
             this.Genre_input.Name = "Genre_input";
             this.Genre_input.Size = new System.Drawing.Size(495, 20);
             this.Genre_input.TabIndex = 17;
+            this.Genre_input.TextChanged += new System.EventHandler(this.Genre_input_TextChanged_1);
             // 
             // label6
             // 
@@ -273,28 +280,66 @@ namespace Project.Forms {
 
         }
 
-        private void button1_Click(object sender, EventArgs e) {
+        private void button1_Click(object sender, EventArgs args) {
 
         }
 
-        private void Movie_create_button_Click(object sender, EventArgs e) {
+        private void Movie_create_button_Click(object sender, EventArgs args) {
+        }
+        private void label1_Click(object sender, EventArgs args) {
+
+        }
+
+        private void NameMovie_input_TextChanged_1(object sender, EventArgs args) {
+            movie.name = NameMovie_input.Text;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs args) {
+
+        }
+
+        private void Name_text_Click(object sender, EventArgs args) {
+
+        }
+
+        private void Movie_create_button_Click_1(object sender, EventArgs args) {
             Program app = Program.GetInstance();
             MovieService movieManager = app.GetService<MovieService>("movies");
-        }
-        private void label1_Click(object sender, EventArgs e) {
-
-        }
-
-        private void NameMovie_input_TextChanged_1(object sender, EventArgs e) {
-
+            movieManager.SaveMovie(movie);
+            MovieList newScreen = app.GetScreen<MovieList>("movieList");
+            app.ShowScreen(newScreen);
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e) {
+        private void Discription_input_TextChanged(object sender, EventArgs args) {
 
         }
 
-        private void Name_text_Click(object sender, EventArgs e) {
+        private void Duration_input_TextChanged_1(object sender, EventArgs args) {
+            movie.duration = ValidationHelper.ParseInt(Duration_input.Text);
+        }
 
+        private void Genre_input_TextChanged_1(object sender, EventArgs args) {
+            movie.genre = Genre_input.Text;
+        }
+
+        private void Search_picture_button_Click(object sender, EventArgs args) {
+            string imageLocation = "";
+
+            try {
+                OpenFileDialog dialog = new OpenFileDialog();
+
+                dialog.Filter = "jpg files(*.jpg)|*.jpg| PNG files(*.png)|*.png| All Files(*,*)|*,*";
+
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                    imageLocation = dialog.FileName;
+                    pictureBox1.ImageLocation = imageLocation;
+                    image = StorageHelper.UploadImage(pictureBox1.ImageLocation);
+                    movie.image = image;
+                }
+            }
+            catch (Exception e) {
+                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 
