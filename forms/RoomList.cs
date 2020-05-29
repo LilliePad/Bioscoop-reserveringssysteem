@@ -21,15 +21,14 @@ namespace Project.Forms {
             return "roomList";
         }
 
-        public override bool IsDefault() {
-            return true;
-        }
+  
 
         public override void OnShow() {
             Program app = Program.GetInstance();
             RoomService roomService = app.GetService<RoomService>("rooms");
             
             List<Room> rooms = roomService.GetRooms();
+            
 
             container.Items.Clear();
             

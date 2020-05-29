@@ -104,17 +104,17 @@ namespace Project.Forms {
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label1.Location = new System.Drawing.Point(9, 224);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.Size = new System.Drawing.Size(43, 20);
             this.label1.TabIndex = 20;
-            this.label1.Text = "Price";
+            this.label1.Text = "Prijs";
             // 
             // CreateButton
             // 
             this.CreateButton.Location = new System.Drawing.Point(125, 279);
             this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(75, 23);
+            this.CreateButton.Size = new System.Drawing.Size(90, 23);
             this.CreateButton.TabIndex = 19;
-            this.CreateButton.Text = "Create ";
+            this.CreateButton.Text = "Aanmaken";
             this.CreateButton.UseVisualStyleBackColor = true;
             this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
@@ -124,9 +124,9 @@ namespace Project.Forms {
             this.Create_a_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Create_a_movie_text.Location = new System.Drawing.Point(3, 0);
             this.Create_a_movie_text.Name = "Create_a_movie_text";
-            this.Create_a_movie_text.Size = new System.Drawing.Size(345, 58);
+            this.Create_a_movie_text.Size = new System.Drawing.Size(368, 58);
             this.Create_a_movie_text.TabIndex = 3;
-            this.Create_a_movie_text.Text = "Create a room";
+            this.Create_a_movie_text.Text = "Film aanmaken";
             this.Create_a_movie_text.Click += new System.EventHandler(this.Create_a_movie_text_Click);
             // 
             // Playtime_text
@@ -135,9 +135,10 @@ namespace Project.Forms {
             this.Playtime_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Playtime_text.Location = new System.Drawing.Point(9, 125);
             this.Playtime_text.Name = "Playtime_text";
-            this.Playtime_text.Size = new System.Drawing.Size(42, 20);
+            this.Playtime_text.Size = new System.Drawing.Size(47, 20);
             this.Playtime_text.TabIndex = 6;
-            this.Playtime_text.Text = "Row";
+            this.Playtime_text.Text = "Rijen";
+            this.Playtime_text.Click += new System.EventHandler(this.Playtime_text_Click);
             // 
             // Room_input
             // 
@@ -169,9 +170,9 @@ namespace Project.Forms {
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label6.Location = new System.Drawing.Point(10, 171);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 20);
+            this.label6.Size = new System.Drawing.Size(89, 20);
             this.label6.TabIndex = 18;
-            this.label6.Text = "Colum";
+            this.label6.Text = "Colommen";
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // Name_text
@@ -180,9 +181,9 @@ namespace Project.Forms {
             this.Name_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Name_text.Location = new System.Drawing.Point(10, 82);
             this.Name_text.Name = "Name_text";
-            this.Name_text.Size = new System.Drawing.Size(114, 20);
+            this.Name_text.Size = new System.Drawing.Size(106, 20);
             this.Name_text.TabIndex = 4;
-            this.Name_text.Text = "Room number";
+            this.Name_text.Text = "Zaal nummer";
             // 
             // RoomCreateDesign
             // 
@@ -286,6 +287,10 @@ namespace Project.Forms {
             catch (FormatException) {
                 MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Playtime_text_Click(object sender, EventArgs e) {
+
         }
     }
 }
