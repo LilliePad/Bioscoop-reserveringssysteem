@@ -281,7 +281,16 @@ namespace Project.Forms {
         }
 
         private void button1_Click(object sender, EventArgs args) {
-
+            Program app = Program.GetInstance();
+            MovieService movieManager = app.GetService<MovieService>("movies");
+            if (movieManager.DeleteMovie(movie)) {
+                MessageBox.Show("film succesvol verwijderd");
+                MovieList newScreen = app.GetScreen<MovieList>("movieList");
+                app.ShowScreen(newScreen);
+            }
+            else {
+                MessageBox.Show("Kon de film niet verwijderen");
+            }
         }
 
         private void Movie_create_button_Click(object sender, EventArgs args) {
