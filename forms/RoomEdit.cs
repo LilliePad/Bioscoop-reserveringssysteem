@@ -82,7 +82,7 @@ namespace Project.Forms {
             this.tableLayoutPanel1.RowCount = HighestRow;
 
 
-            
+
 
 
 
@@ -98,11 +98,11 @@ namespace Project.Forms {
                     Chair chair = chairService.GetChairByRoomAndPosition(roomService.GetRoomByNumber(RoomNumber), i + 1, j + 1);
                     if (chair == null) {
                         var button = new Button();
-                        button.Name = string.Format("button " + (i+1) + "-" + (j+1)); 
-                        button.Dock = DockStyle.Fill; 
+                        button.Name = string.Format("button " + (i + 1) + "-" + (j + 1));
+                        button.Dock = DockStyle.Fill;
                         button.Click += (sender, e) => { MyHandler(sender, e, button.Name); };
                         this.tableLayoutPanel1.Controls.Add(button, j, i);
-                        
+
                     }
                     else {
                         var button = new Button();
@@ -171,7 +171,7 @@ namespace Project.Forms {
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1000, 500);
             this.tableLayoutPanel1.TabIndex = 23;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint_1);
-            
+
             // 
             // label2
             // 
@@ -262,53 +262,21 @@ namespace Project.Forms {
 
 
 
-        private void Price_Input_TextChanged(object sender, EventArgs e) {
-
-            try {
 
 
-            }
-            catch (FormatException) {
-                MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) {
-
-           
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e) {
-
-        }
+  
 
         private void tableLayoutPanel1_Paint_1(object sender, PaintEventArgs e) {
 
         }
 
-        private void roomSelect_Click(object sender, EventArgs e) {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e) {
-            Program app = Program.GetInstance();
-            ChairService chairService = app.GetService<ChairService>("chairs");
-            RoomService roomService = app.GetService<RoomService>("rooms");
-            Chair chair = chairService.GetChairByRoomAndPosition(roomService.GetRoomById(1), 2, 1);
-            try {
-                chairService.DeleteChair(chair);
-            }
-            catch {
-                MessageBox.Show("chair could not be deleted" , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-        }
-
+             
         private void button2_Click_1(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             ChairService chairService = app.GetService<ChairService>("chairs");
             RoomService roomService = app.GetService<RoomService>("rooms");
- 
+
             try {
                 roomService.DeleteRoom(room);
                 MessageBox.Show("room is deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -325,6 +293,7 @@ namespace Project.Forms {
         private void Name_text_Click(object sender, EventArgs e) {
 
         }
+
         void MyHandler(object sender, EventArgs e, string buttonString) {
             Program app = Program.GetInstance();
             RoomService roomService = app.GetService<RoomService>("rooms");
@@ -354,28 +323,8 @@ namespace Project.Forms {
             app.ShowScreen(editScreen);
 
         }
-            private void ButtonEdit_Click(object sender, EventArgs e) {
-            Program app = Program.GetInstance();
-            RoomService roomService = app.GetService<RoomService>("rooms");
-            ChairService chairService = app.GetService<ChairService>("chairs");
-
-            ChairEdit editScreen = app.GetScreen<ChairEdit>("chairEdit");
-            
-            Chair chair = chairService.GetChairByRoomAndPosition(roomService.GetRoomByNumber(RoomNumber), 1, 1);
-
-            
-            
-            
-
-            if (room == null) {
-                MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            editScreen.SetRoom(room);
-            app.ShowScreen(editScreen);
-        }
     }
 }
+            
 
  
