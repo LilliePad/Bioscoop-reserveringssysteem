@@ -30,6 +30,7 @@ namespace Project.Forms {
         private Button button2;
         private int Position;
         private Room room;
+        private Button button;
         public RoomEdit() {
             InitializeComponent();
         }
@@ -62,6 +63,8 @@ namespace Project.Forms {
             }
             List<Chair> chairs = chairService.GetChairsByRoom(roomService.GetRoomByNumber(RoomNumber));
             Maximum = chairs.Count;
+            HighestRow = 0;
+            HighestColum = 0;
             for (int x = 1; x < Maximum; x++) {
                 if (HighestRow < chairs[x].row) {
                     HighestRow = chairs[x].row;
@@ -95,28 +98,34 @@ namespace Project.Forms {
                     Chair chair = chairService.GetChairByRoomAndPosition(roomService.GetRoomByNumber(RoomNumber), i + 1, j + 1);
                     if (chair == null) {
                         var button = new Button();
-                        button.Name = string.Format("button_{0}{1}", i + 1, j + 1);
-                        button.Dock = DockStyle.Fill;
-                        button.Click += new System.EventHandler(this.ButtonEdit_Click);
+                        button.Name = string.Format("button " + (i+1) + "-" + (j+1)); 
+                        button.Dock = DockStyle.Fill; 
+                        button.Click += (sender, e) => { MyHandler(sender, e, button.Name); };
                         this.tableLayoutPanel1.Controls.Add(button, j, i);
+                        
                     }
                     else {
                         var button = new Button();
                         button.Text = string.Format("{0}-{1}", i + 1, j + 1);
-                        button.Name = string.Format("button_{0}{1}", i + 1, j + 1);
+                        button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
                         button.Dock = DockStyle.Fill;
-                        button.Click += new System.EventHandler(this.ButtonEdit_Click);
+                        button.Click += (sender, e) => { MyHandler(sender, e, button.Name); };
                         this.tableLayoutPanel1.Controls.Add(button, j, i);
                     }
                 }
             }
         }
-    
+
+        private void Button_Click(object sender, EventArgs e) {
+            throw new NotImplementedException();
+        }
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
 
         private void InitializeComponent() {
+            this.container = new System.Windows.Forms.ListView();
             this.roomSelect = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -316,8 +325,36 @@ namespace Project.Forms {
         private void Name_text_Click(object sender, EventArgs e) {
 
         }
+        void MyHandler(object sender, EventArgs e, string buttonString) {
+            Program app = Program.GetInstance();
+            RoomService roomService = app.GetService<RoomService>("rooms");
+            ChairService chairService = app.GetService<ChairService>("chairs");
 
-        private void ButtonEdit_Click(object sender, EventArgs e) {
+            ChairEdit editScreen = app.GetScreen<ChairEdit>("chairEdit");
+
+            Chair chair = chairService.GetChairByRoomAndPosition(roomService.GetRoomByNumber(RoomNumber), 1, 1);
+
+
+
+
+
+            if (room == null) {
+                MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            buttonString = buttonString.Replace("button", "");
+            string[] parts = buttonString.Split('-');
+            int row = int.Parse(parts[0]);
+            int col = int.Parse(parts[1]);
+
+            editScreen.SetRow(row);
+            editScreen.SetColum(col);
+            editScreen.SetRoom(room);
+            app.ShowScreen(editScreen);
+
+        }
+            private void ButtonEdit_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             RoomService roomService = app.GetService<RoomService>("rooms");
             ChairService chairService = app.GetService<ChairService>("chairs");
@@ -325,18 +362,20 @@ namespace Project.Forms {
             ChairEdit editScreen = app.GetScreen<ChairEdit>("chairEdit");
             
             Chair chair = chairService.GetChairByRoomAndPosition(roomService.GetRoomByNumber(RoomNumber), 1, 1);
-            
-            
 
+            
+            
+            
 
             if (room == null) {
                 MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            editScreen.SetRow(2);
-            editScreen.SetColum(2);
+
             editScreen.SetRoom(room);
             app.ShowScreen(editScreen);
         }
     }
 }
+
+ 
