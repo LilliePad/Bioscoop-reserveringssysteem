@@ -40,8 +40,11 @@ namespace Project.Forms {
             return "roomCreate";
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 
+        public override void OnShow() {
+            Room_input.Text = "";
+            Row_input.Text = "";
+            Colum_input.Text = "";
         }
 
         private void InitializeComponent() {
@@ -120,6 +123,7 @@ namespace Project.Forms {
             // 
             this.Room_input.Location = new System.Drawing.Point(125, 82);
             this.Room_input.Name = "Room_input";
+            this.Room_input.Text = "";
             this.Room_input.Size = new System.Drawing.Size(495, 22);
             this.Room_input.TabIndex = 14;
             this.Room_input.TextChanged += new System.EventHandler(this.Room_input_TextChanged);
@@ -128,6 +132,7 @@ namespace Project.Forms {
             // 
             this.Row_input.Location = new System.Drawing.Point(125, 125);
             this.Row_input.Name = "Row_input";
+            this.Row_input.Text = "";
             this.Row_input.Size = new System.Drawing.Size(495, 22);
             this.Row_input.TabIndex = 16;
             this.Row_input.TextChanged += new System.EventHandler(this.Row_input_TextChanged);
@@ -136,6 +141,7 @@ namespace Project.Forms {
             // 
             this.Colum_input.Location = new System.Drawing.Point(125, 171);
             this.Colum_input.Name = "Colum_input";
+            this.Colum_input.Text = "";
             this.Colum_input.Size = new System.Drawing.Size(495, 22);
             this.Colum_input.TabIndex = 17;
             this.Colum_input.TextChanged += new System.EventHandler(this.Colum_input_TextChanged);
@@ -200,7 +206,11 @@ namespace Project.Forms {
 
             }
             catch (FormatException) {
-                MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (Colum_input.Text == "") {
+                }
+                else {
+                    MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
         }
@@ -211,7 +221,11 @@ namespace Project.Forms {
 
             }
             catch (FormatException) {
-                MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (Row_input.Text == "") {
+                }
+                else {
+                    MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -221,7 +235,11 @@ namespace Project.Forms {
 
             }
             catch (FormatException) {
-                MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (Room_input.Text == "") {
+                }
+                else {
+                    MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
