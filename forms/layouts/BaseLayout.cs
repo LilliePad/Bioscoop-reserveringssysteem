@@ -339,6 +339,12 @@ namespace Project.Forms.Layouts {
         }
 
         private void navLink3_Click(object sender, EventArgs e) {
+            UserService userService = Program.GetInstance().GetService<UserService>("users");
+            User currentUser = userService.GetCurrentUser();
+            if (currentUser == null) {
+                MessageBox.Show("Er is niemand ingelogd");
+                return;
+            }
             Program app = Program.GetInstance();
             UserChangePassword userChangePasswordScreen = app.GetScreen<UserChangePassword>("userChangePassword");
 

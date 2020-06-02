@@ -96,6 +96,7 @@ namespace Project.forms {
             // 
             this.New_password_input.Location = new System.Drawing.Point(258, 98);
             this.New_password_input.Name = "New_password_input";
+            this.New_password_input.PasswordChar = '*';
             this.New_password_input.Size = new System.Drawing.Size(272, 20);
             this.New_password_input.TabIndex = 4;
             this.New_password_input.TextChanged += new System.EventHandler(this.New_password_input_TextChanged);
@@ -114,6 +115,7 @@ namespace Project.forms {
             // 
             this.New_password_again_input.Location = new System.Drawing.Point(258, 137);
             this.New_password_again_input.Name = "New_password_again_input";
+            this.New_password_again_input.PasswordChar = '*';
             this.New_password_again_input.Size = new System.Drawing.Size(272, 20);
             this.New_password_again_input.TabIndex = 2;
             this.New_password_again_input.TextChanged += new System.EventHandler(this.New_password_again_input_TextChanged);
@@ -131,6 +133,7 @@ namespace Project.forms {
             // 
             this.Old_password_input.Location = new System.Drawing.Point(258, 55);
             this.Old_password_input.Name = "Old_password_input";
+            this.Old_password_input.PasswordChar = '*';
             this.Old_password_input.Size = new System.Drawing.Size(272, 20);
             this.Old_password_input.TabIndex = 0;
             this.Old_password_input.TextChanged += new System.EventHandler(this.Old_password_input_TextChanged);
@@ -181,20 +184,23 @@ namespace Project.forms {
             UserService userService = app.GetService<UserService>("users");
             User currentUser = userService.GetCurrentUser();
             User user = currentUser;
-
-            if (currentUser.admin) {
-                int id = currentUser.id;
-                user = userService.GetUserById(id);
-
-
-                if (user == null) {
-                    MessageBox.Show("Kan de gebruiker niet vinden.");
-                }
-
-            else {
-                    MessageBox.Show("Het wachtwoord kon niet aangepast worden");
-                }
+            
+            if (user.Authenticate(oldPassword) && (newPassword1 != newPassword2)) {
+                MessageBox.Show("Een van de wachtwoorden komt niet overeen");
             }
+            
+            if (user.Authenticate(oldPassword) && newPassword1 == newPassword2) {                   
+                user.password = EncryptionHelper.CreateHash(newPassword1);
+
+               if (userService.SaveUser(user)) {
+                    MessageBox.Show("Wachtwoord succesvol aangepast");
+                }
+               else {
+                    MessageBox.Show("Kon het wachtwoord niet aanpassen");
+                } 
+                
+            }
+
         }
 
         private void New_password_input_TextChanged(object sender, EventArgs e) {
