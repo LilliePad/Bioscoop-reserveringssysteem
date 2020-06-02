@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Project.Base;
 using Project.Data;
+using Project.forms;
 using Project.Forms;
 using Project.Services;
 
@@ -47,6 +48,7 @@ namespace Project {
             RegisterScreen(new MovieCreate());
             RegisterScreen(new MovieEdit());
             RegisterScreen(new RoomList());
+            RegisterScreen(new UserChangePassword());
             RegisterScreen(new RoomCreateDesign());
             RegisterScreen(new RoomEdit());
             RegisterScreen(new ChairEdit());
