@@ -36,10 +36,7 @@ namespace Project.Forms {
             for (int i = 0; i < rooms.Count; i++) {
                 Room room = rooms[i];
                 ListViewItem item = new ListViewItem("Room " + room.number, i);
-
                 item.Tag = room.id;
-
-
                 container.Items.Add(item);
             }
 
@@ -118,8 +115,8 @@ namespace Project.Forms {
                 return;
             }
 
-            RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit"); 
-            app.ShowScreen(newScreen);
+            editScreen.SetRoom(room);
+            app.ShowScreen(editScreen);
         }
 
     }

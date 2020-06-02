@@ -22,9 +22,7 @@ namespace Project.Forms {
         private TextBox Colum_input;
         private Label label6;
         private Label Name_text;
-        private Label label1;
         private Button CreateButton;
-        private TextBox Price_Input;
         private Label label2;
 
         private int RoomNumber;
@@ -49,8 +47,6 @@ namespace Project.Forms {
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.Price_Input = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.CreateButton = new System.Windows.Forms.Button();
             this.Create_a_movie_text = new System.Windows.Forms.Label();
             this.Playtime_text = new System.Windows.Forms.Label();
@@ -65,8 +61,6 @@ namespace Project.Forms {
             // panel1
             // 
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.Price_Input);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.CreateButton);
             this.panel1.Controls.Add(this.Create_a_movie_text);
             this.panel1.Controls.Add(this.Playtime_text);
@@ -90,27 +84,9 @@ namespace Project.Forms {
             this.label2.Size = new System.Drawing.Size(0, 20);
             this.label2.TabIndex = 22;
             // 
-            // Price_Input
-            // 
-            this.Price_Input.Location = new System.Drawing.Point(125, 224);
-            this.Price_Input.Name = "Price_Input";
-            this.Price_Input.Size = new System.Drawing.Size(495, 22);
-            this.Price_Input.TabIndex = 21;
-            this.Price_Input.TextChanged += new System.EventHandler(this.Price_Input_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(9, 224);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 20);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Prijs";
-            // 
             // CreateButton
             // 
-            this.CreateButton.Location = new System.Drawing.Point(125, 279);
+            this.CreateButton.Location = new System.Drawing.Point(125, 221);
             this.CreateButton.Name = "CreateButton";
             this.CreateButton.Size = new System.Drawing.Size(90, 23);
             this.CreateButton.TabIndex = 19;
@@ -262,6 +238,7 @@ namespace Project.Forms {
 
             RoomId = room.id;
             Type = "default";
+            Price = 7.50;
         
             for (int i = 1; i <= Row; i++) {
                 for(int j = 1; j <= Colum; j++) {
@@ -276,17 +253,6 @@ namespace Project.Forms {
             // Go back to list view
             RoomList listScreen = app.GetScreen<RoomList>("roomList");
             app.ShowScreen(listScreen);
-        }
-
-        private void Price_Input_TextChanged(object sender, EventArgs e) {
-
-            try {
-                Price = double.Parse(Price_Input.Text);
-
-            }
-            catch (FormatException) {
-                MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void Playtime_text_Click(object sender, EventArgs e) {

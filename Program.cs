@@ -51,6 +51,7 @@ namespace Project {
             RegisterScreen(new UserChangePassword());
             RegisterScreen(new RoomCreateDesign());
             RegisterScreen(new RoomEdit());
+            RegisterScreen(new ChairEdit());
             
         }
 
