@@ -24,8 +24,6 @@ namespace Project.Forms {
         private double hours;
         private DateTime date;
         private Panel panel1;
-        private TextBox Time;
-        private Label label1;
         private Label Datum_text;
         private DateTimePicker dateTimePicker1;
         private ComboBox MovieComboBox2;
@@ -64,8 +62,6 @@ namespace Project.Forms {
             this.panel1 = new System.Windows.Forms.Panel();
             this.MovieComboBox2 = new System.Windows.Forms.ComboBox();
             this.RoomComboBox = new System.Windows.Forms.ComboBox();
-            this.Time = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.Datum_text = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
@@ -104,7 +100,7 @@ namespace Project.Forms {
             // 
             // Show_create_button
             // 
-            this.Show_create_button.Location = new System.Drawing.Point(125, 276);
+            this.Show_create_button.Location = new System.Drawing.Point(125, 230);
             this.Show_create_button.Name = "Show_create_button";
             this.Show_create_button.Size = new System.Drawing.Size(133, 39);
             this.Show_create_button.TabIndex = 12;
@@ -116,8 +112,6 @@ namespace Project.Forms {
             // 
             this.panel1.Controls.Add(this.MovieComboBox2);
             this.panel1.Controls.Add(this.RoomComboBox);
-            this.panel1.Controls.Add(this.Time);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.Datum_text);
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.Create_a_show_text);
@@ -150,40 +144,24 @@ namespace Project.Forms {
             this.RoomComboBox.TabIndex = 20;
             this.RoomComboBox.SelectedIndexChanged += new System.EventHandler(this.RoomComboBox_SelectedIndexChanged);
             // 
-            // Time
-            // 
-            this.Time.Location = new System.Drawing.Point(125, 221);
-            this.Time.Name = "Time";
-            this.Time.Size = new System.Drawing.Size(495, 22);
-            this.Time.TabIndex = 19;
-            this.Time.TextChanged += new System.EventHandler(this.Time_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(-4, 221);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 20);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "begintijd in uren";
-            // 
             // Datum_text
             // 
             this.Datum_text.AutoSize = true;
             this.Datum_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Datum_text.Location = new System.Drawing.Point(11, 175);
             this.Datum_text.Name = "Datum_text";
-            this.Datum_text.Size = new System.Drawing.Size(59, 20);
+            this.Datum_text.Size = new System.Drawing.Size(109, 20);
             this.Datum_text.TabIndex = 16;
-            this.Datum_text.Text = "Datum";
+            this.Datum_text.Text = "Datum en tijd";
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.CustomFormat = "MM/dd/yyyy HH:mm";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(125, 173);
             this.dateTimePicker1.MinDate = new System.DateTime(2020, 6, 2, 0, 0, 0, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(400, 22);
             this.dateTimePicker1.TabIndex = 15;
             this.dateTimePicker1.Value = new System.DateTime(2020, 6, 2, 0, 0, 0, 0);
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
@@ -228,7 +206,7 @@ namespace Project.Forms {
             MovieService movieService = app.GetService<MovieService>("movies");
             RoomService roomService = app.GetService<RoomService>("rooms");
             ShowService showService = app.GetService<ShowService>("shows");
-            date = date.AddHours(hours);
+          
 
             List<Movie> movies = movieService.GetMovies();
             List<Room> rooms = roomService.GetRooms();
@@ -265,17 +243,7 @@ namespace Project.Forms {
         }
 
         private void Time_TextChanged(object sender, EventArgs e) {
-            try {
-                hours = double.Parse(Time.Text);
-
-            }
-            catch (FormatException) {
-                if (Time.Text == "") {
-                }
-                else {
-                    MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            
         }
 
         private void RoomComboBox_SelectedIndexChanged(object sender, EventArgs e) {
