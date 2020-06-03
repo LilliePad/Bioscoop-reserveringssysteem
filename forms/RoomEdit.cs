@@ -230,42 +230,6 @@ namespace Project.Forms {
 
         }
 
-        private void Movie_create_button_Click(object sender, EventArgs e) {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e) {
-
-        }
-
-        private void Colum_input_TextChanged(object sender, EventArgs e) {
-            try {
-
-
-            }
-            catch (FormatException) {
-                MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
-        private void Row_input_TextChanged(object sender, EventArgs e) {
-            try {
-
-
-            }
-            catch (FormatException) {
-                MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-
-
-
-
-
-  
 
         private void tableLayoutPanel1_Paint_1(object sender, PaintEventArgs e) {
 

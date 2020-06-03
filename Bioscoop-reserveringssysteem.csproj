@@ -60,6 +60,15 @@
     <Compile Include="forms\ChairEdit.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="forms\MovieShowList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\MovieSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\ShowCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="forms\RoomList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +125,15 @@
     <Compile Include="services\UserService.cs" />
     <EmbeddedResource Include="forms\ChairEdit.resx">
       <DependentUpon>ChairEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\MovieShowList.resx">
+      <DependentUpon>MovieShowList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\MovieSelect.resx">
+      <DependentUpon>MovieSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\ShowCreate.resx">
+      <DependentUpon>ShowCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\RoomList.resx">
       <DependentUpon>RoomList.cs</DependentUpon>
