@@ -22,6 +22,9 @@ namespace Project.Forms.Layouts {
 
         private string usernameValue;
         private Button navRegisterButton;
+        private Button navAccountButton;
+        private Button navLogoutButton;
+        private Label navAccountName;
         private string passwordValue;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -54,6 +57,9 @@ namespace Project.Forms.Layouts {
             this.navLoginPassword = new System.Windows.Forms.TextBox();
             this.navLoginButton = new System.Windows.Forms.Button();
             this.navRegisterButton = new System.Windows.Forms.Button();
+            this.navLogoutButton = new System.Windows.Forms.Button();
+            this.navAccountButton = new System.Windows.Forms.Button();
+            this.navAccountName = new System.Windows.Forms.Label();
             this.navBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +67,7 @@ namespace Project.Forms.Layouts {
             // 
             this.navBar.BackColor = System.Drawing.Color.Black;
             this.navBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.navBar.Controls.Add(this.navAccountName);
             this.navBar.Controls.Add(this.navLink1);
             this.navBar.Controls.Add(this.navLink2);
             this.navBar.Controls.Add(this.navLink3);
@@ -70,6 +77,8 @@ namespace Project.Forms.Layouts {
             this.navBar.Controls.Add(this.navLoginPassword);
             this.navBar.Controls.Add(this.navLoginButton);
             this.navBar.Controls.Add(this.navRegisterButton);
+            this.navBar.Controls.Add(this.navAccountButton);
+            this.navBar.Controls.Add(this.navLogoutButton);
             this.navBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.navBar.Location = new System.Drawing.Point(0, 0);
             this.navBar.Name = "navBar";
@@ -198,7 +207,7 @@ namespace Project.Forms.Layouts {
             this.navRegisterButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navRegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navRegisterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navRegisterButton.Location = new System.Drawing.Point(1783, 52);
+            this.navRegisterButton.Location = new System.Drawing.Point(1783, 51);
             this.navRegisterButton.Name = "navRegisterButton";
             this.navRegisterButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
             this.navRegisterButton.Size = new System.Drawing.Size(99, 30);
@@ -206,6 +215,54 @@ namespace Project.Forms.Layouts {
             this.navRegisterButton.Text = "Registreren";
             this.navRegisterButton.UseVisualStyleBackColor = false;
             this.navRegisterButton.Click += new System.EventHandler(this.NavRegisterButton_Click);
+            // 
+            // navLogoutButton
+            // 
+            this.navLogoutButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.navLogoutButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.navLogoutButton.BackColor = System.Drawing.Color.White;
+            this.navLogoutButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.navLogoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.navLogoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            this.navLogoutButton.Location = new System.Drawing.Point(1783, 51);
+            this.navLogoutButton.Name = "navLogoutButton";
+            this.navLogoutButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
+            this.navLogoutButton.Size = new System.Drawing.Size(99, 30);
+            this.navLogoutButton.TabIndex = 12;
+            this.navLogoutButton.Text = "Uitloggen";
+            this.navLogoutButton.UseVisualStyleBackColor = false;
+            this.navLogoutButton.Click += new System.EventHandler(this.NavLogoutButton_Click);
+            // 
+            // navAccountButton
+            // 
+            this.navAccountButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.navAccountButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.navAccountButton.BackColor = System.Drawing.Color.White;
+            this.navAccountButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.navAccountButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.navAccountButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            this.navAccountButton.Location = new System.Drawing.Point(1783, 16);
+            this.navAccountButton.Name = "navAccountButton";
+            this.navAccountButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
+            this.navAccountButton.Size = new System.Drawing.Size(99, 30);
+            this.navAccountButton.TabIndex = 13;
+            this.navAccountButton.Text = "Account";
+            this.navAccountButton.UseVisualStyleBackColor = false;
+            // 
+            // navAccountName
+            // 
+            this.navAccountName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.navAccountName.AutoSize = true;
+            this.navAccountName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.navAccountName.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.navAccountName.Location = new System.Drawing.Point(1663, 16);
+            this.navAccountName.Name = "navAccountName";
+            this.navAccountName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.navAccountName.Size = new System.Drawing.Size(111, 17);
+            this.navAccountName.TabIndex = 14;
+            this.navAccountName.Text = "<accountName>";
+            this.navAccountName.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.navAccountName.Click += new System.EventHandler(this.label1_Click);
             // 
             // BaseLayout
             // 
@@ -227,28 +284,6 @@ namespace Project.Forms.Layouts {
 
         private void NavLoginPassword_TextChanged(object sender, EventArgs e) {
             passwordValue = navLoginPassword.Text;
-        }
-
-        private void NavLoginButton_Click(object sender, EventArgs e) {
-            UserService userService = Program.GetInstance().GetService<UserService>("users");
-
-            // Find user
-            User user = userService.GetUserByUsername(usernameValue);
-
-            // Error if user or password invalid
-            if (user == null || !user.Authenticate(passwordValue)) {
-                MessageBox.Show("Invalid username or password");
-                return;
-            }
-
-            // Everything ok, login
-            userService.SetCurrentUser(user);
-            UpdateUserControls();
-            MessageBox.Show("Succesvol ingelogd, welkom " + user.fullName);
-        }
-
-        private void NavRegisterButton_Click(object sender, EventArgs e) {
-        
         }
 
         public void LoginUsernameRemoveText(object sender, EventArgs e) {
@@ -275,9 +310,44 @@ namespace Project.Forms.Layouts {
             }
         }
 
+        private void NavLoginButton_Click(object sender, EventArgs e) {
+            UserService userService = Program.GetInstance().GetService<UserService>("users");
+
+            // Find user
+            User user = userService.GetUserByUsername(usernameValue);
+
+            // Error if user or password invalid
+            if (user == null || !user.Authenticate(passwordValue)) {
+                MessageBox.Show("Invalid username or password");
+                return;
+            }
+
+            // Clear fields
+            navLoginUsername.Text = "";
+            navLoginPassword.Text = "";
+
+            // Everything ok, login
+            userService.SetCurrentUser(user);
+            UpdateUserControls();
+        }
+
+        private void NavRegisterButton_Click(object sender, EventArgs e) {
+        
+        }
+
+        private void NavLogoutButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            UserService userService = app.GetService<UserService>("users");
+
+            // Logout
+            userService.SetCurrentUser(null);
+            UpdateUserControls();
+        }
+
         private void UpdateUserControls() {
             UserService userService = Program.GetInstance().GetService<UserService>("users");
-            bool loggedIn = userService.GetCurrentUser() != null;
+            User user = userService.GetCurrentUser();
+            bool loggedIn = user != null;
 
             // Update login visibillity
             navLoginUsername.Visible = !loggedIn;
@@ -286,7 +356,13 @@ namespace Project.Forms.Layouts {
             navRegisterButton.Visible = !loggedIn;
 
             // Update account visibillity
+            navAccountName.Visible = loggedIn;
+            navAccountButton.Visible = loggedIn;
+            navLogoutButton.Visible = loggedIn;
 
+            if(loggedIn) {
+                navAccountName.Text = user.fullName;
+            }
         }
 
         private void navLink1_Click(object sender, EventArgs e) {
@@ -327,6 +403,9 @@ namespace Project.Forms.Layouts {
             app.ShowScreen(newScreen);
         }
 
+        private void label1_Click(object sender, EventArgs e) {
+
+        }
     }
 
 }
