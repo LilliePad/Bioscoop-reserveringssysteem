@@ -46,6 +46,9 @@ namespace Project.Forms {
             RoomService roomService = app.GetService<RoomService>("rooms");
             List<Movie> movies = movieService.GetMovies();
             List<Room> rooms = roomService.GetRooms();
+
+            base.OnShow();
+
             for (int i = 0; i < movies.Count; i++) {
                 this.MovieComboBox2.Items.AddRange(new object[]{movies[i].name});
             }

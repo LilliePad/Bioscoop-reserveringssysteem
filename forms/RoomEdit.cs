@@ -45,10 +45,12 @@ namespace Project.Forms {
         }
 
         public override void OnShow() {
-            this.Name_text.Text = "Zaal " + room.number;
             Program app = Program.GetInstance();
             ChairService chairService = app.GetService<ChairService>("chairs");
             RoomService roomService = app.GetService<RoomService>("rooms");
+
+            base.OnShow();
+            this.Name_text.Text = "Zaal " + room.number;
 
             tableLayoutPanel1.Controls.Clear();
             tableLayoutPanel1.RowStyles.Clear();

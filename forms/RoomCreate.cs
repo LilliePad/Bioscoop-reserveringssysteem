@@ -42,6 +42,7 @@ namespace Project.Forms {
 
 
         public override void OnShow() {
+            base.OnShow();
             Room_input.Text = "";
             Row_input.Text = "";
             Colum_input.Text = "";

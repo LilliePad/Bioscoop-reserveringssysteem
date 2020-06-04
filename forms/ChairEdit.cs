@@ -46,6 +46,7 @@ namespace Project.Forms {
         }
 
         public override void OnShow() {
+            base.OnShow();
             this.Colum_text.Text = "Collom  " + colum;
             this.Row_text.Text = "Row  " + row;
         }

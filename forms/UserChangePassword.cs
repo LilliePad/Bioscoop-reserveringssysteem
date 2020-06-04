@@ -7,8 +7,10 @@ using Project.Services;
 using Project.Helpers;
 using Project.Forms;
 
-namespace Project.forms {
+namespace Project.Forms {
+
     public partial class UserChangePassword : BaseLayout {
+
         private Panel panel1;
         private Label Create_a_movie_text;
         private Label Discription_text;

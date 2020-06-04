@@ -31,6 +31,8 @@ namespace Project.Forms {
             ImageList imgs = new ImageList();
             List<Movie> movies = movieService.GetMovies();
 
+            base.OnShow();
+
             container.Items.Clear();
             imgs.ImageSize = new Size(100, 100);
 

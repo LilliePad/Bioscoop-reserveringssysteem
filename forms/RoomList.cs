@@ -26,21 +26,17 @@ namespace Project.Forms {
         public override void OnShow() {
             Program app = Program.GetInstance();
             RoomService roomService = app.GetService<RoomService>("rooms");
-            
             List<Room> rooms = roomService.GetRooms();
-            
 
+            base.OnShow();
             container.Items.Clear();
             
-
             for (int i = 0; i < rooms.Count; i++) {
                 Room room = rooms[i];
                 ListViewItem item = new ListViewItem("Room " + room.number, i);
                 item.Tag = room.id;
                 container.Items.Add(item);
             }
-
-
         }
 
         private void InitializeComponent() {
