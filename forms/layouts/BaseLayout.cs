@@ -125,6 +125,7 @@ namespace Project.Forms.Layouts {
             this.navLink3.Name = "navLink3";
             this.navLink3.Size = new System.Drawing.Size(110, 30);
             this.navLink3.TabIndex = 4;
+            this.navLink3.Text = "Password Change\r\n";
             this.navLink3.UseVisualStyleBackColor = false;
             this.navLink3.Click += new System.EventHandler(this.navLink3_Click);
             // 
