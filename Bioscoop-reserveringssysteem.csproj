@@ -60,6 +60,9 @@
     <Compile Include="forms\ChairEdit.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="forms\components\RoundedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="forms\MovieShowList.cs">
       <SubType>Form</SubType>
     </Compile>
