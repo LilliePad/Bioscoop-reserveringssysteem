@@ -322,7 +322,7 @@ namespace Project.Forms.Layouts {
 
         private void navLink5_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            MovieShowList newScreen = app.GetScreen<MovieShowList>("movieShowList");
+            ShowList newScreen = app.GetScreen<ShowList>("movieShowList");
 
             app.ShowScreen(newScreen);
         }

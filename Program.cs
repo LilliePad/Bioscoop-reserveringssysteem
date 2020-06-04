@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using Bioscoop_reserveringssysteem.forms;
 using Project.Base;
 using Project.Data;
 using Project.forms;
@@ -47,7 +48,7 @@ namespace Project {
             RegisterScreen(new MovieList());
             RegisterScreen(new MovieCreate());
             RegisterScreen(new MovieEdit());
-            RegisterScreen(new MovieShowList());
+            RegisterScreen(new ShowList());
             RegisterScreen(new MovieSelect());
             RegisterScreen(new RoomList());
             RegisterScreen(new UserChangePassword());
@@ -55,6 +56,8 @@ namespace Project {
             RegisterScreen(new RoomEdit());
             RegisterScreen(new ChairEdit());
             RegisterScreen(new ShowCreate());
+            RegisterScreen(new ReservationCreate());
+            RegisterScreen(new ShowListUser());
             
         }
 

@@ -294,6 +294,7 @@ namespace Project.Forms {
         }
 
         private void Movie_create_button_Click(object sender, EventArgs args) {
+       
         }
         private void label1_Click(object sender, EventArgs args) {
 
