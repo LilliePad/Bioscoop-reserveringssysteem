@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace Project.Forms {
     public partial class UserEditDesign : BaseLayout {
-        private Panel panel2;
         private Label label1;
         private TextBox textBox1;
         private Button Confirm;
         private Label Old_password_label;
         private TextBox Old_password_input;
+        private Panel panel2;
 
         public UserEditDesign() {
             InitializeComponent();
@@ -28,11 +28,11 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.Confirm = new System.Windows.Forms.Button();
-            this.Old_password_label = new System.Windows.Forms.Label();
             this.Old_password_input = new System.Windows.Forms.TextBox();
+            this.Old_password_label = new System.Windows.Forms.Label();
+            this.Confirm = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,31 +48,12 @@ namespace Project.Forms {
             this.panel2.Size = new System.Drawing.Size(715, 443);
             this.panel2.TabIndex = 3;
             // 
-            // label1
+            // Old_password_input
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(109, 84);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "change first and last name";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(258, 81);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(272, 20);
-            this.textBox1.TabIndex = 8;
-            // 
-            // Confirm
-            // 
-            this.Confirm.Location = new System.Drawing.Point(315, 292);
-            this.Confirm.Name = "Confirm";
-            this.Confirm.Size = new System.Drawing.Size(75, 23);
-            this.Confirm.TabIndex = 6;
-            this.Confirm.Text = "Confirm";
-            this.Confirm.UseVisualStyleBackColor = true;
+            this.Old_password_input.Location = new System.Drawing.Point(258, 120);
+            this.Old_password_input.Name = "Old_password_input";
+            this.Old_password_input.Size = new System.Drawing.Size(272, 20);
+            this.Old_password_input.TabIndex = 0;
             // 
             // Old_password_label
             // 
@@ -83,12 +64,31 @@ namespace Project.Forms {
             this.Old_password_label.TabIndex = 1;
             this.Old_password_label.Text = "change User Name";
             // 
-            // Old_password_input
+            // Confirm
             // 
-            this.Old_password_input.Location = new System.Drawing.Point(258, 120);
-            this.Old_password_input.Name = "Old_password_input";
-            this.Old_password_input.Size = new System.Drawing.Size(272, 20);
-            this.Old_password_input.TabIndex = 0;
+            this.Confirm.Location = new System.Drawing.Point(315, 292);
+            this.Confirm.Name = "Confirm";
+            this.Confirm.Size = new System.Drawing.Size(75, 23);
+            this.Confirm.TabIndex = 6;
+            this.Confirm.Text = "Confirm";
+            this.Confirm.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(258, 81);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(272, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(109, 84);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(131, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "change first and last name";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // UserEditDesign
             // 

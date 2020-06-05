@@ -55,7 +55,8 @@ namespace Project {
             RegisterScreen(new RoomEdit());
             RegisterScreen(new ChairEdit());
             RegisterScreen(new ShowCreate());
-            
+            RegisterScreen(new UserList());
+
         }
 
         protected override void Unload() {

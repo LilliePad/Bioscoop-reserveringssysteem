@@ -52,6 +52,7 @@ namespace Project.Forms {
             this.container.Size = new System.Drawing.Size(670, 452);
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
+            this.container.SelectedIndexChanged += new System.EventHandler(this.container_SelectedIndexChanged);
             this.container.Click += new System.EventHandler(this.ButtonEdit_Click);
             // 
             // movieCreateButton
@@ -64,12 +65,12 @@ namespace Project.Forms {
             this.movieCreateButton.UseVisualStyleBackColor = true;
             this.movieCreateButton.Click += new System.EventHandler(this.ButtonNew_Click);
             // 
-            // MovieList
+            // RoomList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.movieCreateButton);
             this.Controls.Add(this.container);
-            this.Name = "MovieList";
+            this.Name = "RoomList";
             this.Load += new System.EventHandler(this.MovieList_Load);
             this.Controls.SetChildIndex(this.container, 0);
             this.Controls.SetChildIndex(this.movieCreateButton, 0);
@@ -115,6 +116,9 @@ namespace Project.Forms {
             app.ShowScreen(editScreen);
         }
 
+        private void container_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
     }
 
 }
