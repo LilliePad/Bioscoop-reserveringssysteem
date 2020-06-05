@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Bioscoop_reserveringssysteem.forms;
 using Project.Forms.Layouts;
 using Project.Models;
 using Project.Services;
 
 namespace Project.Forms {
 
-    public class MovieShowList : BaseLayout {
+    public class ShowListUser : BaseLayout {
 
         private ListView container;
         private Button movieCreateButton;
 
-        public MovieShowList() {
+        public ShowListUser() {
             InitializeComponent();
         }
 
         public override string GetHandle() {
-            return "movieShowList";
+            return "showListUser";
         }
 
         public override bool IsDefault() {
@@ -104,7 +105,7 @@ namespace Project.Forms {
         private void ButtonEdit_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             MovieService movieService = app.GetService<MovieService>("movies");
-            MovieSelect editScreen = app.GetScreen<MovieSelect>("movieSelect");
+            ReservationCreate reservationScreen = app.GetScreen<ReservationCreate>("reservationCreate");
 
             // Get the clicked item
             ListViewItem item = container.SelectedItems[0];
@@ -123,8 +124,8 @@ namespace Project.Forms {
                 return;
             }
 
-            editScreen.SetMovie(movie);
-            app.ShowScreen(editScreen);
+            reservationScreen.SetMovie(movie);
+            app.ShowScreen(reservationScreen);
         }
 
         private void container_SelectedIndexChanged(object sender, EventArgs e) {
