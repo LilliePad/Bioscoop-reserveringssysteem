@@ -141,10 +141,12 @@ namespace Project.Forms.Layouts {
             this.navLink5.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.navLink5.FlatAppearance.BorderSize = 0;
             this.navLink5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.navLink5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.navLink5.Location = new System.Drawing.Point(600, 55);
             this.navLink5.Name = "navLink5";
             this.navLink5.Size = new System.Drawing.Size(110, 30);
             this.navLink5.TabIndex = 2;
+            this.navLink5.Text = "Show";
             this.navLink5.UseVisualStyleBackColor = false;
             this.navLink5.Click += new System.EventHandler(this.navLink5_Click);
             // 
@@ -154,7 +156,7 @@ namespace Project.Forms.Layouts {
             this.navLoginUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navLoginUsername.Location = new System.Drawing.Point(1000, 16);
             this.navLoginUsername.Name = "navLoginUsername";
-            this.navLoginUsername.Size = new System.Drawing.Size(132, 23);
+            this.navLoginUsername.Size = new System.Drawing.Size(132, 26);
             this.navLoginUsername.TabIndex = 7;
             this.navLoginUsername.Text = "Gebruikersnaam";
             this.navLoginUsername.TextChanged += new System.EventHandler(this.NavLoginUsername_TextChanged);
@@ -167,7 +169,7 @@ namespace Project.Forms.Layouts {
             this.navLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navLoginPassword.Location = new System.Drawing.Point(1000, 58);
             this.navLoginPassword.Name = "navLoginPassword";
-            this.navLoginPassword.Size = new System.Drawing.Size(132, 23);
+            this.navLoginPassword.Size = new System.Drawing.Size(132, 26);
             this.navLoginPassword.TabIndex = 8;
             this.navLoginPassword.Text = "Wachtwoord";
             this.navLoginPassword.TextChanged += new System.EventHandler(this.NavLoginPassword_TextChanged);
@@ -323,7 +325,7 @@ namespace Project.Forms.Layouts {
 
         private void navLink5_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            MovieShowList newScreen = app.GetScreen<MovieShowList>("movieShowList");
+            ShowList newScreen = app.GetScreen<ShowList>("showList");
 
             app.ShowScreen(newScreen);
         }
