@@ -9,12 +9,16 @@ using Project;
 
 namespace Bioscoop_reserveringssysteem.forms {
     public partial class ReservationCreate : BaseLayout {
+
+        private string userNameValue;
+
+        private string LogedInUser;
         public ReservationCreate() {
             InitializeComponent();
         }
 
         public override string GetHandle() {
-            return "reservation";
+            return "reservationCreate";
         }
 
         private Movie movie;
@@ -23,7 +27,7 @@ namespace Bioscoop_reserveringssysteem.forms {
         }
 
         private void username_placeholder_text_Click(object sender, EventArgs e) {
-
+            
         }
 
         private void chose_chair_button_Click(object sender, EventArgs e) {
