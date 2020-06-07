@@ -1,207 +1,186 @@
-﻿using Project.Forms.Layouts;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
+using Project.Forms;
+using Project.Forms.Layouts;
+using Project.Helpers;
+using Project.Models;
+using Project.Services;
 
 namespace Project.forms {
-    public partial class UserCreate : BaseLayout {
-        private Panel panel1;
-        private Label Create_a_movie_text;
-        private Label Discription_text;
-        private Label Playtime_text;
-        private Button Movie_create_button;
-        private TextBox NameMovie_input;
-        private TextBox Discription_input;
-        private TextBox Duration_input;
-        private TextBox Genre_input;
-        private Label label6;
-        private Panel panel2;
-        private TextBox Old_password_input;
-        private Label New_password_label;
-        private TextBox New_password_input;
-        private Label New_password_again_label;
-        private TextBox New_password_again_input;
-        private Label Old_password_label;
-        private Button Confirm;
-        private RadioButton Secretbutton;
-        private Label First_last_name;
-        private TextBox textBox1;
-        private Label Name_text;
+
+    public class UserCreate : BaseLayout {
+
+        private Panel content;
+
+        private Label fullNameLabel;
+        private TextBox fullNameInput;
+
+        private TextBox usernameInput;
+        private Label usernameLabel;
+
+        private Label adminLabel;
+        private CheckBox adminInput;
+
+        private Label passwordLabel;
+        private TextBox passwordInput;
+
+        private Button saveButton;
 
         public UserCreate() {
             InitializeComponent();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
+        public override string GetHandle() {
+            return "userCreate";
+        }
 
+        public override void OnShow() {
+            UserService userService = Program.GetInstance().GetService<UserService>("users");
+            User user = userService.GetCurrentUser();
+            bool allowAdmin = user != null && user.admin;
+
+            base.OnShow();
+
+            // Show admin checkbox if the user is an admin
+            adminInput.Visible = allowAdmin;
         }
 
         private void InitializeComponent() {
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.First_last_name = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.Secretbutton = new System.Windows.Forms.RadioButton();
-            this.Confirm = new System.Windows.Forms.Button();
-            this.New_password_label = new System.Windows.Forms.Label();
-            this.New_password_input = new System.Windows.Forms.TextBox();
-            this.New_password_again_label = new System.Windows.Forms.Label();
-            this.New_password_again_input = new System.Windows.Forms.TextBox();
-            this.Old_password_label = new System.Windows.Forms.Label();
-            this.Old_password_input = new System.Windows.Forms.TextBox();
-            this.panel2.SuspendLayout();
+            this.content = new System.Windows.Forms.Panel();
+            this.passwordInput = new System.Windows.Forms.TextBox();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.fullNameLabel = new System.Windows.Forms.Label();
+            this.fullNameInput = new System.Windows.Forms.TextBox();
+            this.usernameLabel = new System.Windows.Forms.Label();
+            this.usernameInput = new System.Windows.Forms.TextBox();
+            this.adminLabel = new System.Windows.Forms.Label();
+            this.adminInput = new System.Windows.Forms.CheckBox();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.content.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel2
+            // content
             // 
-            this.panel2.Controls.Add(this.First_last_name);
-            this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.Secretbutton);
-            this.panel2.Controls.Add(this.Confirm);
-            this.panel2.Controls.Add(this.New_password_label);
-            this.panel2.Controls.Add(this.New_password_input);
-            this.panel2.Controls.Add(this.New_password_again_label);
-            this.panel2.Controls.Add(this.New_password_again_input);
-            this.panel2.Controls.Add(this.Old_password_label);
-            this.panel2.Controls.Add(this.Old_password_input);
-            this.panel2.Location = new System.Drawing.Point(180, 127);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(715, 443);
-            this.panel2.TabIndex = 2;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            this.content.Controls.Add(this.passwordInput);
+            this.content.Controls.Add(this.passwordLabel);
+            this.content.Controls.Add(this.fullNameLabel);
+            this.content.Controls.Add(this.fullNameInput);
+            this.content.Controls.Add(this.usernameLabel);
+            this.content.Controls.Add(this.usernameInput);
+            this.content.Controls.Add(this.adminLabel);
+            this.content.Controls.Add(this.adminInput);
+            this.content.Controls.Add(this.saveButton);
+            this.content.Location = new System.Drawing.Point(180, 127);
+            this.content.Name = "content";
+            this.content.Size = new System.Drawing.Size(715, 443);
+            this.content.TabIndex = 2;
             // 
-            // First_last_name
+            // passwordInput
             // 
-            this.First_last_name.AutoSize = true;
-            this.First_last_name.Location = new System.Drawing.Point(137, 84);
-            this.First_last_name.Name = "First_last_name";
-            this.First_last_name.Size = new System.Drawing.Size(95, 13);
-            this.First_last_name.TabIndex = 9;
-            this.First_last_name.Text = "First and last name";
+            this.passwordInput.Location = new System.Drawing.Point(258, 157);
+            this.passwordInput.Name = "passwordInput";
+            this.passwordInput.PasswordChar = '*';
+            this.passwordInput.Size = new System.Drawing.Size(272, 20);
+            this.passwordInput.TabIndex = 13;
             // 
-            // textBox1
+            // passwordLabel
             // 
-            this.textBox1.Location = new System.Drawing.Point(258, 81);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(272, 20);
-            this.textBox1.TabIndex = 8;
+            this.passwordLabel.AutoSize = true;
+            this.passwordLabel.Location = new System.Drawing.Point(137, 160);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(68, 13);
+            this.passwordLabel.TabIndex = 12;
+            this.passwordLabel.Text = "Wachtwoord";
             // 
-            // Secretbutton
+            // fullNameLabel
             // 
-            this.Secretbutton.AutoSize = true;
-            this.Secretbutton.Location = new System.Drawing.Point(697, 413);
-            this.Secretbutton.Name = "Secretbutton";
-            this.Secretbutton.Size = new System.Drawing.Size(120, 17);
-            this.Secretbutton.TabIndex = 7;
-            this.Secretbutton.TabStop = true;
-            this.Secretbutton.Text = "Secret admin button";
-            this.Secretbutton.UseVisualStyleBackColor = true;
-            this.Secretbutton.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.fullNameLabel.AutoSize = true;
+            this.fullNameLabel.Location = new System.Drawing.Point(137, 84);
+            this.fullNameLabel.Name = "fullNameLabel";
+            this.fullNameLabel.Size = new System.Drawing.Size(79, 13);
+            this.fullNameLabel.TabIndex = 9;
+            this.fullNameLabel.Text = "Volledige naam";
             // 
-            // Confirm
+            // fullNameInput
             // 
-            this.Confirm.Location = new System.Drawing.Point(315, 292);
-            this.Confirm.Name = "Confirm";
-            this.Confirm.Size = new System.Drawing.Size(75, 23);
-            this.Confirm.TabIndex = 6;
-            this.Confirm.Text = "Confirm";
-            this.Confirm.UseVisualStyleBackColor = true;
+            this.fullNameInput.Location = new System.Drawing.Point(258, 81);
+            this.fullNameInput.Name = "fullNameInput";
+            this.fullNameInput.Size = new System.Drawing.Size(272, 20);
+            this.fullNameInput.TabIndex = 8;
             // 
-            // New_password_label
+            // usernameLabel
             // 
-            this.New_password_label.AutoSize = true;
-            this.New_password_label.Location = new System.Drawing.Point(137, 166);
-            this.New_password_label.Name = "New_password_label";
-            this.New_password_label.Size = new System.Drawing.Size(52, 13);
-            this.New_password_label.TabIndex = 5;
-            this.New_password_label.Text = "password";
-            this.New_password_label.Click += new System.EventHandler(this.label3_Click);
+            this.usernameLabel.AutoSize = true;
+            this.usernameLabel.Location = new System.Drawing.Point(137, 123);
+            this.usernameLabel.Name = "usernameLabel";
+            this.usernameLabel.Size = new System.Drawing.Size(84, 13);
+            this.usernameLabel.TabIndex = 1;
+            this.usernameLabel.Text = "Gebruikersnaam";
             // 
-            // New_password_input
+            // usernameInput
             // 
-            this.New_password_input.Location = new System.Drawing.Point(258, 163);
-            this.New_password_input.Name = "New_password_input";
-            this.New_password_input.Size = new System.Drawing.Size(272, 20);
-            this.New_password_input.TabIndex = 4;
+            this.usernameInput.Location = new System.Drawing.Point(258, 120);
+            this.usernameInput.Name = "usernameInput";
+            this.usernameInput.Size = new System.Drawing.Size(272, 20);
+            this.usernameInput.TabIndex = 0;
             // 
-            // New_password_again_label
+            // adminLabel
             // 
-            this.New_password_again_label.AutoSize = true;
-            this.New_password_again_label.Location = new System.Drawing.Point(137, 205);
-            this.New_password_again_label.Name = "New_password_again_label";
-            this.New_password_again_label.Size = new System.Drawing.Size(81, 13);
-            this.New_password_again_label.TabIndex = 3;
-            this.New_password_again_label.Text = "password again";
-            this.New_password_again_label.Click += new System.EventHandler(this.label2_Click);
+            this.adminLabel.AutoSize = true;
+            this.adminLabel.Location = new System.Drawing.Point(137, 198);
+            this.adminLabel.Name = "adminLabel";
+            this.adminLabel.Size = new System.Drawing.Size(36, 13);
+            this.adminLabel.TabIndex = 10;
+            this.adminLabel.Text = "Admin";
             // 
-            // New_password_again_input
+            // adminInput
             // 
-            this.New_password_again_input.Location = new System.Drawing.Point(258, 202);
-            this.New_password_again_input.Name = "New_password_again_input";
-            this.New_password_again_input.Size = new System.Drawing.Size(272, 20);
-            this.New_password_again_input.TabIndex = 2;
+            this.adminInput.AutoSize = true;
+            this.adminInput.Location = new System.Drawing.Point(258, 197);
+            this.adminInput.Name = "adminInput";
+            this.adminInput.Size = new System.Drawing.Size(15, 14);
+            this.adminInput.TabIndex = 11;
+            this.adminInput.UseVisualStyleBackColor = true;
             // 
-            // Old_password_label
+            // saveButton
             // 
-            this.Old_password_label.AutoSize = true;
-            this.Old_password_label.Location = new System.Drawing.Point(137, 123);
-            this.Old_password_label.Name = "Old_password_label";
-            this.Old_password_label.Size = new System.Drawing.Size(60, 13);
-            this.Old_password_label.TabIndex = 1;
-            this.Old_password_label.Text = "User Name";
-            this.Old_password_label.Click += new System.EventHandler(this.Old_password_label_Click);
-            // 
-            // Old_password_input
-            // 
-            this.Old_password_input.Location = new System.Drawing.Point(258, 120);
-            this.Old_password_input.Name = "Old_password_input";
-            this.Old_password_input.Size = new System.Drawing.Size(272, 20);
-            this.Old_password_input.TabIndex = 0;
+            this.saveButton.Location = new System.Drawing.Point(140, 232);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 6;
+            this.saveButton.Text = "Opslaan";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // UserCreate
             // 
-            this.ClientSize = new System.Drawing.Size(1217, 599);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(1916, 1173);
+            this.Controls.Add(this.content);
             this.Name = "UserCreate";
-            this.Load += new System.EventHandler(this.UserChangePassword_Load);
-            this.Controls.SetChildIndex(this.panel2, 0);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.Controls.SetChildIndex(this.content, 0);
+            this.content.ResumeLayout(false);
+            this.content.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
-        private void UserChangePassword_Load(object sender, EventArgs e) {
+        private void SaveButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            UserService userService = app.GetService<UserService>("users");
 
+            // Save user
+            User user = new User(fullNameInput.Text, usernameInput.Text, passwordInput.Text, adminInput.Checked);
+
+            if(!userService.SaveUser(user)) {
+                MessageBox.Show("Error: " + ValidationHelper.GetErrorList(user), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Redirect to user list
+            UserList userList = app.GetScreen<UserList>("userList");
+            app.ShowScreen(userList);
         }
 
-        private void Create_a_movie_text_Click(object sender, EventArgs e) {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e) {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e) {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e) {
-
-        }
-
-        private void Old_password_label_Click(object sender, EventArgs e) {
-
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e) {
-
-        }
     }
+
 }

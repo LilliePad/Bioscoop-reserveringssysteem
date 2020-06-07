@@ -5,6 +5,7 @@ using Project.Models;
 using Project.Services;
 using System.Runtime.InteropServices;
 using Project.Forms.Components;
+using Project.forms;
 
 namespace Project.Forms.Layouts {
 
@@ -332,7 +333,10 @@ namespace Project.Forms.Layouts {
         }
 
         private void NavRegisterButton_Click(object sender, EventArgs e) {
-        
+            Program app = Program.GetInstance();
+            UserCreate userCreate = app.GetScreen<UserCreate>("userCreate");
+
+            app.ShowScreen(userCreate);
         }
 
         private void NavLogoutButton_Click(object sender, EventArgs e) {

@@ -187,7 +187,7 @@ namespace Project.Forms {
             }
             
             if (user.Authenticate(oldPassword) && newPassword1 == newPassword2) {                   
-                user.password = EncryptionHelper.CreateHash(newPassword1);
+                user.SetPassword(newPassword1);
 
                if (userService.SaveUser(user)) {
                     MessageBox.Show("Wachtwoord succesvol aangepast");
