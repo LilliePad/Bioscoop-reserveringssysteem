@@ -1,22 +1,17 @@
 ﻿using Project.Forms.Layouts;
-using System.Windows.Forms;
-using System;
-using Project.Base;
+using Project.Helpers;
 using Project.Models;
 using Project.Services;
-using Project.Helpers;
-using Project;
-using Project.Forms;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Project.Forms {
     public partial class ReservationCreate : BaseLayout {
         private Room room;
-        private int row;
-        private int column;
-        private int id;
         private Show show;
         private Chair chair;
-
+        private List<Chair> chairs = new List<Chair>();
 
         public ReservationCreate() {
             InitializeComponent();
@@ -30,40 +25,85 @@ namespace Project.Forms {
             this.room = room;
         }
 
-        public void SetRow(int row) {
-            this.row = row;
-
-        }
-
-        public void SetColum(int column) {
-            this.column = column;
-
+        public void Setchair(Chair chair) {
+            this.chair = chair;
         }
 
         public void GetShow(Show show) {
             this.show = show;
         }
 
-        public void GetChairbyId(int id) {
-            this.id = id;
+        public void GetSelectedChairs(List<Chair> chairs) {
+            this.chairs = chairs;
+        }
+
+        public override void OnShow() {
+            base.OnShow();
+            Movie_Name_Label.Text = show.GetMovie().name;
+            Movie_Picture.Image = show.GetMovie().GetImage();
+            container.Items.Clear();
+            Program app = Program.GetInstance();
+            ChairSelect chairSelect = new ChairSelect();
+            if (chair != null) {
+                chairs.Add(chair);
+                for (int i = 0; i < chairs.Count; i++) {
+                    Chair chair = chairs[i];
+                    ListViewItem item = new ListViewItem("rij: " + chair.row + " " + "nummer: " + chair.number, i);
+
+                    item.Tag = "rij: " + chair.row + " " + "nummer: " + chair.number;
+                    container.Items.Add(item);
+                }
+            }
         }
 
         private void Select_Chair_Button_Click(object sender, EventArgs e) {
-            Program app = Program.GetInstance();
-            ChairSelect ChairSelectScreen = app.GetScreen<ChairSelect>("chairSelect");
-            app.ShowScreen(ChairSelectScreen);
+                Program app = Program.GetInstance();
+                ChairSelect ChairSelectScreen = app.GetScreen<ChairSelect>("chairSelect");
+                ChairSelectScreen.SetShow(show);
+                ChairSelectScreen.SetMovie(show.GetMovie());
+                app.ShowScreen(ChairSelectScreen);
+            }
+
+            private void Reserve_Tickets_Button_Click(object sender, EventArgs e) {
+                Program app = Program.GetInstance();
+                ReservationService reservationService = app.GetService<ReservationService>("reservations");
+                UserService userService = app.GetService<UserService>("users");
+                ChairService chairService = app.GetService<ChairService>("chairs");
+
+                User currentUser = userService.GetCurrentUser();
+
+                Reservation reservation = new Reservation(show.id, currentUser.id, chair.id);
+
+                if (reservationService.SaveReservation(reservation)) {
+                    MessageBox.Show("tickets succesvol gereserveerd");
+                }
+                else {
+                    MessageBox.Show("Kon tickets niet reserveren");
+                }
+            }
+
+            private void ReservationCreate_Load(object sender, EventArgs e) {
+
+            }
+
+            private void label1_Click(object sender, EventArgs e) {
+
+            }
+
+        private void pictureBox1_Click(object sender, EventArgs e) {
+
         }
 
-        private void Reserve_Tickets_Button_Click(object sender, EventArgs e) {
-            Program app = Program.GetInstance();
-            ReservationService reservationService = app.GetService<ReservationService>("reservations");
-            UserService userService = app.GetService<UserService>("users");
-            ChairService chairService = app.GetService<ChairService>("chairs");
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e) {
 
-            chair = chairService.GetChairByRoomAndPosition(room, row, column);
-            User currentUser = userService.GetCurrentUser();
+        }
 
-            Reservation reservation = new Reservation(show.id, currentUser.id, chair.id);
+        private void Selected_Chairs_list_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void Selected_Chairs_List_SelectedIndexChanged_1(object sender, EventArgs e) {
+
         }
     }
 }
