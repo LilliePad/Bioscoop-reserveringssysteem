@@ -15,6 +15,10 @@ namespace Project.Forms {
         private Label Chair_edit_text;
         private Label Row_text;
         private Label Colum_text;
+        private Movie movie;
+        private Room room;
+        private string movieName;
+        private string roomNumber;
 
         private Show show;
         private int row;
@@ -38,16 +42,23 @@ namespace Project.Forms {
        
 
         public override void OnShow() {
-            base.OnShow();
-            this.label1.Text = "Show id = " + show.id;
+            Program app = Program.GetInstance();
+            ShowService showService = app.GetService<ShowService>("shows");
+            MovieService movieService = app.GetService<MovieService>("movies");
+            RoomService roomService = app.GetService<RoomService>("rooms");
+
+            movie = movieService.GetMovieById(show.movieId);
+            room = roomService.GetRoomById(show.roomId);
+
+            this.label1.Text = "Show id = " + show.id + "\n\nMovie    = " + movie.name + "\n\nRoom    = " + room.id +"\n\nDate      = " + show.startTime; 
         }
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.Colum_text = new System.Windows.Forms.Label();
             this.Row_text = new System.Windows.Forms.Label();
             this.Delete_chair_button = new System.Windows.Forms.Button();
             this.Chair_edit_text = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +73,18 @@ namespace Project.Forms {
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(993, 534);
             this.panel1.TabIndex = 20;
+            // 
+            // label1
+            // 
+            this.label1.AutoEllipsis = true;
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label1.Location = new System.Drawing.Point(15, 89);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(99, 25);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Show id =";
             // 
             // Colum_text
             // 
@@ -85,7 +108,7 @@ namespace Project.Forms {
             // 
             // Delete_chair_button
             // 
-            this.Delete_chair_button.Location = new System.Drawing.Point(13, 135);
+            this.Delete_chair_button.Location = new System.Drawing.Point(13, 268);
             this.Delete_chair_button.Name = "Delete_chair_button";
             this.Delete_chair_button.Size = new System.Drawing.Size(133, 39);
             this.Delete_chair_button.TabIndex = 19;
@@ -104,18 +127,6 @@ namespace Project.Forms {
             this.Chair_edit_text.Size = new System.Drawing.Size(420, 58);
             this.Chair_edit_text.TabIndex = 3;
             this.Chair_edit_text.Text = "Show verwijderen";
-            // 
-            // label1
-            // 
-            this.label1.AutoEllipsis = true;
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label1.Location = new System.Drawing.Point(15, 89);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 25);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Show id =";
             // 
             // ShowDelete
             // 
