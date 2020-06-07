@@ -94,8 +94,11 @@ namespace Project.Forms {
 
         private void ButtonEdit_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
+            MovieService movieService = app.GetService<MovieService>("movies");
+            MovieSelect editScreen = app.GetScreen<MovieSelect>("movieSelect");
             ShowService showService = app.GetService<ShowService>("shows");
-            ShowDelete editScreen = app.GetScreen<ShowDelete>("showDelete");
+
+
 
             // Get the clicked item
             ListViewItem item = container.SelectedItems[0];
@@ -113,6 +116,19 @@ namespace Project.Forms {
                 MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            UserService userService = app.GetService<UserService>("users");
+            User currentUser = userService.GetCurrentUser();
+
+            if (currentUser.admin == true) {
+                editScreen.SetMovie(movie);
+                app.ShowScreen(editScreen);
+            }
+
+            else {
+
+            }
+
 
             editScreen.SetShow(show);
             app.ShowScreen(editScreen);

@@ -6,6 +6,7 @@ using Project.Models;
 using Project.Services;
 using Project.Helpers;
 using Project;
+using Project.Forms;
 
 namespace Bioscoop_reserveringssysteem.forms {
     public partial class ReservationCreate : BaseLayout {
@@ -48,7 +49,9 @@ namespace Bioscoop_reserveringssysteem.forms {
         }
 
         private void chose_chair_button_Click_1(object sender, EventArgs e) {
-
+            Program app = Program.GetInstance();
+            ChairSelect chairSelectScreen = app.GetScreen<ChairSelect>("chairSelect");
+            app.ShowScreen(chairSelectScreen);
         }
     }
 }

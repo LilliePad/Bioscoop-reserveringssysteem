@@ -66,7 +66,16 @@
     <Compile Include="forms\components\RoundedButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="forms\ShowList.cs">
+    <Compile Include="forms\ChairSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\ReservationCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\ReservationCreate.Designer.cs">
+      <DependentUpon>ReservationCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\ShowListUser.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\UserList.cs">
@@ -137,6 +146,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ChairEdit.resx">
       <DependentUpon>ChairEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\ChairSelect.resx">
+      <DependentUpon>ChairSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\ShowListUser.resx">
+      <DependentUpon>ShowListUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\ShowList.resx">
+      <DependentUpon>ShowList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MovieSelect.resx">
       <DependentUpon>MovieSelect.cs</DependentUpon>
