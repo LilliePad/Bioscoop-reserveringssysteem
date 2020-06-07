@@ -95,7 +95,7 @@ namespace Project.Forms.Layouts {
             this.navAccountName.Location = new System.Drawing.Point(1663, 16);
             this.navAccountName.Name = "navAccountName";
             this.navAccountName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.navAccountName.Size = new System.Drawing.Size(189, 29);
+            this.navAccountName.Size = new System.Drawing.Size(111, 17);
             this.navAccountName.TabIndex = 14;
             this.navAccountName.Text = "<accountName>";
             this.navAccountName.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -154,7 +154,10 @@ namespace Project.Forms.Layouts {
             this.navLink4.Name = "navLink4";
             this.navLink4.Size = new System.Drawing.Size(110, 30);
             this.navLink4.TabIndex = 3;
+            this.navLink4.Text = "ReservationList";
+            this.navLink4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.navLink4.UseVisualStyleBackColor = false;
+            this.navLink4.Click += new System.EventHandler(this.navLink4_Click_1);
             // 
             // navLink5
             // 
@@ -178,7 +181,7 @@ namespace Project.Forms.Layouts {
             this.navLoginUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navLoginUsername.Location = new System.Drawing.Point(1642, 16);
             this.navLoginUsername.Name = "navLoginUsername";
-            this.navLoginUsername.Size = new System.Drawing.Size(132, 34);
+            this.navLoginUsername.Size = new System.Drawing.Size(132, 23);
             this.navLoginUsername.TabIndex = 7;
             this.navLoginUsername.Text = "Gebruikersnaam";
             this.navLoginUsername.Enter += new System.EventHandler(this.LoginUsernameRemoveText);
@@ -190,7 +193,7 @@ namespace Project.Forms.Layouts {
             this.navLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navLoginPassword.Location = new System.Drawing.Point(1642, 58);
             this.navLoginPassword.Name = "navLoginPassword";
-            this.navLoginPassword.Size = new System.Drawing.Size(132, 34);
+            this.navLoginPassword.Size = new System.Drawing.Size(132, 23);
             this.navLoginPassword.TabIndex = 8;
             this.navLoginPassword.Text = "Wachtwoord";
             this.navLoginPassword.Enter += new System.EventHandler(this.LoginPasswordRemoveText);
@@ -397,6 +400,12 @@ namespace Project.Forms.Layouts {
             app.ShowScreen(newScreen);
         }
 
+        private void navLink4_Click_1(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ReservationList reserVationListScreen = app.GetScreen<ReservationList>("reservationList");
+
+            app.ShowScreen(reserVationListScreen);
+        }
     }
 
 }

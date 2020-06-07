@@ -12,6 +12,7 @@ namespace Project.Forms {
         private Show show;
         private Chair chair;
         private List<Chair> chairs = new List<Chair>();
+        private bool reservationSucces;
 
         public ReservationCreate() {
             InitializeComponent();
@@ -71,16 +72,31 @@ namespace Project.Forms {
                 ChairService chairService = app.GetService<ChairService>("chairs");
 
                 User currentUser = userService.GetCurrentUser();
-
-                Reservation reservation = new Reservation(show.id, currentUser.id, chair.id);
-
-                if (reservationService.SaveReservation(reservation)) {
-                    MessageBox.Show("tickets succesvol gereserveerd");
-                }
-                else {
-                    MessageBox.Show("Kon tickets niet reserveren");
-                }
+            if (currentUser == null) {
+                MessageBox.Show("U moet ingelogd zijn om tickets te kunnen reserveren");
             }
+            else {
+                for (int i = 0; i < chairs.Count; i++) {
+                    Chair currentChair = chairs[i];
+                    Reservation reservation = new Reservation(show.id, currentUser.id, chair.id);
+                    reservationService.SaveReservation(reservation);
+                    if (reservationService.SaveReservation(reservation) && i + 1 >= chairs.Count) {
+                        reservationSucces = true;
+                    }
+
+                }
+
+                if (reservationSucces) {
+                        MessageBox.Show("tickets succesvol gereserveerd");
+                    }
+                else {
+                    MessageBox.Show("kon de tickets niet reserveren");
+                }
+                
+                chairs.Clear();
+
+            }
+        }
 
             private void ReservationCreate_Load(object sender, EventArgs e) {
 
