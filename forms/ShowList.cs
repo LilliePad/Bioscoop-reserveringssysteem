@@ -26,7 +26,6 @@ namespace Project.Forms {
         public override void OnShow() {
             Program app = Program.GetInstance();
             ShowService showService = app.GetService<ShowService>("shows");
-            RoomService roomService = app.GetService<RoomService>("rooms");
             MovieService movieService = app.GetService<MovieService>("movies");
             List<Show> shows = showService.GetShows();
 
@@ -35,7 +34,7 @@ namespace Project.Forms {
             
             for (int i = 0; i < shows.Count; i++) {
                 Show show = shows[i];
-                ListViewItem item = new ListViewItem("voorstelling id = " + show.id + ", zaal nummer = " + roomService.GetRoomById(show.roomId).number , i);
+                ListViewItem item = new ListViewItem("Show id = " + show.id, i);
                 item.Tag = show.id;
                 container.Items.Add(item);
             }
@@ -67,12 +66,12 @@ namespace Project.Forms {
             this.movieCreateButton.UseVisualStyleBackColor = true;
             this.movieCreateButton.Click += new System.EventHandler(this.ButtonNew_Click);
             // 
-            // RoomList
+            // ShowList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.movieCreateButton);
             this.Controls.Add(this.container);
-            this.Name = "RoomList";
+            this.Name = "ShowList";
             this.Load += new System.EventHandler(this.MovieList_Load);
             this.Controls.SetChildIndex(this.container, 0);
             this.Controls.SetChildIndex(this.movieCreateButton, 0);
@@ -82,7 +81,7 @@ namespace Project.Forms {
 
         private void MovieList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Shows", 100);
+            container.Columns.Add("Shows", 500);
         }
 
         private void ButtonNew_Click(object sender, EventArgs e) {
@@ -94,11 +93,8 @@ namespace Project.Forms {
 
         private void ButtonEdit_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            MovieService movieService = app.GetService<MovieService>("movies");
-            MovieSelect editScreen = app.GetScreen<MovieSelect>("movieSelect");
             ShowService showService = app.GetService<ShowService>("shows");
-
-
+            ShowDelete editScreen = app.GetScreen<ShowDelete>("showDelete");
 
             // Get the clicked item
             ListViewItem item = container.SelectedItems[0];
@@ -108,7 +104,7 @@ namespace Project.Forms {
                 return;
             }
 
-            // Find the movie
+            // Find the show
             int id = (int) item.Tag;
             Show show = showService.GetShowById(id);
 
@@ -116,19 +112,6 @@ namespace Project.Forms {
                 MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            UserService userService = app.GetService<UserService>("users");
-            User currentUser = userService.GetCurrentUser();
-
-            if (currentUser.admin == true) {
-                editScreen.SetMovie(movie);
-                app.ShowScreen(editScreen);
-            }
-
-            else {
-
-            }
-
 
             editScreen.SetShow(show);
             app.ShowScreen(editScreen);
