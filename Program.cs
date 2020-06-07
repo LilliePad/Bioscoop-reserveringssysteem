@@ -68,7 +68,7 @@ namespace Project {
             RegisterScreen(new UserList());
             RegisterScreen(new UserChangePassword());
 
-            //RegisterScreen(new ReservationCreate());
+            RegisterScreen(new ReservatonCreate());
 
         }
 

@@ -14,6 +14,10 @@ namespace Bioscoop_reserveringssysteem.forms {
             InitializeComponent();
         }
 
+        public override string GetHandle() {
+            return "reservationCreate";
+        }
+
         private Room room;
         private int row;
         private int column;
