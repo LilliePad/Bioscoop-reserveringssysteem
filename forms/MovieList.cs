@@ -13,6 +13,7 @@ namespace Project.Forms {
         private ListView container;
         private Button movieCreateButton;
 
+
         public MovieList() {
             InitializeComponent();
         }
@@ -104,7 +105,7 @@ namespace Project.Forms {
         private void ButtonEdit_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             MovieService movieService = app.GetService<MovieService>("movies");
-            MovieEdit editScreen = app.GetScreen<MovieEdit>("movieEdit");
+            UserService userService = app.GetService<UserService>("users");
 
             // Get the clicked item
             ListViewItem item = container.SelectedItems[0];
@@ -122,9 +123,24 @@ namespace Project.Forms {
                 MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            editScreen.SetMovie(movie);
-            app.ShowScreen(editScreen);
+            User user = userService.GetCurrentUser();
+            if (userService.GetCurrentUser() != null) {
+                if (user.admin) {
+                    MovieEdit editScreen = app.GetScreen<MovieEdit>("movieEdit");
+                    editScreen.SetMovie(movie);
+                    app.ShowScreen(editScreen);
+                }
+                else {
+                    MovieSelect editScreen = app.GetScreen<MovieSelect>("movieSelect");
+                    editScreen.SetMovie(movie);
+                    app.ShowScreen(editScreen);
+                }
+            }
+            else {
+                MovieSelect editScreen = app.GetScreen<MovieSelect>("movieSelect");
+                editScreen.SetMovie(movie);
+                app.ShowScreen(editScreen);
+            }
         }
 
         private void container_SelectedIndexChanged(object sender, EventArgs e) {

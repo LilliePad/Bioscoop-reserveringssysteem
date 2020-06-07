@@ -66,6 +66,7 @@ namespace Project.Forms {
             catch (FormatException) {
                 MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             List<Chair> chairs = chairService.GetChairsByRoom(roomService.GetRoomByNumber(RoomNumber));
             Maximum = chairs.Count;
             HighestRow = 0;
