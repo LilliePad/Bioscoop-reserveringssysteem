@@ -1,4 +1,4 @@
-﻿namespace Bioscoop_reserveringssysteem.forms {
+﻿namespace Project.Forms {
     partial class ReservationCreate {
         /// <summary>
         /// Required designer variable.

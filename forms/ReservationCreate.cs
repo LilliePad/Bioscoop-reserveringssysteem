@@ -8,16 +8,8 @@ using Project.Helpers;
 using Project;
 using Project.Forms;
 
-namespace Bioscoop_reserveringssysteem.forms {
+namespace Project.Forms {
     public partial class ReservationCreate : BaseLayout {
-        public ReservationCreate() {
-            InitializeComponent();
-        }
-
-        public override string GetHandle() {
-            return "reservationCreate";
-        }
-
         private Room room;
         private int row;
         private int column;
@@ -25,6 +17,14 @@ namespace Bioscoop_reserveringssysteem.forms {
         private Show show;
         private Chair chair;
 
+
+        public ReservationCreate() {
+            InitializeComponent();
+        }
+
+        public override string GetHandle() {
+            return "reservationCreate";
+        }
 
         public void SetRoom(Room room) {
             this.room = room;

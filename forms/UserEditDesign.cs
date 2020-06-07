@@ -22,6 +22,9 @@ namespace Project.Forms {
             InitializeComponent();
         }
 
+        public override string GetHandle() {
+            return "userEditDesign";
+        }
         private void UserEditDesign_Load(object sender, EventArgs e) {
 
         }

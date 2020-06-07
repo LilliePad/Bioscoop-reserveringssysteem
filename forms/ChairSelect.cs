@@ -12,7 +12,6 @@ using Project.Models;
 using Project.Services;
 using Project.Helpers;
 using System.Drawing.Text;
-using Bioscoop_reserveringssysteem.forms;
 
 namespace Project.Forms {
     public partial class ChairSelect : BaseLayout {
