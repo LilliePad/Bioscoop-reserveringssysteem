@@ -57,6 +57,12 @@
     <Compile Include="base\StorageFile.cs" />
     <Compile Include="data\Database.cs" />
     <Compile Include="enums\PrintType.cs" />
+    <Compile Include="forms\ReservationCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\ReservationCreate.Designer.cs">
+      <DependentUpon>ReservationCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\ShowList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,12 +77,6 @@
     </Compile>
     <Compile Include="forms\ChairSelect.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\ReservationCreate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\ReservationCreate.Designer.cs">
-      <DependentUpon>ReservationCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\UserList.cs">
       <SubType>Form</SubType>
@@ -141,6 +141,9 @@
     <Compile Include="services\RoomService.cs" />
     <Compile Include="services\ShowService.cs" />
     <Compile Include="services\UserService.cs" />
+    <EmbeddedResource Include="forms\ReservationCreate.resx">
+      <DependentUpon>ReservationCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\ShowList.resx">
       <DependentUpon>ShowList.cs</DependentUpon>
     </EmbeddedResource>

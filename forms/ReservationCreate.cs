@@ -10,48 +10,56 @@ using Project.Forms;
 
 namespace Bioscoop_reserveringssysteem.forms {
     public partial class ReservationCreate : BaseLayout {
-
-        private string userNameValue;
-
-        private string LogedInUser;
         public ReservationCreate() {
             InitializeComponent();
         }
 
-        public override string GetHandle() {
-            return "reservationCreate";
+        private Room room;
+        private int row;
+        private int column;
+        private int id;
+        private Show show;
+        private Chair chair;
+
+
+        public void SetRoom(Room room) {
+            this.room = room;
         }
 
-        private Movie movie;
-        public void SetMovie(Movie movie) {
-            this.movie = movie;
-        }
-
-        private void username_placeholder_text_Click(object sender, EventArgs e) {
-            
-        }
-
-        private void chose_chair_button_Click(object sender, EventArgs e) {
+        public void SetRow(int row) {
+            this.row = row;
 
         }
 
-        private void Create_reservation_Click(object sender, EventArgs e) {
+        public void SetColum(int column) {
+            this.column = column;
+
+        }
+
+        public void GetShowById(int id) {
+            this.show = show;
+        }
+
+        public void GetChairbyId(int id) {
+            this.id = id;
+        }
+
+        private void Select_Chair_Button_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ChairSelect ChairSelectScreen = app.GetScreen<ChairSelect>("chairSelect");
+            app.ShowScreen(ChairSelectScreen);
+        }
+
+        private void Reserve_Tickets_Button_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
             UserService userService = app.GetService<UserService>("users");
+            ChairService chairService = app.GetService<ChairService>("chairs");
 
+            chair = chairService.GetChairByRoomAndPosition(room, row, column);
+            User currentUser = userService.GetCurrentUser();
 
-        }
-
-
-        private void ReservationCreate_Load(object sender, EventArgs e) {
-
-        }
-
-        private void chose_chair_button_Click_1(object sender, EventArgs e) {
-            Program app = Program.GetInstance();
-            ChairSelect chairSelectScreen = app.GetScreen<ChairSelect>("chairSelect");
-            app.ShowScreen(chairSelectScreen);
+            Reservation reservation = new Reservation(show.id, currentUser.id, chair.id);
         }
     }
 }

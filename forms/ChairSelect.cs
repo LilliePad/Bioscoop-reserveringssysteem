@@ -11,13 +11,13 @@ using System.Windows.Forms;
 using Project.Models;
 using Project.Services;
 using Project.Helpers;
-
+using System.Drawing.Text;
+using Bioscoop_reserveringssysteem.forms;
 
 namespace Project.Forms {
     public partial class ChairSelect : BaseLayout {
         private Panel roomSelect;
         private Label Chose_Chair_Text;
-        private Label Name_text;
         private Label label2;
         private ListView container;
         private Show show;
@@ -53,7 +53,6 @@ namespace Project.Forms {
 
             base.OnShow();
             
-            this.Name_text.Text = "Zaal " + show.roomId;
 
             tableLayoutPanel1.Controls.Clear();
             tableLayoutPanel1.RowStyles.Clear();
@@ -135,16 +134,23 @@ namespace Project.Forms {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.Chose_Chair_Text = new System.Windows.Forms.Label();
-            this.Name_text = new System.Windows.Forms.Label();
             this.roomSelect.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // container
+            // 
+            this.container.HideSelection = false;
+            this.container.Location = new System.Drawing.Point(0, 0);
+            this.container.Name = "container";
+            this.container.Size = new System.Drawing.Size(121, 97);
+            this.container.TabIndex = 0;
+            this.container.UseCompatibleStateImageBehavior = false;
             // 
             // roomSelect
             // 
             this.roomSelect.Controls.Add(this.tableLayoutPanel1);
             this.roomSelect.Controls.Add(this.label2);
             this.roomSelect.Controls.Add(this.Chose_Chair_Text);
-            this.roomSelect.Controls.Add(this.Name_text);
             this.roomSelect.Location = new System.Drawing.Point(40, 115);
             this.roomSelect.Name = "roomSelect";
             this.roomSelect.Size = new System.Drawing.Size(1800, 1000);
@@ -164,7 +170,6 @@ namespace Project.Forms {
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1000, 500);
             this.tableLayoutPanel1.TabIndex = 23;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint_1);
-
             // 
             // label2
             // 
@@ -172,36 +177,25 @@ namespace Project.Forms {
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label2.Location = new System.Drawing.Point(10, 279);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 20);
+            this.label2.Size = new System.Drawing.Size(0, 17);
             this.label2.TabIndex = 22;
             // 
-            // Create_a_movie_text
+            // Chose_Chair_Text
             // 
             this.Chose_Chair_Text.AutoSize = true;
             this.Chose_Chair_Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Chose_Chair_Text.Location = new System.Drawing.Point(-10, 0);
-            this.Chose_Chair_Text.Name = "Create_a_movie_text";
-            this.Chose_Chair_Text.Size = new System.Drawing.Size(310, 58);
+            this.Chose_Chair_Text.Name = "Chose_Chair_Text";
+            this.Chose_Chair_Text.Size = new System.Drawing.Size(270, 46);
             this.Chose_Chair_Text.TabIndex = 3;
-            this.Chose_Chair_Text.Text = "Bewerk zaal ";
+            this.Chose_Chair_Text.Text = "Kies een stoel";
             this.Chose_Chair_Text.Click += new System.EventHandler(this.Create_a_movie_text_Click);
             // 
-            // Name_text
-            // 
-            this.Name_text.AutoSize = true;
-            this.Name_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Name_text.Location = new System.Drawing.Point(21, 82);
-            this.Name_text.Name = "Name_text";
-            this.Name_text.Size = new System.Drawing.Size(45, 20);
-            this.Name_text.TabIndex = 4;
-            this.Name_text.Text = "Zaal ";
-            this.Name_text.Click += new System.EventHandler(this.Name_text_Click);
-            // 
-            // RoomEdit
+            // ChairSelect
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.roomSelect);
-            this.Name = "RoomEdit";
+            this.Name = "ChairSelect";
             this.Load += new System.EventHandler(this.RoomCreateDesign_Load);
             this.Controls.SetChildIndex(this.roomSelect, 0);
             this.roomSelect.ResumeLayout(false);
@@ -256,7 +250,7 @@ namespace Project.Forms {
             RoomService roomService = app.GetService<RoomService>("rooms");
             ChairService chairService = app.GetService<ChairService>("chairs");
 
-            ChairEdit editScreen = app.GetScreen<ChairEdit>("chairEdit");
+            ReservationCreate reservationScreen = app.GetScreen<ReservationCreate>("reservationCreate");
 
             Chair chair = chairService.GetChairByRoomAndPosition(roomService.GetRoomByNumber(RoomNumber), 1, 1);
 
@@ -274,10 +268,14 @@ namespace Project.Forms {
             int row = int.Parse(parts[0]);
             int col = int.Parse(parts[1]);
 
-            editScreen.SetRow(row);
-            editScreen.SetColum(col);
-            editScreen.SetRoom(room);
-            app.ShowScreen(editScreen);
+
+
+
+
+            reservationScreen.SetRow(row);
+            reservationScreen.SetColum(col);
+            reservationScreen.SetRoom(room);
+            app.ShowScreen(reservationScreen);
 
         }
     }
