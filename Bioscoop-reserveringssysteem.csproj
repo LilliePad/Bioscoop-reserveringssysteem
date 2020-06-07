@@ -135,6 +135,9 @@
     <Compile Include="records\RoomRecord.cs" />
     <Compile Include="records\ShowRecord.cs" />
     <Compile Include="records\UserRecord.cs" />
+    <Compile Include="ReservatonCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="services\ChairService.cs" />
     <Compile Include="services\MovieService.cs" />
     <Compile Include="services\ReservationService.cs" />

@@ -46,6 +46,7 @@ namespace Project.Forms {
             this.show = show;
         }
 
+
         public override void OnShow() {
             Program app = Program.GetInstance();
             ChairService chairService = app.GetService<ChairService>("chairs");
