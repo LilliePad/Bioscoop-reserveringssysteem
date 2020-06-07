@@ -1,18 +1,16 @@
-﻿using Project.Forms.Layouts;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project.Forms.Layouts;
+using Project.Models;
+using Project.Services;
 
 namespace Project.Forms {
-    public partial class UserList : BaseLayout {
+
+    public class UserList : BaseLayout {
+
         private ListView container;
-        private Panel panel2;
 
         public UserList() {
             InitializeComponent();
@@ -22,62 +20,71 @@ namespace Project.Forms {
             return "userList";
         }
 
-        private void UserEditDesign_Load(object sender, EventArgs e) {
+
+        public override void OnShow() {
+            Program app = Program.GetInstance();
+            UserService userService = app.GetService<UserService>("users");
+            List<User> users = userService.GetUsers();
+
+            base.OnShow();
+
+            container.Items.Clear();
+
+            for (int i = 0; i < users.Count; i++) {
+                User user = users[i];
+                ListViewItem item = new ListViewItem(user.username, i);
+                ListViewItem itemid = new ListViewItem(user.id + "", i);
+                item.Tag = user.username;
+                itemid.Tag = user.id;
+                container.Items.Add(item);
+                item.SubItems.Add(user.id + "");
+            }
 
         }
-
         private void InitializeComponent() {
-            this.panel2 = new System.Windows.Forms.Panel();
             this.container = new System.Windows.Forms.ListView();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.container);
-            this.panel2.Location = new System.Drawing.Point(40, 106);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 800);
-            this.panel2.TabIndex = 3;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // container
             // 
             this.container.HideSelection = false;
-            this.container.Location = new System.Drawing.Point(3, 3);
+            this.container.Location = new System.Drawing.Point(40, 129);
             this.container.Name = "container";
-            this.container.Size = new System.Drawing.Size(500, 500);
-            this.container.TabIndex = 4;
+            this.container.Size = new System.Drawing.Size(670, 452);
+            this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.SelectedIndexChanged += new System.EventHandler(this.container_SelectedIndexChanged);
             // 
             // UserList
             // 
-            this.ClientSize = new System.Drawing.Size(1222, 606);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.container);
             this.Name = "UserList";
-            this.Load += new System.EventHandler(this.UserEditDesign_Load_1);
-            this.Controls.SetChildIndex(this.panel2, 0);
-            this.panel2.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.UserList_Load);
+            this.Controls.SetChildIndex(this.container, 0);
             this.ResumeLayout(false);
 
         }
+        // Collums
 
-        private void UserEditDesign_Load_1(object sender, EventArgs e) {
+        private void UserList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Users", 250);
+            container.Columns.Add("users", 100);
+            container.Columns.Add("ID", 100);
         }
 
-        private void label1_Click(object sender, EventArgs e) {
+        private void ButtonNew_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            RoomCreateDesign newScreen = app.GetScreen<RoomCreateDesign>("roomCreate");
 
+            app.ShowScreen(newScreen);
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e) {
-
-        }
+     
 
         private void container_SelectedIndexChanged(object sender, EventArgs e) {
-
+            
         }
     }
+
 }
