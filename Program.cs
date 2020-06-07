@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using Bioscoop_reserveringssysteem.forms;
 using Project.Base;
 using Project.Data;
+using Project.forms;
 using Project.Forms;
 using Project.Services;
 
@@ -47,6 +47,7 @@ namespace Project {
             RegisterScreen(new MovieList());
             RegisterScreen(new MovieCreate());
             RegisterScreen(new MovieEdit());
+            RegisterScreen(new ShowDelete());
             RegisterScreen(new ShowList());
             RegisterScreen(new MovieSelect());
             RegisterScreen(new RoomList());
@@ -59,6 +60,8 @@ namespace Project {
             RegisterScreen(new ShowListUser());
             RegisterScreen(new ChairSelect());
             
+            RegisterScreen(new UserList());
+
         }
 
         protected override void Unload() {

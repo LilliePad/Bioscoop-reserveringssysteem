@@ -57,6 +57,9 @@
     <Compile Include="base\StorageFile.cs" />
     <Compile Include="data\Database.cs" />
     <Compile Include="enums\PrintType.cs" />
+    <Compile Include="forms\ShowDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="forms\ChairEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,7 +78,7 @@
     <Compile Include="forms\ShowListUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\ShowList.cs">
+    <Compile Include="forms\UserList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\MovieSelect.cs">
@@ -138,6 +141,9 @@
     <Compile Include="services\RoomService.cs" />
     <Compile Include="services\ShowService.cs" />
     <Compile Include="services\UserService.cs" />
+    <EmbeddedResource Include="forms\ShowDelete.resx">
+      <DependentUpon>ShowDelete.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\ChairEdit.resx">
       <DependentUpon>ChairEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -153,8 +159,8 @@
     <EmbeddedResource Include="forms\MovieSelect.resx">
       <DependentUpon>MovieSelect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\ReservationCreate.resx">
-      <DependentUpon>ReservationCreate.cs</DependentUpon>
+    <EmbeddedResource Include="forms\ShowList.resx">
+      <DependentUpon>ShowList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ShowCreate.resx">
       <DependentUpon>ShowCreate.cs</DependentUpon>
@@ -188,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\UserEditDesign.resx">
       <DependentUpon>UserEditDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\UserList.resx">
+      <DependentUpon>UserList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
