@@ -113,7 +113,7 @@ namespace Project.Base {
         }
 
         public void ShowScreen(BaseScreen screen) {
-            if(screen == null) {
+            if(screen == null) {    
                 throw new ArgumentException("Screen can't be null");
             }
 
