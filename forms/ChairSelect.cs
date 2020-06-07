@@ -20,6 +20,7 @@ namespace Project.Forms {
         private Label label2;
         private ListView container;
         private Show show;
+        public List<Chair> chairs = new List<Chair>();
 
 
 
@@ -29,6 +30,7 @@ namespace Project.Forms {
         private int HighestRow;
         private TableLayoutPanel tableLayoutPanel1;
         private Room room;
+        private Movie movie;
         public ChairSelect() {
             InitializeComponent();
         }
@@ -44,7 +46,9 @@ namespace Project.Forms {
         public void SetShow(Show show) {
             this.show = show;
         }
-
+        public void SetMovie(Movie movie) {
+            this.movie = movie;
+        }
 
         public override void OnShow() {
             Program app = Program.GetInstance();
@@ -59,7 +63,7 @@ namespace Project.Forms {
             tableLayoutPanel1.ColumnStyles.Clear();
 
             try {
-                RoomNumber = room.number;
+                RoomNumber = show.roomId;
                 chairService.GetChairsByRoom(roomService.GetRoomByNumber(RoomNumber));
             }
             catch (FormatException) {
@@ -254,8 +258,8 @@ namespace Project.Forms {
             ReservationCreate reservationScreen = app.GetScreen<ReservationCreate>("reservationCreate");
 
             Chair chair = chairService.GetChairByRoomAndPosition(roomService.GetRoomByNumber(RoomNumber), 1, 1);
-
-
+            int roomId = show.roomId;
+            Room room = roomService.GetRoomById(roomId);
 
 
 
@@ -269,13 +273,12 @@ namespace Project.Forms {
             int row = int.Parse(parts[0]);
             int col = int.Parse(parts[1]);
 
+            chair = chairService.GetChairByRoomAndPosition(room, row, col);
+            chairs.Add(chair);
 
 
 
-
-            reservationScreen.SetRow(row);
-            reservationScreen.SetColum(col);
-            reservationScreen.SetRoom(room);
+            reservationScreen.Setchair(chair);
             app.ShowScreen(reservationScreen);
 
         }

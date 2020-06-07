@@ -8,7 +8,7 @@ using Project.Helpers;
 using Project;
 using Project.Forms;
 
-namespace Bioscoop_reserveringssysteem.forms {
+namespace Projects.Forms {
     public partial class ReservationDetail : BaseLayout {
         public ReservationDetail() {
             InitializeComponent();
