@@ -44,19 +44,34 @@ namespace Project {
             RegisterService(new ReservationService());
 
             // Register screens
+            // movie screens
             RegisterScreen(new MovieList());
             RegisterScreen(new MovieCreate());
-            RegisterScreen(new MovieEdit());
-            RegisterScreen(new MovieShowList());
+            RegisterScreen(new MovieEdit());        
             RegisterScreen(new MovieSelect());
+
+            // room screens
             RegisterScreen(new RoomList());
-            RegisterScreen(new UserChangePassword());
             RegisterScreen(new RoomCreateDesign());
             RegisterScreen(new RoomEdit());
-            RegisterScreen(new ChairEdit());
+
+            // shows screens
+            RegisterScreen(new ShowDelete());
+            RegisterScreen(new ShowList());
             RegisterScreen(new ShowCreate());
+
+            // chair screens
+            RegisterScreen(new ChairEdit()); 
+            RegisterScreen(new ChairSelect());
+
+            // user screens
             RegisterScreen(new UserList());
-            RegisterScreen(new ReservationList());
+
+            RegisterScreen(new UserChangePassword());
+            RegisterScreen(new UserEditDesign());
+
+            RegisterScreen(new ReservationCreate());
+
 
         }
 

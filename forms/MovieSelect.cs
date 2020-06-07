@@ -6,6 +6,9 @@ using Project.Base;
 using Project.Models;
 using Project.Services;
 using Project.Helpers;
+using Project;
+using Project.Forms;
+
 
 namespace Project.Forms {
 
@@ -207,12 +210,12 @@ namespace Project.Forms {
         void MyHandler(object sender, EventArgs e, string showId) {
             Program app = Program.GetInstance();
             ShowService showService = app.GetService<ShowService>("shows");
-            //ChairEdit editScreen = app.GetScreen<ChairEdit>("chairEdit");
+            ReservationCreate reservationScreen = app.GetScreen<ReservationCreate>("reservationCreate");
 
             List<Show> shows = showService.GetShowsByMovie(movie);
             Show show = shows[int.Parse(showId)];
-            //editScreen.SetShow(show);
-            //app.ShowScreen(editScreen);
+            reservationScreen.GetShow(show);
+            app.ShowScreen(reservationScreen);
         }
 
         private void Discription_input_TextChanged(object sender, EventArgs e) {

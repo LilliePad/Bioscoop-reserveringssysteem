@@ -21,33 +21,23 @@ namespace Project.Forms {
             return "showList";
         }
 
-        public override bool IsDefault() {
-            return false;
-        }
+  
 
         public override void OnShow() {
             Program app = Program.GetInstance();
+            ShowService showService = app.GetService<ShowService>("shows");
             MovieService movieService = app.GetService<MovieService>("movies");
-            ImageList imgs = new ImageList();
-            List<Movie> movies = movieService.GetMovies();
+            List<Show> shows = showService.GetShows();
 
             base.OnShow();
-
             container.Items.Clear();
-            imgs.ImageSize = new Size(100, 100);
-
-            for (int i = 0; i < movies.Count; i++) {
-                Movie movie = movies[i];
-                ListViewItem item = new ListViewItem(movie.name, i);
-
-                item.Tag = movie.id;
-
-                imgs.Images.Add(movie.GetImage());
+            
+            for (int i = 0; i < shows.Count; i++) {
+                Show show = shows[i];
+                ListViewItem item = new ListViewItem("Show id = " + show.id, i);
+                item.Tag = show.id;
                 container.Items.Add(item);
             }
-
-            //BIND IMGS TO LISTVIEW
-            container.SmallImageList = imgs;
         }
 
         private void InitializeComponent() {
@@ -76,12 +66,12 @@ namespace Project.Forms {
             this.movieCreateButton.UseVisualStyleBackColor = true;
             this.movieCreateButton.Click += new System.EventHandler(this.ButtonNew_Click);
             // 
-            // MovieList
+            // ShowList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.movieCreateButton);
             this.Controls.Add(this.container);
-            this.Name = "MovieList";
+            this.Name = "ShowList";
             this.Load += new System.EventHandler(this.MovieList_Load);
             this.Controls.SetChildIndex(this.container, 0);
             this.Controls.SetChildIndex(this.movieCreateButton, 0);
@@ -91,7 +81,7 @@ namespace Project.Forms {
 
         private void MovieList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Films", 250);
+            container.Columns.Add("Shows", 500);
         }
 
         private void ButtonNew_Click(object sender, EventArgs e) {
@@ -103,8 +93,8 @@ namespace Project.Forms {
 
         private void ButtonEdit_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            MovieService movieService = app.GetService<MovieService>("movies");
-            MovieSelect editScreen = app.GetScreen<MovieSelect>("movieSelect");
+            ShowService showService = app.GetService<ShowService>("shows");
+            ShowDelete editScreen = app.GetScreen<ShowDelete>("showDelete");
 
             // Get the clicked item
             ListViewItem item = container.SelectedItems[0];
@@ -114,29 +104,16 @@ namespace Project.Forms {
                 return;
             }
 
-            // Find the movie
+            // Find the show
             int id = (int) item.Tag;
-            Movie movie = movieService.GetMovieById(id);
+            Show show = showService.GetShowById(id);
 
-            if(movie == null) {
+            if(show == null) {
                 MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            UserService userService = app.GetService<UserService>("users");
-            User currentUser = userService.GetCurrentUser();
-
-            if (currentUser.admin == true) {
-                editScreen.SetMovie(movie);
-                app.ShowScreen(editScreen);
-            }
-
-            else {
-
-            }
-
-
-            editScreen.SetMovie(movie);
+            editScreen.SetShow(show);
             app.ShowScreen(editScreen);
         }
 

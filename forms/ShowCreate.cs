@@ -76,9 +76,9 @@ namespace Project.Forms {
             this.Create_a_show_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Create_a_show_text.Location = new System.Drawing.Point(3, 0);
             this.Create_a_show_text.Name = "Create_a_show_text";
-            this.Create_a_show_text.Size = new System.Drawing.Size(355, 58);
+            this.Create_a_show_text.Size = new System.Drawing.Size(472, 58);
             this.Create_a_show_text.TabIndex = 3;
-            this.Create_a_show_text.Text = "Create a Show";
+            this.Create_a_show_text.Text = "Maak een show aan";
             // 
             // Name_text
             // 
@@ -107,7 +107,7 @@ namespace Project.Forms {
             this.Show_create_button.Name = "Show_create_button";
             this.Show_create_button.Size = new System.Drawing.Size(133, 39);
             this.Show_create_button.TabIndex = 12;
-            this.Show_create_button.Text = "Create Show";
+            this.Show_create_button.Text = "Show aanmaken";
             this.Show_create_button.UseVisualStyleBackColor = true;
             this.Show_create_button.Click += new System.EventHandler(this.button1_Click);
             // 
