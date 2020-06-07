@@ -12,21 +12,21 @@ namespace Project.Forms.Layouts {
     public class BaseLayout : BaseScreen {
 
         private Panel navBar;
+
         private RoundedButton navLink1;
         private RoundedButton navLink2;
         private RoundedButton navLink3;
         private RoundedButton navLink4;
         private RoundedButton navLink5;
+
         private TextBox navLoginUsername;
         private TextBox navLoginPassword;
         private Button navLoginButton;
-
-        private string usernameValue;
         private Button navRegisterButton;
+
         private Button navAccountButton;
         private Button navLogoutButton;
         private Label navAccountName;
-        private string passwordValue;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -95,11 +95,10 @@ namespace Project.Forms.Layouts {
             this.navAccountName.Location = new System.Drawing.Point(1663, 16);
             this.navAccountName.Name = "navAccountName";
             this.navAccountName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.navAccountName.Size = new System.Drawing.Size(132, 20);
+            this.navAccountName.Size = new System.Drawing.Size(189, 29);
             this.navAccountName.TabIndex = 14;
             this.navAccountName.Text = "<accountName>";
             this.navAccountName.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.navAccountName.Click += new System.EventHandler(this.label1_Click);
             // 
             // navLink1
             // 
@@ -179,10 +178,9 @@ namespace Project.Forms.Layouts {
             this.navLoginUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navLoginUsername.Location = new System.Drawing.Point(1642, 16);
             this.navLoginUsername.Name = "navLoginUsername";
-            this.navLoginUsername.Size = new System.Drawing.Size(132, 26);
+            this.navLoginUsername.Size = new System.Drawing.Size(132, 34);
             this.navLoginUsername.TabIndex = 7;
             this.navLoginUsername.Text = "Gebruikersnaam";
-            this.navLoginUsername.TextChanged += new System.EventHandler(this.NavLoginUsername_TextChanged);
             this.navLoginUsername.Enter += new System.EventHandler(this.LoginUsernameRemoveText);
             this.navLoginUsername.Leave += new System.EventHandler(this.LoginUsernameAddText);
             // 
@@ -192,10 +190,9 @@ namespace Project.Forms.Layouts {
             this.navLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navLoginPassword.Location = new System.Drawing.Point(1642, 58);
             this.navLoginPassword.Name = "navLoginPassword";
-            this.navLoginPassword.Size = new System.Drawing.Size(132, 26);
+            this.navLoginPassword.Size = new System.Drawing.Size(132, 34);
             this.navLoginPassword.TabIndex = 8;
             this.navLoginPassword.Text = "Wachtwoord";
-            this.navLoginPassword.TextChanged += new System.EventHandler(this.NavLoginPassword_TextChanged);
             this.navLoginPassword.Enter += new System.EventHandler(this.LoginPasswordRemoveText);
             this.navLoginPassword.Leave += new System.EventHandler(this.LoginPasswordAddText);
             // 
@@ -280,15 +277,6 @@ namespace Project.Forms.Layouts {
 
         }
 
-        private void NavLoginUsername_TextChanged(object sender, EventArgs e) {
-            usernameValue = navLoginUsername.Text;
-
-        }
-
-        private void NavLoginPassword_TextChanged(object sender, EventArgs e) {
-            passwordValue = navLoginPassword.Text;
-        }
-
         public void LoginUsernameRemoveText(object sender, EventArgs e) {
             if (navLoginUsername.Text == "Gebruikersnaam")
                 navLoginUsername.Text = "";
@@ -317,10 +305,10 @@ namespace Project.Forms.Layouts {
             UserService userService = Program.GetInstance().GetService<UserService>("users");
 
             // Find user
-            User user = userService.GetUserByUsername(usernameValue);
+            User user = userService.GetUserByUsername(navLoginUsername.Text);
 
             // Error if user or password invalid
-            if (user == null || !user.Authenticate(passwordValue)) {
+            if (user == null || !user.Authenticate(navLoginPassword.Text)) {
                 MessageBox.Show("Invalid username or password");
                 return;
             }
@@ -409,9 +397,6 @@ namespace Project.Forms.Layouts {
             app.ShowScreen(newScreen);
         }
 
-        private void label1_Click(object sender, EventArgs e) {
-
-        }
     }
 
 }

@@ -42,7 +42,14 @@ namespace Project.forms {
             base.OnShow();
 
             // Show admin checkbox if the user is an admin
+            adminLabel.Visible = allowAdmin;
             adminInput.Visible = allowAdmin;
+
+            // Reset values
+            fullNameInput.Text = "";
+            usernameInput.Text = "";
+            passwordInput.Text = "";
+            adminInput.Checked = false;
         }
 
         private void InitializeComponent() {
@@ -167,6 +174,7 @@ namespace Project.forms {
         private void SaveButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             UserService userService = app.GetService<UserService>("users");
+            User currentUser = userService.GetCurrentUser();
 
             // Save user
             User user = new User(fullNameInput.Text, usernameInput.Text, passwordInput.Text, adminInput.Checked);
@@ -176,9 +184,21 @@ namespace Project.forms {
                 return;
             }
 
-            // Redirect to user list
+            // Login if not logged in already
+            if(currentUser == null) {
+                userService.SetCurrentUser(user);
+                currentUser = user;
+            }
+
+            // Redirect depending on permission
             UserList userList = app.GetScreen<UserList>("userList");
-            app.ShowScreen(userList);
+            ShowList showList = app.GetScreen<ShowList>("showList");
+
+            if (currentUser.admin) {
+                app.ShowScreen(userList);
+            } else {
+                app.ShowScreen(showList);
+            }
         }
 
     }
