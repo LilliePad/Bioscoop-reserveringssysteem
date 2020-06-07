@@ -214,6 +214,7 @@ namespace Project.Forms.Layouts {
             // 
             this.ClientSize = new System.Drawing.Size(1260, 673);
             this.Controls.Add(this.navBar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BaseLayout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
