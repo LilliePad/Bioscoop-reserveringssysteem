@@ -105,6 +105,9 @@ namespace Project.Forms {
             Program app = Program.GetInstance();
             MovieService movieService = app.GetService<MovieService>("movies");
             MovieSelect editScreen = app.GetScreen<MovieSelect>("movieSelect");
+            ShowService showService = app.GetService<ShowService>("shows");
+
+
 
             // Get the clicked item
             ListViewItem item = container.SelectedItems[0];
@@ -117,8 +120,9 @@ namespace Project.Forms {
             // Find the movie
             int id = (int) item.Tag;
             Movie movie = movieService.GetMovieById(id);
+            Show show = showService.GetShowById(id);
 
-            if(movie == null) {
+            if (movie == null) {
                 MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -136,7 +140,7 @@ namespace Project.Forms {
             }
 
 
-            editScreen.SetMovie(movie);
+            editScreen.SetShow(show);
             app.ShowScreen(editScreen);
         }
 
