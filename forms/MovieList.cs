@@ -21,10 +21,6 @@ namespace Project.Forms {
             return "movieList";
         }
 
-        public override bool IsDefault() {
-            return true;
-        }
-
         public override bool RequireLogin() {
             return false;
         }

@@ -405,7 +405,7 @@ namespace Project.Forms.Layouts {
 
         private void navLink5_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            ShowList newScreen = app.GetScreen<ShowList>("showList");
+            ShowListUser newScreen = app.GetScreen<ShowListUser>("showListUser");
             app.ShowScreen(newScreen);
         }
 
