@@ -10,7 +10,7 @@ namespace Project.Models {
         public int id = -1;
         public string fullName;
         public string username;
-        public string password;
+        public string password { get; private set; }
         public bool admin;
 
         public User(UserRecord record) {
@@ -24,7 +24,7 @@ namespace Project.Models {
         public User(string fullName, string username, string password, bool admin) {
             this.fullName = fullName;
             this.username = username;
-            this.password = password;
+            SetPassword(password);
             this.admin = admin;
         }
 
@@ -58,6 +58,11 @@ namespace Project.Models {
             }
 
             return true;
+        }
+
+        // Sets the password
+        public void SetPassword(string password) {
+            this.password = password != null ? EncryptionHelper.CreateHash(password) : null;
         }
 
         // Returns whether the specified password is correct

@@ -107,7 +107,7 @@ namespace Project.Forms {
             this.Show_create_button.Name = "Show_create_button";
             this.Show_create_button.Size = new System.Drawing.Size(133, 39);
             this.Show_create_button.TabIndex = 12;
-            this.Show_create_button.Text = "Create Show";
+            this.Show_create_button.Text = "Show aanmaken";
             this.Show_create_button.UseVisualStyleBackColor = true;
             this.Show_create_button.Click += new System.EventHandler(this.button1_Click);
             // 

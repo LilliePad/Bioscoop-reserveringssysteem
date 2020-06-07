@@ -66,11 +66,11 @@ namespace Project {
 
             // user screens
             RegisterScreen(new UserList());
+            RegisterScreen(new UserCreate());
             RegisterScreen(new UserChangePassword());
             RegisterScreen(new UserEditDesign());
 
             RegisterScreen(new ReservationCreate());
-
         }
 
         protected override void Unload() {

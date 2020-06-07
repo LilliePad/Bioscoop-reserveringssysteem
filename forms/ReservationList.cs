@@ -8,41 +8,44 @@ using Project.Services;
 
 namespace Project.Forms {
 
-    public class UserList : BaseLayout {
+    public class ReservationList : BaseLayout {
 
         private ListView container;
+        private Button movieCreateButton;
 
-        public UserList() {
+        public ReservationList() {
             InitializeComponent();
         }
 
         public override string GetHandle() {
-            return "userList";
+            return "reservationList";
         }
 
 
         public override void OnShow() {
             Program app = Program.GetInstance();
-            UserService userService = app.GetService<UserService>("users");
-            List<User> users = userService.GetUsers();
+            ReservationService ReservationService = app.GetService<ReservationService>("reservations");
+            List<Reservation> reservations = ReservationService.GetReservations();
 
             base.OnShow();
 
             container.Items.Clear();
 
-            for (int i = 0; i < users.Count; i++) {
-                User user = users[i];
-                ListViewItem item = new ListViewItem(user.username, i);
-                ListViewItem itemid = new ListViewItem(user.id + "", i);
-                item.Tag = user.username;
-                itemid.Tag = user.id;
+            for (int i = 0; i < reservations.Count; i++) {
+                Reservation reservation = reservations[i];
+                ListViewItem item = new ListViewItem(reservation.userId + "", i);
+
+                item.Tag = reservation.showId;
                 container.Items.Add(item);
-                item.SubItems.Add(user.id + "");
+                item.SubItems.Add(reservation.showId + "");
+                item.SubItems.Add(reservation.chairId + "");
+
             }
 
         }
         private void InitializeComponent() {
             this.container = new System.Windows.Forms.ListView();
+            this.movieCreateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // container
@@ -55,35 +58,37 @@ namespace Project.Forms {
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.SelectedIndexChanged += new System.EventHandler(this.container_SelectedIndexChanged);
             // 
-            // UserList
+            // movieCreateButton
+            // 
+            this.movieCreateButton.Location = new System.Drawing.Point(0, 0);
+            this.movieCreateButton.Name = "movieCreateButton";
+            this.movieCreateButton.Size = new System.Drawing.Size(75, 23);
+            this.movieCreateButton.TabIndex = 2;
+            // 
+            // ReservationList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.movieCreateButton);
             this.Controls.Add(this.container);
-            this.Name = "UserList";
-            this.Load += new System.EventHandler(this.UserList_Load);
+            this.Name = "ReservationList";
+            this.Load += new System.EventHandler(this.ReservationList_Load);
             this.Controls.SetChildIndex(this.container, 0);
+            this.Controls.SetChildIndex(this.movieCreateButton, 0);
             this.ResumeLayout(false);
 
         }
-        // Collums
 
-        private void UserList_Load(object sender, System.EventArgs e) {
+        private void ReservationList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("users", 100);
-            container.Columns.Add("ID", 100);
+            container.Columns.Add("User", 100);
+            container.Columns.Add("Movie", 100);
+            container.Columns.Add("Chair", 100);
         }
 
-        private void ButtonNew_Click(object sender, EventArgs e) {
-            Program app = Program.GetInstance();
-            RoomCreateDesign newScreen = app.GetScreen<RoomCreateDesign>("roomCreate");
-
-            app.ShowScreen(newScreen);
-        }
-
-     
+       
 
         private void container_SelectedIndexChanged(object sender, EventArgs e) {
-            
+
         }
     }
 

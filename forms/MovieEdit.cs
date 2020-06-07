@@ -24,9 +24,9 @@ namespace Project.Forms {
         private Label Name_text;
         private PictureBox pictureBox1;
         private Button Delete_movie_button;
-        private TextBox Movie_ID_input;
         private Label label1;
         private Movie movie;
+        private Label movieId;
         private StorageFile image;
 
         public MovieEdit() {
@@ -41,7 +41,9 @@ namespace Project.Forms {
             this.movie = movie;
         }
 
-      
+        public override void OnShow() {
+            this.movieId.Text = "" + movie.id;
+        }
 
         private void label3_Click(object sender, EventArgs e) {
 
@@ -70,7 +72,6 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Movie_ID_input = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Delete_movie_button = new System.Windows.Forms.Button();
             this.Create_a_movie_text = new System.Windows.Forms.Label();
@@ -86,13 +87,14 @@ namespace Project.Forms {
             this.label6 = new System.Windows.Forms.Label();
             this.Name_text = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.movieId = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.Movie_ID_input);
+            this.panel1.Controls.Add(this.movieId);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.Delete_movie_button);
             this.panel1.Controls.Add(this.Create_a_movie_text);
@@ -113,21 +115,13 @@ namespace Project.Forms {
             this.panel1.Size = new System.Drawing.Size(993, 534);
             this.panel1.TabIndex = 20;
             // 
-            // Movie_ID_input
-            // 
-            this.Movie_ID_input.Location = new System.Drawing.Point(125, 62);
-            this.Movie_ID_input.Name = "Movie_ID_input";
-            this.Movie_ID_input.Size = new System.Drawing.Size(495, 20);
-            this.Movie_ID_input.TabIndex = 21;
-            this.Movie_ID_input.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label1.Location = new System.Drawing.Point(10, 62);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 17);
+            this.label1.Size = new System.Drawing.Size(75, 20);
             this.label1.TabIndex = 20;
             this.label1.Text = "Movie ID";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -150,7 +144,7 @@ namespace Project.Forms {
             this.Create_a_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Create_a_movie_text.Location = new System.Drawing.Point(3, 0);
             this.Create_a_movie_text.Name = "Create_a_movie_text";
-            this.Create_a_movie_text.Size = new System.Drawing.Size(239, 46);
+            this.Create_a_movie_text.Size = new System.Drawing.Size(299, 58);
             this.Create_a_movie_text.TabIndex = 3;
             this.Create_a_movie_text.Text = "Edit a movie";
             // 
@@ -160,9 +154,9 @@ namespace Project.Forms {
             this.Discription_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Discription_text.Location = new System.Drawing.Point(10, 131);
             this.Discription_text.Name = "Discription_text";
-            this.Discription_text.Size = new System.Drawing.Size(74, 17);
+            this.Discription_text.Size = new System.Drawing.Size(101, 20);
             this.Discription_text.TabIndex = 5;
-            this.Discription_text.Text = "Discription";
+            this.Discription_text.Text = "Beschrijving";
             // 
             // Playtime_text
             // 
@@ -170,9 +164,9 @@ namespace Project.Forms {
             this.Playtime_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Playtime_text.Location = new System.Drawing.Point(9, 360);
             this.Playtime_text.Name = "Playtime_text";
-            this.Playtime_text.Size = new System.Drawing.Size(61, 17);
+            this.Playtime_text.Size = new System.Drawing.Size(73, 20);
             this.Playtime_text.TabIndex = 6;
-            this.Playtime_text.Text = "Playtime";
+            this.Playtime_text.Text = "Speeltijd";
             // 
             // Movie_Picture_text
             // 
@@ -180,9 +174,9 @@ namespace Project.Forms {
             this.Movie_Picture_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Movie_Picture_text.Location = new System.Drawing.Point(700, 82);
             this.Movie_Picture_text.Name = "Movie_Picture_text";
-            this.Movie_Picture_text.Size = new System.Drawing.Size(93, 17);
+            this.Movie_Picture_text.Size = new System.Drawing.Size(117, 20);
             this.Movie_Picture_text.TabIndex = 11;
-            this.Movie_Picture_text.Text = "Movie Picture";
+            this.Movie_Picture_text.Text = "afbeelding film";
             // 
             // Movie_edit_button
             // 
@@ -200,7 +194,7 @@ namespace Project.Forms {
             this.Search_picture_button.Name = "Search_picture_button";
             this.Search_picture_button.Size = new System.Drawing.Size(133, 39);
             this.Search_picture_button.TabIndex = 13;
-            this.Search_picture_button.Text = "Search Picture";
+            this.Search_picture_button.Text = "Zoek afbeelding";
             this.Search_picture_button.UseVisualStyleBackColor = true;
             this.Search_picture_button.Click += new System.EventHandler(this.Search_picture_button_Click);
             // 
@@ -208,7 +202,7 @@ namespace Project.Forms {
             // 
             this.NameMovie_input.Location = new System.Drawing.Point(125, 95);
             this.NameMovie_input.Name = "NameMovie_input";
-            this.NameMovie_input.Size = new System.Drawing.Size(495, 20);
+            this.NameMovie_input.Size = new System.Drawing.Size(495, 22);
             this.NameMovie_input.TabIndex = 14;
             this.NameMovie_input.TextChanged += new System.EventHandler(this.NameMovie_input_TextChanged_1);
             // 
@@ -225,7 +219,7 @@ namespace Project.Forms {
             // 
             this.Duration_input.Location = new System.Drawing.Point(125, 360);
             this.Duration_input.Name = "Duration_input";
-            this.Duration_input.Size = new System.Drawing.Size(495, 20);
+            this.Duration_input.Size = new System.Drawing.Size(495, 22);
             this.Duration_input.TabIndex = 16;
             this.Duration_input.TextChanged += new System.EventHandler(this.Duration_input_TextChanged_1);
             // 
@@ -233,7 +227,7 @@ namespace Project.Forms {
             // 
             this.Genre_input.Location = new System.Drawing.Point(125, 394);
             this.Genre_input.Name = "Genre_input";
-            this.Genre_input.Size = new System.Drawing.Size(495, 20);
+            this.Genre_input.Size = new System.Drawing.Size(495, 22);
             this.Genre_input.TabIndex = 17;
             this.Genre_input.TextChanged += new System.EventHandler(this.Genre_input_TextChanged_1);
             // 
@@ -243,7 +237,7 @@ namespace Project.Forms {
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label6.Location = new System.Drawing.Point(10, 394);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 17);
+            this.label6.Size = new System.Drawing.Size(55, 20);
             this.label6.TabIndex = 18;
             this.label6.Text = "Genre";
             // 
@@ -253,7 +247,7 @@ namespace Project.Forms {
             this.Name_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Name_text.Location = new System.Drawing.Point(10, 95);
             this.Name_text.Name = "Name_text";
-            this.Name_text.Size = new System.Drawing.Size(45, 17);
+            this.Name_text.Size = new System.Drawing.Size(53, 20);
             this.Name_text.TabIndex = 4;
             this.Name_text.Text = "Name";
             this.Name_text.Click += new System.EventHandler(this.Name_text_Click);
@@ -266,6 +260,17 @@ namespace Project.Forms {
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
+            // 
+            // movieId
+            // 
+            this.movieId.AutoSize = true;
+            this.movieId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.movieId.Location = new System.Drawing.Point(121, 62);
+            this.movieId.Name = "movieId";
+            this.movieId.Size = new System.Drawing.Size(75, 20);
+            this.movieId.TabIndex = 21;
+            this.movieId.Text = "Movie ID";
+            this.movieId.Click += new System.EventHandler(this.movieId_Click);
             // 
             // MovieEdit
             // 
@@ -350,6 +355,10 @@ namespace Project.Forms {
             catch (Exception e) {
                 MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void movieId_Click(object sender, EventArgs e) {
+
         }
     }
 

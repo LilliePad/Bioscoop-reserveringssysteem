@@ -20,7 +20,7 @@ namespace Project.Helpers {
                         list += ", ";
                     }
 
-                    list += attribute + " -> " + error;
+                    list += attribute.Key + " -> " + error;
                 }
             }
 
