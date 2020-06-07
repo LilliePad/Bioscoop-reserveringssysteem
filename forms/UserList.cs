@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using Project.Forms.Layouts;
+using Project.Helpers;
 using Project.Models;
 using Project.Services;
 
@@ -10,6 +10,7 @@ namespace Project.Forms {
 
     public class UserList : BaseLayout {
 
+        private Button userCreateButton;
         private ListView container;
 
         public UserList() {
@@ -20,6 +21,9 @@ namespace Project.Forms {
             return "userList";
         }
 
+        public override bool RequireAdmin() {
+            return true;
+        }
 
         public override void OnShow() {
             Program app = Program.GetInstance();
@@ -28,21 +32,23 @@ namespace Project.Forms {
 
             base.OnShow();
 
+            // Enforce permissions
+            RequireAdmin();
+
             container.Items.Clear();
 
             for (int i = 0; i < users.Count; i++) {
                 User user = users[i];
-                ListViewItem item = new ListViewItem(user.username, i);
-                ListViewItem itemid = new ListViewItem(user.id + "", i);
-                item.Tag = user.username;
-                itemid.Tag = user.id;
-                container.Items.Add(item);
-                item.SubItems.Add(user.id + "");
-            }
+                ListViewItem item = new ListViewItem(user.id + " - " + user.username, i);
 
+                item.Tag = user.id;
+                container.Items.Add(item);
+            }
         }
+
         private void InitializeComponent() {
             this.container = new System.Windows.Forms.ListView();
+            this.userCreateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // container
@@ -53,38 +59,70 @@ namespace Project.Forms {
             this.container.Size = new System.Drawing.Size(670, 452);
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
-            this.container.SelectedIndexChanged += new System.EventHandler(this.container_SelectedIndexChanged);
+            this.container.Click += new System.EventHandler(this.ListItem_Click);
+            // 
+            // userCreateButton
+            // 
+            this.userCreateButton.Location = new System.Drawing.Point(40, 601);
+            this.userCreateButton.Name = "userCreateButton";
+            this.userCreateButton.Size = new System.Drawing.Size(110, 51);
+            this.userCreateButton.TabIndex = 4;
+            this.userCreateButton.Text = "Nieuw";
+            this.userCreateButton.UseVisualStyleBackColor = true;
+            this.userCreateButton.Click += new System.EventHandler(this.UserCreateButton_Click);
             // 
             // UserList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.userCreateButton);
             this.Controls.Add(this.container);
             this.Name = "UserList";
             this.Load += new System.EventHandler(this.UserList_Load);
             this.Controls.SetChildIndex(this.container, 0);
+            this.Controls.SetChildIndex(this.userCreateButton, 0);
             this.ResumeLayout(false);
 
         }
-        // Collums
 
         private void UserList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("users", 100);
-            container.Columns.Add("ID", 100);
+            container.Columns.Add("Gebruikers", 250);
         }
 
-        private void ButtonNew_Click(object sender, EventArgs e) {
+        private void ListItem_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            RoomCreateDesign newScreen = app.GetScreen<RoomCreateDesign>("roomCreate");
+            UserService userService = app.GetService<UserService>("users");
 
-            app.ShowScreen(newScreen);
+            // Get the clicked item
+            ListViewItem item = container.SelectedItems[0];
+
+            if (item == null) {
+                GuiHelper.ShowError("Error: Geen item geselecteerd");
+                return;
+            }
+
+            // Find the movie
+            int id = (int)item.Tag;
+            User user = userService.GetUserById(id);
+
+            if (user == null) {
+                GuiHelper.ShowError("Error: Kon geen gebruiker vinden voor dit item");
+                return;
+            }
+
+            // Show screen
+            UserEdit editScreen = app.GetScreen<UserEdit>("userEdit");
+
+            editScreen.SetUser(user);
+            app.ShowScreen(editScreen);
         }
 
-     
-
-        private void container_SelectedIndexChanged(object sender, EventArgs e) {
-            
+        private void UserCreateButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            UserCreate userCreate = app.GetScreen<UserCreate>("userCreate");
+            app.ShowScreen(userCreate);
         }
+
     }
 
 }

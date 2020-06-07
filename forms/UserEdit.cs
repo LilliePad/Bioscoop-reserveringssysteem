@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Project.Forms;
+using Project.Errors;
 using Project.Forms.Layouts;
 using Project.Helpers;
 using Project.Models;
@@ -8,8 +8,9 @@ using Project.Services;
 
 namespace Project.Forms {
 
-    public class UserCreate : BaseLayout {
+    public class UserEdit : BaseLayout {
 
+        // Frontend
         private Panel content;
 
         private Label fullNameLabel;
@@ -21,45 +22,47 @@ namespace Project.Forms {
         private Label adminLabel;
         private CheckBox adminInput;
 
-        private Label passwordLabel;
-        private TextBox passwordInput;
-
         private Button saveButton;
+        private Button changePasswordButton;
+        private Button cancelButton;
+        private Button deleteButton;
 
-        public UserCreate() {
+        // Backend
+        private User user;
+
+        public UserEdit() {
             InitializeComponent();
         }
 
         public override string GetHandle() {
-            return "userCreate";
-        }
-
-        public override bool RequireLogin() {
-            return false;
+            return "userEdit";
         }
 
         public override void OnShow() {
             UserService userService = Program.GetInstance().GetService<UserService>("users");
-            User user = userService.GetCurrentUser();
-            bool allowAdmin = user != null && user.admin;
+            User currentUser = userService.GetCurrentUser();
 
             base.OnShow();
 
-            // Show admin checkbox if the user is an admin
-            adminLabel.Visible = allowAdmin;
-            adminInput.Visible = allowAdmin;
+            if(user.id != currentUser.id && !currentUser.admin) {
+                throw new PermissionException("Je kunt alleen je eigen account bewerken");
+            }
 
-            // Reset values
-            fullNameInput.Text = "";
-            usernameInput.Text = "";
-            passwordInput.Text = "";
-            adminInput.Checked = false;
+            // Show admin/delete if the user is an admin
+            adminLabel.Visible = currentUser.admin;
+            adminInput.Visible = currentUser.admin;
+            cancelButton.Visible = currentUser.admin;
+            deleteButton.Visible = currentUser.admin  && currentUser.id != user.id;
+
+            // Set values
+            fullNameInput.Text = user.fullName;
+            usernameInput.Text = user.username;
+            adminInput.Checked = user.admin;
         }
 
         private void InitializeComponent() {
             this.content = new System.Windows.Forms.Panel();
-            this.passwordInput = new System.Windows.Forms.TextBox();
-            this.passwordLabel = new System.Windows.Forms.Label();
+            this.changePasswordButton = new System.Windows.Forms.Button();
             this.fullNameLabel = new System.Windows.Forms.Label();
             this.fullNameInput = new System.Windows.Forms.TextBox();
             this.usernameLabel = new System.Windows.Forms.Label();
@@ -67,13 +70,16 @@ namespace Project.Forms {
             this.adminLabel = new System.Windows.Forms.Label();
             this.adminInput = new System.Windows.Forms.CheckBox();
             this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.content.SuspendLayout();
             this.SuspendLayout();
             // 
             // content
             // 
-            this.content.Controls.Add(this.passwordInput);
-            this.content.Controls.Add(this.passwordLabel);
+            this.content.Controls.Add(this.deleteButton);
+            this.content.Controls.Add(this.cancelButton);
+            this.content.Controls.Add(this.changePasswordButton);
             this.content.Controls.Add(this.fullNameLabel);
             this.content.Controls.Add(this.fullNameInput);
             this.content.Controls.Add(this.usernameLabel);
@@ -86,22 +92,15 @@ namespace Project.Forms {
             this.content.Size = new System.Drawing.Size(715, 443);
             this.content.TabIndex = 2;
             // 
-            // passwordInput
+            // changePasswordButton
             // 
-            this.passwordInput.Location = new System.Drawing.Point(258, 157);
-            this.passwordInput.Name = "passwordInput";
-            this.passwordInput.PasswordChar = '*';
-            this.passwordInput.Size = new System.Drawing.Size(272, 20);
-            this.passwordInput.TabIndex = 13;
-            // 
-            // passwordLabel
-            // 
-            this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(137, 160);
-            this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(68, 13);
-            this.passwordLabel.TabIndex = 12;
-            this.passwordLabel.Text = "Wachtwoord";
+            this.changePasswordButton.Location = new System.Drawing.Point(141, 238);
+            this.changePasswordButton.Name = "changePasswordButton";
+            this.changePasswordButton.Size = new System.Drawing.Size(140, 23);
+            this.changePasswordButton.TabIndex = 14;
+            this.changePasswordButton.Text = "Wachtwoord aanpassen";
+            this.changePasswordButton.UseVisualStyleBackColor = true;
+            this.changePasswordButton.Click += new System.EventHandler(this.ChangePasswordButton_Click);
             // 
             // fullNameLabel
             // 
@@ -138,7 +137,7 @@ namespace Project.Forms {
             // adminLabel
             // 
             this.adminLabel.AutoSize = true;
-            this.adminLabel.Location = new System.Drawing.Point(137, 198);
+            this.adminLabel.Location = new System.Drawing.Point(137, 161);
             this.adminLabel.Name = "adminLabel";
             this.adminLabel.Size = new System.Drawing.Size(36, 13);
             this.adminLabel.TabIndex = 10;
@@ -147,7 +146,7 @@ namespace Project.Forms {
             // adminInput
             // 
             this.adminInput.AutoSize = true;
-            this.adminInput.Location = new System.Drawing.Point(258, 197);
+            this.adminInput.Location = new System.Drawing.Point(258, 161);
             this.adminInput.Name = "adminInput";
             this.adminInput.Size = new System.Drawing.Size(15, 14);
             this.adminInput.TabIndex = 11;
@@ -155,7 +154,7 @@ namespace Project.Forms {
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(140, 232);
+            this.saveButton.Location = new System.Drawing.Point(141, 198);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 6;
@@ -163,16 +162,40 @@ namespace Project.Forms {
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // UserCreate
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(231, 198);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 15;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(141, 276);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(140, 23);
+            this.deleteButton.TabIndex = 16;
+            this.deleteButton.Text = "Verwijderen";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // UserEdit
             // 
             this.ClientSize = new System.Drawing.Size(1916, 1173);
             this.Controls.Add(this.content);
-            this.Name = "UserCreate";
+            this.Name = "UserEdit";
             this.Controls.SetChildIndex(this.content, 0);
             this.content.ResumeLayout(false);
             this.content.PerformLayout();
             this.ResumeLayout(false);
 
+        }
+
+        public void SetUser(User user) {
+            this.user = user;
         }
 
         private void SaveButton_Click(object sender, EventArgs e) {
@@ -181,25 +204,43 @@ namespace Project.Forms {
             User currentUser = userService.GetCurrentUser();
 
             // Save user
-            User user = new User(fullNameInput.Text, usernameInput.Text, passwordInput.Text, adminInput.Checked);
+            user.fullName = fullNameInput.Text;
+            user.username = usernameInput.Text;
+            user.admin = adminInput.Checked;
 
             if(!userService.SaveUser(user)) {
-                MessageBox.Show("Error: " + ValidationHelper.GetErrorList(user), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GuiHelper.ShowError("Error: " + ValidationHelper.GetErrorList(user));
                 return;
             }
 
-            // Login if not logged in already
-            if(currentUser == null) {
-                userService.SetCurrentUser(user);
+            GuiHelper.ShowInfo("Gebruiker succesvol aangepast");
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e) {
+            UserList userList = Program.GetInstance().GetScreen<UserList>("userList");
+            Program.GetInstance().ShowScreen(userList);
+        }
+
+        private void ChangePasswordButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            UserChangePassword changePassword = app.GetScreen<UserChangePassword>("userChangePassword");
+
+            changePassword.SetUser(user);
+            app.ShowScreen(changePassword);
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            UserService userService = app.GetService<UserService>("users");
+
+            if (userService.DeleteUser(user)) {
+                UserList userList = app.GetScreen<UserList>("userList");
+
+                app.ShowScreen(userList);
+                GuiHelper.ShowInfo("Gebruiker succesvol verwijderd");
+            } else {
+                GuiHelper.ShowError("Kon gebruiker niet verwijderen");
             }
-
-            // Redirect and show message
-            UserEdit userEdit = app.GetScreen<UserEdit>("userEdit");
-
-            userEdit.SetUser(user);
-            app.ShowScreen(userEdit);
-
-            GuiHelper.ShowInfo("Gebruiker succesvol aangemaakt");
         }
 
     }

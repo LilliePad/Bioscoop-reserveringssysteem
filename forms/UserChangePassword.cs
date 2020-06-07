@@ -1,215 +1,182 @@
 ﻿using Project.Forms.Layouts;
 using System.Windows.Forms;
 using System;
-using Project.Base;
 using Project.Models;
 using Project.Services;
 using Project.Helpers;
-using Project.Forms;
+using Project.Errors;
 
 namespace Project.Forms {
 
-    public partial class UserChangePassword : BaseLayout {
+    public class UserChangePassword : BaseLayout {
 
-        private Panel panel1;
-        private Label Create_a_movie_text;
-        private Label Discription_text;
-        private Label Playtime_text;
-        private Button Movie_create_button;
-        private TextBox NameMovie_input;
-        private TextBox Discription_input;
-        private TextBox Duration_input;
-        private TextBox Genre_input;
-        private Label label6;
-        private Panel panel2;
-        private TextBox Old_password_input;
-        private Label New_password_label;
-        private TextBox New_password_input;
-        private Label New_password_again_label;
-        private TextBox New_password_again_input;
-        private Label Old_password_label;
-        private Button Confirm;
-        private Label Name_text;
-        private string oldPassword;
-        private string newPassword1;
-        private string newPassword2;
+        // Frontend
+        private Panel panel;
+
+        private Label currentPasswordLabel;
+        private TextBox currentPasswordInput;
+
+        private Label newPasswordLabel;
+        private TextBox newPasswordInput;
+        
+        private Button saveButton;
+        private Button cancelButton;
+
+        // Backend
+        private User user;
 
         public UserChangePassword() {
             InitializeComponent();
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
-
-        }
-
-        private void InitializeComponent() {
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.Confirm = new System.Windows.Forms.Button();
-            this.New_password_label = new System.Windows.Forms.Label();
-            this.New_password_input = new System.Windows.Forms.TextBox();
-            this.New_password_again_label = new System.Windows.Forms.Label();
-            this.New_password_again_input = new System.Windows.Forms.TextBox();
-            this.Old_password_label = new System.Windows.Forms.Label();
-            this.Old_password_input = new System.Windows.Forms.TextBox();
-            this.panel2.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.Confirm);
-            this.panel2.Controls.Add(this.New_password_label);
-            this.panel2.Controls.Add(this.New_password_input);
-            this.panel2.Controls.Add(this.New_password_again_label);
-            this.panel2.Controls.Add(this.New_password_again_input);
-            this.panel2.Controls.Add(this.Old_password_label);
-            this.panel2.Controls.Add(this.Old_password_input);
-            this.panel2.Location = new System.Drawing.Point(180, 127);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(715, 443);
-            this.panel2.TabIndex = 2;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
-            // Confirm
-            // 
-            this.Confirm.Location = new System.Drawing.Point(315, 227);
-            this.Confirm.Name = "Confirm";
-            this.Confirm.Size = new System.Drawing.Size(75, 23);
-            this.Confirm.TabIndex = 6;
-            this.Confirm.Text = "Confirm";
-            this.Confirm.UseVisualStyleBackColor = true;
-            this.Confirm.Click += new System.EventHandler(this.Confirm_Click);
-            // 
-            // New_password_label
-            // 
-            this.New_password_label.AutoSize = true;
-            this.New_password_label.Location = new System.Drawing.Point(137, 101);
-            this.New_password_label.Name = "New_password_label";
-            this.New_password_label.Size = new System.Drawing.Size(77, 13);
-            this.New_password_label.TabIndex = 5;
-            this.New_password_label.Text = "New password";
-            this.New_password_label.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // New_password_input
-            // 
-            this.New_password_input.Location = new System.Drawing.Point(258, 98);
-            this.New_password_input.Name = "New_password_input";
-            this.New_password_input.PasswordChar = '*';
-            this.New_password_input.Size = new System.Drawing.Size(272, 20);
-            this.New_password_input.TabIndex = 4;
-            this.New_password_input.TextChanged += new System.EventHandler(this.New_password_input_TextChanged);
-            // 
-            // New_password_again_label
-            // 
-            this.New_password_again_label.AutoSize = true;
-            this.New_password_again_label.Location = new System.Drawing.Point(137, 140);
-            this.New_password_again_label.Name = "New_password_again_label";
-            this.New_password_again_label.Size = new System.Drawing.Size(106, 13);
-            this.New_password_again_label.TabIndex = 3;
-            this.New_password_again_label.Text = "New password again";
-            this.New_password_again_label.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // New_password_again_input
-            // 
-            this.New_password_again_input.Location = new System.Drawing.Point(258, 137);
-            this.New_password_again_input.Name = "New_password_again_input";
-            this.New_password_again_input.PasswordChar = '*';
-            this.New_password_again_input.Size = new System.Drawing.Size(272, 20);
-            this.New_password_again_input.TabIndex = 2;
-            this.New_password_again_input.TextChanged += new System.EventHandler(this.New_password_again_input_TextChanged);
-            // 
-            // Old_password_label
-            // 
-            this.Old_password_label.AutoSize = true;
-            this.Old_password_label.Location = new System.Drawing.Point(137, 58);
-            this.Old_password_label.Name = "Old_password_label";
-            this.Old_password_label.Size = new System.Drawing.Size(71, 13);
-            this.Old_password_label.TabIndex = 1;
-            this.Old_password_label.Text = "Old password";
-            // 
-            // Old_password_input
-            // 
-            this.Old_password_input.Location = new System.Drawing.Point(258, 55);
-            this.Old_password_input.Name = "Old_password_input";
-            this.Old_password_input.PasswordChar = '*';
-            this.Old_password_input.Size = new System.Drawing.Size(272, 20);
-            this.Old_password_input.TabIndex = 0;
-            this.Old_password_input.TextChanged += new System.EventHandler(this.Old_password_input_TextChanged);
-            // 
-            // UserChangePassword
-            // 
-            this.ClientSize = new System.Drawing.Size(1217, 599);
-            this.Controls.Add(this.panel2);
-            this.Name = "UserChangePassword";
-            this.Load += new System.EventHandler(this.UserChangePassword_Load);
-            this.Controls.SetChildIndex(this.panel2, 0);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.ResumeLayout(false);
-
         }
 
         public override string GetHandle() {
             return "userChangePassword";
         }
 
-        private void UserChangePassword_Load(object sender, EventArgs e) {
+        public override void OnShow() {
+            UserService userService = Program.GetInstance().GetService<UserService>("users");
+            User currentUser = userService.GetCurrentUser();
+
+            base.OnShow();
+
+            if (user.id != currentUser.id && !currentUser.admin) {
+                throw new PermissionException("Je kunt alleen je eigen account bewerken");
+            }
+        }
+
+        private void InitializeComponent() {
+            this.panel = new System.Windows.Forms.Panel();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.newPasswordLabel = new System.Windows.Forms.Label();
+            this.newPasswordInput = new System.Windows.Forms.TextBox();
+            this.currentPasswordLabel = new System.Windows.Forms.Label();
+            this.currentPasswordInput = new System.Windows.Forms.TextBox();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.panel.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel
+            // 
+            this.panel.Controls.Add(this.cancelButton);
+            this.panel.Controls.Add(this.saveButton);
+            this.panel.Controls.Add(this.newPasswordLabel);
+            this.panel.Controls.Add(this.newPasswordInput);
+            this.panel.Controls.Add(this.currentPasswordLabel);
+            this.panel.Controls.Add(this.currentPasswordInput);
+            this.panel.Location = new System.Drawing.Point(180, 127);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(715, 443);
+            this.panel.TabIndex = 2;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(140, 145);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 6;
+            this.saveButton.Text = "Opslaan";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // newPasswordLabel
+            // 
+            this.newPasswordLabel.AutoSize = true;
+            this.newPasswordLabel.Location = new System.Drawing.Point(137, 101);
+            this.newPasswordLabel.Name = "newPasswordLabel";
+            this.newPasswordLabel.Size = new System.Drawing.Size(98, 13);
+            this.newPasswordLabel.TabIndex = 5;
+            this.newPasswordLabel.Text = "Nieuw wachtwoord";
+            // 
+            // newPasswordInput
+            // 
+            this.newPasswordInput.Location = new System.Drawing.Point(258, 98);
+            this.newPasswordInput.Name = "newPasswordInput";
+            this.newPasswordInput.PasswordChar = '*';
+            this.newPasswordInput.Size = new System.Drawing.Size(272, 20);
+            this.newPasswordInput.TabIndex = 4;
+            // 
+            // currentPasswordLabel
+            // 
+            this.currentPasswordLabel.AutoSize = true;
+            this.currentPasswordLabel.Location = new System.Drawing.Point(137, 58);
+            this.currentPasswordLabel.Name = "currentPasswordLabel";
+            this.currentPasswordLabel.Size = new System.Drawing.Size(98, 13);
+            this.currentPasswordLabel.TabIndex = 1;
+            this.currentPasswordLabel.Text = "Huidig wachtwoord";
+            // 
+            // currentPasswordInput
+            // 
+            this.currentPasswordInput.Location = new System.Drawing.Point(258, 55);
+            this.currentPasswordInput.Name = "currentPasswordInput";
+            this.currentPasswordInput.PasswordChar = '*';
+            this.currentPasswordInput.Size = new System.Drawing.Size(272, 20);
+            this.currentPasswordInput.TabIndex = 0;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(231, 145);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 7;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // UserChangePassword
+            // 
+            this.ClientSize = new System.Drawing.Size(1217, 599);
+            this.Controls.Add(this.panel);
+            this.Name = "UserChangePassword";
+            this.Controls.SetChildIndex(this.panel, 0);
+            this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
+            this.ResumeLayout(false);
 
         }
 
-        private void Create_a_movie_text_Click(object sender, EventArgs e) {
-
+        public void SetUser(User user) {
+            this.user = user;
         }
 
-        private void label3_Click(object sender, EventArgs e) {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e) {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e) {
-
-        }
-
-        private void Old_password_input_TextChanged(object sender, EventArgs e) {
-            oldPassword = Old_password_input.Text;
-        }
-
-        private void Confirm_Click(object sender, EventArgs e) {
+        private void SaveButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             UserService userService = app.GetService<UserService>("users");
             User currentUser = userService.GetCurrentUser();
-            User user = currentUser;
-            
-            if (user.Authenticate(oldPassword) && (newPassword1 != newPassword2)) {
-                MessageBox.Show("Een van de wachtwoorden komt niet overeen");
+
+            // Get values
+            string currentPassword = currentPasswordInput.Text;
+            string newPassword = newPasswordInput.Text;
+
+            if (!currentUser.Authenticate(currentPassword)) {
+                GuiHelper.ShowError("Ongeldig wachtwoord");
+                return;
             }
             
-            if (user.Authenticate(oldPassword) && newPassword1 == newPassword2) {                   
-                user.SetPassword(newPassword1);
+            // Update and save user
+            user.SetPassword(newPassword);
 
-               if (userService.SaveUser(user)) {
-                    MessageBox.Show("Wachtwoord succesvol aangepast");
-                    MovieList newScreen = app.GetScreen<MovieList>("movieList");
-                    app.ShowScreen(newScreen);
-                }
-               else {
-                    MessageBox.Show("Kon het wachtwoord niet aanpassen");
-                    MovieList newScreen = app.GetScreen<MovieList>("movieList");
-                    app.ShowScreen(newScreen);
-                } 
-                
-            }
+            if (userService.SaveUser(user)) {
+                UserEdit userEdit = app.GetScreen<UserEdit>("userEdit");
 
+                userEdit.SetUser(user);
+                app.ShowScreen(userEdit);
+
+                currentPasswordInput.Text = "";
+                newPasswordInput.Text = "";
+
+                GuiHelper.ShowInfo("Wachtwoord succesvol aangepast");
+            } else {
+                GuiHelper.ShowError("Kon het wachtwoord niet aanpassen");
+            } 
         }
 
-        private void New_password_input_TextChanged(object sender, EventArgs e) {
-            newPassword1 = New_password_input.Text;
+        private void CancelButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            UserEdit userEdit = app.GetScreen<UserEdit>("userEdit");
+            userEdit.SetUser(user);
+            app.ShowScreen(userEdit);
         }
 
-        private void New_password_again_input_TextChanged(object sender, EventArgs e) {
-            newPassword2 = New_password_again_input.Text;
-        }
     }
+
 }

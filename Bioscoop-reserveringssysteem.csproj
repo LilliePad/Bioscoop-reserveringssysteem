@@ -57,6 +57,7 @@
     <Compile Include="base\StorageFile.cs" />
     <Compile Include="data\Database.cs" />
     <Compile Include="enums\PrintType.cs" />
+    <Compile Include="errors\PermissionException.cs" />
     <Compile Include="forms\ReservationCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +79,9 @@
     <Compile Include="forms\ChairSelect.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="forms\UserEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="forms\UserList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,9 +98,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\UserCreate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\UserEditDesign.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\UserChangePassword.cs">
@@ -117,6 +118,7 @@
     <Compile Include="forms\MovieList.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="helpers\GuiHelper.cs" />
     <Compile Include="helpers\StringHelper.cs" />
     <Compile Include="helpers\ValidationHelper.cs" />
     <Compile Include="helpers\EncryptionHelper.cs" />
@@ -186,11 +188,11 @@
     <EmbeddedResource Include="forms\RoomCreate.resx">
       <DependentUpon>RoomCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\UserEdit.resx">
+      <DependentUpon>UserEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\UserCreate.resx">
       <DependentUpon>UserCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms\UserEditDesign.resx">
-      <DependentUpon>UserEditDesign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\UserList.resx">
       <DependentUpon>UserList.cs</DependentUpon>
