@@ -25,9 +25,9 @@ namespace Projects.Forms {
             UserService userService = app.GetService<UserService>("users");
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
 
-            Reservation reservation = reservationService.GetReservationById(id);
+            //Reservation reservation = reservationService.GetReservationById(id);
 
-            reservationService.DeleteReservation(reservation)
+            reservationService.DeleteReservation(reservation);
         }
     }
 }

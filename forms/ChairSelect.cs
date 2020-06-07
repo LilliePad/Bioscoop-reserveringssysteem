@@ -255,7 +255,7 @@ namespace Project.Forms {
             Program app = Program.GetInstance();
             RoomService roomService = app.GetService<RoomService>("rooms");
             ChairService chairService = app.GetService<ChairService>("chairs");
-
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
             ReservationCreate reservationScreen = app.GetScreen<ReservationCreate>("reservationCreate");
 
             Chair chair = chairService.GetChairByRoomAndPosition(roomService.GetRoomByNumber(RoomNumber), 1, 1);
@@ -275,8 +275,12 @@ namespace Project.Forms {
             int col = int.Parse(parts[1]);
 
             chair = chairService.GetChairByRoomAndPosition(room, row, col);
-            chairs.Add(chair);
 
+            if (reservationService.IsChairTaken(chair, show) || chairs.Contains(chair)) {
+                GuiHelper.ShowError("Deze stoel is niet beschikbaar");
+                return;
+            }
+                chairs.Add(chair);
 
 
             reservationScreen.Setchair(chair);
