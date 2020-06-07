@@ -23,7 +23,7 @@ namespace Project.Forms {
 
         private Label passwordLabel;
         private TextBox passwordInput;
-
+        private Button cancelButton;
         private Button saveButton;
 
         public UserCreate() {
@@ -48,6 +48,7 @@ namespace Project.Forms {
             // Show admin checkbox if the user is an admin
             adminLabel.Visible = allowAdmin;
             adminInput.Visible = allowAdmin;
+            cancelButton.Visible = allowAdmin;
 
             // Reset values
             fullNameInput.Text = "";
@@ -67,11 +68,13 @@ namespace Project.Forms {
             this.adminLabel = new System.Windows.Forms.Label();
             this.adminInput = new System.Windows.Forms.CheckBox();
             this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.content.SuspendLayout();
             this.SuspendLayout();
             // 
             // content
             // 
+            this.content.Controls.Add(this.cancelButton);
             this.content.Controls.Add(this.passwordInput);
             this.content.Controls.Add(this.passwordLabel);
             this.content.Controls.Add(this.fullNameLabel);
@@ -163,6 +166,16 @@ namespace Project.Forms {
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(231, 232);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 14;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
             // UserCreate
             // 
             this.ClientSize = new System.Drawing.Size(1916, 1173);
@@ -200,6 +213,11 @@ namespace Project.Forms {
             app.ShowScreen(userEdit);
 
             GuiHelper.ShowInfo("Gebruiker succesvol aangemaakt");
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e) {
+            UserList userList = Program.GetInstance().GetScreen<UserList>("userList");
+            Program.GetInstance().ShowScreen(userList);
         }
 
     }
