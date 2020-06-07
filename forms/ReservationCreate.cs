@@ -36,7 +36,7 @@ namespace Bioscoop_reserveringssysteem.forms {
 
         }
 
-        public void GetShowById(int id) {
+        public void GetShow(Show show) {
             this.show = show;
         }
 
