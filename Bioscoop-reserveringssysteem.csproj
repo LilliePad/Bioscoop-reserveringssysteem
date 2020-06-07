@@ -71,6 +71,7 @@
       <DependentUpon>ReservationCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\ShowListUser.cs">
+    <Compile Include="forms\ReservationList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\ShowList.cs">
@@ -160,6 +161,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ShowListUser.resx">
       <DependentUpon>ShowListUser.cs</DependentUpon>
+    <EmbeddedResource Include="forms\ReservationList.resx">
+      <DependentUpon>ReservationList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ShowList.resx">
       <DependentUpon>ShowList.cs</DependentUpon>

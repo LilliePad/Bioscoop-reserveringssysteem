@@ -153,7 +153,10 @@ namespace Project.Forms.Layouts {
             this.navLink4.Name = "navLink4";
             this.navLink4.Size = new System.Drawing.Size(110, 30);
             this.navLink4.TabIndex = 3;
+            this.navLink4.Text = "ReservationList";
+            this.navLink4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.navLink4.UseVisualStyleBackColor = false;
+            this.navLink4.Click += new System.EventHandler(this.navLink4_Click_1);
             // 
             // navLink5
             // 
@@ -409,6 +412,12 @@ namespace Project.Forms.Layouts {
             app.ShowScreen(newScreen);
         }
 
+        private void navLink4_Click_1(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ReservationList reserVationListScreen = app.GetScreen<ReservationList>("reservationList");
+
+            app.ShowScreen(reserVationListScreen);
+        }
     }
 
 }

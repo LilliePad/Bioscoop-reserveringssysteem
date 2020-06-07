@@ -71,6 +71,7 @@ namespace Project {
             RegisterScreen(new ShowListUser());
             RegisterScreen(new MovieSelect());
             RegisterScreen(new ReservationCreate());
+            RegisterScreen(new ReservationList());
         }
 
         protected override void Unload() {
