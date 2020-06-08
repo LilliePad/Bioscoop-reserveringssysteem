@@ -31,6 +31,7 @@ namespace Project.Forms {
             MovieService movieService = app.GetService<MovieService>("movies");
             ImageList imgs = new ImageList();
             List<Movie> movies = movieService.GetMovies();
+
             base.OnShow();
 
             container.Items.Clear();
@@ -41,7 +42,7 @@ namespace Project.Forms {
                 User user = users[i];
                 ListViewItem item = new ListViewItem(reservation.userId + " - " + user.username + " - " + movie.name + " - " + movie.duration, i);
 
-                item.Tag = reservation.showId;
+                item.Tag = reservation.id;
                 container.Items.Add(item);
                 
             }

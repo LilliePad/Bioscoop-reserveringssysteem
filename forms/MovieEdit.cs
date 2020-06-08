@@ -27,6 +27,7 @@ namespace Project.Forms {
         private Label label1;
         private Movie movie;
         private Label movieId;
+        private Button Back_button;
         private StorageFile image;
 
         public MovieEdit() {
@@ -88,12 +89,15 @@ namespace Project.Forms {
             this.label6 = new System.Windows.Forms.Label();
             this.Name_text = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+
+            this.Back_button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.Back_button);
             this.panel1.Controls.Add(this.movieId);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.Delete_movie_button);
@@ -121,7 +125,10 @@ namespace Project.Forms {
             this.movieId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.movieId.Location = new System.Drawing.Point(121, 62);
             this.movieId.Name = "movieId";
+
             this.movieId.Size = new System.Drawing.Size(50, 17);
+
+
             this.movieId.TabIndex = 21;
             this.movieId.Text = "Film ID";
             this.movieId.Click += new System.EventHandler(this.movieId_Click);
@@ -132,18 +139,22 @@ namespace Project.Forms {
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label1.Location = new System.Drawing.Point(10, 62);
             this.label1.Name = "label1";
+
             this.label1.Size = new System.Drawing.Size(50, 17);
+
             this.label1.TabIndex = 20;
             this.label1.Text = "Film ID";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // Delete_movie_button
             // 
-            this.Delete_movie_button.Location = new System.Drawing.Point(487, 472);
+            this.Delete_movie_button.Location = new System.Drawing.Point(327, 472);
             this.Delete_movie_button.Name = "Delete_movie_button";
             this.Delete_movie_button.Size = new System.Drawing.Size(140, 23);
             this.Delete_movie_button.TabIndex = 19;
+
             this.Delete_movie_button.Text = "Film verwijderen ";
+
             this.Delete_movie_button.UseVisualStyleBackColor = true;
             this.Delete_movie_button.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -155,10 +166,13 @@ namespace Project.Forms {
             this.Create_a_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Create_a_movie_text.Location = new System.Drawing.Point(3, 0);
             this.Create_a_movie_text.Name = "Create_a_movie_text";
+
             this.Create_a_movie_text.Size = new System.Drawing.Size(278, 46);
             this.Create_a_movie_text.TabIndex = 3;
             this.Create_a_movie_text.Text = "Film bewerken";
             this.Create_a_movie_text.Click += new System.EventHandler(this.Create_a_movie_text_Click);
+
+
             // 
             // Discription_text
             // 
@@ -196,7 +210,9 @@ namespace Project.Forms {
             this.Movie_edit_button.Name = "Movie_edit_button";
             this.Movie_edit_button.Size = new System.Drawing.Size(140, 23);
             this.Movie_edit_button.TabIndex = 12;
+
             this.Movie_edit_button.Text = "Film bewerken";
+
             this.Movie_edit_button.UseVisualStyleBackColor = true;
             this.Movie_edit_button.Click += new System.EventHandler(this.Movie_create_button_Click_1);
             // 
@@ -273,6 +289,17 @@ namespace Project.Forms {
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // Back_button
+            // 
+            this.Back_button.Location = new System.Drawing.Point(521, 472);
+            this.Back_button.Name = "Back_button";
+            this.Back_button.Size = new System.Drawing.Size(133, 39);
+            this.Back_button.TabIndex = 22;
+            this.Back_button.Text = "Annuleer";
+            this.Back_button.UseVisualStyleBackColor = true;
+            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
+            // 
+
             // MovieEdit
             // 
             this.ClientSize = new System.Drawing.Size(1260, 673);
@@ -362,7 +389,11 @@ namespace Project.Forms {
 
         }
 
-        private void Create_a_movie_text_Click(object sender, EventArgs e) {
+
+        private void Back_button_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            MovieList editScreen = app.GetScreen<MovieList>("movieList");
+            app.ShowScreen(editScreen);
 
         }
     }

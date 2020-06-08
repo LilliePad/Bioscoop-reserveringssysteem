@@ -24,7 +24,7 @@ namespace Project.Services {
 
             // Creating default user if we need to
             if (database.users.Count == 0) {
-                User admin = new User("Admin user", "admin", EncryptionHelper.CreateHash("admin"), true);
+                User admin = new User("Admin user", "admin", "admin", true);
 
                 if (!SaveUser(admin)) {
                     MessageBox.Show("Failed to create default user", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
