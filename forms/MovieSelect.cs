@@ -38,6 +38,11 @@ namespace Project.Forms {
         public override string GetHandle() {
             return "movieSelect";
         }
+
+        public override bool RequireLogin() {
+            return false;
+        }
+
         public void SetMovie(Movie movie) {
             this.movie = movie;
         }
