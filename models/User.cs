@@ -62,7 +62,8 @@ namespace Project.Models {
 
         // Sets the password
         public void SetPassword(string password) {
-            this.password = password != null ? EncryptionHelper.CreateHash(password) : null;
+            this.password = password != null ? EncryptionHelper.CreateHash(password) : null; //Ow0
+
         }
 
         // Returns whether the specified password is correct
