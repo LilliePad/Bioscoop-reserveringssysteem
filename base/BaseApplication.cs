@@ -77,6 +77,9 @@ namespace Project.Base {
 
             // Set running to false to stop any running loops
             running = false;
+
+            // Close all active forms
+            defaultScreen.Close();
         }
 
         // Register a service
