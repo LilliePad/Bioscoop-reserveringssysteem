@@ -55,6 +55,7 @@ namespace Project.Forms {
             Program app = Program.GetInstance();
             ChairService chairService = app.GetService<ChairService>("chairs");
             RoomService roomService = app.GetService<RoomService>("rooms");
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
 
             base.OnShow();
             
@@ -110,12 +111,22 @@ namespace Project.Forms {
 
                     }
                     else {
-                        var button = new Button();
-                        button.Text = string.Format("{0}-{1}", i + 1, j + 1);
-                        button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
-                        button.Dock = DockStyle.Fill;
-                        button.Click += (sender, e) => { MyHandler(sender, e, button.Name); };
-                        this.tableLayoutPanel1.Controls.Add(button, j, i);
+                        if (reservationService.IsChairTaken(chair, show) || chairs.Contains(chair)) {
+                            var button = new Button();
+                            button.Text = string.Format("Niet beschikbaar");
+                            button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
+                            button.Dock = DockStyle.Fill;
+                            button.Click += (sender, e) => { MyHandler(sender, e, button.Name); };
+                            this.tableLayoutPanel1.Controls.Add(button, j, i);
+                        }
+                        else {
+                            var button = new Button();
+                            button.Text = string.Format("{0}-{1}", i + 1, j + 1);
+                            button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
+                            button.Dock = DockStyle.Fill;
+                            button.Click += (sender, e) => { MyHandler(sender, e, button.Name); };
+                            this.tableLayoutPanel1.Controls.Add(button, j, i);
+                        }
                     }
                 }
             }
