@@ -107,11 +107,6 @@ namespace Project.Forms {
                 for (int j = 0; j < columnCount; j++) {
                     Chair chair = chairService.GetChairByRoomAndPosition(roomService.GetRoomByNumber(RoomNumber), i + 1, j + 1);
                     if (chair == null) {
-                        var button = new Button();
-                        button.Name = string.Format("button " + (i + 1) + "-" + (j + 1));
-                        button.Dock = DockStyle.Fill;
-                        button.Click += (sender, e) => { MyHandler(sender, e, button.Name); };
-                        this.tableLayoutPanel1.Controls.Add(button, j, i);
 
                     }
                     else {

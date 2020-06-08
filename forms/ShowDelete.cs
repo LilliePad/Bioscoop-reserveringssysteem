@@ -42,6 +42,7 @@ namespace Project.Forms {
        
 
         public override void OnShow() {
+            base.OnShow();
             Program app = Program.GetInstance();
             ShowService showService = app.GetService<ShowService>("shows");
             MovieService movieService = app.GetService<MovieService>("movies");
