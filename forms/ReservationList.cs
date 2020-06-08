@@ -25,7 +25,7 @@ namespace Project.Forms {
         public override void OnShow() {
             Program app = Program.GetInstance();
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
-            List<Reservation> reservations = ReservationService.GetReservations();
+            List<Reservation> reservations = reservationService.GetReservations();
 
             base.OnShow();
 
