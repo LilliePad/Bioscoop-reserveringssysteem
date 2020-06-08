@@ -37,12 +37,14 @@ namespace Projects.Forms {
             base.OnShow();
             Program app = Program.GetInstance();
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
+
             Show show = reservation.GetShow();
             Chair chair = reservation.GetChair();
             Movie movie = show.GetMovie();
             Reservation_Id_Text.Text = "ID: " + reservation.id;
             Show_Text.Text = "Film: " + movie.name + " Starttijd: " + show.startTime;
             Chair_Text.Text = "Rij: " + chair.row + " Nummer: " + chair.row + " Stoel ID:" + chair.id; 
+
         }
 
         private void Reservation_Id_Label_Click(object sender, EventArgs e) {
