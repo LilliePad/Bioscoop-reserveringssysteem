@@ -25,6 +25,8 @@ namespace Project.Forms.Layouts {
 
         private Button navAccountButton;
         private Button navLogoutButton;
+        private RoundedButton userReservationButton;
+        private RoundedButton userShowButton;
         private Label navAccountName;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -48,6 +50,8 @@ namespace Project.Forms.Layouts {
 
         private void InitializeComponent() {
             this.navBar = new System.Windows.Forms.Panel();
+            this.userReservationButton = new Project.Forms.Components.RoundedButton();
+            this.userShowButton = new Project.Forms.Components.RoundedButton();
             this.navAccountName = new System.Windows.Forms.Label();
             this.navLink1 = new Project.Forms.Components.RoundedButton();
             this.navLink2 = new Project.Forms.Components.RoundedButton();
@@ -67,6 +71,8 @@ namespace Project.Forms.Layouts {
             // 
             this.navBar.BackColor = System.Drawing.Color.Black;
             this.navBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.navBar.Controls.Add(this.userReservationButton);
+            this.navBar.Controls.Add(this.userShowButton);
             this.navBar.Controls.Add(this.navAccountName);
             this.navBar.Controls.Add(this.navLink1);
             this.navBar.Controls.Add(this.navLink2);
@@ -84,6 +90,36 @@ namespace Project.Forms.Layouts {
             this.navBar.Name = "navBar";
             this.navBar.Size = new System.Drawing.Size(1902, 100);
             this.navBar.TabIndex = 1;
+            // 
+            // userReservationButton
+            // 
+            this.userReservationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.userReservationButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.userReservationButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.userReservationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userReservationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userReservationButton.Location = new System.Drawing.Point(316, 58);
+            this.userReservationButton.Name = "userReservationButton";
+            this.userReservationButton.Size = new System.Drawing.Size(249, 30);
+            this.userReservationButton.TabIndex = 16;
+            this.userReservationButton.Text = "Mijn reserveringen";
+            this.userReservationButton.UseVisualStyleBackColor = false;
+            this.userReservationButton.Click += new System.EventHandler(this.UserReservationButton_Click);
+            // 
+            // userShowButton
+            // 
+            this.userShowButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.userShowButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.userShowButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.userShowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userShowButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userShowButton.Location = new System.Drawing.Point(42, 58);
+            this.userShowButton.Name = "userShowButton";
+            this.userShowButton.Size = new System.Drawing.Size(246, 30);
+            this.userShowButton.TabIndex = 15;
+            this.userShowButton.Text = "Bekijk voorstellingen";
+            this.userShowButton.UseVisualStyleBackColor = false;
+            this.userShowButton.Click += new System.EventHandler(this.UserShowButton_Click);
             // 
             // navAccountName
             // 
@@ -106,11 +142,11 @@ namespace Project.Forms.Layouts {
             this.navLink1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLink1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.navLink1.Location = new System.Drawing.Point(40, 55);
+            this.navLink1.Location = new System.Drawing.Point(42, 14);
             this.navLink1.Name = "navLink1";
-            this.navLink1.Size = new System.Drawing.Size(110, 30);
+            this.navLink1.Size = new System.Drawing.Size(130, 30);
             this.navLink1.TabIndex = 0;
-            this.navLink1.Text = "Movie";
+            this.navLink1.Text = "Films";
             this.navLink1.UseVisualStyleBackColor = false;
             this.navLink1.Click += new System.EventHandler(this.navLink1_Click);
             // 
@@ -121,11 +157,11 @@ namespace Project.Forms.Layouts {
             this.navLink2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLink2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.navLink2.Location = new System.Drawing.Point(180, 55);
+            this.navLink2.Location = new System.Drawing.Point(194, 14);
             this.navLink2.Name = "navLink2";
-            this.navLink2.Size = new System.Drawing.Size(110, 30);
+            this.navLink2.Size = new System.Drawing.Size(130, 30);
             this.navLink2.TabIndex = 1;
-            this.navLink2.Text = "Room";
+            this.navLink2.Text = "Zalen";
             this.navLink2.UseVisualStyleBackColor = false;
             this.navLink2.Click += new System.EventHandler(this.navLink2_Click);
             // 
@@ -135,11 +171,12 @@ namespace Project.Forms.Layouts {
             this.navLink3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.navLink3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.navLink3.Location = new System.Drawing.Point(320, 55);
+            this.navLink3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold);
+            this.navLink3.Location = new System.Drawing.Point(348, 14);
             this.navLink3.Name = "navLink3";
-            this.navLink3.Size = new System.Drawing.Size(110, 30);
+            this.navLink3.Size = new System.Drawing.Size(130, 30);
             this.navLink3.TabIndex = 4;
-            this.navLink3.Text = "Gebruikers";
+            this.navLink3.Text = "Voorstellingen";
             this.navLink3.UseVisualStyleBackColor = false;
             this.navLink3.Click += new System.EventHandler(this.navLink3_Click);
             // 
@@ -149,14 +186,14 @@ namespace Project.Forms.Layouts {
             this.navLink4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.navLink4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.navLink4.Location = new System.Drawing.Point(460, 55);
+            this.navLink4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold);
+            this.navLink4.Location = new System.Drawing.Point(504, 14);
             this.navLink4.Name = "navLink4";
-            this.navLink4.Size = new System.Drawing.Size(110, 30);
+            this.navLink4.Size = new System.Drawing.Size(130, 30);
             this.navLink4.TabIndex = 3;
-            this.navLink4.Text = "ReservationList";
-            this.navLink4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.navLink4.Text = "Reserveringen";
             this.navLink4.UseVisualStyleBackColor = false;
-            this.navLink4.Click += new System.EventHandler(this.navLink4_Click_1);
+            this.navLink4.Click += new System.EventHandler(this.navLink4_Click);
             // 
             // navLink5
             // 
@@ -166,11 +203,12 @@ namespace Project.Forms.Layouts {
             this.navLink5.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.navLink5.FlatAppearance.BorderSize = 0;
             this.navLink5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.navLink5.Location = new System.Drawing.Point(600, 55);
+            this.navLink5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold);
+            this.navLink5.Location = new System.Drawing.Point(659, 14);
             this.navLink5.Name = "navLink5";
-            this.navLink5.Size = new System.Drawing.Size(110, 30);
+            this.navLink5.Size = new System.Drawing.Size(130, 30);
             this.navLink5.TabIndex = 2;
-            this.navLink5.Text = "show";
+            this.navLink5.Text = "Gebruikers";
             this.navLink5.UseVisualStyleBackColor = false;
             this.navLink5.Click += new System.EventHandler(this.navLink5_Click);
             // 
@@ -367,6 +405,7 @@ namespace Project.Forms.Layouts {
             UserService userService = Program.GetInstance().GetService<UserService>("users");
             User user = userService.GetCurrentUser();
             bool loggedIn = user != null;
+            bool isAdmin = loggedIn && user.admin;
 
             // Update login visibillity
             navLoginUsername.Visible = !loggedIn;
@@ -382,6 +421,15 @@ namespace Project.Forms.Layouts {
             if(loggedIn) {
                 navAccountName.Text = user.fullName;
             }
+
+            // Update nav item visibillity
+            navLink1.Visible = isAdmin;
+            navLink2.Visible = isAdmin;
+            navLink3.Visible = isAdmin;
+            navLink4.Visible = isAdmin;
+            navLink5.Visible = isAdmin;
+
+            userReservationButton.Visible = loggedIn;
         }
 
         private void navLink1_Click(object sender, EventArgs e) {
@@ -398,26 +446,34 @@ namespace Project.Forms.Layouts {
 
         private void navLink3_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            UserList userList = app.GetScreen<UserList>("userList");
-            app.ShowScreen(userList);
+            ShowList showList = app.GetScreen<ShowList>("showList");
+            app.ShowScreen(showList);
         }
 
         private void navLink4_Click(object sender, EventArgs e) {
-
+            Program app = Program.GetInstance();
+            ReservationList reservationList = app.GetScreen<ReservationList>("reservationList");
+            app.ShowScreen(reservationList);
         }
 
         private void navLink5_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            ShowListUser newScreen = app.GetScreen<ShowListUser>("showListUser");
-            app.ShowScreen(newScreen);
+            UserList userList = app.GetScreen<UserList>("userList");
+            app.ShowScreen(userList);
         }
 
-        private void navLink4_Click_1(object sender, EventArgs e) {
+        private void UserShowButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            ReservationList reserVationListScreen = app.GetScreen<ReservationList>("reservationList");
-
-            app.ShowScreen(reserVationListScreen);
+            ShowListUser showListUser = app.GetScreen<ShowListUser>("showListUser");
+            app.ShowScreen(showListUser);
         }
+
+        private void UserReservationButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ReservationList reservationList = app.GetScreen<ReservationList>("reservationList");
+            app.ShowScreen(reservationList);
+        }
+
     }
 
 }

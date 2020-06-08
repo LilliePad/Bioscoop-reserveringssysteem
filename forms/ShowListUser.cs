@@ -8,7 +8,6 @@ using Project.Services;
 namespace Project.Forms {
 
     public class ShowListUser : BaseLayout {
-        private Label label1;
         private ListView container;
 
         public ShowListUser() {
@@ -45,7 +44,6 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.container = new System.Windows.Forms.ListView();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // container
@@ -59,26 +57,14 @@ namespace Project.Forms {
             this.container.SelectedIndexChanged += new System.EventHandler(this.container_SelectedIndexChanged);
             this.container.Click += new System.EventHandler(this.ButtonEdit_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(828, 338);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 25);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
-            // 
             // ShowListUser
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.container);
             this.Name = "ShowListUser";
             this.Load += new System.EventHandler(this.MovieList_Load);
             this.Controls.SetChildIndex(this.container, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
