@@ -19,6 +19,7 @@ namespace Project.Forms {
 
         private Room room;
         private int row;
+        private Button Back_button;
         private int colum;
 
         
@@ -52,16 +53,18 @@ namespace Project.Forms {
         }
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Colum_text = new System.Windows.Forms.Label();
             this.Row_text = new System.Windows.Forms.Label();
             this.Delete_chair_button = new System.Windows.Forms.Button();
             this.Chair_edit_text = new System.Windows.Forms.Label();
             this.Chair_edit_Button = new System.Windows.Forms.Button();
-            this.Colum_text = new System.Windows.Forms.Label();
+            this.Back_button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.Back_button);
             this.panel1.Controls.Add(this.Colum_text);
             this.panel1.Controls.Add(this.Row_text);
             this.panel1.Controls.Add(this.Delete_chair_button);
@@ -72,19 +75,29 @@ namespace Project.Forms {
             this.panel1.Size = new System.Drawing.Size(993, 534);
             this.panel1.TabIndex = 20;
             // 
+            // Colum_text
+            // 
+            this.Colum_text.AutoSize = true;
+            this.Colum_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.Colum_text.Location = new System.Drawing.Point(9, 126);
+            this.Colum_text.Name = "Colum_text";
+            this.Colum_text.Size = new System.Drawing.Size(0, 20);
+            this.Colum_text.TabIndex = 21;
+            this.Colum_text.Click += new System.EventHandler(this.Colum_Click);
+            // 
             // Row_text
             // 
             this.Row_text.AutoSize = true;
             this.Row_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Row_text.Location = new System.Drawing.Point(9, 94);
             this.Row_text.Name = "Row_text";
-            this.Row_text.Size = new System.Drawing.Size(42, 20);
+            this.Row_text.Size = new System.Drawing.Size(0, 20);
             this.Row_text.TabIndex = 20;
             this.Row_text.Click += new System.EventHandler(this.Row_Click);
             // 
             // Delete_chair_button
             // 
-            this.Delete_chair_button.Location = new System.Drawing.Point(257, 171);
+            this.Delete_chair_button.Location = new System.Drawing.Point(168, 171);
             this.Delete_chair_button.Name = "Delete_chair_button";
             this.Delete_chair_button.Size = new System.Drawing.Size(133, 39);
             this.Delete_chair_button.TabIndex = 19;
@@ -114,15 +127,15 @@ namespace Project.Forms {
             this.Chair_edit_Button.UseVisualStyleBackColor = true;
             this.Chair_edit_Button.Click += new System.EventHandler(this.Chair_edit_button_Click);
             // 
-            // Colum_text
+            // Back_button
             // 
-            this.Colum_text.AutoSize = true;
-            this.Colum_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Colum_text.Location = new System.Drawing.Point(9, 126);
-            this.Colum_text.Name = "Colum_text";
-            this.Colum_text.Size = new System.Drawing.Size(66, 20);
-            this.Colum_text.TabIndex = 21;
-            this.Colum_text.Click += new System.EventHandler(this.Colum_Click);
+            this.Back_button.Location = new System.Drawing.Point(318, 171);
+            this.Back_button.Name = "Back_button";
+            this.Back_button.Size = new System.Drawing.Size(133, 39);
+            this.Back_button.TabIndex = 22;
+            this.Back_button.Text = "Annuleren";
+            this.Back_button.UseVisualStyleBackColor = true;
+            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
             // 
             // ChairEdit
             // 
@@ -167,6 +180,12 @@ namespace Project.Forms {
                 MessageBox.Show("Error: kon stoel niet verwijderen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
+            RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit");
+            app.ShowScreen(newScreen);
+        }
+
+        private void Back_button_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
             RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit");
             app.ShowScreen(newScreen);
         }
