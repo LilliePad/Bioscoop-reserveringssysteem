@@ -11,21 +11,23 @@ namespace Project.Forms.Layouts {
     public class BaseLayout : BaseScreen {
 
         private Panel navBar;
+
         private RoundedButton navLink1;
         private RoundedButton navLink2;
         private RoundedButton navLink3;
         private RoundedButton navLink4;
         private RoundedButton navLink5;
+
         private TextBox navLoginUsername;
         private TextBox navLoginPassword;
         private Button navLoginButton;
-
-        private string usernameValue;
         private Button navRegisterButton;
+
         private Button navAccountButton;
         private Button navLogoutButton;
+        private RoundedButton userReservationButton;
+        private RoundedButton userShowButton;
         private Label navAccountName;
-        private string passwordValue;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -48,6 +50,8 @@ namespace Project.Forms.Layouts {
 
         private void InitializeComponent() {
             this.navBar = new System.Windows.Forms.Panel();
+            this.userReservationButton = new Project.Forms.Components.RoundedButton();
+            this.userShowButton = new Project.Forms.Components.RoundedButton();
             this.navAccountName = new System.Windows.Forms.Label();
             this.navLink1 = new Project.Forms.Components.RoundedButton();
             this.navLink2 = new Project.Forms.Components.RoundedButton();
@@ -67,6 +71,8 @@ namespace Project.Forms.Layouts {
             // 
             this.navBar.BackColor = System.Drawing.Color.Black;
             this.navBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.navBar.Controls.Add(this.userReservationButton);
+            this.navBar.Controls.Add(this.userShowButton);
             this.navBar.Controls.Add(this.navAccountName);
             this.navBar.Controls.Add(this.navLink1);
             this.navBar.Controls.Add(this.navLink2);
@@ -85,6 +91,36 @@ namespace Project.Forms.Layouts {
             this.navBar.Size = new System.Drawing.Size(1902, 100);
             this.navBar.TabIndex = 1;
             // 
+            // userReservationButton
+            // 
+            this.userReservationButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.userReservationButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.userReservationButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.userReservationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userReservationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userReservationButton.Location = new System.Drawing.Point(316, 58);
+            this.userReservationButton.Name = "userReservationButton";
+            this.userReservationButton.Size = new System.Drawing.Size(249, 30);
+            this.userReservationButton.TabIndex = 16;
+            this.userReservationButton.Text = "Mijn reserveringen";
+            this.userReservationButton.UseVisualStyleBackColor = false;
+            this.userReservationButton.Click += new System.EventHandler(this.UserReservationButton_Click);
+            // 
+            // userShowButton
+            // 
+            this.userShowButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.userShowButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.userShowButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.userShowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userShowButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userShowButton.Location = new System.Drawing.Point(42, 58);
+            this.userShowButton.Name = "userShowButton";
+            this.userShowButton.Size = new System.Drawing.Size(246, 30);
+            this.userShowButton.TabIndex = 15;
+            this.userShowButton.Text = "Bekijk voorstellingen";
+            this.userShowButton.UseVisualStyleBackColor = false;
+            this.userShowButton.Click += new System.EventHandler(this.UserShowButton_Click);
+            // 
             // navAccountName
             // 
             this.navAccountName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -94,11 +130,10 @@ namespace Project.Forms.Layouts {
             this.navAccountName.Location = new System.Drawing.Point(1663, 16);
             this.navAccountName.Name = "navAccountName";
             this.navAccountName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.navAccountName.Size = new System.Drawing.Size(132, 20);
+            this.navAccountName.Size = new System.Drawing.Size(111, 17);
             this.navAccountName.TabIndex = 14;
             this.navAccountName.Text = "<accountName>";
             this.navAccountName.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.navAccountName.Click += new System.EventHandler(this.label1_Click);
             // 
             // navLink1
             // 
@@ -107,11 +142,11 @@ namespace Project.Forms.Layouts {
             this.navLink1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLink1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.navLink1.Location = new System.Drawing.Point(40, 55);
+            this.navLink1.Location = new System.Drawing.Point(42, 14);
             this.navLink1.Name = "navLink1";
-            this.navLink1.Size = new System.Drawing.Size(110, 30);
+            this.navLink1.Size = new System.Drawing.Size(130, 30);
             this.navLink1.TabIndex = 0;
-            this.navLink1.Text = "Movie";
+            this.navLink1.Text = "Films";
             this.navLink1.UseVisualStyleBackColor = false;
             this.navLink1.Click += new System.EventHandler(this.navLink1_Click);
             // 
@@ -122,11 +157,11 @@ namespace Project.Forms.Layouts {
             this.navLink2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLink2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.navLink2.Location = new System.Drawing.Point(180, 55);
+            this.navLink2.Location = new System.Drawing.Point(194, 14);
             this.navLink2.Name = "navLink2";
-            this.navLink2.Size = new System.Drawing.Size(110, 30);
+            this.navLink2.Size = new System.Drawing.Size(130, 30);
             this.navLink2.TabIndex = 1;
-            this.navLink2.Text = "Room";
+            this.navLink2.Text = "Zalen";
             this.navLink2.UseVisualStyleBackColor = false;
             this.navLink2.Click += new System.EventHandler(this.navLink2_Click);
             // 
@@ -136,11 +171,12 @@ namespace Project.Forms.Layouts {
             this.navLink3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.navLink3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.navLink3.Location = new System.Drawing.Point(320, 55);
+            this.navLink3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold);
+            this.navLink3.Location = new System.Drawing.Point(348, 14);
             this.navLink3.Name = "navLink3";
-            this.navLink3.Size = new System.Drawing.Size(110, 30);
+            this.navLink3.Size = new System.Drawing.Size(130, 30);
             this.navLink3.TabIndex = 4;
-            this.navLink3.Text = "Password Change\r\n";
+            this.navLink3.Text = "Voorstellingen";
             this.navLink3.UseVisualStyleBackColor = false;
             this.navLink3.Click += new System.EventHandler(this.navLink3_Click);
             // 
@@ -150,11 +186,14 @@ namespace Project.Forms.Layouts {
             this.navLink4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.navLink4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.navLink4.Location = new System.Drawing.Point(460, 55);
+            this.navLink4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold);
+            this.navLink4.Location = new System.Drawing.Point(504, 14);
             this.navLink4.Name = "navLink4";
-            this.navLink4.Size = new System.Drawing.Size(110, 30);
+            this.navLink4.Size = new System.Drawing.Size(130, 30);
             this.navLink4.TabIndex = 3;
+            this.navLink4.Text = "Reserveringen";
             this.navLink4.UseVisualStyleBackColor = false;
+            this.navLink4.Click += new System.EventHandler(this.navLink4_Click);
             // 
             // navLink5
             // 
@@ -164,11 +203,12 @@ namespace Project.Forms.Layouts {
             this.navLink5.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.navLink5.FlatAppearance.BorderSize = 0;
             this.navLink5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.navLink5.Location = new System.Drawing.Point(600, 55);
+            this.navLink5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold);
+            this.navLink5.Location = new System.Drawing.Point(659, 14);
             this.navLink5.Name = "navLink5";
-            this.navLink5.Size = new System.Drawing.Size(110, 30);
+            this.navLink5.Size = new System.Drawing.Size(130, 30);
             this.navLink5.TabIndex = 2;
-            this.navLink5.Text = "show";
+            this.navLink5.Text = "Gebruikers";
             this.navLink5.UseVisualStyleBackColor = false;
             this.navLink5.Click += new System.EventHandler(this.navLink5_Click);
             // 
@@ -178,10 +218,9 @@ namespace Project.Forms.Layouts {
             this.navLoginUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navLoginUsername.Location = new System.Drawing.Point(1642, 16);
             this.navLoginUsername.Name = "navLoginUsername";
-            this.navLoginUsername.Size = new System.Drawing.Size(132, 26);
+            this.navLoginUsername.Size = new System.Drawing.Size(132, 23);
             this.navLoginUsername.TabIndex = 7;
             this.navLoginUsername.Text = "Gebruikersnaam";
-            this.navLoginUsername.TextChanged += new System.EventHandler(this.NavLoginUsername_TextChanged);
             this.navLoginUsername.Enter += new System.EventHandler(this.LoginUsernameRemoveText);
             this.navLoginUsername.Leave += new System.EventHandler(this.LoginUsernameAddText);
             // 
@@ -191,10 +230,9 @@ namespace Project.Forms.Layouts {
             this.navLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navLoginPassword.Location = new System.Drawing.Point(1642, 58);
             this.navLoginPassword.Name = "navLoginPassword";
-            this.navLoginPassword.Size = new System.Drawing.Size(132, 26);
+            this.navLoginPassword.Size = new System.Drawing.Size(132, 23);
             this.navLoginPassword.TabIndex = 8;
             this.navLoginPassword.Text = "Wachtwoord";
-            this.navLoginPassword.TextChanged += new System.EventHandler(this.NavLoginPassword_TextChanged);
             this.navLoginPassword.Enter += new System.EventHandler(this.LoginPasswordRemoveText);
             this.navLoginPassword.Leave += new System.EventHandler(this.LoginPasswordAddText);
             // 
@@ -247,6 +285,7 @@ namespace Project.Forms.Layouts {
             this.navAccountButton.TabIndex = 13;
             this.navAccountButton.Text = "Account";
             this.navAccountButton.UseVisualStyleBackColor = false;
+            this.navAccountButton.Click += new System.EventHandler(this.AccountButton_Click);
             // 
             // navLogoutButton
             // 
@@ -279,15 +318,6 @@ namespace Project.Forms.Layouts {
 
         }
 
-        private void NavLoginUsername_TextChanged(object sender, EventArgs e) {
-            usernameValue = navLoginUsername.Text;
-
-        }
-
-        private void NavLoginPassword_TextChanged(object sender, EventArgs e) {
-            passwordValue = navLoginPassword.Text;
-        }
-
         public void LoginUsernameRemoveText(object sender, EventArgs e) {
             if (navLoginUsername.Text == "Gebruikersnaam")
                 navLoginUsername.Text = "";
@@ -316,40 +346,66 @@ namespace Project.Forms.Layouts {
             UserService userService = Program.GetInstance().GetService<UserService>("users");
 
             // Find user
-            User user = userService.GetUserByUsername(usernameValue);
+            User user = userService.GetUserByUsername(navLoginUsername.Text);
 
             // Error if user or password invalid
-            if (user == null || !user.Authenticate(passwordValue)) {
+            if (user == null || !user.Authenticate(navLoginPassword.Text)) {
                 MessageBox.Show("Invalid username or password");
                 return;
             }
 
             // Clear fields
-            navLoginUsername.Text = "";
-            navLoginPassword.Text = "";
+            navLoginUsername.Text = "Gebruikersnaam";
+            navLoginPassword.Text = "Wachtwoord";
+            navLoginPassword.PasswordChar = '\0';
 
             // Everything ok, login
             userService.SetCurrentUser(user);
             UpdateUserControls();
+            OnLogin(user);
         }
 
         private void NavRegisterButton_Click(object sender, EventArgs e) {
-        
+            Program app = Program.GetInstance();
+            UserCreate userCreate = app.GetScreen<UserCreate>("userCreate");
+            app.ShowScreen(userCreate);
+        }
+
+        private void AccountButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            UserService userService = app.GetService<UserService>("users");
+            UserEdit userEdit = app.GetScreen<UserEdit>("userEdit");
+
+            userEdit.SetUser(userService.GetCurrentUser());
+            app.ShowScreen(userEdit);
         }
 
         private void NavLogoutButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             UserService userService = app.GetService<UserService>("users");
+            User user = userService.GetCurrentUser();
 
             // Logout
             userService.SetCurrentUser(null);
             UpdateUserControls();
+            OnLogout(user);
+
+            // Check whether they need to be moved
+            BaseScreen currentScreen = app.GetCurrentScreen();
+
+            if (currentScreen.RequireLogin() || currentScreen.RequireAdmin()) {
+                app.ShowScreen(app.GetDefaultScreen());
+            }
         }
+
+        protected void OnLogin(User user) { }
+        protected void OnLogout(User user) { }
 
         private void UpdateUserControls() {
             UserService userService = Program.GetInstance().GetService<UserService>("users");
             User user = userService.GetCurrentUser();
             bool loggedIn = user != null;
+            bool isAdmin = loggedIn && user.admin;
 
             // Update login visibillity
             navLoginUsername.Visible = !loggedIn;
@@ -365,49 +421,59 @@ namespace Project.Forms.Layouts {
             if(loggedIn) {
                 navAccountName.Text = user.fullName;
             }
+
+            // Update nav item visibillity
+            navLink1.Visible = isAdmin;
+            navLink2.Visible = isAdmin;
+            navLink3.Visible = isAdmin;
+            navLink4.Visible = isAdmin;
+            navLink5.Visible = isAdmin;
+
+            userReservationButton.Visible = loggedIn;
         }
 
         private void navLink1_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             MovieList newScreen = app.GetScreen<MovieList>("movieList");
-
             app.ShowScreen(newScreen);
         }
 
         private void navLink2_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             RoomList newScreen = app.GetScreen<RoomList>("roomList");
-
             app.ShowScreen(newScreen);
         }
 
         private void navLink3_Click(object sender, EventArgs e) {
-            UserService userService = Program.GetInstance().GetService<UserService>("users");
-            User currentUser = userService.GetCurrentUser();
-            if (currentUser == null) {
-                MessageBox.Show("Er is niemand ingelogd");
-                return;
-            }
             Program app = Program.GetInstance();
-            UserChangePassword userChangePasswordScreen = app.GetScreen<UserChangePassword>("userChangePassword");
-
-            app.ShowScreen(userChangePasswordScreen);
+            ShowList showList = app.GetScreen<ShowList>("showList");
+            app.ShowScreen(showList);
         }
 
         private void navLink4_Click(object sender, EventArgs e) {
-
+            Program app = Program.GetInstance();
+            ReservationList reservationList = app.GetScreen<ReservationList>("reservationList");
+            app.ShowScreen(reservationList);
         }
 
         private void navLink5_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            ShowList newScreen = app.GetScreen<ShowList>("showList");
-
-            app.ShowScreen(newScreen);
+            UserList userList = app.GetScreen<UserList>("userList");
+            app.ShowScreen(userList);
         }
 
-        private void label1_Click(object sender, EventArgs e) {
-
+        private void UserShowButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ShowListUser showListUser = app.GetScreen<ShowListUser>("showListUser");
+            app.ShowScreen(showListUser);
         }
+
+        private void UserReservationButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ReservationList reservationList = app.GetScreen<ReservationList>("reservationList");
+            app.ShowScreen(reservationList);
+        }
+
     }
 
 }

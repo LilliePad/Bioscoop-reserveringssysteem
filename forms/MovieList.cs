@@ -13,7 +13,6 @@ namespace Project.Forms {
         private ListView container;
         private Button movieCreateButton;
 
-
         public MovieList() {
             InitializeComponent();
         }
@@ -22,8 +21,8 @@ namespace Project.Forms {
             return "movieList";
         }
 
-        public override bool IsDefault() {
-            return true;
+        public override bool RequireLogin() {
+            return false;
         }
 
         public override void OnShow() {
@@ -64,8 +63,7 @@ namespace Project.Forms {
             this.container.Size = new System.Drawing.Size(670, 452);
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
-            this.container.SelectedIndexChanged += new System.EventHandler(this.container_SelectedIndexChanged);
-            this.container.Click += new System.EventHandler(this.ButtonEdit_Click);
+            this.container.Click += new System.EventHandler(this.ListItem_Click);
             // 
             // movieCreateButton
             // 
@@ -75,7 +73,7 @@ namespace Project.Forms {
             this.movieCreateButton.TabIndex = 3;
             this.movieCreateButton.Text = "Nieuw";
             this.movieCreateButton.UseVisualStyleBackColor = true;
-            this.movieCreateButton.Click += new System.EventHandler(this.ButtonNew_Click);
+            this.movieCreateButton.Click += new System.EventHandler(this.MovieCreateButton_Click);
             // 
             // MovieList
             // 
@@ -95,57 +93,41 @@ namespace Project.Forms {
             container.Columns.Add("Films", 250);
         }
 
-        private void ButtonNew_Click(object sender, EventArgs e) {
+        private void ListItem_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            MovieService movieService = app.GetService<MovieService>("movies");
+
+            // Get the clicked item
+            ListViewItem item = container.SelectedItems[0];
+
+            if (item == null) {
+                MessageBox.Show("Error: Geen item geselecteerd", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Find the movie
+            int id = (int)item.Tag;
+            Movie movie = movieService.GetMovieById(id);
+
+            if (movie == null) {
+                MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Show screen
+            MovieEdit editScreen = app.GetScreen<MovieEdit>("movieEdit");
+
+            editScreen.SetMovie(movie);
+            app.ShowScreen(editScreen);
+        }
+
+        private void MovieCreateButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             MovieCreate newScreen = app.GetScreen<MovieCreate>("movieCreate");
 
             app.ShowScreen(newScreen);
         }
 
-        private void ButtonEdit_Click(object sender, EventArgs e) {
-            Program app = Program.GetInstance();
-            MovieService movieService = app.GetService<MovieService>("movies");
-            UserService userService = app.GetService<UserService>("users");
-
-            // Get the clicked item
-            ListViewItem item = container.SelectedItems[0];
-
-            if(item == null) {
-                MessageBox.Show("Error: Geen item geselecteerd", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Find the movie
-            int id = (int) item.Tag;
-            Movie movie = movieService.GetMovieById(id);
-
-            if(movie == null) {
-                MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            User user = userService.GetCurrentUser();
-            if (userService.GetCurrentUser() != null) {
-                if (user.admin) {
-                    MovieEdit editScreen = app.GetScreen<MovieEdit>("movieEdit");
-                    editScreen.SetMovie(movie);
-                    app.ShowScreen(editScreen);
-                }
-                else {
-                    MovieSelect editScreen = app.GetScreen<MovieSelect>("movieSelect");
-                    editScreen.SetMovie(movie);
-                    app.ShowScreen(editScreen);
-                }
-            }
-            else {
-                MovieSelect editScreen = app.GetScreen<MovieSelect>("movieSelect");
-                editScreen.SetMovie(movie);
-                app.ShowScreen(editScreen);
-            }
-        }
-
-        private void container_SelectedIndexChanged(object sender, EventArgs e) {
-
-        }
     }
 
 }

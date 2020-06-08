@@ -1,4 +1,8 @@
-﻿using Project.Forms.Layouts;
+﻿using Project.Errors;
+using Project.Forms.Layouts;
+using Project.Helpers;
+using Project.Models;
+using Project.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -112,20 +116,53 @@ namespace Project.Base {
             return (T) Convert.ChangeType(screen, typeof(T));
         }
 
+        public BaseScreen GetDefaultScreen() {
+            return defaultScreen;
+        }
+
+        public BaseScreen GetCurrentScreen() {
+            return currentScreen;
+        }
+
         public void ShowScreen(BaseScreen screen) {
+            UserService userService = GetService<UserService>("users");
+            User user = userService.GetCurrentUser();
+
             if(screen == null) {    
                 throw new ArgumentException("Screen can't be null");
             }
 
-            // Show if not already visible
-            if(currentScreen == null || screen.GetHandle() != currentScreen.GetHandle()) {
-                if(currentScreen != null) {
-                    currentScreen.Hide();
-                }
+            // Check user permissions
+            bool allowAuthCheck = !screen.IsDefault();
 
-                screen.Show();
-                currentScreen = screen;
-                screen.OnShow();
+            if((screen.RequireLogin() || screen.RequireAdmin()) && user == null && allowAuthCheck) {
+                GuiHelper.ShowError("Je moet ingelogd zijn om dit scherm te bekijken");
+                return;
+            }
+
+            if (screen.RequireAdmin() && !user.admin && allowAuthCheck) {
+                GuiHelper.ShowError("Je moet een admin zijn om dit scherm te bekijken");
+                return;
+            }
+
+            // Show if not already visible
+            if (currentScreen == null || screen.GetHandle() != currentScreen.GetHandle()) {
+                try {
+                    screen.OnShow();
+
+                    // Hide current screen
+                    if (currentScreen != null) {
+                        currentScreen.Hide();
+                    }
+
+                    // Show new  screen
+                    screen.Show();
+                    currentScreen = screen;
+                } catch(PermissionException e) {
+                    GuiHelper.ShowError(e.Message);
+                } catch(Exception e) {
+                    GuiHelper.ShowError("Interne error: " + e.Message);
+                }
             }
         }
 

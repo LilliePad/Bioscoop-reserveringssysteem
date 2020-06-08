@@ -3,7 +3,6 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Project.Base;
 using Project.Data;
-using Project.forms;
 using Project.Forms;
 using Project.Services;
 
@@ -47,8 +46,7 @@ namespace Project {
             // movie screens
             RegisterScreen(new MovieList());
             RegisterScreen(new MovieCreate());
-            RegisterScreen(new MovieEdit());        
-            RegisterScreen(new MovieSelect());
+            RegisterScreen(new MovieEdit());
 
             // room screens
             RegisterScreen(new RoomList());
@@ -66,13 +64,14 @@ namespace Project {
 
             // user screens
             RegisterScreen(new UserList());
-
+            RegisterScreen(new UserCreate());
+            RegisterScreen(new UserEdit());
             RegisterScreen(new UserChangePassword());
-            RegisterScreen(new UserEditDesign());
 
+            RegisterScreen(new ShowListUser());
+            RegisterScreen(new MovieSelect());
             RegisterScreen(new ReservationCreate());
-
-
+            RegisterScreen(new ReservationList());
         }
 
         protected override void Unload() {
