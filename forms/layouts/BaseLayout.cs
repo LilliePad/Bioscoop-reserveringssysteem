@@ -306,12 +306,14 @@ namespace Project.Forms.Layouts {
             // 
             // BaseLayout
             // 
+            this.AcceptButton = this.navLoginButton;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.Controls.Add(this.navBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BaseLayout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_Closed);
             this.navBar.ResumeLayout(false);
             this.navBar.PerformLayout();
             this.ResumeLayout(false);
@@ -472,6 +474,15 @@ namespace Project.Forms.Layouts {
             Program app = Program.GetInstance();
             ReservationList reservationList = app.GetScreen<ReservationList>("reservationList");
             app.ShowScreen(reservationList);
+        }
+
+        private void Form_Closed(object sender, FormClosedEventArgs e) {
+            Program app = Program.GetInstance();
+
+            // Stop app if  still running
+            if (app.IsRunning()) {
+                app.Stop();
+            }
         }
 
     }
