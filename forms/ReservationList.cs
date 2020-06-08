@@ -35,7 +35,7 @@ namespace Project.Forms {
                 Reservation reservation = reservations[i];
                 ListViewItem item = new ListViewItem(reservation.userId + "", i);
 
-                item.Tag = reservation.showId;
+                item.Tag = reservation.id;
                 container.Items.Add(item);
                 item.SubItems.Add(reservation.showId + "");
                 item.SubItems.Add(reservation.chairId + "");

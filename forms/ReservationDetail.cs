@@ -28,10 +28,9 @@ namespace Projects.Forms {
             Program app = Program.GetInstance();
             UserService userService = app.GetService<UserService>("users");
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
-
-            //Reservation reservation = reservationService.GetReservationById(id);
-
             reservationService.DeleteReservation(reservation);
+            ReservationList reservationListScreen = Program.GetInstance().GetScreen<ReservationList>("reservationList");
+            Program.GetInstance().ShowScreen(reservationListScreen);
         }
 
         public override void OnShow() {
