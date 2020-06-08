@@ -25,21 +25,25 @@ namespace Project.Forms {
         public override void OnShow() {
             Program app = Program.GetInstance();
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
-            List<Reservation> reservations = ReservationService.GetReservations();
-
+            List<Reservation> reservations = reservationService.GetReservations();
+            UserService userService = app.GetService<UserService>("users");
+            List<User> users = userService.GetUsers();
+            MovieService movieService = app.GetService<MovieService>("movies");
+            ImageList imgs = new ImageList();
+            List<Movie> movies = movieService.GetMovies();
             base.OnShow();
 
             container.Items.Clear();
 
             for (int i = 0; i < reservations.Count; i++) {
                 Reservation reservation = reservations[i];
-                ListViewItem item = new ListViewItem(reservation.userId + "", i);
+                Movie movie = movies[i];
+                User user = users[i];
+                ListViewItem item = new ListViewItem(reservation.userId + " - " + user.username + " - " + movie.name + " - " + movie.duration, i);
 
                 item.Tag = reservation.showId;
                 container.Items.Add(item);
-                item.SubItems.Add(reservation.showId + "");
-                item.SubItems.Add(reservation.chairId + "");
-
+                
             }
 
         }
@@ -71,8 +75,7 @@ namespace Project.Forms {
         private void ReservationList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
             container.Columns.Add("User", 100);
-            container.Columns.Add("Movie", 100);
-            container.Columns.Add("Chair", 100);
+
         }
 
        
