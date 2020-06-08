@@ -26,6 +26,7 @@ namespace Project.Forms {
         private Button changePasswordButton;
         private Button cancelButton;
         private Button deleteButton;
+        private Label Movie_list_text;
 
         // Backend
         private User user;
@@ -62,6 +63,8 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.content = new System.Windows.Forms.Panel();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.changePasswordButton = new System.Windows.Forms.Button();
             this.fullNameLabel = new System.Windows.Forms.Label();
             this.fullNameInput = new System.Windows.Forms.TextBox();
@@ -70,13 +73,13 @@ namespace Project.Forms {
             this.adminLabel = new System.Windows.Forms.Label();
             this.adminInput = new System.Windows.Forms.CheckBox();
             this.saveButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
+            this.Movie_list_text = new System.Windows.Forms.Label();
             this.content.SuspendLayout();
             this.SuspendLayout();
             // 
             // content
             // 
+            this.content.Controls.Add(this.Movie_list_text);
             this.content.Controls.Add(this.deleteButton);
             this.content.Controls.Add(this.cancelButton);
             this.content.Controls.Add(this.changePasswordButton);
@@ -87,14 +90,34 @@ namespace Project.Forms {
             this.content.Controls.Add(this.adminLabel);
             this.content.Controls.Add(this.adminInput);
             this.content.Controls.Add(this.saveButton);
-            this.content.Location = new System.Drawing.Point(180, 127);
+            this.content.Location = new System.Drawing.Point(42, 106);
             this.content.Name = "content";
             this.content.Size = new System.Drawing.Size(715, 443);
             this.content.TabIndex = 2;
             // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(66, 280);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(140, 23);
+            this.deleteButton.TabIndex = 16;
+            this.deleteButton.Text = "Verwijderen";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(212, 202);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(140, 23);
+            this.cancelButton.TabIndex = 15;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
             // changePasswordButton
             // 
-            this.changePasswordButton.Location = new System.Drawing.Point(141, 238);
+            this.changePasswordButton.Location = new System.Drawing.Point(66, 242);
             this.changePasswordButton.Name = "changePasswordButton";
             this.changePasswordButton.Size = new System.Drawing.Size(140, 23);
             this.changePasswordButton.TabIndex = 14;
@@ -105,7 +128,7 @@ namespace Project.Forms {
             // fullNameLabel
             // 
             this.fullNameLabel.AutoSize = true;
-            this.fullNameLabel.Location = new System.Drawing.Point(137, 84);
+            this.fullNameLabel.Location = new System.Drawing.Point(3, 91);
             this.fullNameLabel.Name = "fullNameLabel";
             this.fullNameLabel.Size = new System.Drawing.Size(79, 13);
             this.fullNameLabel.TabIndex = 9;
@@ -113,7 +136,7 @@ namespace Project.Forms {
             // 
             // fullNameInput
             // 
-            this.fullNameInput.Location = new System.Drawing.Point(258, 81);
+            this.fullNameInput.Location = new System.Drawing.Point(124, 88);
             this.fullNameInput.Name = "fullNameInput";
             this.fullNameInput.Size = new System.Drawing.Size(272, 20);
             this.fullNameInput.TabIndex = 8;
@@ -121,7 +144,7 @@ namespace Project.Forms {
             // usernameLabel
             // 
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Location = new System.Drawing.Point(137, 123);
+            this.usernameLabel.Location = new System.Drawing.Point(3, 130);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(84, 13);
             this.usernameLabel.TabIndex = 1;
@@ -129,7 +152,7 @@ namespace Project.Forms {
             // 
             // usernameInput
             // 
-            this.usernameInput.Location = new System.Drawing.Point(258, 120);
+            this.usernameInput.Location = new System.Drawing.Point(124, 127);
             this.usernameInput.Name = "usernameInput";
             this.usernameInput.Size = new System.Drawing.Size(272, 20);
             this.usernameInput.TabIndex = 0;
@@ -137,7 +160,7 @@ namespace Project.Forms {
             // adminLabel
             // 
             this.adminLabel.AutoSize = true;
-            this.adminLabel.Location = new System.Drawing.Point(137, 161);
+            this.adminLabel.Location = new System.Drawing.Point(3, 168);
             this.adminLabel.Name = "adminLabel";
             this.adminLabel.Size = new System.Drawing.Size(36, 13);
             this.adminLabel.TabIndex = 10;
@@ -146,7 +169,7 @@ namespace Project.Forms {
             // adminInput
             // 
             this.adminInput.AutoSize = true;
-            this.adminInput.Location = new System.Drawing.Point(258, 161);
+            this.adminInput.Location = new System.Drawing.Point(124, 168);
             this.adminInput.Name = "adminInput";
             this.adminInput.Size = new System.Drawing.Size(15, 14);
             this.adminInput.TabIndex = 11;
@@ -154,37 +177,29 @@ namespace Project.Forms {
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(141, 198);
+            this.saveButton.Location = new System.Drawing.Point(66, 202);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(140, 23);
             this.saveButton.TabIndex = 6;
             this.saveButton.Text = "Opslaan";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // cancelButton
+            // Movie_list_text
             // 
-            this.cancelButton.Location = new System.Drawing.Point(231, 198);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 15;
-            this.cancelButton.Text = "Annuleren";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.Location = new System.Drawing.Point(141, 276);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(140, 23);
-            this.deleteButton.TabIndex = 16;
-            this.deleteButton.Text = "Verwijderen";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            this.Movie_list_text.AutoEllipsis = true;
+            this.Movie_list_text.AutoSize = true;
+            this.Movie_list_text.BackColor = System.Drawing.SystemColors.Control;
+            this.Movie_list_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.Movie_list_text.Location = new System.Drawing.Point(-8, 11);
+            this.Movie_list_text.Name = "Movie_list_text";
+            this.Movie_list_text.Size = new System.Drawing.Size(350, 46);
+            this.Movie_list_text.TabIndex = 17;
+            this.Movie_list_text.Text = "Account bewerken";
             // 
             // UserEdit
             // 
-            this.ClientSize = new System.Drawing.Size(1916, 1173);
+            this.ClientSize = new System.Drawing.Size(1684, 1031);
             this.Controls.Add(this.content);
             this.Name = "UserEdit";
             this.Controls.SetChildIndex(this.content, 0);
