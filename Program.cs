@@ -5,6 +5,7 @@ using Project.Base;
 using Project.Data;
 using Project.Forms;
 using Project.Services;
+using Projects.Forms;
 
 namespace Project {
 
@@ -73,6 +74,7 @@ namespace Project {
             // reservation screens
             RegisterScreen(new ReservationCreate());
             RegisterScreen(new ReservationList());
+            RegisterScreen(new ReservationDetail());
         }
 
         protected override void Unload() {
