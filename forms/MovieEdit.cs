@@ -170,7 +170,6 @@ namespace Project.Forms {
             this.Create_a_movie_text.Size = new System.Drawing.Size(278, 46);
             this.Create_a_movie_text.TabIndex = 3;
             this.Create_a_movie_text.Text = "Film bewerken";
-            this.Create_a_movie_text.Click += new System.EventHandler(this.Create_a_movie_text_Click);
 
 
             // 

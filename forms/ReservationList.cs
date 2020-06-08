@@ -38,13 +38,13 @@ namespace Project.Forms {
 
             for (int i = 0; i < reservations.Count; i++) {
                 Reservation reservation = reservations[i];
-                Movie movie = movies[i];
-                User user = users[i];
+                Movie movie = reservation.GetShow().GetMovie();
+                User user = reservation.GetUser();
                 ListViewItem item = new ListViewItem(reservation.userId + " - " + user.username + " - " + movie.name + " - " + movie.duration, i);
 
                 item.Tag = reservation.id;
                 container.Items.Add(item);
-                
+
             }
 
         }

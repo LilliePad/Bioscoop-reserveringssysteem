@@ -62,16 +62,7 @@ namespace Project.Forms {
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.Click += new System.EventHandler(this.ListItem_Click);
-            // 
-            // movieCreateButton
-            // 
-            this.movieCreateButton.Location = new System.Drawing.Point(40, 601);
-            this.movieCreateButton.Name = "movieCreateButton";
-            this.movieCreateButton.Size = new System.Drawing.Size(140, 23);
-            this.movieCreateButton.TabIndex = 3;
-            this.movieCreateButton.Text = "Nieuw";
-            this.movieCreateButton.UseVisualStyleBackColor = true;
-            this.movieCreateButton.Click += new System.EventHandler(this.MovieCreateButton_Click);
+
             // 
             // MovieListUser
             // 
