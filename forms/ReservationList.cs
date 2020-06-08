@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Project.Forms.Layouts;
 using Project.Models;
 using Project.Services;
+using Projects.Forms;
 
 namespace Project.Forms {
 
@@ -23,7 +24,7 @@ namespace Project.Forms {
 
         public override void OnShow() {
             Program app = Program.GetInstance();
-            ReservationService ReservationService = app.GetService<ReservationService>("reservations");
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
             List<Reservation> reservations = ReservationService.GetReservations();
 
             base.OnShow();
@@ -77,7 +78,16 @@ namespace Project.Forms {
        
 
         private void container_SelectedIndexChanged(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
+            ListViewItem item = container.SelectedItems[0];
+            int id = (int)item.Tag;
+            Reservation reservation = reservationService.GetReservationById(id);
 
+            ReservationDetail reservationDetailScreen = app.GetScreen<ReservationDetail>("reservationDetail");
+
+            reservationDetailScreen.SetReservation(reservation);
+            app.ShowScreen(reservationDetailScreen);
         }
     }
 
