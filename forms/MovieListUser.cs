@@ -62,7 +62,6 @@ namespace Project.Forms {
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.Click += new System.EventHandler(this.ListItem_Click);
-
             // 
             // MovieListUser
             // 

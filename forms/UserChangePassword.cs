@@ -21,6 +21,7 @@ namespace Project.Forms {
         
         private Button saveButton;
         private Button cancelButton;
+        private Label Movie_list_text;
 
         // Backend
         private User user;
@@ -46,33 +47,45 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.panel = new System.Windows.Forms.Panel();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.newPasswordLabel = new System.Windows.Forms.Label();
             this.newPasswordInput = new System.Windows.Forms.TextBox();
             this.currentPasswordLabel = new System.Windows.Forms.Label();
             this.currentPasswordInput = new System.Windows.Forms.TextBox();
-            this.cancelButton = new System.Windows.Forms.Button();
+            this.Movie_list_text = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.Movie_list_text);
             this.panel.Controls.Add(this.cancelButton);
             this.panel.Controls.Add(this.saveButton);
             this.panel.Controls.Add(this.newPasswordLabel);
             this.panel.Controls.Add(this.newPasswordInput);
             this.panel.Controls.Add(this.currentPasswordLabel);
             this.panel.Controls.Add(this.currentPasswordInput);
-            this.panel.Location = new System.Drawing.Point(180, 127);
+            this.panel.Location = new System.Drawing.Point(42, 106);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(715, 443);
             this.panel.TabIndex = 2;
             // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(218, 186);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(140, 23);
+            this.cancelButton.TabIndex = 7;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(140, 145);
+            this.saveButton.Location = new System.Drawing.Point(44, 186);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(140, 23);
             this.saveButton.TabIndex = 6;
             this.saveButton.Text = "Opslaan";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -81,7 +94,7 @@ namespace Project.Forms {
             // newPasswordLabel
             // 
             this.newPasswordLabel.AutoSize = true;
-            this.newPasswordLabel.Location = new System.Drawing.Point(137, 101);
+            this.newPasswordLabel.Location = new System.Drawing.Point(-3, 142);
             this.newPasswordLabel.Name = "newPasswordLabel";
             this.newPasswordLabel.Size = new System.Drawing.Size(98, 13);
             this.newPasswordLabel.TabIndex = 5;
@@ -89,7 +102,7 @@ namespace Project.Forms {
             // 
             // newPasswordInput
             // 
-            this.newPasswordInput.Location = new System.Drawing.Point(258, 98);
+            this.newPasswordInput.Location = new System.Drawing.Point(118, 139);
             this.newPasswordInput.Name = "newPasswordInput";
             this.newPasswordInput.PasswordChar = '*';
             this.newPasswordInput.Size = new System.Drawing.Size(272, 20);
@@ -98,7 +111,7 @@ namespace Project.Forms {
             // currentPasswordLabel
             // 
             this.currentPasswordLabel.AutoSize = true;
-            this.currentPasswordLabel.Location = new System.Drawing.Point(137, 58);
+            this.currentPasswordLabel.Location = new System.Drawing.Point(-3, 99);
             this.currentPasswordLabel.Name = "currentPasswordLabel";
             this.currentPasswordLabel.Size = new System.Drawing.Size(98, 13);
             this.currentPasswordLabel.TabIndex = 1;
@@ -106,21 +119,23 @@ namespace Project.Forms {
             // 
             // currentPasswordInput
             // 
-            this.currentPasswordInput.Location = new System.Drawing.Point(258, 55);
+            this.currentPasswordInput.Location = new System.Drawing.Point(118, 96);
             this.currentPasswordInput.Name = "currentPasswordInput";
             this.currentPasswordInput.PasswordChar = '*';
             this.currentPasswordInput.Size = new System.Drawing.Size(272, 20);
             this.currentPasswordInput.TabIndex = 0;
             // 
-            // cancelButton
+            // Movie_list_text
             // 
-            this.cancelButton.Location = new System.Drawing.Point(231, 145);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 7;
-            this.cancelButton.Text = "Annuleren";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.Movie_list_text.AutoEllipsis = true;
+            this.Movie_list_text.AutoSize = true;
+            this.Movie_list_text.BackColor = System.Drawing.SystemColors.Control;
+            this.Movie_list_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.Movie_list_text.Location = new System.Drawing.Point(-8, 0);
+            this.Movie_list_text.Name = "Movie_list_text";
+            this.Movie_list_text.Size = new System.Drawing.Size(445, 46);
+            this.Movie_list_text.TabIndex = 8;
+            this.Movie_list_text.Text = "wachtwoord veranderen";
             // 
             // UserChangePassword
             // 

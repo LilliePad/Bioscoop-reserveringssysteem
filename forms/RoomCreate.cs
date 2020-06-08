@@ -51,6 +51,7 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Back_button = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.CreateButton = new System.Windows.Forms.Button();
             this.Create_a_movie_text = new System.Windows.Forms.Label();
@@ -60,7 +61,6 @@ namespace Project.Forms {
             this.Colum_input = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Name_text = new System.Windows.Forms.Label();
-            this.Back_button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,20 +82,30 @@ namespace Project.Forms {
             this.panel1.TabIndex = 20;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // Back_button
+            // 
+            this.Back_button.Location = new System.Drawing.Point(281, 221);
+            this.Back_button.Name = "Back_button";
+            this.Back_button.Size = new System.Drawing.Size(140, 23);
+            this.Back_button.TabIndex = 23;
+            this.Back_button.Text = "Annuleer";
+            this.Back_button.UseVisualStyleBackColor = true;
+            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label2.Location = new System.Drawing.Point(10, 279);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 20);
+            this.label2.Size = new System.Drawing.Size(0, 17);
             this.label2.TabIndex = 22;
             // 
             // CreateButton
             // 
             this.CreateButton.Location = new System.Drawing.Point(125, 221);
             this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(90, 23);
+            this.CreateButton.Size = new System.Drawing.Size(140, 23);
             this.CreateButton.TabIndex = 19;
             this.CreateButton.Text = "Aanmaken";
             this.CreateButton.UseVisualStyleBackColor = true;
@@ -107,7 +117,7 @@ namespace Project.Forms {
             this.Create_a_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Create_a_movie_text.Location = new System.Drawing.Point(3, 0);
             this.Create_a_movie_text.Name = "Create_a_movie_text";
-            this.Create_a_movie_text.Size = new System.Drawing.Size(371, 58);
+            this.Create_a_movie_text.Size = new System.Drawing.Size(293, 46);
             this.Create_a_movie_text.TabIndex = 3;
             this.Create_a_movie_text.Text = "Zaal aanmaken";
             this.Create_a_movie_text.Click += new System.EventHandler(this.Create_a_movie_text_Click);
@@ -118,7 +128,7 @@ namespace Project.Forms {
             this.Playtime_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Playtime_text.Location = new System.Drawing.Point(9, 125);
             this.Playtime_text.Name = "Playtime_text";
-            this.Playtime_text.Size = new System.Drawing.Size(47, 20);
+            this.Playtime_text.Size = new System.Drawing.Size(40, 17);
             this.Playtime_text.TabIndex = 6;
             this.Playtime_text.Text = "Rijen";
             this.Playtime_text.Click += new System.EventHandler(this.Playtime_text_Click);
@@ -127,7 +137,7 @@ namespace Project.Forms {
             // 
             this.Room_input.Location = new System.Drawing.Point(125, 82);
             this.Room_input.Name = "Room_input";
-            this.Room_input.Size = new System.Drawing.Size(495, 22);
+            this.Room_input.Size = new System.Drawing.Size(495, 20);
             this.Room_input.TabIndex = 14;
             this.Room_input.TextChanged += new System.EventHandler(this.Room_input_TextChanged);
             // 
@@ -135,7 +145,7 @@ namespace Project.Forms {
             // 
             this.Row_input.Location = new System.Drawing.Point(125, 125);
             this.Row_input.Name = "Row_input";
-            this.Row_input.Size = new System.Drawing.Size(495, 22);
+            this.Row_input.Size = new System.Drawing.Size(495, 20);
             this.Row_input.TabIndex = 16;
             this.Row_input.TextChanged += new System.EventHandler(this.Row_input_TextChanged);
             // 
@@ -143,7 +153,7 @@ namespace Project.Forms {
             // 
             this.Colum_input.Location = new System.Drawing.Point(125, 171);
             this.Colum_input.Name = "Colum_input";
-            this.Colum_input.Size = new System.Drawing.Size(495, 22);
+            this.Colum_input.Size = new System.Drawing.Size(495, 20);
             this.Colum_input.TabIndex = 17;
             this.Colum_input.TextChanged += new System.EventHandler(this.Colum_input_TextChanged);
             // 
@@ -153,7 +163,7 @@ namespace Project.Forms {
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label6.Location = new System.Drawing.Point(10, 171);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(89, 20);
+            this.label6.Size = new System.Drawing.Size(74, 17);
             this.label6.TabIndex = 18;
             this.label6.Text = "Colommen";
             this.label6.Click += new System.EventHandler(this.label6_Click);
@@ -164,19 +174,9 @@ namespace Project.Forms {
             this.Name_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Name_text.Location = new System.Drawing.Point(10, 82);
             this.Name_text.Name = "Name_text";
-            this.Name_text.Size = new System.Drawing.Size(106, 20);
+            this.Name_text.Size = new System.Drawing.Size(91, 17);
             this.Name_text.TabIndex = 4;
             this.Name_text.Text = "Zaal nummer";
-            // 
-            // Back_button
-            // 
-            this.Back_button.Location = new System.Drawing.Point(281, 221);
-            this.Back_button.Name = "Back_button";
-            this.Back_button.Size = new System.Drawing.Size(90, 23);
-            this.Back_button.TabIndex = 23;
-            this.Back_button.Text = "Annuleer";
-            this.Back_button.UseVisualStyleBackColor = true;
-            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
             // 
             // RoomCreateDesign
             // 
