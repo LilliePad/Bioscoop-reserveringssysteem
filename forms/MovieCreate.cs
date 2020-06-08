@@ -31,6 +31,7 @@ namespace Project.Forms {
         private int movieDuration;
         private string movieDurationStr;
         private Panel panel1;
+        private Button Back_button;
         private StorageFile image;
 
         public MovieCreate() {
@@ -56,6 +57,7 @@ namespace Project.Forms {
             this.Genre_input = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Back_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -129,7 +131,7 @@ namespace Project.Forms {
             this.Movie_create_button.Name = "Movie_create_button";
             this.Movie_create_button.Size = new System.Drawing.Size(133, 39);
             this.Movie_create_button.TabIndex = 12;
-            this.Movie_create_button.Text = "Create Movie";
+            this.Movie_create_button.Text = "Film aanmaken";
             this.Movie_create_button.UseVisualStyleBackColor = true;
             this.Movie_create_button.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -188,6 +190,7 @@ namespace Project.Forms {
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.Back_button);
             this.panel1.Controls.Add(this.Create_a_movie_text);
             this.panel1.Controls.Add(this.Discription_text);
             this.panel1.Controls.Add(this.Playtime_text);
@@ -206,6 +209,16 @@ namespace Project.Forms {
             this.panel1.Size = new System.Drawing.Size(993, 534);
             this.panel1.TabIndex = 19;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // Back_button
+            // 
+            this.Back_button.Location = new System.Drawing.Point(290, 472);
+            this.Back_button.Name = "Back_button";
+            this.Back_button.Size = new System.Drawing.Size(133, 39);
+            this.Back_button.TabIndex = 19;
+            this.Back_button.Text = "Annuleer";
+            this.Back_button.UseVisualStyleBackColor = true;
+            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
             // 
             // MovieCreate
             // 
@@ -305,6 +318,12 @@ namespace Project.Forms {
 
         private void panel1_Paint(object sender, PaintEventArgs e) {
 
+        }
+
+        private void Back_button_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            MovieList editScreen = app.GetScreen<MovieList>("movieList");
+            app.ShowScreen(editScreen);
         }
     }
 
