@@ -5,13 +5,13 @@ using System.Windows.Forms;
 using Project.Forms.Layouts;
 using Project.Models;
 using Project.Services;
+using Projects.Forms;
 
 namespace Project.Forms {
 
     public class ReservationList : BaseLayout {
 
         private ListView container;
-        private Button movieCreateButton;
 
         public ReservationList() {
             InitializeComponent();
@@ -24,7 +24,7 @@ namespace Project.Forms {
 
         public override void OnShow() {
             Program app = Program.GetInstance();
-            ReservationService ReservationService = app.GetService<ReservationService>("reservations");
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
             List<Reservation> reservations = ReservationService.GetReservations();
 
             base.OnShow();
@@ -45,7 +45,6 @@ namespace Project.Forms {
         }
         private void InitializeComponent() {
             this.container = new System.Windows.Forms.ListView();
-            this.movieCreateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // container
@@ -58,22 +57,13 @@ namespace Project.Forms {
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.SelectedIndexChanged += new System.EventHandler(this.container_SelectedIndexChanged);
             // 
-            // movieCreateButton
-            // 
-            this.movieCreateButton.Location = new System.Drawing.Point(0, 0);
-            this.movieCreateButton.Name = "movieCreateButton";
-            this.movieCreateButton.Size = new System.Drawing.Size(75, 23);
-            this.movieCreateButton.TabIndex = 2;
-            // 
             // ReservationList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
-            this.Controls.Add(this.movieCreateButton);
             this.Controls.Add(this.container);
             this.Name = "ReservationList";
             this.Load += new System.EventHandler(this.ReservationList_Load);
             this.Controls.SetChildIndex(this.container, 0);
-            this.Controls.SetChildIndex(this.movieCreateButton, 0);
             this.ResumeLayout(false);
 
         }
@@ -88,7 +78,16 @@ namespace Project.Forms {
        
 
         private void container_SelectedIndexChanged(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
+            ListViewItem item = container.SelectedItems[0];
+            int id = (int)item.Tag;
+            Reservation reservation = reservationService.GetReservationById(id);
 
+            ReservationDetail reservationDetailScreen = app.GetScreen<ReservationDetail>("reservationDetail");
+
+            reservationDetailScreen.SetReservation(reservation);
+            app.ShowScreen(reservationDetailScreen);
         }
     }
 

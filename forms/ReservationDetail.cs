@@ -10,6 +10,7 @@ using Project.Forms;
 
 namespace Projects.Forms {
     public partial class ReservationDetail : BaseLayout {
+        private Show show;
 
         private Reservation reservation;
         public ReservationDetail() {
@@ -28,6 +29,39 @@ namespace Projects.Forms {
             //Reservation reservation = reservationService.GetReservationById(id);
 
             reservationService.DeleteReservation(reservation);
+        }
+
+        public override void OnShow() {
+            base.OnShow();
+            Program app = Program.GetInstance();
+            ReservationService reservationService = app.GetService<ReservationService>("reservations");
+            Reservation_Id_Text.Text = reservation.id;
+            show = reservation.GetShow(reservation.showId);
+            Show_Text.Text = reservation.Get
+        }
+
+        private void Reservation_Id_Label_Click(object sender, EventArgs e) {
+
+        }
+
+        private void Reservation_Show_Label_Click(object sender, EventArgs e) {
+
+        }
+
+        private void Reservation_Chair_Label_Click(object sender, EventArgs e) {
+
+        }
+
+        private void Reservation_Id_Text_Click(object sender, EventArgs e) {
+
+        }
+
+        private void Show_Text_Click(object sender, EventArgs e) {
+
+        }
+
+        private void Chair_Text_Click(object sender, EventArgs e) {
+
         }
     }
 }
