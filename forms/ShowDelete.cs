@@ -23,6 +23,7 @@ namespace Project.Forms {
         private Show show;
         private int row;
         private Label label1;
+        private Button Back_button;
         private int colum;
 
         
@@ -60,11 +61,13 @@ namespace Project.Forms {
             this.Row_text = new System.Windows.Forms.Label();
             this.Delete_chair_button = new System.Windows.Forms.Button();
             this.Chair_edit_text = new System.Windows.Forms.Label();
+            this.Back_button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.Back_button);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.Colum_text);
             this.panel1.Controls.Add(this.Row_text);
@@ -83,9 +86,9 @@ namespace Project.Forms {
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.label1.Location = new System.Drawing.Point(15, 89);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 25);
+            this.label1.Size = new System.Drawing.Size(151, 25);
             this.label1.TabIndex = 22;
-            this.label1.Text = "Show id =";
+            this.label1.Text = "Voorstelling id =";
             // 
             // Colum_text
             // 
@@ -111,9 +114,9 @@ namespace Project.Forms {
             // 
             this.Delete_chair_button.Location = new System.Drawing.Point(13, 268);
             this.Delete_chair_button.Name = "Delete_chair_button";
-            this.Delete_chair_button.Size = new System.Drawing.Size(133, 39);
+            this.Delete_chair_button.Size = new System.Drawing.Size(170, 40);
             this.Delete_chair_button.TabIndex = 19;
-            this.Delete_chair_button.Text = "show verwijderen";
+            this.Delete_chair_button.Text = "Voorstelling verwijderen";
             this.Delete_chair_button.UseVisualStyleBackColor = true;
             this.Delete_chair_button.Click += new System.EventHandler(this.Chair_delete_button_Click);
             // 
@@ -125,9 +128,19 @@ namespace Project.Forms {
             this.Chair_edit_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Chair_edit_text.Location = new System.Drawing.Point(3, 0);
             this.Chair_edit_text.Name = "Chair_edit_text";
-            this.Chair_edit_text.Size = new System.Drawing.Size(420, 58);
+            this.Chair_edit_text.Size = new System.Drawing.Size(546, 58);
             this.Chair_edit_text.TabIndex = 3;
-            this.Chair_edit_text.Text = "Show verwijderen";
+            this.Chair_edit_text.Text = "Voorsteling verwijderen";
+            // 
+            // Back_button
+            // 
+            this.Back_button.Location = new System.Drawing.Point(204, 268);
+            this.Back_button.Name = "Back_button";
+            this.Back_button.Size = new System.Drawing.Size(170, 40);
+            this.Back_button.TabIndex = 23;
+            this.Back_button.Text = "Annuleer";
+            this.Back_button.UseVisualStyleBackColor = true;
+            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
             // 
             // ShowDelete
             // 
@@ -165,6 +178,12 @@ namespace Project.Forms {
             
             ShowList newScreen = app.GetScreen<ShowList>("showList");
             app.ShowScreen(newScreen);
+        }
+
+        private void Back_button_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ShowList editScreen = app.GetScreen<ShowList>("showList");
+            app.ShowScreen(editScreen);
         }
     }
 

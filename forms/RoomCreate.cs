@@ -30,6 +30,7 @@ namespace Project.Forms {
         private int Row;
         private int Colum;
         private double Price;
+        private Button Back_button;
         private string Type;
 
         public RoomCreateDesign() {
@@ -59,11 +60,13 @@ namespace Project.Forms {
             this.Colum_input = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Name_text = new System.Windows.Forms.Label();
+            this.Back_button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.Back_button);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.CreateButton);
             this.panel1.Controls.Add(this.Create_a_movie_text);
@@ -104,9 +107,9 @@ namespace Project.Forms {
             this.Create_a_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Create_a_movie_text.Location = new System.Drawing.Point(3, 0);
             this.Create_a_movie_text.Name = "Create_a_movie_text";
-            this.Create_a_movie_text.Size = new System.Drawing.Size(368, 58);
+            this.Create_a_movie_text.Size = new System.Drawing.Size(371, 58);
             this.Create_a_movie_text.TabIndex = 3;
-            this.Create_a_movie_text.Text = "Film aanmaken";
+            this.Create_a_movie_text.Text = "Zaal aanmaken";
             this.Create_a_movie_text.Click += new System.EventHandler(this.Create_a_movie_text_Click);
             // 
             // Playtime_text
@@ -124,7 +127,6 @@ namespace Project.Forms {
             // 
             this.Room_input.Location = new System.Drawing.Point(125, 82);
             this.Room_input.Name = "Room_input";
-            this.Room_input.Text = "";
             this.Room_input.Size = new System.Drawing.Size(495, 22);
             this.Room_input.TabIndex = 14;
             this.Room_input.TextChanged += new System.EventHandler(this.Room_input_TextChanged);
@@ -133,7 +135,6 @@ namespace Project.Forms {
             // 
             this.Row_input.Location = new System.Drawing.Point(125, 125);
             this.Row_input.Name = "Row_input";
-            this.Row_input.Text = "";
             this.Row_input.Size = new System.Drawing.Size(495, 22);
             this.Row_input.TabIndex = 16;
             this.Row_input.TextChanged += new System.EventHandler(this.Row_input_TextChanged);
@@ -142,7 +143,6 @@ namespace Project.Forms {
             // 
             this.Colum_input.Location = new System.Drawing.Point(125, 171);
             this.Colum_input.Name = "Colum_input";
-            this.Colum_input.Text = "";
             this.Colum_input.Size = new System.Drawing.Size(495, 22);
             this.Colum_input.TabIndex = 17;
             this.Colum_input.TextChanged += new System.EventHandler(this.Colum_input_TextChanged);
@@ -167,6 +167,16 @@ namespace Project.Forms {
             this.Name_text.Size = new System.Drawing.Size(106, 20);
             this.Name_text.TabIndex = 4;
             this.Name_text.Text = "Zaal nummer";
+            // 
+            // Back_button
+            // 
+            this.Back_button.Location = new System.Drawing.Point(281, 221);
+            this.Back_button.Name = "Back_button";
+            this.Back_button.Size = new System.Drawing.Size(90, 23);
+            this.Back_button.TabIndex = 23;
+            this.Back_button.Text = "Annuleer";
+            this.Back_button.UseVisualStyleBackColor = true;
+            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
             // 
             // RoomCreateDesign
             // 
@@ -272,6 +282,12 @@ namespace Project.Forms {
 
         private void Playtime_text_Click(object sender, EventArgs e) {
 
+        }
+
+        private void Back_button_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            RoomList editScreen = app.GetScreen<RoomList>("roomList");
+            app.ShowScreen(editScreen);
         }
     }
 }
