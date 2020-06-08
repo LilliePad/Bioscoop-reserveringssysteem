@@ -88,7 +88,7 @@ namespace Project.Forms.Layouts {
             this.navBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.navBar.Location = new System.Drawing.Point(0, 0);
             this.navBar.Name = "navBar";
-            this.navBar.Size = new System.Drawing.Size(1902, 100);
+            this.navBar.Size = new System.Drawing.Size(1684, 100);
             this.navBar.TabIndex = 1;
             // 
             // userReservationButton
@@ -127,7 +127,7 @@ namespace Project.Forms.Layouts {
             this.navAccountName.AutoSize = true;
             this.navAccountName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navAccountName.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.navAccountName.Location = new System.Drawing.Point(1663, 16);
+            this.navAccountName.Location = new System.Drawing.Point(1445, 16);
             this.navAccountName.Name = "navAccountName";
             this.navAccountName.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.navAccountName.Size = new System.Drawing.Size(111, 17);
@@ -216,7 +216,7 @@ namespace Project.Forms.Layouts {
             // 
             this.navLoginUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.navLoginUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.navLoginUsername.Location = new System.Drawing.Point(1642, 16);
+            this.navLoginUsername.Location = new System.Drawing.Point(1424, 16);
             this.navLoginUsername.Name = "navLoginUsername";
             this.navLoginUsername.Size = new System.Drawing.Size(132, 23);
             this.navLoginUsername.TabIndex = 7;
@@ -228,7 +228,7 @@ namespace Project.Forms.Layouts {
             // 
             this.navLoginPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.navLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.navLoginPassword.Location = new System.Drawing.Point(1642, 58);
+            this.navLoginPassword.Location = new System.Drawing.Point(1424, 58);
             this.navLoginPassword.Name = "navLoginPassword";
             this.navLoginPassword.Size = new System.Drawing.Size(132, 23);
             this.navLoginPassword.TabIndex = 8;
@@ -244,7 +244,7 @@ namespace Project.Forms.Layouts {
             this.navLoginButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navLoginButton.Location = new System.Drawing.Point(1783, 16);
+            this.navLoginButton.Location = new System.Drawing.Point(1565, 16);
             this.navLoginButton.Name = "navLoginButton";
             this.navLoginButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
             this.navLoginButton.Size = new System.Drawing.Size(99, 30);
@@ -261,7 +261,7 @@ namespace Project.Forms.Layouts {
             this.navRegisterButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navRegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navRegisterButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navRegisterButton.Location = new System.Drawing.Point(1783, 51);
+            this.navRegisterButton.Location = new System.Drawing.Point(1565, 51);
             this.navRegisterButton.Name = "navRegisterButton";
             this.navRegisterButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
             this.navRegisterButton.Size = new System.Drawing.Size(99, 30);
@@ -278,7 +278,7 @@ namespace Project.Forms.Layouts {
             this.navAccountButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navAccountButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navAccountButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navAccountButton.Location = new System.Drawing.Point(1783, 16);
+            this.navAccountButton.Location = new System.Drawing.Point(1565, 16);
             this.navAccountButton.Name = "navAccountButton";
             this.navAccountButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
             this.navAccountButton.Size = new System.Drawing.Size(99, 30);
@@ -295,7 +295,7 @@ namespace Project.Forms.Layouts {
             this.navLogoutButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLogoutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLogoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.navLogoutButton.Location = new System.Drawing.Point(1783, 51);
+            this.navLogoutButton.Location = new System.Drawing.Point(1565, 51);
             this.navLogoutButton.Name = "navLogoutButton";
             this.navLogoutButton.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
             this.navLogoutButton.Size = new System.Drawing.Size(99, 30);
@@ -307,7 +307,7 @@ namespace Project.Forms.Layouts {
             // BaseLayout
             // 
             this.AcceptButton = this.navLoginButton;
-            this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.ClientSize = new System.Drawing.Size(1684, 1031);
             this.Controls.Add(this.navBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BaseLayout";

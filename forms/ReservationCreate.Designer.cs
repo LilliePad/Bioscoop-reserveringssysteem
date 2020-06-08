@@ -34,9 +34,9 @@
             // 
             // Select_Chair_Button
             // 
-            this.Select_Chair_Button.Location = new System.Drawing.Point(268, 391);
+            this.Select_Chair_Button.Location = new System.Drawing.Point(253, 457);
             this.Select_Chair_Button.Name = "Select_Chair_Button";
-            this.Select_Chair_Button.Size = new System.Drawing.Size(139, 89);
+            this.Select_Chair_Button.Size = new System.Drawing.Size(140, 23);
             this.Select_Chair_Button.TabIndex = 2;
             this.Select_Chair_Button.Text = "Stoel kiezen";
             this.Select_Chair_Button.UseVisualStyleBackColor = true;
@@ -44,9 +44,9 @@
             // 
             // Reserve_Tickets_Button
             // 
-            this.Reserve_Tickets_Button.Location = new System.Drawing.Point(820, 462);
+            this.Reserve_Tickets_Button.Location = new System.Drawing.Point(820, 457);
             this.Reserve_Tickets_Button.Name = "Reserve_Tickets_Button";
-            this.Reserve_Tickets_Button.Size = new System.Drawing.Size(420, 159);
+            this.Reserve_Tickets_Button.Size = new System.Drawing.Size(140, 23);
             this.Reserve_Tickets_Button.TabIndex = 3;
             this.Reserve_Tickets_Button.Text = "Reserveren";
             this.Reserve_Tickets_Button.UseVisualStyleBackColor = true;
@@ -72,19 +72,19 @@
             // Movie_Name_Label
             // 
             this.Movie_Name_Label.AutoSize = true;
-            this.Movie_Name_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Movie_Name_Label.Location = new System.Drawing.Point(37, 141);
+            this.Movie_Name_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.Movie_Name_Label.Location = new System.Drawing.Point(32, 118);
             this.Movie_Name_Label.Name = "Movie_Name_Label";
-            this.Movie_Name_Label.Size = new System.Drawing.Size(631, 63);
+            this.Movie_Name_Label.Size = new System.Drawing.Size(466, 46);
             this.Movie_Name_Label.TabIndex = 6;
             this.Movie_Name_Label.Text = "Movie Name Placeholder";
             // 
             // container
             // 
             this.container.HideSelection = false;
-            this.container.Location = new System.Drawing.Point(600, 228);
+            this.container.Location = new System.Drawing.Point(607, 212);
             this.container.Name = "container";
-            this.container.Size = new System.Drawing.Size(182, 199);
+            this.container.Size = new System.Drawing.Size(207, 268);
             this.container.TabIndex = 7;
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.SelectedIndexChanged += new System.EventHandler(this.Selected_Chairs_List_SelectedIndexChanged_1);

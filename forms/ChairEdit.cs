@@ -53,12 +53,12 @@ namespace Project.Forms {
         }
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Back_button = new System.Windows.Forms.Button();
             this.Colum_text = new System.Windows.Forms.Label();
             this.Row_text = new System.Windows.Forms.Label();
             this.Delete_chair_button = new System.Windows.Forms.Button();
             this.Chair_edit_text = new System.Windows.Forms.Label();
             this.Chair_edit_Button = new System.Windows.Forms.Button();
-            this.Back_button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,13 +75,23 @@ namespace Project.Forms {
             this.panel1.Size = new System.Drawing.Size(993, 534);
             this.panel1.TabIndex = 20;
             // 
+            // Back_button
+            // 
+            this.Back_button.Location = new System.Drawing.Point(318, 171);
+            this.Back_button.Name = "Back_button";
+            this.Back_button.Size = new System.Drawing.Size(140, 23);
+            this.Back_button.TabIndex = 22;
+            this.Back_button.Text = "Annuleren";
+            this.Back_button.UseVisualStyleBackColor = true;
+            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
+            // 
             // Colum_text
             // 
             this.Colum_text.AutoSize = true;
             this.Colum_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Colum_text.Location = new System.Drawing.Point(9, 126);
             this.Colum_text.Name = "Colum_text";
-            this.Colum_text.Size = new System.Drawing.Size(0, 20);
+            this.Colum_text.Size = new System.Drawing.Size(0, 17);
             this.Colum_text.TabIndex = 21;
             this.Colum_text.Click += new System.EventHandler(this.Colum_Click);
             // 
@@ -91,7 +101,7 @@ namespace Project.Forms {
             this.Row_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Row_text.Location = new System.Drawing.Point(9, 94);
             this.Row_text.Name = "Row_text";
-            this.Row_text.Size = new System.Drawing.Size(0, 20);
+            this.Row_text.Size = new System.Drawing.Size(0, 17);
             this.Row_text.TabIndex = 20;
             this.Row_text.Click += new System.EventHandler(this.Row_Click);
             // 
@@ -99,7 +109,7 @@ namespace Project.Forms {
             // 
             this.Delete_chair_button.Location = new System.Drawing.Point(168, 171);
             this.Delete_chair_button.Name = "Delete_chair_button";
-            this.Delete_chair_button.Size = new System.Drawing.Size(133, 39);
+            this.Delete_chair_button.Size = new System.Drawing.Size(140, 23);
             this.Delete_chair_button.TabIndex = 19;
             this.Delete_chair_button.Text = "stoel verwijderen";
             this.Delete_chair_button.UseVisualStyleBackColor = true;
@@ -113,7 +123,7 @@ namespace Project.Forms {
             this.Chair_edit_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Chair_edit_text.Location = new System.Drawing.Point(3, 0);
             this.Chair_edit_text.Name = "Chair_edit_text";
-            this.Chair_edit_text.Size = new System.Drawing.Size(375, 58);
+            this.Chair_edit_text.Size = new System.Drawing.Size(300, 46);
             this.Chair_edit_text.TabIndex = 3;
             this.Chair_edit_text.Text = "Stoel Bewerken";
             // 
@@ -121,21 +131,11 @@ namespace Project.Forms {
             // 
             this.Chair_edit_Button.Location = new System.Drawing.Point(13, 171);
             this.Chair_edit_Button.Name = "Chair_edit_Button";
-            this.Chair_edit_Button.Size = new System.Drawing.Size(133, 39);
+            this.Chair_edit_Button.Size = new System.Drawing.Size(140, 23);
             this.Chair_edit_Button.TabIndex = 12;
             this.Chair_edit_Button.Text = "Stoel aanmaken";
             this.Chair_edit_Button.UseVisualStyleBackColor = true;
             this.Chair_edit_Button.Click += new System.EventHandler(this.Chair_edit_button_Click);
-            // 
-            // Back_button
-            // 
-            this.Back_button.Location = new System.Drawing.Point(318, 171);
-            this.Back_button.Name = "Back_button";
-            this.Back_button.Size = new System.Drawing.Size(133, 39);
-            this.Back_button.TabIndex = 22;
-            this.Back_button.Text = "Annuleren";
-            this.Back_button.UseVisualStyleBackColor = true;
-            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
             // 
             // ChairEdit
             // 

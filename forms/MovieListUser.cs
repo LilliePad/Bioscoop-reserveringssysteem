@@ -69,18 +69,18 @@ namespace Project.Forms {
             // 
             this.movieCreateButton.Location = new System.Drawing.Point(40, 601);
             this.movieCreateButton.Name = "movieCreateButton";
-            this.movieCreateButton.Size = new System.Drawing.Size(110, 51);
+            this.movieCreateButton.Size = new System.Drawing.Size(140, 23);
             this.movieCreateButton.TabIndex = 3;
             this.movieCreateButton.Text = "Nieuw";
             this.movieCreateButton.UseVisualStyleBackColor = true;
             this.movieCreateButton.Click += new System.EventHandler(this.MovieCreateButton_Click);
             // 
-            // MovieList
+            // MovieListUser
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.movieCreateButton);
             this.Controls.Add(this.container);
-            this.Name = "MovieList";
+            this.Name = "MovieListUser";
             this.Load += new System.EventHandler(this.MovieList_Load);
             this.Controls.SetChildIndex(this.container, 0);
             this.Controls.SetChildIndex(this.movieCreateButton, 0);

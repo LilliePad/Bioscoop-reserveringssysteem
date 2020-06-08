@@ -185,7 +185,7 @@ namespace Project.Forms {
             // 
             this.Chose_Chair_Text.AutoSize = true;
             this.Chose_Chair_Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.Chose_Chair_Text.Location = new System.Drawing.Point(-10, 0);
+            this.Chose_Chair_Text.Location = new System.Drawing.Point(-6, 0);
             this.Chose_Chair_Text.Name = "Chose_Chair_Text";
             this.Chose_Chair_Text.Size = new System.Drawing.Size(270, 46);
             this.Chose_Chair_Text.TabIndex = 3;

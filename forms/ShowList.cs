@@ -11,6 +11,7 @@ namespace Project.Forms {
     public class ShowList : BaseLayout {
 
         private ListView container;
+        private Label Movie_list_text;
         private Button movieCreateButton;
 
         public ShowList() {
@@ -43,14 +44,15 @@ namespace Project.Forms {
         private void InitializeComponent() {
             this.container = new System.Windows.Forms.ListView();
             this.movieCreateButton = new System.Windows.Forms.Button();
+            this.Movie_list_text = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // container
             // 
             this.container.HideSelection = false;
-            this.container.Location = new System.Drawing.Point(40, 129);
+            this.container.Location = new System.Drawing.Point(40, 170);
             this.container.Name = "container";
-            this.container.Size = new System.Drawing.Size(670, 452);
+            this.container.Size = new System.Drawing.Size(670, 430);
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.SelectedIndexChanged += new System.EventHandler(this.container_SelectedIndexChanged);
@@ -58,7 +60,7 @@ namespace Project.Forms {
             // 
             // movieCreateButton
             // 
-            this.movieCreateButton.Location = new System.Drawing.Point(40, 601);
+            this.movieCreateButton.Location = new System.Drawing.Point(40, 610);
             this.movieCreateButton.Name = "movieCreateButton";
             this.movieCreateButton.Size = new System.Drawing.Size(110, 51);
             this.movieCreateButton.TabIndex = 3;
@@ -66,16 +68,31 @@ namespace Project.Forms {
             this.movieCreateButton.UseVisualStyleBackColor = true;
             this.movieCreateButton.Click += new System.EventHandler(this.ButtonNew_Click);
             // 
+            // Movie_list_text
+            // 
+            this.Movie_list_text.AutoEllipsis = true;
+            this.Movie_list_text.AutoSize = true;
+            this.Movie_list_text.BackColor = System.Drawing.SystemColors.Control;
+            this.Movie_list_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.Movie_list_text.Location = new System.Drawing.Point(32, 112);
+            this.Movie_list_text.Name = "Movie_list_text";
+            this.Movie_list_text.Size = new System.Drawing.Size(300, 46);
+            this.Movie_list_text.TabIndex = 5;
+            this.Movie_list_text.Text = "Voorstelling lijst";
+            // 
             // ShowList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.Movie_list_text);
             this.Controls.Add(this.movieCreateButton);
             this.Controls.Add(this.container);
             this.Name = "ShowList";
             this.Load += new System.EventHandler(this.MovieList_Load);
             this.Controls.SetChildIndex(this.container, 0);
             this.Controls.SetChildIndex(this.movieCreateButton, 0);
+            this.Controls.SetChildIndex(this.Movie_list_text, 0);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

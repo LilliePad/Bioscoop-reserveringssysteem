@@ -65,7 +65,7 @@ namespace Project.Forms {
             // 
             this.userCreateButton.Location = new System.Drawing.Point(40, 601);
             this.userCreateButton.Name = "userCreateButton";
-            this.userCreateButton.Size = new System.Drawing.Size(110, 51);
+            this.userCreateButton.Size = new System.Drawing.Size(140, 23);
             this.userCreateButton.TabIndex = 4;
             this.userCreateButton.Text = "Nieuw";
             this.userCreateButton.UseVisualStyleBackColor = true;
