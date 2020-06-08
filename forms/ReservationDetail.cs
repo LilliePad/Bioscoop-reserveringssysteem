@@ -37,7 +37,7 @@ namespace Projects.Forms {
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
             Reservation_Id_Text.Text = reservation.id;
             show = reservation.GetShow(reservation.showId);
-            Show_Text.Text = reservation.Get
+            Show_Text.Text = reservation.Get;
         }
 
         private void Reservation_Id_Label_Click(object sender, EventArgs e) {

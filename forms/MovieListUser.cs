@@ -11,7 +11,6 @@ namespace Project.Forms {
     public class MovieListUser : BaseLayout {
 
         private ListView container;
-        private Button movieCreateButton;
 
         public MovieListUser() {
             InitializeComponent();
@@ -52,7 +51,6 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.container = new System.Windows.Forms.ListView();
-            this.movieCreateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // container
@@ -65,25 +63,13 @@ namespace Project.Forms {
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.Click += new System.EventHandler(this.ListItem_Click);
             // 
-            // movieCreateButton
-            // 
-            this.movieCreateButton.Location = new System.Drawing.Point(40, 601);
-            this.movieCreateButton.Name = "movieCreateButton";
-            this.movieCreateButton.Size = new System.Drawing.Size(110, 51);
-            this.movieCreateButton.TabIndex = 3;
-            this.movieCreateButton.Text = "Nieuw";
-            this.movieCreateButton.UseVisualStyleBackColor = true;
-            this.movieCreateButton.Click += new System.EventHandler(this.MovieCreateButton_Click);
-            // 
-            // MovieList
+            // MovieListUser
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
-            this.Controls.Add(this.movieCreateButton);
             this.Controls.Add(this.container);
-            this.Name = "MovieList";
+            this.Name = "MovieListUser";
             this.Load += new System.EventHandler(this.MovieList_Load);
             this.Controls.SetChildIndex(this.container, 0);
-            this.Controls.SetChildIndex(this.movieCreateButton, 0);
             this.ResumeLayout(false);
 
         }
