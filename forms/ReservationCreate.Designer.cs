@@ -34,7 +34,7 @@
             // 
             // Select_Chair_Button
             // 
-            this.Select_Chair_Button.Location = new System.Drawing.Point(253, 457);
+            this.Select_Chair_Button.Location = new System.Drawing.Point(316, 539);
             this.Select_Chair_Button.Name = "Select_Chair_Button";
             this.Select_Chair_Button.Size = new System.Drawing.Size(140, 23);
             this.Select_Chair_Button.TabIndex = 2;
@@ -44,7 +44,7 @@
             // 
             // Reserve_Tickets_Button
             // 
-            this.Reserve_Tickets_Button.Location = new System.Drawing.Point(820, 457);
+            this.Reserve_Tickets_Button.Location = new System.Drawing.Point(885, 539);
             this.Reserve_Tickets_Button.Name = "Reserve_Tickets_Button";
             this.Reserve_Tickets_Button.Size = new System.Drawing.Size(140, 23);
             this.Reserve_Tickets_Button.TabIndex = 3;
@@ -56,7 +56,7 @@
             // 
             this.Movie_Picture.Location = new System.Drawing.Point(40, 212);
             this.Movie_Picture.Name = "Movie_Picture";
-            this.Movie_Picture.Size = new System.Drawing.Size(207, 268);
+            this.Movie_Picture.Size = new System.Drawing.Size(250, 350);
             this.Movie_Picture.TabIndex = 4;
             this.Movie_Picture.TabStop = false;
             this.Movie_Picture.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -84,7 +84,7 @@
             this.container.HideSelection = false;
             this.container.Location = new System.Drawing.Point(607, 212);
             this.container.Name = "container";
-            this.container.Size = new System.Drawing.Size(207, 268);
+            this.container.Size = new System.Drawing.Size(250, 350);
             this.container.TabIndex = 7;
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.SelectedIndexChanged += new System.EventHandler(this.Selected_Chairs_List_SelectedIndexChanged_1);
