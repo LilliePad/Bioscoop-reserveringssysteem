@@ -58,6 +58,9 @@
     <Compile Include="data\Database.cs" />
     <Compile Include="enums\PrintType.cs" />
     <Compile Include="errors\PermissionException.cs" />
+    <Compile Include="forms\MovieListUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="forms\ReservationDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,9 +72,6 @@
     </Compile>
     <Compile Include="forms\ReservationCreate.Designer.cs">
       <DependentUpon>ReservationCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="forms\ShowListUser.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\ReservationList.cs">
       <SubType>Form</SubType>
@@ -155,14 +155,14 @@
     <Compile Include="services\RoomService.cs" />
     <Compile Include="services\ShowService.cs" />
     <Compile Include="services\UserService.cs" />
+    <EmbeddedResource Include="forms\MovieListUser.resx">
+      <DependentUpon>MovieListUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\ReservationCreate.resx">
       <DependentUpon>ReservationCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ReservationDetail.resx">
       <DependentUpon>ReservationDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms\ShowListUser.resx">
-      <DependentUpon>ShowListUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ReservationList.resx">
       <DependentUpon>ReservationList.cs</DependentUpon>
