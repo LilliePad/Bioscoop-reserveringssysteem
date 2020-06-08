@@ -30,6 +30,7 @@ namespace Project.Forms {
         private Button button2;
         private int Position;
         private Room room;
+        private Button Back_button;
         private Button button;
         public RoomEdit() {
             InitializeComponent();
@@ -134,11 +135,22 @@ namespace Project.Forms {
             this.label2 = new System.Windows.Forms.Label();
             this.Create_a_movie_text = new System.Windows.Forms.Label();
             this.Name_text = new System.Windows.Forms.Label();
+            this.Back_button = new System.Windows.Forms.Button();
             this.roomSelect.SuspendLayout();
             this.SuspendLayout();
             // 
+            // container
+            // 
+            this.container.HideSelection = false;
+            this.container.Location = new System.Drawing.Point(0, 0);
+            this.container.Name = "container";
+            this.container.Size = new System.Drawing.Size(121, 97);
+            this.container.TabIndex = 0;
+            this.container.UseCompatibleStateImageBehavior = false;
+            // 
             // roomSelect
             // 
+            this.roomSelect.Controls.Add(this.Back_button);
             this.roomSelect.Controls.Add(this.button2);
             this.roomSelect.Controls.Add(this.tableLayoutPanel1);
             this.roomSelect.Controls.Add(this.label2);
@@ -154,9 +166,9 @@ namespace Project.Forms {
             // 
             this.button2.Location = new System.Drawing.Point(23, 105);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 23);
+            this.button2.Size = new System.Drawing.Size(130, 23);
             this.button2.TabIndex = 24;
-            this.button2.Text = "room delete";
+            this.button2.Text = "Zaal verwijderen";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
@@ -173,7 +185,6 @@ namespace Project.Forms {
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1000, 500);
             this.tableLayoutPanel1.TabIndex = 23;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint_1);
-
             // 
             // label2
             // 
@@ -206,9 +217,19 @@ namespace Project.Forms {
             this.Name_text.Text = "Zaal ";
             this.Name_text.Click += new System.EventHandler(this.Name_text_Click);
             // 
+            // Back_button
+            // 
+            this.Back_button.Location = new System.Drawing.Point(25, 654);
+            this.Back_button.Name = "Back_button";
+            this.Back_button.Size = new System.Drawing.Size(130, 50);
+            this.Back_button.TabIndex = 25;
+            this.Back_button.Text = "Annuleer";
+            this.Back_button.UseVisualStyleBackColor = true;
+            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
+            // 
             // RoomEdit
             // 
-            this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.ClientSize = new System.Drawing.Size(1262, 857);
             this.Controls.Add(this.roomSelect);
             this.Name = "RoomEdit";
             this.Load += new System.EventHandler(this.RoomCreateDesign_Load);
@@ -288,6 +309,12 @@ namespace Project.Forms {
             editScreen.SetRoom(room);
             app.ShowScreen(editScreen);
 
+        }
+
+        private void Back_button_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            RoomList editScreen = app.GetScreen<RoomList>("roomList");
+            app.ShowScreen(editScreen);
         }
     }
 }

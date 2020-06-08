@@ -47,6 +47,8 @@ namespace Project {
             RegisterScreen(new MovieList());
             RegisterScreen(new MovieCreate());
             RegisterScreen(new MovieEdit());
+            RegisterScreen(new MovieListUser());
+            RegisterScreen(new MovieSelect());
 
             // room screens
             RegisterScreen(new RoomList());
@@ -68,8 +70,7 @@ namespace Project {
             RegisterScreen(new UserEdit());
             RegisterScreen(new UserChangePassword());
 
-            RegisterScreen(new MovieListUser());
-            RegisterScreen(new MovieSelect());
+            // reservation screens
             RegisterScreen(new ReservationCreate());
             RegisterScreen(new ReservationList());
         }
