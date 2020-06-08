@@ -38,11 +38,17 @@ namespace Project.Forms {
         public override string GetHandle() {
             return "movieSelect";
         }
+
+        public override bool RequireLogin() {
+            return false;
+        }
+
         public void SetMovie(Movie movie) {
             this.movie = movie;
         }
 
         public override void OnShow() {
+            base.OnShow();
             Program app = Program.GetInstance();
             ChairService chairService = app.GetService<ChairService>("chairs");
             RoomService roomService = app.GetService<RoomService>("rooms");

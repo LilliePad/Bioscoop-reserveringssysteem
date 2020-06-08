@@ -117,7 +117,7 @@ namespace Project.Forms.Layouts {
             this.userShowButton.Name = "userShowButton";
             this.userShowButton.Size = new System.Drawing.Size(246, 30);
             this.userShowButton.TabIndex = 15;
-            this.userShowButton.Text = "Bekijk voorstellingen";
+            this.userShowButton.Text = "Bekijk films";
             this.userShowButton.UseVisualStyleBackColor = false;
             this.userShowButton.Click += new System.EventHandler(this.UserShowButton_Click);
             // 
@@ -306,12 +306,14 @@ namespace Project.Forms.Layouts {
             // 
             // BaseLayout
             // 
+            this.AcceptButton = this.navLoginButton;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.Controls.Add(this.navBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BaseLayout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_Closed);
             this.navBar.ResumeLayout(false);
             this.navBar.PerformLayout();
             this.ResumeLayout(false);
@@ -464,14 +466,23 @@ namespace Project.Forms.Layouts {
 
         private void UserShowButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            ShowListUser showListUser = app.GetScreen<ShowListUser>("showListUser");
-            app.ShowScreen(showListUser);
+            MovieListUser movieListUser = app.GetScreen<MovieListUser>("movieListUser");
+            app.ShowScreen(movieListUser);
         }
 
         private void UserReservationButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             ReservationList reservationList = app.GetScreen<ReservationList>("reservationList");
             app.ShowScreen(reservationList);
+        }
+
+        private void Form_Closed(object sender, FormClosedEventArgs e) {
+            Program app = Program.GetInstance();
+
+            // Stop app if  still running
+            if (app.IsRunning()) {
+                app.Stop();
+            }
         }
 
     }

@@ -34,7 +34,7 @@ namespace Project.Forms {
             
             for (int i = 0; i < shows.Count; i++) {
                 Show show = shows[i];
-                ListViewItem item = new ListViewItem("Show id = " + show.id, i);
+                ListViewItem item = new ListViewItem("Voorstelling id = " + show.id, i);
                 item.Tag = show.id;
                 container.Items.Add(item);
             }
@@ -81,7 +81,7 @@ namespace Project.Forms {
 
         private void MovieList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Shows", 500);
+            container.Columns.Add("Voorstellingen", 500);
         }
 
         private void ButtonNew_Click(object sender, EventArgs e) {

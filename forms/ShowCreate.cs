@@ -29,6 +29,7 @@ namespace Project.Forms {
         private ComboBox MovieComboBox2;
         private ComboBox RoomComboBox;
         private List<Room> rooms;
+        private Button Back_Button;
         private List<Movie> movies;
 
 
@@ -67,6 +68,7 @@ namespace Project.Forms {
             this.RoomComboBox = new System.Windows.Forms.ComboBox();
             this.Datum_text = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.Back_Button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,9 +78,9 @@ namespace Project.Forms {
             this.Create_a_show_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.Create_a_show_text.Location = new System.Drawing.Point(3, 0);
             this.Create_a_show_text.Name = "Create_a_show_text";
-            this.Create_a_show_text.Size = new System.Drawing.Size(472, 58);
+            this.Create_a_show_text.Size = new System.Drawing.Size(535, 58);
             this.Create_a_show_text.TabIndex = 3;
-            this.Create_a_show_text.Text = "Maak een show aan";
+            this.Create_a_show_text.Text = "Voorstelling aanmaken";
             // 
             // Name_text
             // 
@@ -105,14 +107,15 @@ namespace Project.Forms {
             // 
             this.Show_create_button.Location = new System.Drawing.Point(125, 230);
             this.Show_create_button.Name = "Show_create_button";
-            this.Show_create_button.Size = new System.Drawing.Size(133, 39);
+            this.Show_create_button.Size = new System.Drawing.Size(170, 39);
             this.Show_create_button.TabIndex = 12;
-            this.Show_create_button.Text = "Show aanmaken";
+            this.Show_create_button.Text = "Voorstelling aanmaken";
             this.Show_create_button.UseVisualStyleBackColor = true;
             this.Show_create_button.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.Back_Button);
             this.panel1.Controls.Add(this.MovieComboBox2);
             this.panel1.Controls.Add(this.RoomComboBox);
             this.panel1.Controls.Add(this.Datum_text);
@@ -168,6 +171,16 @@ namespace Project.Forms {
             this.dateTimePicker1.TabIndex = 15;
             this.dateTimePicker1.Value = new System.DateTime(2020, 6, 2, 0, 0, 0, 0);
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // Back_Button
+            // 
+            this.Back_Button.Location = new System.Drawing.Point(308, 230);
+            this.Back_Button.Name = "Back_Button";
+            this.Back_Button.Size = new System.Drawing.Size(170, 39);
+            this.Back_Button.TabIndex = 22;
+            this.Back_Button.Text = "Annuleer";
+            this.Back_Button.UseVisualStyleBackColor = true;
+            this.Back_Button.Click += new System.EventHandler(this.Back_Button_Click);
             // 
             // ShowCreate
             // 
@@ -257,6 +270,12 @@ namespace Project.Forms {
             catch (FormatException) {                      
                  MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);             
             }
+        }
+
+        private void Back_Button_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ShowList editScreen = app.GetScreen<ShowList>("showList");
+            app.ShowScreen(editScreen);
         }
     }
 
