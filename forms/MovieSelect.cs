@@ -5,6 +5,7 @@ using System;
 using Project.Base;
 using Project.Models;
 using Project.Services;
+using System.Linq;
 using Project.Helpers;
 using Project;
 using Project.Forms;
@@ -29,6 +30,7 @@ namespace Project.Forms {
         private Label genre;
         private Label playtime;
         private TableLayoutPanel tableLayoutPanel1;
+        private Label label1;
         private StorageFile image;
 
         public MovieSelect() {
@@ -55,6 +57,20 @@ namespace Project.Forms {
             MovieService movieservice = app.GetService<MovieService>("movies");
             ShowService showService = app.GetService<ShowService>("shows");
 
+       
+
+            for (int i = 0; i < 50; i++) {
+                DateTime date = DateTime.Now;
+                Show show = new Show(1, 1, date.AddHours(i));
+                if (!showService.SaveShow(show)) {
+                    MessageBox.Show("Error: " + ValidationHelper.GetErrorList(show), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
+
+
+            }
             this.Create_a_movie_text.Text = movie.name;
             this.pictureBox1.Image = movie.GetImage();
             this.Discription_input.Text = movie.discription;
@@ -68,12 +84,13 @@ namespace Project.Forms {
 
 
             List<Show> shows = showService.GetShowsByMovie(movie);
+            List<Show> list = shows.Where(i => i.startTime > DateTime.Now).OrderBy(i => i.startTime).ToList();
             maximum = shows.Count;
             currentShow = 0;
 
 
 
-            var rowCount = 5;
+            var rowCount = 10;
             var columnCount = 5;
 
             this.tableLayoutPanel1.ColumnCount = 5;
@@ -93,7 +110,7 @@ namespace Project.Forms {
                     
                     try {
                         var button = new Button();
-                        Show show = shows[currentShow];
+                        Show show = list[currentShow];
                         button.Text = string.Format(show.startTime.ToString("yyyy-MM-dd HH:mm"));
                         button.Name = string.Format(currentShow + "");
                         button.Dock = DockStyle.Fill;
@@ -114,19 +131,20 @@ namespace Project.Forms {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Create_a_movie_text = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Discription_input = new System.Windows.Forms.TextBox();
-            this.playtime = new System.Windows.Forms.Label();
-            this.genre = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.genre = new System.Windows.Forms.Label();
+            this.playtime = new System.Windows.Forms.Label();
+            this.Discription_input = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(29, 39);
+            this.pictureBox1.Location = new System.Drawing.Point(17, 47);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 270);
+            this.pictureBox1.Size = new System.Drawing.Size(200, 280);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -136,7 +154,7 @@ namespace Project.Forms {
             // 
             this.Create_a_movie_text.AutoSize = true;
             this.Create_a_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.Create_a_movie_text.Location = new System.Drawing.Point(28, 0);
+            this.Create_a_movie_text.Location = new System.Drawing.Point(7, 0);
             this.Create_a_movie_text.Name = "Create_a_movie_text";
             this.Create_a_movie_text.Size = new System.Drawing.Size(61, 58);
             this.Create_a_movie_text.TabIndex = 3;
@@ -145,59 +163,70 @@ namespace Project.Forms {
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Controls.Add(this.genre);
             this.panel1.Controls.Add(this.playtime);
             this.panel1.Controls.Add(this.Create_a_movie_text);
             this.panel1.Controls.Add(this.Discription_input);
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(40, 106);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(993, 700);
+            this.panel1.Size = new System.Drawing.Size(1800, 900);
             this.panel1.TabIndex = 19;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // Discription_input
+            // label1
             // 
-            this.Discription_input.Location = new System.Drawing.Point(235, 48);
-            this.Discription_input.Multiline = true;
-            this.Discription_input.Name = "Discription_input";
-            this.Discription_input.ReadOnly = true;
-            this.Discription_input.Size = new System.Drawing.Size(400, 250);
-            this.Discription_input.TabIndex = 15;
-            this.Discription_input.TextChanged += new System.EventHandler(this.Discription_input_TextChanged);
-            // 
-            // playtime
-            // 
-            this.playtime.AutoSize = true;
-            this.playtime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.playtime.Location = new System.Drawing.Point(660, 55);
-            this.playtime.Name = "playtime";
-            this.playtime.Size = new System.Drawing.Size(0, 20);
-            this.playtime.TabIndex = 17;
-            // 
-            // genre
-            // 
-            this.genre.AutoSize = true;
-            this.genre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.genre.Location = new System.Drawing.Point(660, 103);
-            this.genre.Name = "genre";
-            this.genre.Size = new System.Drawing.Size(0, 20);
-            this.genre.TabIndex = 19;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.label1.Location = new System.Drawing.Point(641, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(343, 58);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Voorstellingen";
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(29, 302);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(650, 60);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(950, 395);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 395);
             this.tableLayoutPanel1.TabIndex = 20;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            // 
+            // genre
+            // 
+            this.genre.AutoSize = true;
+            this.genre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.genre.Location = new System.Drawing.Point(17, 330);
+            this.genre.Name = "genre";
+            this.genre.Size = new System.Drawing.Size(0, 20);
+            this.genre.TabIndex = 19;
+            // 
+            // playtime
+            // 
+            this.playtime.AutoSize = true;
+            this.playtime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.playtime.Location = new System.Drawing.Point(17, 360);
+            this.playtime.Name = "playtime";
+            this.playtime.Size = new System.Drawing.Size(0, 20);
+            this.playtime.TabIndex = 17;
+            // 
+            // Discription_input
+            // 
+            this.Discription_input.Location = new System.Drawing.Point(223, 66);
+            this.Discription_input.Multiline = true;
+            this.Discription_input.Name = "Discription_input";
+            this.Discription_input.ReadOnly = true;
+            this.Discription_input.Size = new System.Drawing.Size(400, 250);
+            this.Discription_input.TabIndex = 15;
+            this.Discription_input.TextChanged += new System.EventHandler(this.Discription_input_TextChanged);
             // 
             // MovieSelect
             // 
