@@ -45,14 +45,20 @@ namespace Project.Forms {
             container.Items.Clear();
             Program app = Program.GetInstance();
             ChairSelect chairSelect = new ChairSelect();
+            
             if (chair != null) {
                 chairs.Add(chair);
-                for (int i = 0; i < chairs.Count; i++) {
-                    Chair chair = chairs[i];
-                    ListViewItem item = new ListViewItem("rij: " + chair.row + " " + "nummer: " + chair.number, i);
+                if (chairs.Count == 0) {
+                    return;
+                }
+                else {
+                    for (int i = 0; i < chairs.Count; i++) {
+                        Chair chair = chairs[i];
+                        ListViewItem item = new ListViewItem("rij: " + chair.row + " " + "nummer: " + chair.number, i);
 
-                    item.Tag = "rij: " + chair.row + " " + "nummer: " + chair.number;
-                    container.Items.Add(item);
+                        item.Tag = "rij: " + chair.row + " " + "nummer: " + chair.number;
+                        container.Items.Add(item);
+                    }
                 }
             }
         }
@@ -86,18 +92,23 @@ namespace Project.Forms {
 
                 }
 
+                int amountOfChairs = chairs.Count;
                 if (reservationSucces) {
-                        MessageBox.Show("tickets succesvol gereserveerd");
+                    MessageBox.Show("tickets succesvol gereserveerd");
+                    chair = null;
+                    chairs.Clear();
                     MovieListUser movieListUserScreen = Program.GetInstance().GetScreen<MovieListUser>("movieListUser");
                     Program.GetInstance().ShowScreen(movieListUserScreen);
                 }
                 else {
                     MessageBox.Show("kon de tickets niet reserveren");
+                    chair = null;
+                    chairs.Clear();
                     MovieListUser movieListUserScreen = Program.GetInstance().GetScreen<MovieListUser>("movieListUser");
                     Program.GetInstance().ShowScreen(movieListUserScreen);
                 }
+
                 
-                chairs.Clear();
 
             }
         }

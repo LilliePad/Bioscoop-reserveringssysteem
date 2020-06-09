@@ -31,6 +31,7 @@ namespace Project.Forms {
         private int HighestRow;
         private TableLayoutPanel tableLayoutPanel1;
         private Room room;
+        private Button Back_button;
         private Movie movie;
         public ChairSelect() {
             InitializeComponent();
@@ -146,6 +147,7 @@ namespace Project.Forms {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.Chose_Chair_Text = new System.Windows.Forms.Label();
+            this.Back_button = new System.Windows.Forms.Button();
             this.roomSelect.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -160,6 +162,7 @@ namespace Project.Forms {
             // 
             // roomSelect
             // 
+            this.roomSelect.Controls.Add(this.Back_button);
             this.roomSelect.Controls.Add(this.tableLayoutPanel1);
             this.roomSelect.Controls.Add(this.label2);
             this.roomSelect.Controls.Add(this.Chose_Chair_Text);
@@ -202,6 +205,16 @@ namespace Project.Forms {
             this.Chose_Chair_Text.TabIndex = 3;
             this.Chose_Chair_Text.Text = "Kies een stoel";
             this.Chose_Chair_Text.Click += new System.EventHandler(this.Create_a_movie_text_Click);
+            // 
+            // Back_button
+            // 
+            this.Back_button.Location = new System.Drawing.Point(1062, 509);
+            this.Back_button.Name = "Back_button";
+            this.Back_button.Size = new System.Drawing.Size(140, 23);
+            this.Back_button.TabIndex = 24;
+            this.Back_button.Text = "Annuleren";
+            this.Back_button.UseVisualStyleBackColor = true;
+            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
             // 
             // ChairSelect
             // 
@@ -292,6 +305,12 @@ namespace Project.Forms {
             reservationScreen.Setchair(chair);
             app.ShowScreen(reservationScreen);
 
+        }
+
+        private void Back_button_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            ReservationCreate reservationScreen = app.GetScreen<ReservationCreate>("reservationCreate");
+            app.ShowScreen(reservationScreen);
         }
     }
 }
