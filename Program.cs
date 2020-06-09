@@ -16,6 +16,7 @@ namespace Project {
         public static readonly Regex DATE_REGEX = new Regex(@"^([0-2][0-9]|(3)[0-1])(\-)(((0)[0-9])|((1)[0-2]))(\-)\d{4}$");
         public static readonly string TIME_FORMAT = "HH:mm";
         public static readonly Regex TIME_REGEX = new Regex(@"^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$");
+        public static readonly string DATETIME_FORMAT = DATE_FORMAT + " " + TIME_FORMAT;
 
         // Program instance & database
         private static Program instance;
@@ -57,7 +58,7 @@ namespace Project {
             RegisterScreen(new RoomEdit());
 
             // shows screens
-            RegisterScreen(new ShowDelete());
+            RegisterScreen(new ShowDetail());
             RegisterScreen(new ShowList());
             RegisterScreen(new ShowCreate());
 

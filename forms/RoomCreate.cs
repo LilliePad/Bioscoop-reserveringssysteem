@@ -1,37 +1,28 @@
-﻿using Project.Forms.Layouts;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
+using Project.Forms.Layouts;
 using Project.Models;
 using Project.Services;
 using Project.Helpers;
 
 namespace Project.Forms {
-    public partial class RoomCreateDesign : BaseLayout {
-        private Panel panel1;
-        private Label Create_a_movie_text;
-        private Label Playtime_text;
-        private TextBox Room_input;
-        private TextBox Row_input;
-        private TextBox Colum_input;
-        private Label label6;
-        private Label Name_text;
-        private Button CreateButton;
-        private Label label2;
 
-        private int RoomNumber;
-        private int RoomId;
-        private int Row;
-        private int Colum;
-        private double Price;
-        private Button Back_button;
-        private string Type;
+    public partial class RoomCreateDesign : BaseLayout {
+
+        private Panel panel;
+        private Label title;
+
+        private Label numberLabel;
+        private NumericUpDown numberInput;
+
+        private Label rowLabel;
+        private NumericUpDown rowInput;
+
+        private Label columnLabel;
+        private NumericUpDown columnInput;
+
+        private Button saveButton;
+        private Button cancelButton;
 
         public RoomCreateDesign() {
             InitializeComponent();
@@ -41,236 +32,166 @@ namespace Project.Forms {
             return "roomCreate";
         }
 
-
         public override void OnShow() {
             base.OnShow();
-            Room_input.Text = "";
-            Row_input.Text = "";
-            Colum_input.Text = "";
+
+            numberInput.Text = "";
+            rowInput.Text = "";
+            columnInput.Text = "";
         }
 
         private void InitializeComponent() {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.Back_button = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.CreateButton = new System.Windows.Forms.Button();
-            this.Create_a_movie_text = new System.Windows.Forms.Label();
-            this.Playtime_text = new System.Windows.Forms.Label();
-            this.Room_input = new System.Windows.Forms.TextBox();
-            this.Row_input = new System.Windows.Forms.TextBox();
-            this.Colum_input = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.Name_text = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.panel = new System.Windows.Forms.Panel();
+            this.numberInput = new System.Windows.Forms.NumericUpDown();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.title = new System.Windows.Forms.Label();
+            this.rowLabel = new System.Windows.Forms.Label();
+            this.columnLabel = new System.Windows.Forms.Label();
+            this.numberLabel = new System.Windows.Forms.Label();
+            this.rowInput = new System.Windows.Forms.NumericUpDown();
+            this.columnInput = new System.Windows.Forms.NumericUpDown();
+            this.panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numberInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rowInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.columnInput)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // panel
             // 
-            this.panel1.Controls.Add(this.Back_button);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.CreateButton);
-            this.panel1.Controls.Add(this.Create_a_movie_text);
-            this.panel1.Controls.Add(this.Playtime_text);
-            this.panel1.Controls.Add(this.Room_input);
-            this.panel1.Controls.Add(this.Row_input);
-            this.panel1.Controls.Add(this.Colum_input);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.Name_text);
-            this.panel1.Location = new System.Drawing.Point(40, 115);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(993, 534);
-            this.panel1.TabIndex = 20;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel.Controls.Add(this.columnInput);
+            this.panel.Controls.Add(this.rowInput);
+            this.panel.Controls.Add(this.numberInput);
+            this.panel.Controls.Add(this.cancelButton);
+            this.panel.Controls.Add(this.saveButton);
+            this.panel.Controls.Add(this.title);
+            this.panel.Controls.Add(this.rowLabel);
+            this.panel.Controls.Add(this.columnLabel);
+            this.panel.Controls.Add(this.numberLabel);
+            this.panel.Location = new System.Drawing.Point(40, 115);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(993, 534);
+            this.panel.TabIndex = 20;
             // 
-            // Back_button
+            // numberInput
             // 
-            this.Back_button.Location = new System.Drawing.Point(281, 221);
-            this.Back_button.Name = "Back_button";
-            this.Back_button.Size = new System.Drawing.Size(140, 23);
-            this.Back_button.TabIndex = 23;
-            this.Back_button.Text = "Annuleer";
-            this.Back_button.UseVisualStyleBackColor = true;
-            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
+            this.numberInput.Location = new System.Drawing.Point(125, 79);
+            this.numberInput.Name = "numberInput";
+            this.numberInput.Size = new System.Drawing.Size(495, 20);
+            this.numberInput.TabIndex = 24;
             // 
-            // label2
+            // cancelButton
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.Location = new System.Drawing.Point(10, 279);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 17);
-            this.label2.TabIndex = 22;
+            this.cancelButton.Location = new System.Drawing.Point(281, 221);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(140, 23);
+            this.cancelButton.TabIndex = 23;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // CreateButton
+            // saveButton
             // 
-            this.CreateButton.Location = new System.Drawing.Point(125, 221);
-            this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(140, 23);
-            this.CreateButton.TabIndex = 19;
-            this.CreateButton.Text = "Aanmaken";
-            this.CreateButton.UseVisualStyleBackColor = true;
-            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
+            this.saveButton.Location = new System.Drawing.Point(125, 221);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(140, 23);
+            this.saveButton.TabIndex = 19;
+            this.saveButton.Text = "Opslaan";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // Create_a_movie_text
+            // title
             // 
-            this.Create_a_movie_text.AutoSize = true;
-            this.Create_a_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.Create_a_movie_text.Location = new System.Drawing.Point(3, 0);
-            this.Create_a_movie_text.Name = "Create_a_movie_text";
-            this.Create_a_movie_text.Size = new System.Drawing.Size(293, 46);
-            this.Create_a_movie_text.TabIndex = 3;
-            this.Create_a_movie_text.Text = "Zaal aanmaken";
-            this.Create_a_movie_text.Click += new System.EventHandler(this.Create_a_movie_text_Click);
+            this.title.AutoSize = true;
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.title.Location = new System.Drawing.Point(3, 0);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(293, 46);
+            this.title.TabIndex = 3;
+            this.title.Text = "Zaal aanmaken";
             // 
-            // Playtime_text
+            // rowLabel
             // 
-            this.Playtime_text.AutoSize = true;
-            this.Playtime_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Playtime_text.Location = new System.Drawing.Point(9, 125);
-            this.Playtime_text.Name = "Playtime_text";
-            this.Playtime_text.Size = new System.Drawing.Size(40, 17);
-            this.Playtime_text.TabIndex = 6;
-            this.Playtime_text.Text = "Rijen";
-            this.Playtime_text.Click += new System.EventHandler(this.Playtime_text_Click);
+            this.rowLabel.AutoSize = true;
+            this.rowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rowLabel.Location = new System.Drawing.Point(9, 125);
+            this.rowLabel.Name = "rowLabel";
+            this.rowLabel.Size = new System.Drawing.Size(40, 17);
+            this.rowLabel.TabIndex = 6;
+            this.rowLabel.Text = "Rijen";
             // 
-            // Room_input
+            // columnLabel
             // 
-            this.Room_input.Location = new System.Drawing.Point(125, 82);
-            this.Room_input.Name = "Room_input";
-            this.Room_input.Size = new System.Drawing.Size(495, 20);
-            this.Room_input.TabIndex = 14;
-            this.Room_input.TextChanged += new System.EventHandler(this.Room_input_TextChanged);
+            this.columnLabel.AutoSize = true;
+            this.columnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.columnLabel.Location = new System.Drawing.Point(10, 171);
+            this.columnLabel.Name = "columnLabel";
+            this.columnLabel.Size = new System.Drawing.Size(74, 17);
+            this.columnLabel.TabIndex = 18;
+            this.columnLabel.Text = "Colommen";
             // 
-            // Row_input
+            // numberLabel
             // 
-            this.Row_input.Location = new System.Drawing.Point(125, 125);
-            this.Row_input.Name = "Row_input";
-            this.Row_input.Size = new System.Drawing.Size(495, 20);
-            this.Row_input.TabIndex = 16;
-            this.Row_input.TextChanged += new System.EventHandler(this.Row_input_TextChanged);
+            this.numberLabel.AutoSize = true;
+            this.numberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numberLabel.Location = new System.Drawing.Point(10, 82);
+            this.numberLabel.Name = "numberLabel";
+            this.numberLabel.Size = new System.Drawing.Size(91, 17);
+            this.numberLabel.TabIndex = 4;
+            this.numberLabel.Text = "Zaal nummer";
             // 
-            // Colum_input
+            // rowInput
             // 
-            this.Colum_input.Location = new System.Drawing.Point(125, 171);
-            this.Colum_input.Name = "Colum_input";
-            this.Colum_input.Size = new System.Drawing.Size(495, 20);
-            this.Colum_input.TabIndex = 17;
-            this.Colum_input.TextChanged += new System.EventHandler(this.Colum_input_TextChanged);
+            this.rowInput.Location = new System.Drawing.Point(125, 122);
+            this.rowInput.Name = "rowInput";
+            this.rowInput.Size = new System.Drawing.Size(495, 20);
+            this.rowInput.TabIndex = 25;
             // 
-            // label6
+            // columnInput
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label6.Location = new System.Drawing.Point(10, 171);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(74, 17);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Colommen";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
-            // 
-            // Name_text
-            // 
-            this.Name_text.AutoSize = true;
-            this.Name_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Name_text.Location = new System.Drawing.Point(10, 82);
-            this.Name_text.Name = "Name_text";
-            this.Name_text.Size = new System.Drawing.Size(91, 17);
-            this.Name_text.TabIndex = 4;
-            this.Name_text.Text = "Zaal nummer";
+            this.columnInput.Location = new System.Drawing.Point(125, 168);
+            this.columnInput.Name = "columnInput";
+            this.columnInput.Size = new System.Drawing.Size(495, 20);
+            this.columnInput.TabIndex = 26;
             // 
             // RoomCreateDesign
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel);
             this.Name = "RoomCreateDesign";
-            this.Load += new System.EventHandler(this.RoomCreateDesign_Load);
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.Controls.SetChildIndex(this.panel, 0);
+            this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numberInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rowInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.columnInput)).EndInit();
             this.ResumeLayout(false);
 
         }
 
-        private void RoomCreateDesign_Load(object sender, EventArgs e) {
-
-        }
-
-        private void Create_a_movie_text_Click(object sender, EventArgs e) {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e) {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e) {
-
-        }
-
-        private void Colum_input_TextChanged(object sender, EventArgs e) {
-            try {
-                Colum = int.Parse(Colum_input.Text);
-
-            }
-            catch (FormatException) {
-                if (Colum_input.Text == "") {
-                }
-                else {
-                    MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-
-        }
-
-        private void Row_input_TextChanged(object sender, EventArgs e) {
-            try {
-                Row = int.Parse(Row_input.Text);
-
-            }
-            catch (FormatException) {
-                if (Row_input.Text == "") {
-                }
-                else {
-                    MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void Room_input_TextChanged(object sender, EventArgs e) {
-            try {
-                RoomNumber = int.Parse(Room_input.Text);
-
-            }
-            catch (FormatException) {
-                if (Room_input.Text == "") {
-                }
-                else {
-                    MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void CreateButton_Click(object sender, EventArgs e) {
+        private void SaveButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             ChairService chairManager = app.GetService<ChairService>("chairs");
             RoomService roomManager = app.GetService<RoomService>("rooms");
-            Room room = new Room(RoomNumber);
+
+            // Save room
+            Room room = new Room((int) numberInput.Value);
 
             if (!roomManager.SaveRoom(room)) {
-                MessageBox.Show("Error: " + ValidationHelper.GetErrorList(room), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GuiHelper.ShowError(ValidationHelper.GetErrorList(room));
                 return;
             }
 
-            RoomId = room.id;
-            Type = "default";
-            Price = 7.50;
-        
-            for (int i = 1; i <= Row; i++) {
-                for(int j = 1; j <= Colum; j++) {
-                    Chair chair = new Chair(RoomId, i, j, Price, Type);
+            // Create chairs
+            int rows = (int) rowInput.Value;
+            int columns = (int)columnInput.Value;
+
+            for (int i = 1; i <= rows; i++) {
+                for(int j = 1; j <= columns; j++) {
+                    Chair chair = new Chair(room.id, i, j, 0, "default");
+
                     if (!chairManager.SaveChair(chair)) {
-                        MessageBox.Show("Error: " + ValidationHelper.GetErrorList(room), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        GuiHelper.ShowError(ValidationHelper.GetErrorList(room));
                     }
                 }
             }
@@ -280,14 +201,12 @@ namespace Project.Forms {
             app.ShowScreen(listScreen);
         }
 
-        private void Playtime_text_Click(object sender, EventArgs e) {
-
-        }
-
-        private void Back_button_Click(object sender, EventArgs e) {
+        private void CancelButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             RoomList editScreen = app.GetScreen<RoomList>("roomList");
             app.ShowScreen(editScreen);
         }
+
     }
+
 }

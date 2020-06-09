@@ -9,26 +9,32 @@ using Project.Helpers;
 namespace Project.Forms {
 
     public class MovieEdit : BaseLayout {
-        private Panel panel1;
-        private Label Create_a_movie_text;
-        private Label Discription_text;
-        private Label Playtime_text;
-        private Label Movie_Picture_text;
-        private Button Movie_edit_button;
-        private Button Search_picture_button;
-        private TextBox NameMovie_input;
-        private TextBox Discription_input;
-        private TextBox Duration_input;
-        private TextBox Genre_input;
-        private Label label6;
-        private Label Name_text;
-        private PictureBox pictureBox1;
-        private Button Delete_movie_button;
-        private Label label1;
+
+        // Frontend
+        private Panel panel;
+        private Label title;
+
+        private Label nameLabel;
+        private TextBox nameInput;
+
+        private Label descriptionLabel;
+        private TextBox descriptionInput;
+
+        private Label durationLabel;
+        private NumericUpDown durationInput;
+
+        private Label genreLabel;
+        private TextBox genreInput;
+
+        private Label imageLabel;
+        private Button imageInput;
+        private PictureBox imagePreview;
+
+        private Button saveButton;
+        private Button cancelButton;
+
+        // Backend
         private Movie movie;
-        private Label movieId;
-        private Button Back_button;
-        private StorageFile image;
 
         public MovieEdit() {
             InitializeComponent();
@@ -38,356 +44,252 @@ namespace Project.Forms {
             return "movieEdit";
         }
 
-        public void SetMovie(Movie movie) {
-            this.movie = movie;
-        }
-
         public override void OnShow() {
-            this.movieId.Text = "" + movie.id;
-        }
+            base.OnShow();
 
-        private void label3_Click(object sender, EventArgs e) {
-
-        }
-
-        private void Edit_movie_text_Click(object sender, EventArgs e) {
-
-        }
-
-
-        private void NameMovie_input_TextChanged(object sender, EventArgs e) {
-
-        }
-
-        private void Duration_input_TextChanged(object sender, EventArgs e) {
-
-        }
-
-        private void Edit_panel_Paint(object sender, PaintEventArgs e) {
-
-        }
-
-        private void Genre_input_TextChanged(object sender, EventArgs e) {
-
+            nameInput.Text = movie.name;
+            descriptionInput.Text = movie.description;
+            durationInput.Value = movie.duration;
+            genreInput.Text = movie.genre;
+            imagePreview.ImageLocation = movie.image.location;
         }
 
         private void InitializeComponent() {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.Back_button = new System.Windows.Forms.Button();
-            this.movieId = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Delete_movie_button = new System.Windows.Forms.Button();
-            this.Create_a_movie_text = new System.Windows.Forms.Label();
-            this.Discription_text = new System.Windows.Forms.Label();
-            this.Playtime_text = new System.Windows.Forms.Label();
-            this.Movie_Picture_text = new System.Windows.Forms.Label();
-            this.Movie_edit_button = new System.Windows.Forms.Button();
-            this.Search_picture_button = new System.Windows.Forms.Button();
-            this.NameMovie_input = new System.Windows.Forms.TextBox();
-            this.Discription_input = new System.Windows.Forms.TextBox();
-            this.Duration_input = new System.Windows.Forms.TextBox();
-            this.Genre_input = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.Name_text = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.imagePreview = new System.Windows.Forms.PictureBox();
+            this.title = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.descriptionLabel = new System.Windows.Forms.Label();
+            this.durationLabel = new System.Windows.Forms.Label();
+            this.imageLabel = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.imageInput = new System.Windows.Forms.Button();
+            this.nameInput = new System.Windows.Forms.TextBox();
+            this.descriptionInput = new System.Windows.Forms.TextBox();
+            this.genreInput = new System.Windows.Forms.TextBox();
+            this.genreLabel = new System.Windows.Forms.Label();
+            this.panel = new System.Windows.Forms.Panel();
+            this.durationInput = new System.Windows.Forms.NumericUpDown();
+            this.cancelButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
+            this.panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.durationInput)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // imagePreview
             // 
-            this.panel1.Controls.Add(this.Back_button);
-            this.panel1.Controls.Add(this.movieId);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.Delete_movie_button);
-            this.panel1.Controls.Add(this.Create_a_movie_text);
-            this.panel1.Controls.Add(this.Discription_text);
-            this.panel1.Controls.Add(this.Playtime_text);
-            this.panel1.Controls.Add(this.Movie_Picture_text);
-            this.panel1.Controls.Add(this.Movie_edit_button);
-            this.panel1.Controls.Add(this.Search_picture_button);
-            this.panel1.Controls.Add(this.NameMovie_input);
-            this.panel1.Controls.Add(this.Discription_input);
-            this.panel1.Controls.Add(this.Duration_input);
-            this.panel1.Controls.Add(this.Genre_input);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.Name_text);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(40, 106);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(993, 534);
-            this.panel1.TabIndex = 20;
+            this.imagePreview.Location = new System.Drawing.Point(704, 112);
+            this.imagePreview.Name = "imagePreview";
+            this.imagePreview.Size = new System.Drawing.Size(204, 268);
+            this.imagePreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imagePreview.TabIndex = 2;
+            this.imagePreview.TabStop = false;
             // 
-            // Back_button
+            // title
             // 
-            this.Back_button.Location = new System.Drawing.Point(521, 472);
-            this.Back_button.Name = "Back_button";
-            this.Back_button.Size = new System.Drawing.Size(140, 23);
-            this.Back_button.TabIndex = 22;
-            this.Back_button.Text = "Annuleer";
-            this.Back_button.UseVisualStyleBackColor = true;
-            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
+            this.title.AutoSize = true;
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.title.Location = new System.Drawing.Point(3, 0);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(278, 46);
+            this.title.TabIndex = 3;
+            this.title.Text = "Film bewerken";
             // 
-            // movieId
+            // nameLabel
             // 
-            this.movieId.AutoSize = true;
-            this.movieId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.movieId.Location = new System.Drawing.Point(121, 62);
-            this.movieId.Name = "movieId";
-            this.movieId.Size = new System.Drawing.Size(50, 17);
-            this.movieId.TabIndex = 21;
-            this.movieId.Text = "Film ID";
-            this.movieId.Click += new System.EventHandler(this.movieId_Click);
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.nameLabel.Location = new System.Drawing.Point(10, 82);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(72, 17);
+            this.nameLabel.TabIndex = 4;
+            this.nameLabel.Text = "Film naam";
             // 
-            // label1
+            // descriptionLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(10, 62);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 17);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Film ID";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.descriptionLabel.AutoSize = true;
+            this.descriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.descriptionLabel.Location = new System.Drawing.Point(10, 131);
+            this.descriptionLabel.Name = "descriptionLabel";
+            this.descriptionLabel.Size = new System.Drawing.Size(84, 17);
+            this.descriptionLabel.TabIndex = 5;
+            this.descriptionLabel.Text = "Beschrijving";
             // 
-            // Delete_movie_button
+            // durationLabel
             // 
-            this.Delete_movie_button.Location = new System.Drawing.Point(327, 472);
-            this.Delete_movie_button.Name = "Delete_movie_button";
-            this.Delete_movie_button.Size = new System.Drawing.Size(140, 23);
-            this.Delete_movie_button.TabIndex = 19;
-            this.Delete_movie_button.Text = "Film verwijderen ";
-            this.Delete_movie_button.UseVisualStyleBackColor = true;
-            this.Delete_movie_button.Click += new System.EventHandler(this.button1_Click);
+            this.durationLabel.AutoSize = true;
+            this.durationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.durationLabel.Location = new System.Drawing.Point(9, 360);
+            this.durationLabel.Name = "durationLabel";
+            this.durationLabel.Size = new System.Drawing.Size(62, 17);
+            this.durationLabel.TabIndex = 6;
+            this.durationLabel.Text = "Speeltijd";
             // 
-            // Create_a_movie_text
+            // imageLabel
             // 
-            this.Create_a_movie_text.AutoEllipsis = true;
-            this.Create_a_movie_text.AutoSize = true;
-            this.Create_a_movie_text.BackColor = System.Drawing.SystemColors.Control;
-            this.Create_a_movie_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.Create_a_movie_text.Location = new System.Drawing.Point(3, 0);
-            this.Create_a_movie_text.Name = "Create_a_movie_text";
-            this.Create_a_movie_text.Size = new System.Drawing.Size(278, 46);
-            this.Create_a_movie_text.TabIndex = 3;
-            this.Create_a_movie_text.Text = "Film bewerken";
-
-
+            this.imageLabel.AutoSize = true;
+            this.imageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.imageLabel.Location = new System.Drawing.Point(700, 82);
+            this.imageLabel.Name = "imageLabel";
+            this.imageLabel.Size = new System.Drawing.Size(75, 17);
+            this.imageLabel.TabIndex = 11;
+            this.imageLabel.Text = "Afbeelding";
             // 
-            // Discription_text
+            // saveButton
             // 
-            this.Discription_text.AutoSize = true;
-            this.Discription_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Discription_text.Location = new System.Drawing.Point(10, 131);
-            this.Discription_text.Name = "Discription_text";
-            this.Discription_text.Size = new System.Drawing.Size(84, 17);
-            this.Discription_text.TabIndex = 5;
-            this.Discription_text.Text = "Beschrijving";
+            this.saveButton.Location = new System.Drawing.Point(125, 472);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(140, 23);
+            this.saveButton.TabIndex = 12;
+            this.saveButton.Text = "Opslaan";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // Playtime_text
+            // imageInput
             // 
-            this.Playtime_text.AutoSize = true;
-            this.Playtime_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Playtime_text.Location = new System.Drawing.Point(9, 360);
-            this.Playtime_text.Name = "Playtime_text";
-            this.Playtime_text.Size = new System.Drawing.Size(62, 17);
-            this.Playtime_text.TabIndex = 6;
-            this.Playtime_text.Text = "Speeltijd";
+            this.imageInput.Location = new System.Drawing.Point(734, 386);
+            this.imageInput.Name = "imageInput";
+            this.imageInput.Size = new System.Drawing.Size(140, 23);
+            this.imageInput.TabIndex = 13;
+            this.imageInput.Text = "Zoek afbeelding";
+            this.imageInput.UseVisualStyleBackColor = true;
+            this.imageInput.Click += new System.EventHandler(this.ImageInput_Click);
             // 
-            // Movie_Picture_text
+            // nameInput
             // 
-            this.Movie_Picture_text.AutoSize = true;
-            this.Movie_Picture_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Movie_Picture_text.Location = new System.Drawing.Point(700, 82);
-            this.Movie_Picture_text.Name = "Movie_Picture_text";
-            this.Movie_Picture_text.Size = new System.Drawing.Size(99, 17);
-            this.Movie_Picture_text.TabIndex = 11;
-            this.Movie_Picture_text.Text = "afbeelding film";
+            this.nameInput.Location = new System.Drawing.Point(125, 82);
+            this.nameInput.Name = "nameInput";
+            this.nameInput.Size = new System.Drawing.Size(495, 20);
+            this.nameInput.TabIndex = 14;
             // 
-            // Movie_edit_button
+            // descriptionInput
             // 
-            this.Movie_edit_button.Location = new System.Drawing.Point(125, 472);
-            this.Movie_edit_button.Name = "Movie_edit_button";
-            this.Movie_edit_button.Size = new System.Drawing.Size(140, 23);
-            this.Movie_edit_button.TabIndex = 12;
-            this.Movie_edit_button.Text = "Film bewerken";
-            this.Movie_edit_button.UseVisualStyleBackColor = true;
-            this.Movie_edit_button.Click += new System.EventHandler(this.Movie_create_button_Click_1);
+            this.descriptionInput.Location = new System.Drawing.Point(125, 131);
+            this.descriptionInput.Multiline = true;
+            this.descriptionInput.Name = "descriptionInput";
+            this.descriptionInput.Size = new System.Drawing.Size(495, 206);
+            this.descriptionInput.TabIndex = 15;
             // 
-            // Search_picture_button
+            // genreInput
             // 
-            this.Search_picture_button.Location = new System.Drawing.Point(734, 386);
-            this.Search_picture_button.Name = "Search_picture_button";
-            this.Search_picture_button.Size = new System.Drawing.Size(140, 23);
-            this.Search_picture_button.TabIndex = 13;
-            this.Search_picture_button.Text = "Zoek afbeelding";
-            this.Search_picture_button.UseVisualStyleBackColor = true;
-            this.Search_picture_button.Click += new System.EventHandler(this.Search_picture_button_Click);
+            this.genreInput.Location = new System.Drawing.Point(125, 394);
+            this.genreInput.Name = "genreInput";
+            this.genreInput.Size = new System.Drawing.Size(495, 20);
+            this.genreInput.TabIndex = 17;
             // 
-            // NameMovie_input
+            // genreLabel
             // 
-            this.NameMovie_input.Location = new System.Drawing.Point(125, 95);
-            this.NameMovie_input.Name = "NameMovie_input";
-            this.NameMovie_input.Size = new System.Drawing.Size(495, 20);
-            this.NameMovie_input.TabIndex = 14;
-            this.NameMovie_input.TextChanged += new System.EventHandler(this.NameMovie_input_TextChanged_1);
+            this.genreLabel.AutoSize = true;
+            this.genreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.genreLabel.Location = new System.Drawing.Point(10, 394);
+            this.genreLabel.Name = "genreLabel";
+            this.genreLabel.Size = new System.Drawing.Size(48, 17);
+            this.genreLabel.TabIndex = 18;
+            this.genreLabel.Text = "Genre";
             // 
-            // Discription_input
+            // panel
             // 
-            this.Discription_input.Location = new System.Drawing.Point(125, 131);
-            this.Discription_input.Multiline = true;
-            this.Discription_input.Name = "Discription_input";
-            this.Discription_input.Size = new System.Drawing.Size(495, 206);
-            this.Discription_input.TabIndex = 15;
-            this.Discription_input.TextChanged += new System.EventHandler(this.Discription_input_TextChanged);
+            this.panel.Controls.Add(this.durationInput);
+            this.panel.Controls.Add(this.cancelButton);
+            this.panel.Controls.Add(this.title);
+            this.panel.Controls.Add(this.descriptionLabel);
+            this.panel.Controls.Add(this.durationLabel);
+            this.panel.Controls.Add(this.imageLabel);
+            this.panel.Controls.Add(this.saveButton);
+            this.panel.Controls.Add(this.imageInput);
+            this.panel.Controls.Add(this.nameInput);
+            this.panel.Controls.Add(this.descriptionInput);
+            this.panel.Controls.Add(this.genreInput);
+            this.panel.Controls.Add(this.genreLabel);
+            this.panel.Controls.Add(this.nameLabel);
+            this.panel.Controls.Add(this.imagePreview);
+            this.panel.Location = new System.Drawing.Point(40, 106);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(993, 534);
+            this.panel.TabIndex = 19;
             // 
-            // Duration_input
+            // durationInput
             // 
-            this.Duration_input.Location = new System.Drawing.Point(125, 360);
-            this.Duration_input.Name = "Duration_input";
-            this.Duration_input.Size = new System.Drawing.Size(495, 20);
-            this.Duration_input.TabIndex = 16;
-            this.Duration_input.TextChanged += new System.EventHandler(this.Duration_input_TextChanged_1);
+            this.durationInput.Location = new System.Drawing.Point(125, 357);
+            this.durationInput.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.durationInput.Name = "durationInput";
+            this.durationInput.Size = new System.Drawing.Size(495, 20);
+            this.durationInput.TabIndex = 20;
             // 
-            // Genre_input
+            // cancelButton
             // 
-            this.Genre_input.Location = new System.Drawing.Point(125, 394);
-            this.Genre_input.Name = "Genre_input";
-            this.Genre_input.Size = new System.Drawing.Size(495, 20);
-            this.Genre_input.TabIndex = 17;
-            this.Genre_input.TextChanged += new System.EventHandler(this.Genre_input_TextChanged_1);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label6.Location = new System.Drawing.Point(10, 394);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 17);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Genre";
-            // 
-            // Name_text
-            // 
-            this.Name_text.AutoSize = true;
-            this.Name_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Name_text.Location = new System.Drawing.Point(10, 95);
-            this.Name_text.Name = "Name_text";
-            this.Name_text.Size = new System.Drawing.Size(45, 17);
-            this.Name_text.TabIndex = 4;
-            this.Name_text.Text = "Naam";
-            this.Name_text.Click += new System.EventHandler(this.Name_text_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(704, 112);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(204, 268);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.cancelButton.Location = new System.Drawing.Point(290, 472);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(140, 23);
+            this.cancelButton.TabIndex = 19;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // MovieEdit
             // 
-            this.ClientSize = new System.Drawing.Size(1260, 673);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(1360, 807);
+            this.Controls.Add(this.panel);
             this.Name = "MovieEdit";
-            this.Load += new System.EventHandler(this.MovieEdit_Load);
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Controls.SetChildIndex(this.panel, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).EndInit();
+            this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.durationInput)).EndInit();
             this.ResumeLayout(false);
 
         }
 
-        private void button1_Click(object sender, EventArgs args) {
-            Program app = Program.GetInstance();
-            MovieService movieManager = app.GetService<MovieService>("movies");
-            if (movieManager.DeleteMovie(movie)) {
-                MessageBox.Show("film succesvol verwijderd");
-                MovieList newScreen = app.GetScreen<MovieList>("movieList");
-                app.ShowScreen(newScreen);
-            }
-            else {
-                MessageBox.Show("Kon de film niet verwijderen");
-            }
+        public void SetMovie(Movie movie) {
+            this.movie = movie;
         }
 
-        private void Movie_create_button_Click(object sender, EventArgs args) {
-       
-        }
-        private void label1_Click(object sender, EventArgs args) {
-
-        }
-
-        private void NameMovie_input_TextChanged_1(object sender, EventArgs args) {
-            movie.name = NameMovie_input.Text;
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs args) {
-
-        }
-
-        private void Name_text_Click(object sender, EventArgs args) {
-
-        }
-
-        private void Movie_create_button_Click_1(object sender, EventArgs args) {
-            Program app = Program.GetInstance();
-            MovieService movieManager = app.GetService<MovieService>("movies");
-            movieManager.SaveMovie(movie);
-            MovieList newScreen = app.GetScreen<MovieList>("movieList");
-            app.ShowScreen(newScreen);
-        }
-
-        private void Discription_input_TextChanged(object sender, EventArgs args) {
-
-        }
-
-        private void Duration_input_TextChanged_1(object sender, EventArgs args) {
-            movie.duration = ValidationHelper.ParseInt(Duration_input.Text);
-        }
-
-        private void Genre_input_TextChanged_1(object sender, EventArgs args) {
-            movie.genre = Genre_input.Text;
-        }
-
-        private void Search_picture_button_Click(object sender, EventArgs args) {
-            string imageLocation = "";
-
+        private void ImageInput_Click(object sender, EventArgs args) {
             try {
                 OpenFileDialog dialog = new OpenFileDialog();
 
                 dialog.Filter = "jpg files(*.jpg)|*.jpg| PNG files(*.png)|*.png| All Files(*,*)|*,*";
 
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-                    imageLocation = dialog.FileName;
-                    pictureBox1.ImageLocation = imageLocation;
-                    image = StorageHelper.UploadImage(pictureBox1.ImageLocation);
-                    movie.image = image;
+                if (dialog.ShowDialog() == DialogResult.OK) {
+                    imagePreview.ImageLocation = dialog.FileName;
                 }
-            }
-            catch (Exception e) {
-                MessageBox.Show("Error: " + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } catch (Exception e) {
+                GuiHelper.ShowError("Error: " + e.Message);
             }
         }
 
-        private void movieId_Click(object sender, EventArgs e) {
-
-        }
-
-
-        private void Back_button_Click(object sender, EventArgs e) {
+        private void SaveButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            MovieList editScreen = app.GetScreen<MovieList>("movieList");
-            app.ShowScreen(editScreen);
+            MovieService movieManager = app.GetService<MovieService>("movies");
 
+            // Upload file
+            StorageFile image = StorageHelper.UploadImage(imagePreview.ImageLocation);
+
+            // Update and save movie
+            movie.name = nameInput.Text;
+            movie.description = descriptionInput.Text;
+            movie.genre = genreInput.Text;
+            movie.duration = (int) durationInput.Value;
+            movie.image = image;
+
+            if (!movieManager.SaveMovie(movie)) {
+                GuiHelper.ShowError(ValidationHelper.GetErrorList(movie));
+                return;
+            }
+
+            GuiHelper.ShowInfo("Film succesvol aangepast");
         }
 
-        private void MovieEdit_Load(object sender, EventArgs e) {
-
+        private void CancelButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            MovieList listScreen = app.GetScreen<MovieList>("movieList");
+            app.ShowScreen(listScreen);
         }
+
     }
 
 }
+

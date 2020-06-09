@@ -21,7 +21,7 @@ namespace Project.Forms {
         
         private Button saveButton;
         private Button cancelButton;
-        private Label Movie_list_text;
+        private Label title;
 
         // Backend
         private User user;
@@ -47,19 +47,19 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.panel = new System.Windows.Forms.Panel();
+            this.title = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.newPasswordLabel = new System.Windows.Forms.Label();
             this.newPasswordInput = new System.Windows.Forms.TextBox();
             this.currentPasswordLabel = new System.Windows.Forms.Label();
             this.currentPasswordInput = new System.Windows.Forms.TextBox();
-            this.Movie_list_text = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel
             // 
-            this.panel.Controls.Add(this.Movie_list_text);
+            this.panel.Controls.Add(this.title);
             this.panel.Controls.Add(this.cancelButton);
             this.panel.Controls.Add(this.saveButton);
             this.panel.Controls.Add(this.newPasswordLabel);
@@ -70,6 +70,18 @@ namespace Project.Forms {
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(715, 443);
             this.panel.TabIndex = 2;
+            // 
+            // title
+            // 
+            this.title.AutoEllipsis = true;
+            this.title.AutoSize = true;
+            this.title.BackColor = System.Drawing.SystemColors.Control;
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.title.Location = new System.Drawing.Point(-8, 0);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(445, 46);
+            this.title.TabIndex = 8;
+            this.title.Text = "wachtwoord veranderen";
             // 
             // cancelButton
             // 
@@ -124,18 +136,6 @@ namespace Project.Forms {
             this.currentPasswordInput.PasswordChar = '*';
             this.currentPasswordInput.Size = new System.Drawing.Size(272, 20);
             this.currentPasswordInput.TabIndex = 0;
-            // 
-            // Movie_list_text
-            // 
-            this.Movie_list_text.AutoEllipsis = true;
-            this.Movie_list_text.AutoSize = true;
-            this.Movie_list_text.BackColor = System.Drawing.SystemColors.Control;
-            this.Movie_list_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.Movie_list_text.Location = new System.Drawing.Point(-8, 0);
-            this.Movie_list_text.Name = "Movie_list_text";
-            this.Movie_list_text.Size = new System.Drawing.Size(445, 46);
-            this.Movie_list_text.TabIndex = 8;
-            this.Movie_list_text.Text = "wachtwoord veranderen";
             // 
             // UserChangePassword
             // 

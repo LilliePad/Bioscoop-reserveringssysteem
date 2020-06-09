@@ -1,37 +1,31 @@
-﻿using Project.Forms.Layouts;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using System;
-using Project.Base;
+using Project.Forms.Layouts;
 using Project.Models;
 using Project.Services;
 using Project.Helpers;
-using System.Collections.Generic;
 
 
 namespace Project.Forms {
 
     public class ShowCreate : BaseLayout {
 
-        private System.Windows.Forms.Label Create_a_show_text;
-        private System.Windows.Forms.Label Name_text;
-        private System.Windows.Forms.Label Room_text;
-        private System.Windows.Forms.Button Show_create_button;
+        // Frontend
+        private Panel panel;
+        private Label title;
 
-        
-        
-        private int movieId;
-        private int roomNumber;
-        private double hours;
-        private DateTime date;
-        private Panel panel1;
-        private Label Datum_text;
-        private DateTimePicker dateTimePicker1;
-        private ComboBox MovieComboBox2;
-        private ComboBox RoomComboBox;
-        private List<Room> rooms;
-        private Button Back_Button;
-        private List<Movie> movies;
+        private Label movieLabel;
+        private ComboBox movieInput;
 
+        private Label roomLabel;
+        private ComboBox roomInput;
+
+        private Label datetimeLabel;
+        private DateTimePicker datetimeInput;
+
+        private Button saveButton;
+        private Button cancelButton;
 
         public ShowCreate() {
             InitializeComponent();
@@ -50,233 +44,182 @@ namespace Project.Forms {
 
             base.OnShow();
 
-            for (int i = 0; i < movies.Count; i++) {
-                this.MovieComboBox2.Items.AddRange(new object[]{movies[i].name});
-            }
-            
-            for (int i = 0; i < rooms.Count; i++) {
-                this.RoomComboBox.Items.AddRange(new object[] { rooms[i].number });
-            }
+            movieInput.Items.Clear();
+            roomInput.Items.Clear();
+
+            movieInput.Items.AddRange(movies.ToArray());
+            roomInput.Items.AddRange(rooms.ToArray());
         }
         private void InitializeComponent() {
-            this.Create_a_show_text = new System.Windows.Forms.Label();
-            this.Name_text = new System.Windows.Forms.Label();
-            this.Room_text = new System.Windows.Forms.Label();
-            this.Show_create_button = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.MovieComboBox2 = new System.Windows.Forms.ComboBox();
-            this.RoomComboBox = new System.Windows.Forms.ComboBox();
-            this.Datum_text = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.Back_Button = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.title = new System.Windows.Forms.Label();
+            this.movieLabel = new System.Windows.Forms.Label();
+            this.roomLabel = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.panel = new System.Windows.Forms.Panel();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.movieInput = new System.Windows.Forms.ComboBox();
+            this.roomInput = new System.Windows.Forms.ComboBox();
+            this.datetimeLabel = new System.Windows.Forms.Label();
+            this.datetimeInput = new System.Windows.Forms.DateTimePicker();
+            this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Create_a_show_text
+            // title
             // 
-            this.Create_a_show_text.AutoSize = true;
-            this.Create_a_show_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.Create_a_show_text.Location = new System.Drawing.Point(3, 0);
-            this.Create_a_show_text.Name = "Create_a_show_text";
-            this.Create_a_show_text.Size = new System.Drawing.Size(535, 58);
-            this.Create_a_show_text.TabIndex = 3;
-            this.Create_a_show_text.Text = "Voorstelling aanmaken";
+            this.title.AutoSize = true;
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.title.Location = new System.Drawing.Point(3, 0);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(426, 46);
+            this.title.TabIndex = 3;
+            this.title.Text = "Voorstelling aanmaken";
             // 
-            // Name_text
+            // movieLabel
             // 
-            this.Name_text.AutoSize = true;
-            this.Name_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Name_text.Location = new System.Drawing.Point(10, 82);
-            this.Name_text.Name = "Name_text";
-            this.Name_text.Size = new System.Drawing.Size(41, 20);
-            this.Name_text.TabIndex = 4;
-            this.Name_text.Text = "Film";
-            this.Name_text.Click += new System.EventHandler(this.label2_Click);
+            this.movieLabel.AutoSize = true;
+            this.movieLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.movieLabel.Location = new System.Drawing.Point(10, 82);
+            this.movieLabel.Name = "movieLabel";
+            this.movieLabel.Size = new System.Drawing.Size(33, 17);
+            this.movieLabel.TabIndex = 4;
+            this.movieLabel.Text = "Film";
             // 
-            // Room_text
+            // roomLabel
             // 
-            this.Room_text.AutoSize = true;
-            this.Room_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Room_text.Location = new System.Drawing.Point(10, 131);
-            this.Room_text.Name = "Room_text";
-            this.Room_text.Size = new System.Drawing.Size(40, 20);
-            this.Room_text.TabIndex = 5;
-            this.Room_text.Text = "Zaal";
+            this.roomLabel.AutoSize = true;
+            this.roomLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.roomLabel.Location = new System.Drawing.Point(10, 131);
+            this.roomLabel.Name = "roomLabel";
+            this.roomLabel.Size = new System.Drawing.Size(36, 17);
+            this.roomLabel.TabIndex = 5;
+            this.roomLabel.Text = "Zaal";
             // 
-            // Show_create_button
+            // saveButton
             // 
-            this.Show_create_button.Location = new System.Drawing.Point(125, 230);
-            this.Show_create_button.Name = "Show_create_button";
-            this.Show_create_button.Size = new System.Drawing.Size(170, 39);
-            this.Show_create_button.TabIndex = 12;
-            this.Show_create_button.Text = "Voorstelling aanmaken";
-            this.Show_create_button.UseVisualStyleBackColor = true;
-            this.Show_create_button.Click += new System.EventHandler(this.button1_Click);
+            this.saveButton.Location = new System.Drawing.Point(125, 230);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(170, 39);
+            this.saveButton.TabIndex = 12;
+            this.saveButton.Text = "Opslaan";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // panel1
+            // panel
             // 
-            this.panel1.Controls.Add(this.Back_Button);
-            this.panel1.Controls.Add(this.MovieComboBox2);
-            this.panel1.Controls.Add(this.RoomComboBox);
-            this.panel1.Controls.Add(this.Datum_text);
-            this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.Create_a_show_text);
-            this.panel1.Controls.Add(this.Room_text);
-            this.panel1.Controls.Add(this.Show_create_button);
-            this.panel1.Controls.Add(this.Name_text);
-            this.panel1.Location = new System.Drawing.Point(40, 106);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(993, 534);
-            this.panel1.TabIndex = 19;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel.Controls.Add(this.cancelButton);
+            this.panel.Controls.Add(this.movieInput);
+            this.panel.Controls.Add(this.roomInput);
+            this.panel.Controls.Add(this.datetimeLabel);
+            this.panel.Controls.Add(this.datetimeInput);
+            this.panel.Controls.Add(this.title);
+            this.panel.Controls.Add(this.roomLabel);
+            this.panel.Controls.Add(this.saveButton);
+            this.panel.Controls.Add(this.movieLabel);
+            this.panel.Location = new System.Drawing.Point(40, 106);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(993, 534);
+            this.panel.TabIndex = 19;
             // 
-            // MovieComboBox2
+            // cancelButton
             // 
-            this.MovieComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MovieComboBox2.FormattingEnabled = true;
-            this.MovieComboBox2.Location = new System.Drawing.Point(125, 82);
-            this.MovieComboBox2.Name = "MovieComboBox2";
-            this.MovieComboBox2.Size = new System.Drawing.Size(495, 24);
-            this.MovieComboBox2.TabIndex = 21;
-            this.MovieComboBox2.SelectedIndexChanged += new System.EventHandler(this.MovieComboBox2_SelectedIndexChanged);
+            this.cancelButton.Location = new System.Drawing.Point(308, 230);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(170, 39);
+            this.cancelButton.TabIndex = 22;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // RoomComboBox
+            // movieInput
             // 
-            this.RoomComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.RoomComboBox.FormattingEnabled = true;
-            this.RoomComboBox.Location = new System.Drawing.Point(125, 131);
-            this.RoomComboBox.Name = "RoomComboBox";
-            this.RoomComboBox.Size = new System.Drawing.Size(495, 24);
-            this.RoomComboBox.TabIndex = 20;
-            this.RoomComboBox.SelectedIndexChanged += new System.EventHandler(this.RoomComboBox_SelectedIndexChanged);
+            this.movieInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.movieInput.FormattingEnabled = true;
+            this.movieInput.Location = new System.Drawing.Point(125, 82);
+            this.movieInput.Name = "movieInput";
+            this.movieInput.Size = new System.Drawing.Size(495, 21);
+            this.movieInput.TabIndex = 21;
             // 
-            // Datum_text
+            // roomInput
             // 
-            this.Datum_text.AutoSize = true;
-            this.Datum_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Datum_text.Location = new System.Drawing.Point(11, 175);
-            this.Datum_text.Name = "Datum_text";
-            this.Datum_text.Size = new System.Drawing.Size(109, 20);
-            this.Datum_text.TabIndex = 16;
-            this.Datum_text.Text = "Datum en tijd";
+            this.roomInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.roomInput.FormattingEnabled = true;
+            this.roomInput.Location = new System.Drawing.Point(125, 131);
+            this.roomInput.Name = "roomInput";
+            this.roomInput.Size = new System.Drawing.Size(495, 21);
+            this.roomInput.TabIndex = 20;
             // 
-            // dateTimePicker1
+            // datetimeLabel
             // 
-            this.dateTimePicker1.CustomFormat = "MM/dd/yyyy HH:mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(125, 173);
-            this.dateTimePicker1.MinDate = new System.DateTime(2020, 6, 2, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(400, 22);
-            this.dateTimePicker1.TabIndex = 15;
-            this.dateTimePicker1.Value = new System.DateTime(2020, 6, 2, 0, 0, 0, 0);
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.datetimeLabel.AutoSize = true;
+            this.datetimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.datetimeLabel.Location = new System.Drawing.Point(11, 175);
+            this.datetimeLabel.Name = "datetimeLabel";
+            this.datetimeLabel.Size = new System.Drawing.Size(91, 17);
+            this.datetimeLabel.TabIndex = 16;
+            this.datetimeLabel.Text = "Datum en tijd";
             // 
-            // Back_Button
+            // datetimeInput
             // 
-            this.Back_Button.Location = new System.Drawing.Point(308, 230);
-            this.Back_Button.Name = "Back_Button";
-            this.Back_Button.Size = new System.Drawing.Size(170, 39);
-            this.Back_Button.TabIndex = 22;
-            this.Back_Button.Text = "Annuleer";
-            this.Back_Button.UseVisualStyleBackColor = true;
-            this.Back_Button.Click += new System.EventHandler(this.Back_Button_Click);
+            this.datetimeInput.CustomFormat = Program.DATETIME_FORMAT;
+            this.datetimeInput.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datetimeInput.Location = new System.Drawing.Point(125, 173);
+            this.datetimeInput.MinDate = new System.DateTime(2020, 6, 2, 0, 0, 0, 0);
+            this.datetimeInput.Name = "datetimeInput";
+            this.datetimeInput.Size = new System.Drawing.Size(400, 20);
+            this.datetimeInput.TabIndex = 15;
+            this.datetimeInput.Value = new System.DateTime(2020, 6, 2, 0, 0, 0, 0);
             // 
             // ShowCreate
             // 
             this.ClientSize = new System.Drawing.Size(1360, 807);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel);
             this.Name = "ShowCreate";
-            this.Load += new System.EventHandler(this.MovieCreate_Load);
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.Controls.SetChildIndex(this.panel, 0);
+            this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
-        private void pictureBox1_Click(object sender, System.EventArgs e) {
-
-        }
-
-        private void label2_Click(object sender, System.EventArgs e) {
-
-        }
-
-        private void MovieCreate_Load(object sender, System.EventArgs e) {
-
-        }
-
-        private void richTextBox3_TextChanged(object sender, System.EventArgs e) {
-
-        }
-
-        private void label5_Click(object sender, System.EventArgs e) {
-
-        }
-
-
-        private void button1_Click(object sender, System.EventArgs e) {
-
+        private void SaveButton_Click(object sender, System.EventArgs e) {
             Program app = Program.GetInstance();
             MovieService movieService = app.GetService<MovieService>("movies");
             RoomService roomService = app.GetService<RoomService>("rooms");
             ShowService showService = app.GetService<ShowService>("shows");
-          
 
-            List<Movie> movies = movieService.GetMovies();
-            List<Room> rooms = roomService.GetRooms();
-            date = date.AddHours(hours);
-            Show show = new Show(movies[movieId].id , rooms[roomNumber].id, date);
+            // Parse values
+            Movie movie = (Movie) movieInput.SelectedItem;
+            Room room = (Room) roomInput.SelectedItem;
 
-            if (!showService.SaveShow(show)) {
-                MessageBox.Show("Error: " + ValidationHelper.GetErrorList(show), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if(movie == null) {
+                GuiHelper.ShowError("Je moet een film kiezen");
                 return;
             }
 
-            // Go back to list view
+            if (room == null) {
+                GuiHelper.ShowError("Je moet een zaal kiezen");
+                return;
+            }
+
+            // Create and save show
+            Show show = new Show(movie.id, room.id, datetimeInput.Value);
+
+            if (!showService.SaveShow(show)) {
+                GuiHelper.ShowError(ValidationHelper.GetErrorList(show));
+                return;
+            }
+
+            // Redirect to screen
             MovieList listScreen = app.GetScreen<MovieList>("movieList");
             app.ShowScreen(listScreen);
         }
 
-        private void label4_Click(object sender, EventArgs e) {
-
-        }
-
-
-
-
-        private void panel1_Paint(object sender, PaintEventArgs e) {
-
-        }
-
-        private void MovieComboBox2_SelectedIndexChanged(object sender, EventArgs e) {
-            movieId = MovieComboBox2.SelectedIndex;
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
-            date = dateTimePicker1.Value;
-        }
-
-        private void Time_TextChanged(object sender, EventArgs e) {
-            
-        }
-
-        private void RoomComboBox_SelectedIndexChanged(object sender, EventArgs e) {
-            try {
-                roomNumber = RoomComboBox.SelectedIndex;
-
-            }
-            catch (FormatException) {                      
-                 MessageBox.Show("voer hier enkel cijfers in", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);             
-            }
-        }
-
-        private void Back_Button_Click(object sender, EventArgs e) {
+        private void CancelButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             ShowList editScreen = app.GetScreen<ShowList>("showList");
             app.ShowScreen(editScreen);
         }
+
     }
 
 }

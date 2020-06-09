@@ -24,7 +24,7 @@ namespace Project.Forms {
         private Label passwordLabel;
         private TextBox passwordInput;
         private Button cancelButton;
-        private Label Movie_list_text;
+        private Label title;
         private Button saveButton;
 
         public UserCreate() {
@@ -60,6 +60,7 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.content = new System.Windows.Forms.Panel();
+            this.title = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.passwordInput = new System.Windows.Forms.TextBox();
             this.passwordLabel = new System.Windows.Forms.Label();
@@ -70,13 +71,12 @@ namespace Project.Forms {
             this.adminLabel = new System.Windows.Forms.Label();
             this.adminInput = new System.Windows.Forms.CheckBox();
             this.saveButton = new System.Windows.Forms.Button();
-            this.Movie_list_text = new System.Windows.Forms.Label();
             this.content.SuspendLayout();
             this.SuspendLayout();
             // 
             // content
             // 
-            this.content.Controls.Add(this.Movie_list_text);
+            this.content.Controls.Add(this.title);
             this.content.Controls.Add(this.cancelButton);
             this.content.Controls.Add(this.passwordInput);
             this.content.Controls.Add(this.passwordLabel);
@@ -91,6 +91,18 @@ namespace Project.Forms {
             this.content.Name = "content";
             this.content.Size = new System.Drawing.Size(715, 443);
             this.content.TabIndex = 2;
+            // 
+            // title
+            // 
+            this.title.AutoEllipsis = true;
+            this.title.AutoSize = true;
+            this.title.BackColor = System.Drawing.SystemColors.Control;
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.title.Location = new System.Drawing.Point(-4, 0);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(297, 46);
+            this.title.TabIndex = 15;
+            this.title.Text = "Account maken";
             // 
             // cancelButton
             // 
@@ -178,18 +190,6 @@ namespace Project.Forms {
             this.saveButton.Text = "Opslaan";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
-            // Movie_list_text
-            // 
-            this.Movie_list_text.AutoEllipsis = true;
-            this.Movie_list_text.AutoSize = true;
-            this.Movie_list_text.BackColor = System.Drawing.SystemColors.Control;
-            this.Movie_list_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.Movie_list_text.Location = new System.Drawing.Point(-4, 0);
-            this.Movie_list_text.Name = "Movie_list_text";
-            this.Movie_list_text.Size = new System.Drawing.Size(297, 46);
-            this.Movie_list_text.TabIndex = 15;
-            this.Movie_list_text.Text = "Account maken";
             // 
             // UserCreate
             // 

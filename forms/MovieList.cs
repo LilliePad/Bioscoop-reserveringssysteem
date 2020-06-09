@@ -10,9 +10,11 @@ namespace Project.Forms {
 
     public class MovieList : BaseLayout {
 
+        // Frontend
         private ListView container;
-        private Label Movie_list_text;
-        private Button movieCreateButton;
+        private Label title;
+
+        private Button newButton;
 
         public MovieList() {
             InitializeComponent();
@@ -53,8 +55,8 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.container = new System.Windows.Forms.ListView();
-            this.movieCreateButton = new System.Windows.Forms.Button();
-            this.Movie_list_text = new System.Windows.Forms.Label();
+            this.newButton = new System.Windows.Forms.Button();
+            this.title = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // container
@@ -67,40 +69,39 @@ namespace Project.Forms {
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.Click += new System.EventHandler(this.ListItem_Click);
             // 
-            // movieCreateButton
+            // newButton
             // 
-            this.movieCreateButton.Location = new System.Drawing.Point(40, 610);
-            this.movieCreateButton.Name = "movieCreateButton";
-            this.movieCreateButton.Size = new System.Drawing.Size(110, 51);
-            this.movieCreateButton.TabIndex = 3;
-            this.movieCreateButton.Text = "Nieuw";
-            this.movieCreateButton.UseVisualStyleBackColor = true;
-            this.movieCreateButton.Click += new System.EventHandler(this.MovieCreateButton_Click);
+            this.newButton.Location = new System.Drawing.Point(40, 638);
+            this.newButton.Name = "newButton";
+            this.newButton.Size = new System.Drawing.Size(140, 23);
+            this.newButton.TabIndex = 3;
+            this.newButton.Text = "Nieuw";
+            this.newButton.UseVisualStyleBackColor = true;
+            this.newButton.Click += new System.EventHandler(this.NewButton_Click);
             // 
-            // Movie_list_text
+            // title
             // 
-            this.Movie_list_text.AutoEllipsis = true;
-            this.Movie_list_text.AutoSize = true;
-            this.Movie_list_text.BackColor = System.Drawing.SystemColors.Control;
-            this.Movie_list_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.Movie_list_text.Location = new System.Drawing.Point(32, 114);
-            this.Movie_list_text.Name = "Movie_list_text";
-            this.Movie_list_text.Size = new System.Drawing.Size(165, 46);
-            this.Movie_list_text.TabIndex = 4;
-            this.Movie_list_text.Text = "Film lijst";
-            this.Movie_list_text.Click += new System.EventHandler(this.Create_a_movie_text_Click);
+            this.title.AutoEllipsis = true;
+            this.title.AutoSize = true;
+            this.title.BackColor = System.Drawing.SystemColors.Control;
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.title.Location = new System.Drawing.Point(32, 114);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(165, 46);
+            this.title.TabIndex = 4;
+            this.title.Text = "Film lijst";
             // 
             // MovieList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
-            this.Controls.Add(this.movieCreateButton);
+            this.Controls.Add(this.newButton);
             this.Controls.Add(this.container);
-            this.Controls.Add(this.Movie_list_text);
+            this.Controls.Add(this.title);
             this.Name = "MovieList";
             this.Load += new System.EventHandler(this.MovieList_Load);
-            this.Controls.SetChildIndex(this.Movie_list_text, 0);
+            this.Controls.SetChildIndex(this.title, 0);
             this.Controls.SetChildIndex(this.container, 0);
-            this.Controls.SetChildIndex(this.movieCreateButton, 0);
+            this.Controls.SetChildIndex(this.newButton, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,7 +125,7 @@ namespace Project.Forms {
             }
 
             // Find the movie
-            int id = (int)item.Tag;
+            int id = (int) item.Tag;
             Movie movie = movieService.GetMovieById(id);
 
             if (movie == null) {
@@ -139,16 +140,13 @@ namespace Project.Forms {
             app.ShowScreen(editScreen);
         }
 
-        private void MovieCreateButton_Click(object sender, EventArgs e) {
+        private void NewButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             MovieCreate newScreen = app.GetScreen<MovieCreate>("movieCreate");
 
             app.ShowScreen(newScreen);
         }
 
-        private void Create_a_movie_text_Click(object sender, EventArgs e) {
-
-        }
     }
 
 }

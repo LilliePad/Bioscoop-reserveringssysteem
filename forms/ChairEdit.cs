@@ -1,28 +1,29 @@
-﻿using Project.Forms.Layouts;
+﻿using System;
 using System.Windows.Forms;
-using System;
-using Project.Base;
+using Project.Forms.Layouts;
+using Project.Helpers;
 using Project.Models;
 using Project.Services;
-using Project.Helpers;
 
 namespace Project.Forms {
 
     public class ChairEdit : BaseLayout {
-        private Panel panel1;
-        private Button Chair_edit_Button;
-        private Button Delete_chair_button;
 
-        private Label Chair_edit_text;
-        private Label Row_text;
-        private Label Colum_text;
+        // Frontend
+        private Panel panel;
+        private Label title;
 
+        private Label rowLabel;
+        private Label columnLabel;
+
+        private Button addButton;
+        private Button deleteButton;
+        private Button cancelButton;
+
+        // Backend
         private Room room;
         private int row;
-        private Button Back_button;
-        private int colum;
-
-        
+        private int column;
 
         public ChairEdit() {
             InitializeComponent();
@@ -32,163 +33,163 @@ namespace Project.Forms {
             return "chairEdit";
         }
 
-        public void SetRoom(Room room) {
-            this.room = room;
-        }
-
-        public void SetRow(int row) {
-            this.row = row;
-
-        }
-
-        public void SetColum(int colum) {
-            this.colum = colum;
-
-        }
-
         public override void OnShow() {
             base.OnShow();
-            this.Colum_text.Text = "Collom  " + colum;
-            this.Row_text.Text = "Row  " + row;
+
+            this.columnLabel.Text = "Kolom  " + column;
+            this.rowLabel.Text = "Rij  " + row;
         }
+
         private void InitializeComponent() {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.Back_button = new System.Windows.Forms.Button();
-            this.Colum_text = new System.Windows.Forms.Label();
-            this.Row_text = new System.Windows.Forms.Label();
-            this.Delete_chair_button = new System.Windows.Forms.Button();
-            this.Chair_edit_text = new System.Windows.Forms.Label();
-            this.Chair_edit_Button = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.panel = new System.Windows.Forms.Panel();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.columnLabel = new System.Windows.Forms.Label();
+            this.rowLabel = new System.Windows.Forms.Label();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.title = new System.Windows.Forms.Label();
+            this.addButton = new System.Windows.Forms.Button();
+            this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // panel
             // 
-            this.panel1.Controls.Add(this.Back_button);
-            this.panel1.Controls.Add(this.Colum_text);
-            this.panel1.Controls.Add(this.Row_text);
-            this.panel1.Controls.Add(this.Delete_chair_button);
-            this.panel1.Controls.Add(this.Chair_edit_text);
-            this.panel1.Controls.Add(this.Chair_edit_Button);
-            this.panel1.Location = new System.Drawing.Point(40, 106);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(993, 534);
-            this.panel1.TabIndex = 20;
+            this.panel.Controls.Add(this.cancelButton);
+            this.panel.Controls.Add(this.columnLabel);
+            this.panel.Controls.Add(this.rowLabel);
+            this.panel.Controls.Add(this.deleteButton);
+            this.panel.Controls.Add(this.title);
+            this.panel.Controls.Add(this.addButton);
+            this.panel.Location = new System.Drawing.Point(40, 106);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(993, 534);
+            this.panel.TabIndex = 20;
             // 
-            // Back_button
+            // cancelButton
             // 
-            this.Back_button.Location = new System.Drawing.Point(318, 171);
-            this.Back_button.Name = "Back_button";
-            this.Back_button.Size = new System.Drawing.Size(140, 23);
-            this.Back_button.TabIndex = 22;
-            this.Back_button.Text = "Annuleren";
-            this.Back_button.UseVisualStyleBackColor = true;
-            this.Back_button.Click += new System.EventHandler(this.Back_button_Click);
+            this.cancelButton.Location = new System.Drawing.Point(318, 171);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(140, 23);
+            this.cancelButton.TabIndex = 22;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // Colum_text
+            // columnLabel
             // 
-            this.Colum_text.AutoSize = true;
-            this.Colum_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Colum_text.Location = new System.Drawing.Point(9, 126);
-            this.Colum_text.Name = "Colum_text";
-            this.Colum_text.Size = new System.Drawing.Size(0, 17);
-            this.Colum_text.TabIndex = 21;
-            this.Colum_text.Click += new System.EventHandler(this.Colum_Click);
+            this.columnLabel.AutoSize = true;
+            this.columnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.columnLabel.Location = new System.Drawing.Point(9, 126);
+            this.columnLabel.Name = "columnLabel";
+            this.columnLabel.Size = new System.Drawing.Size(0, 17);
+            this.columnLabel.TabIndex = 21;
             // 
-            // Row_text
+            // rowLabel
             // 
-            this.Row_text.AutoSize = true;
-            this.Row_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Row_text.Location = new System.Drawing.Point(9, 94);
-            this.Row_text.Name = "Row_text";
-            this.Row_text.Size = new System.Drawing.Size(0, 17);
-            this.Row_text.TabIndex = 20;
-            this.Row_text.Click += new System.EventHandler(this.Row_Click);
+            this.rowLabel.AutoSize = true;
+            this.rowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.rowLabel.Location = new System.Drawing.Point(9, 94);
+            this.rowLabel.Name = "rowLabel";
+            this.rowLabel.Size = new System.Drawing.Size(0, 17);
+            this.rowLabel.TabIndex = 20;
             // 
-            // Delete_chair_button
+            // deleteButton
             // 
-            this.Delete_chair_button.Location = new System.Drawing.Point(168, 171);
-            this.Delete_chair_button.Name = "Delete_chair_button";
-            this.Delete_chair_button.Size = new System.Drawing.Size(140, 23);
-            this.Delete_chair_button.TabIndex = 19;
-            this.Delete_chair_button.Text = "stoel verwijderen";
-            this.Delete_chair_button.UseVisualStyleBackColor = true;
-            this.Delete_chair_button.Click += new System.EventHandler(this.Chair_delete_button_Click);
+            this.deleteButton.Location = new System.Drawing.Point(168, 171);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(140, 23);
+            this.deleteButton.TabIndex = 19;
+            this.deleteButton.Text = "Stoel verwijderen";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
-            // Chair_edit_text
+            // title
             // 
-            this.Chair_edit_text.AutoEllipsis = true;
-            this.Chair_edit_text.AutoSize = true;
-            this.Chair_edit_text.BackColor = System.Drawing.SystemColors.Control;
-            this.Chair_edit_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.Chair_edit_text.Location = new System.Drawing.Point(3, 0);
-            this.Chair_edit_text.Name = "Chair_edit_text";
-            this.Chair_edit_text.Size = new System.Drawing.Size(300, 46);
-            this.Chair_edit_text.TabIndex = 3;
-            this.Chair_edit_text.Text = "Stoel Bewerken";
+            this.title.AutoEllipsis = true;
+            this.title.AutoSize = true;
+            this.title.BackColor = System.Drawing.SystemColors.Control;
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.title.Location = new System.Drawing.Point(3, 0);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(300, 46);
+            this.title.TabIndex = 3;
+            this.title.Text = "Stoel Bewerken";
             // 
-            // Chair_edit_Button
+            // addButton
             // 
-            this.Chair_edit_Button.Location = new System.Drawing.Point(13, 171);
-            this.Chair_edit_Button.Name = "Chair_edit_Button";
-            this.Chair_edit_Button.Size = new System.Drawing.Size(140, 23);
-            this.Chair_edit_Button.TabIndex = 12;
-            this.Chair_edit_Button.Text = "Stoel aanmaken";
-            this.Chair_edit_Button.UseVisualStyleBackColor = true;
-            this.Chair_edit_Button.Click += new System.EventHandler(this.Chair_edit_button_Click);
+            this.addButton.Location = new System.Drawing.Point(13, 171);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(140, 23);
+            this.addButton.TabIndex = 12;
+            this.addButton.Text = "Stoel aanmaken";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // ChairEdit
             // 
             this.ClientSize = new System.Drawing.Size(1260, 673);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel);
             this.Name = "ChairEdit";
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.Controls.SetChildIndex(this.panel, 0);
+            this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
+        public void SetChairInfo(Room room, int row, int column) {
+            this.room = room;
+            this.row = row;
+            this.column = column;
+        }
       
-        private void Chair_edit_button_Click(object sender, EventArgs args) {
+        private void AddButton_Click(object sender, EventArgs args) {
             Program app = Program.GetInstance();
             ChairService chairManager = app.GetService<ChairService>("chairs");
 
-            Chair chair = new Chair(room.id, row, colum, 7.50, "default");
-            chairManager.SaveChair(chair);
-            RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit");
-            app.ShowScreen(newScreen);
+            // Create and save chair
+            Chair chair = new Chair(room.id, row, column, 0, "default");
 
-        }
-
-        private void Colum_Click(object sender, EventArgs e) {
-
-        }
-
-        private void Row_Click(object sender, EventArgs args) {
-
-        }
-
-        private void Chair_delete_button_Click(object sender, EventArgs args) {
-            Program app = Program.GetInstance();
-            ChairService chairManager = app.GetService<ChairService>("chairs");
-            Chair chair = chairManager.GetChairByRoomAndPosition(room, row, colum);
-            try {
-                chairManager.DeleteChair(chair);
+            if(!chairManager.SaveChair(chair)) {
+                GuiHelper.ShowError(ValidationHelper.GetErrorList(chair));
+                return;
             }
-            catch {
-                MessageBox.Show("Error: kon stoel niet verwijderen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            // Redirect to screen
+            RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit");
+
+            app.ShowScreen(newScreen);
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs args) {
+            Program app = Program.GetInstance();
+            ChairService chairManager = app.GetService<ChairService>("chairs");
+
+            // Find the chair
+            Chair chair = chairManager.GetChairByRoomAndPosition(room, row, column);
+
+            if(chair == null) {
+                GuiHelper.ShowError("Er bestaat geen stoel op deze positie");
+                return;
+            }
+
+            // Delete it
+            if(!chairManager.DeleteChair(chair)) {
+                GuiHelper.ShowError("Kon stoel niet verwijderen");
+                return;
             }
             
+            // Redirect to screen
             RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit");
+
             app.ShowScreen(newScreen);
         }
 
-        private void Back_button_Click(object sender, EventArgs e) {
+        private void CancelButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit");
             app.ShowScreen(newScreen);
         }
+
     }
 
 }

@@ -64,7 +64,7 @@ namespace Project.Services {
             // Update record
             record.id = movie.id;
             record.name = movie.name;
-            record.discription = movie.discription;
+            record.description = movie.description;
             record.duration = movie.duration;
             record.genre = movie.genre;
             record.image = movie.image;

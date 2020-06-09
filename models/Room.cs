@@ -39,6 +39,10 @@ namespace Project.Models {
             return chairService.GetChairsByRoom(this);
         }
 
+        public override string ToString() {
+            return "number " + number;
+        }
+
     }
 
 }

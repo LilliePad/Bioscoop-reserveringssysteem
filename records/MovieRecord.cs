@@ -6,7 +6,7 @@ namespace Project.Records {
 
         public int id;
         public string name;
-        public string discription;
+        public string description;
         public string genre;
         public int duration;
         public StorageFile image;

@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using Project.Base;
 using Project.Models;
 using Project.Services;
-using System.Runtime.InteropServices;
 using Project.Forms.Components;
 
 namespace Project.Forms.Layouts {
@@ -28,17 +27,6 @@ namespace Project.Forms.Layouts {
         private RoundedButton userReservationButton;
         private RoundedButton userShowButton;
         private Label navAccountName;
-
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect,     // x-coordinate of upper-left corner
-            int nTopRect,      // y-coordinate of upper-left corner
-            int nRightRect,    // x-coordinate of lower-right corner
-            int nBottomRect,   // y-coordinate of lower-right corner
-            int nWidthEllipse, // height of ellipse
-            int nHeightEllipse // width of ellipse
-        );
         
         public BaseLayout() {
             InitializeComponent();

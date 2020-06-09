@@ -11,7 +11,7 @@ namespace Project.Forms {
     public class UserList : BaseLayout {
 
         private Button userCreateButton;
-        private Label Movie_list_text;
+        private Label title;
         private ListView container;
 
         public UserList() {
@@ -50,7 +50,7 @@ namespace Project.Forms {
         private void InitializeComponent() {
             this.container = new System.Windows.Forms.ListView();
             this.userCreateButton = new System.Windows.Forms.Button();
-            this.Movie_list_text = new System.Windows.Forms.Label();
+            this.title = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // container
@@ -73,29 +73,29 @@ namespace Project.Forms {
             this.userCreateButton.UseVisualStyleBackColor = true;
             this.userCreateButton.Click += new System.EventHandler(this.UserCreateButton_Click);
             // 
-            // Movie_list_text
+            // title
             // 
-            this.Movie_list_text.AutoEllipsis = true;
-            this.Movie_list_text.AutoSize = true;
-            this.Movie_list_text.BackColor = System.Drawing.SystemColors.Control;
-            this.Movie_list_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.Movie_list_text.Location = new System.Drawing.Point(34, 112);
-            this.Movie_list_text.Name = "Movie_list_text";
-            this.Movie_list_text.Size = new System.Drawing.Size(237, 46);
-            this.Movie_list_text.TabIndex = 6;
-            this.Movie_list_text.Text = "Account lijst";
+            this.title.AutoEllipsis = true;
+            this.title.AutoSize = true;
+            this.title.BackColor = System.Drawing.SystemColors.Control;
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.title.Location = new System.Drawing.Point(34, 112);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(237, 46);
+            this.title.TabIndex = 6;
+            this.title.Text = "Account lijst";
             // 
             // UserList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
-            this.Controls.Add(this.Movie_list_text);
+            this.Controls.Add(this.title);
             this.Controls.Add(this.userCreateButton);
             this.Controls.Add(this.container);
             this.Name = "UserList";
             this.Load += new System.EventHandler(this.UserList_Load);
             this.Controls.SetChildIndex(this.container, 0);
             this.Controls.SetChildIndex(this.userCreateButton, 0);
-            this.Controls.SetChildIndex(this.Movie_list_text, 0);
+            this.Controls.SetChildIndex(this.title, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 

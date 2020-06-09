@@ -9,7 +9,7 @@ namespace Project.Models {
 
         public int id = -1;
         public string name;
-        public string discription;
+        public string description;
         public string genre;
         public int duration;
         public StorageFile image;
@@ -17,15 +17,15 @@ namespace Project.Models {
         public Movie(MovieRecord record) {
             id = record.id;
             name = record.name;
-            discription = record.discription;
+            description = record.description;
             genre = record.genre;
             duration = record.duration;
             image = record.image;
         }
 
-        public Movie(string name, string discription, string genre, int duration, StorageFile image) {
+        public Movie(string name, string description, string genre, int duration, StorageFile image) {
             this.name = name;
-            this.discription = discription;
+            this.description = description;
             this.duration = duration;
             this.genre = genre;
             this.image = image;
@@ -61,6 +61,10 @@ namespace Project.Models {
             } catch(Exception) {
                 return null;
             }
+        }
+
+        public override string ToString() {
+            return name;
         }
 
     }

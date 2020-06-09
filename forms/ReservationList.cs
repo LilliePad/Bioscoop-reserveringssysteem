@@ -11,6 +11,7 @@ namespace Project.Forms {
 
     public class ReservationList : BaseLayout {
 
+        // Frontend
         private ListView container;
 
         public ReservationList() {
@@ -21,16 +22,12 @@ namespace Project.Forms {
             return "reservationList";
         }
 
-
         public override void OnShow() {
             Program app = Program.GetInstance();
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
-            List<Reservation> reservations = reservationService.GetReservations();
             UserService userService = app.GetService<UserService>("users");
-            List<User> users = userService.GetUsers();
-            MovieService movieService = app.GetService<MovieService>("movies");
-            ImageList imgs = new ImageList();
-            List<Movie> movies = movieService.GetMovies();
+            List<Reservation> reservations = reservationService.GetReservations();
+            User currentUser = userService.GetCurrentUser();
 
             base.OnShow();
 
@@ -40,11 +37,17 @@ namespace Project.Forms {
                 Reservation reservation = reservations[i];
                 Movie movie = reservation.GetShow().GetMovie();
                 User user = reservation.GetUser();
+
+                // Make sure the user is allowed to see it
+                if(!currentUser.admin && currentUser.id != user.id) {
+                    continue;
+                }
+
+                // Create item
                 ListViewItem item = new ListViewItem(reservation.userId + " - " + user.username + " - " + movie.name + " - " + movie.duration, i);
 
                 item.Tag = reservation.id;
                 container.Items.Add(item);
-
             }
 
         }
@@ -60,7 +63,7 @@ namespace Project.Forms {
             this.container.Size = new System.Drawing.Size(670, 452);
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
-            this.container.SelectedIndexChanged += new System.EventHandler(this.container_SelectedIndexChanged);
+            this.container.SelectedIndexChanged += new System.EventHandler(this.ListItem_Click);
             // 
             // ReservationList
             // 
@@ -75,24 +78,38 @@ namespace Project.Forms {
 
         private void ReservationList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("User", 100);
+            container.Columns.Add("Reserveringen", 100);
 
         }
 
-       
-
-        private void container_SelectedIndexChanged(object sender, EventArgs e) {
+        private void ListItem_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
+
+            // Get the clicked item
             ListViewItem item = container.SelectedItems[0];
-            int id = (int)item.Tag;
+
+            if (item == null) {
+                MessageBox.Show("Error: Geen item geselecteerd", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Find the movie
+            int id = (int) item.Tag;
             Reservation reservation = reservationService.GetReservationById(id);
 
-            ReservationDetail reservationDetailScreen = app.GetScreen<ReservationDetail>("reservationDetail");
+            if (reservation == null) {
+                MessageBox.Show("Error: Kon geen reservering vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            reservationDetailScreen.SetReservation(reservation);
-            app.ShowScreen(reservationDetailScreen);
+            // Show screen
+            ReservationDetail reservationDetail = app.GetScreen<ReservationDetail>("reservationDetail");
+
+            reservationDetail.SetReservation(reservation);
+            app.ShowScreen(reservationDetail);
         }
+
     }
 
 }

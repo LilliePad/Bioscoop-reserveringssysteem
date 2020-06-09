@@ -64,14 +64,8 @@
     <Compile Include="forms\ReservationDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\ReservationDetail.Designer.cs">
-      <DependentUpon>ReservationDetail.cs</DependentUpon>
-    </Compile>
     <Compile Include="forms\ReservationCreate.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\ReservationCreate.Designer.cs">
-      <DependentUpon>ReservationCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\ReservationList.cs">
       <SubType>Form</SubType>
@@ -79,7 +73,7 @@
     <Compile Include="forms\ShowList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\ShowDelete.cs">
+    <Compile Include="forms\ShowDetail.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\ChairEdit.cs">
@@ -170,8 +164,8 @@
     <EmbeddedResource Include="forms\ShowList.resx">
       <DependentUpon>ShowList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\ShowDelete.resx">
-      <DependentUpon>ShowDelete.cs</DependentUpon>
+    <EmbeddedResource Include="forms\ShowDetail.resx">
+      <DependentUpon>ShowDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ChairEdit.resx">
       <DependentUpon>ChairEdit.cs</DependentUpon>

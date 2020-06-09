@@ -10,7 +10,9 @@ namespace Project.Forms {
 
     public class MovieListUser : BaseLayout {
 
+        // Frontend
         private ListView container;
+        private Label title;
 
         public MovieListUser() {
             InitializeComponent();
@@ -22,6 +24,10 @@ namespace Project.Forms {
 
         public override bool IsDefault() {
             return true;
+        }
+
+        public override bool RequireLogin() {
+            return false;
         }
 
         public override void OnShow() {
@@ -51,26 +57,42 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.container = new System.Windows.Forms.ListView();
+            this.title = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // container
             // 
             this.container.HideSelection = false;
-            this.container.Location = new System.Drawing.Point(40, 129);
+            this.container.Location = new System.Drawing.Point(40, 174);
             this.container.Name = "container";
-            this.container.Size = new System.Drawing.Size(670, 452);
+            this.container.Size = new System.Drawing.Size(670, 430);
             this.container.TabIndex = 2;
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.Click += new System.EventHandler(this.ListItem_Click);
             // 
-            // MovieListUser
+            // title
+            // 
+            this.title.AutoEllipsis = true;
+            this.title.AutoSize = true;
+            this.title.BackColor = System.Drawing.SystemColors.Control;
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.title.Location = new System.Drawing.Point(32, 114);
+            this.title.Name = "title";
+            this.title.Size = new System.Drawing.Size(165, 46);
+            this.title.TabIndex = 4;
+            this.title.Text = "Film lijst";
+            // 
+            // MovieList
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.container);
-            this.Name = "MovieListUser";
+            this.Controls.Add(this.title);
+            this.Name = "MovieList";
             this.Load += new System.EventHandler(this.MovieList_Load);
+            this.Controls.SetChildIndex(this.title, 0);
             this.Controls.SetChildIndex(this.container, 0);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -92,7 +114,7 @@ namespace Project.Forms {
             }
 
             // Find the movie
-            int id = (int)item.Tag;
+            int id = (int) item.Tag;
             Movie movie = movieService.GetMovieById(id);
 
             if (movie == null) {
@@ -105,12 +127,6 @@ namespace Project.Forms {
 
             movieSelect.SetMovie(movie);
             app.ShowScreen(movieSelect);
-        }
-
-        private void MovieCreateButton_Click(object sender, EventArgs e) {
-            Program app = Program.GetInstance();
-            MovieCreate newScreen = app.GetScreen<MovieCreate>("movieCreate");
-            app.ShowScreen(newScreen);
         }
 
     }
