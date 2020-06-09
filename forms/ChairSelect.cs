@@ -115,6 +115,7 @@ namespace Project.Forms {
                         if (reservationService.IsChairTaken(chair, show) || chairs.Contains(chair)) {
                             var button = new Button();
                             button.Text = string.Format("Niet beschikbaar");
+                            button.BackColor = Color.FromArgb(153, 0, 0); ;
                             button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
                             button.Dock = DockStyle.Fill;
                             button.Click += (sender, e) => { MyHandler(sender, e, button.Name); };
