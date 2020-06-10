@@ -87,6 +87,7 @@ namespace Project.Forms.Layouts {
             this.userReservationButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.userReservationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userReservationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userReservationButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.userReservationButton.Location = new System.Drawing.Point(316, 58);
             this.userReservationButton.Name = "userReservationButton";
             this.userReservationButton.Size = new System.Drawing.Size(249, 30);
@@ -102,6 +103,7 @@ namespace Project.Forms.Layouts {
             this.userShowButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.userShowButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userShowButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userShowButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.userShowButton.Location = new System.Drawing.Point(42, 58);
             this.userShowButton.Name = "userShowButton";
             this.userShowButton.Size = new System.Drawing.Size(246, 30);
@@ -119,7 +121,7 @@ namespace Project.Forms.Layouts {
             this.navAccountName.Location = new System.Drawing.Point(1445, 16);
             this.navAccountName.Name = "navAccountName";
             this.navAccountName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.navAccountName.Size = new System.Drawing.Size(111, 17);
+            this.navAccountName.Size = new System.Drawing.Size(132, 20);
             this.navAccountName.TabIndex = 14;
             this.navAccountName.Text = "<accountName>";
             this.navAccountName.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -131,6 +133,7 @@ namespace Project.Forms.Layouts {
             this.navLink1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLink1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.navLink1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.navLink1.Location = new System.Drawing.Point(42, 14);
             this.navLink1.Name = "navLink1";
             this.navLink1.Size = new System.Drawing.Size(130, 30);
@@ -146,6 +149,7 @@ namespace Project.Forms.Layouts {
             this.navLink2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLink2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.navLink2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.navLink2.Location = new System.Drawing.Point(194, 14);
             this.navLink2.Name = "navLink2";
             this.navLink2.Size = new System.Drawing.Size(130, 30);
@@ -161,6 +165,7 @@ namespace Project.Forms.Layouts {
             this.navLink3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLink3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold);
+            this.navLink3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.navLink3.Location = new System.Drawing.Point(348, 14);
             this.navLink3.Name = "navLink3";
             this.navLink3.Size = new System.Drawing.Size(130, 30);
@@ -176,9 +181,10 @@ namespace Project.Forms.Layouts {
             this.navLink4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.navLink4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLink4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold);
+            this.navLink4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.navLink4.Location = new System.Drawing.Point(504, 14);
             this.navLink4.Name = "navLink4";
-            this.navLink4.Size = new System.Drawing.Size(130, 30);
+            this.navLink4.Size = new System.Drawing.Size(136, 30);
             this.navLink4.TabIndex = 3;
             this.navLink4.Text = "Reserveringen";
             this.navLink4.UseVisualStyleBackColor = false;
@@ -193,6 +199,7 @@ namespace Project.Forms.Layouts {
             this.navLink5.FlatAppearance.BorderSize = 0;
             this.navLink5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.navLink5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold);
+            this.navLink5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.navLink5.Location = new System.Drawing.Point(659, 14);
             this.navLink5.Name = "navLink5";
             this.navLink5.Size = new System.Drawing.Size(130, 30);
@@ -207,7 +214,7 @@ namespace Project.Forms.Layouts {
             this.navLoginUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navLoginUsername.Location = new System.Drawing.Point(1424, 16);
             this.navLoginUsername.Name = "navLoginUsername";
-            this.navLoginUsername.Size = new System.Drawing.Size(132, 23);
+            this.navLoginUsername.Size = new System.Drawing.Size(132, 26);
             this.navLoginUsername.TabIndex = 7;
             this.navLoginUsername.Text = "Gebruikersnaam";
             this.navLoginUsername.Enter += new System.EventHandler(this.LoginUsernameRemoveText);
@@ -219,7 +226,7 @@ namespace Project.Forms.Layouts {
             this.navLoginPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.navLoginPassword.Location = new System.Drawing.Point(1424, 58);
             this.navLoginPassword.Name = "navLoginPassword";
-            this.navLoginPassword.Size = new System.Drawing.Size(132, 23);
+            this.navLoginPassword.Size = new System.Drawing.Size(132, 26);
             this.navLoginPassword.TabIndex = 8;
             this.navLoginPassword.Text = "Wachtwoord";
             this.navLoginPassword.Enter += new System.EventHandler(this.LoginPasswordRemoveText);
