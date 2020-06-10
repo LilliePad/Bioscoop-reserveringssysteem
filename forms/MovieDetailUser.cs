@@ -86,7 +86,7 @@ namespace Project.Forms {
                 button.Dock = DockStyle.Fill;
 
                 button.Click += (sender, e) => {
-                    ShowButton_Click(sender, e, button.Name);
+                    ShowButton_Click(sender, e, show.id);
                 };
 
                 container.Controls.Add(button, rowIndex, columnIndex);
@@ -231,15 +231,15 @@ namespace Project.Forms {
             this.movie = movie;
         }
 
-        void ShowButton_Click(object sender, EventArgs e, string showId) {
+        void ShowButton_Click(object sender, EventArgs e, int showId) {
             Program app = Program.GetInstance();
             ShowService showService = app.GetService<ShowService>("shows");
-            ReservationCreate reservationScreen = app.GetScreen<ReservationCreate>("reservationCreate");
 
-            // Get show and redirect to screen
-            List<Show> shows = showService.GetShowsByMovie(movie);
-            List<Show> list = shows.Where(i => i.startTime > DateTime.Now).OrderBy(i => i.startTime).ToList();
-            Show show = list[int.Parse(showId)];
+            // Get show
+            Show show = showService.GetShowById(showId);
+
+            // Redirect to screen
+            ReservationCreate reservationScreen = app.GetScreen<ReservationCreate>("reservationCreate");
             reservationScreen.SetShow(show);
             app.ShowScreen(reservationScreen);
         }
