@@ -56,13 +56,9 @@ namespace Project.Forms {
             container.RowStyles.Clear();
             container.ColumnStyles.Clear();
 
-            // Print shows
-            List<Show> shows = showService.GetShowsByMovie(movie);
-            List<Show> list = shows.Where(i => i.startTime > DateTime.Now).OrderBy(i => i.startTime).ToList();
-            int maximum = list.Count;
+            // Prepare list
             int rowCount = 15;
             int columnCount = 5;
-            int showIndex = 0;
 
             container.ColumnCount = columnCount;
             container.RowCount = rowCount;
@@ -75,22 +71,32 @@ namespace Project.Forms {
                 container.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / rowCount));
             }
 
-            for (int i = 0; i < rowCount && showIndex < shows.Count; i++) {
-                for (int j = 0; j < columnCount && showIndex < shows.Count; j++) {
-                    Button button = new Button();
-                    Show show = list[showIndex];
-                    
-                    button.Text = show.startTime.ToString(Program.DATETIME_FORMAT);
-                    button.Name = "" + showIndex;
-                    button.BackColor = Color.FromArgb(193,193,193);
-                    button.Dock = DockStyle.Fill;
+            // Build list
+            List<Show> shows = showService.GetShowsByMovie(movie);
+            List<Show> list = shows.Where(i => i.startTime > DateTime.Now).OrderBy(i => i.startTime).Take(rowCount * columnCount).ToList();
 
-                    button.Click += (sender, e) => {
-                        ShowButton_Click(sender, e, button.Name);
-                    };
+            int rowIndex = 0;
+            int columnIndex = 0;
 
-                    container.Controls.Add(button, j, i);
-                    showIndex += 1;
+            foreach(Show show in list) {
+                Button button = new Button();
+
+                button.Text = show.startTime.ToString(Program.DATETIME_FORMAT);
+                button.Name = "show" + show.id;
+                button.BackColor = Color.FromArgb(193, 193, 193);
+                button.Dock = DockStyle.Fill;
+
+                button.Click += (sender, e) => {
+                    ShowButton_Click(sender, e, button.Name);
+                };
+
+                container.Controls.Add(button, rowIndex, columnIndex);
+
+                columnIndex += 1;
+
+                if(columnIndex >= columnCount) {
+                    columnIndex = 0;
+                    rowIndex += 1;
                 }
             }
         }
@@ -235,9 +241,10 @@ namespace Project.Forms {
 
         private void cancelButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            MovieList listScreen = app.GetScreen<MovieList>("movieList");
-            app.ShowScreen(listScreen);
+            MovieListUser movieListUser = app.GetScreen<MovieListUser>("movieListUser");
+            app.ShowScreen(movieListUser);
         }
+
     }
 
 }
