@@ -4,6 +4,7 @@ using Project.Base;
 using Project.Models;
 using Project.Services;
 using Project.Forms.Components;
+using Project.Helpers;
 
 namespace Project.Forms.Layouts {
 
@@ -340,7 +341,7 @@ namespace Project.Forms.Layouts {
 
             // Error if user or password invalid
             if (user == null || !user.Authenticate(navLoginPassword.Text)) {
-                MessageBox.Show("Invalid username or password");
+                GuiHelper.ShowError("Invalid username or password");
                 return;
             }
 

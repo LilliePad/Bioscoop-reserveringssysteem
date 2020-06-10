@@ -31,7 +31,7 @@ namespace Project.Base {
 
             // Try to save
             if (!success) {
-                MessageBox.Show("Failed to load " + STORAGE_NAME + " database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GuiHelper.ShowError("Failed to load " + STORAGE_NAME + " database");
             }
 
             return success;
@@ -53,7 +53,7 @@ namespace Project.Base {
 
             // Try to save
             if (!success) {
-                MessageBox.Show("Failed to save " + STORAGE_NAME + " database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GuiHelper.ShowError("Failed to save " + STORAGE_NAME + " database");
             }
 
             return success;

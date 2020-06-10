@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Forms;
 using Project.Base;
 using Project.Data;
-using Project.Enums;
 using Project.Helpers;
 using Project.Models;
 using Project.Records;
@@ -27,12 +26,12 @@ namespace Project.Services {
                 User admin = new User("Admin user", "admin", "admin", true);
 
                 if (!SaveUser(admin)) {
-                    MessageBox.Show("Failed to create default user", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    GuiHelper.ShowError("Failed to create default user");
                     return;
                 }
 
                 SetCurrentUser(admin);
-                MessageBox.Show("Created default admin user, please configure it", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                GuiHelper.ShowWarning("Er is een standaard admin gebruiker aangemaakt, pas deze z.s.m. aan");
             }
         }
 
