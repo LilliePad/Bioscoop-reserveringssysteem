@@ -15,8 +15,7 @@ namespace Project.Forms {
         private Label title;
 
         private TableLayoutPanel container;
-
-        private TextBox descriptionInput;
+        internal TextBox descriptionInput;
         private Label durationLabel;
         private Label genreLabel;
         private PictureBox imagePreview;
@@ -105,12 +104,12 @@ namespace Project.Forms {
             this.imagePreview = new System.Windows.Forms.PictureBox();
             this.title = new System.Windows.Forms.Label();
             this.panel = new System.Windows.Forms.Panel();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.voorstellingen = new System.Windows.Forms.Label();
             this.container = new System.Windows.Forms.TableLayoutPanel();
             this.genreLabel = new System.Windows.Forms.Label();
             this.durationLabel = new System.Windows.Forms.Label();
             this.descriptionInput = new System.Windows.Forms.TextBox();
-            this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
             this.panel.SuspendLayout();
             this.SuspendLayout();
@@ -148,6 +147,16 @@ namespace Project.Forms {
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(1600, 700);
             this.panel.TabIndex = 19;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(29, 419);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(140, 23);
+            this.cancelButton.TabIndex = 22;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // voorstellingen
             // 
@@ -192,22 +201,18 @@ namespace Project.Forms {
             // 
             // descriptionInput
             // 
-            this.descriptionInput.Location = new System.Drawing.Point(235, 48);
+            this.descriptionInput.AcceptsReturn = true;
+            this.descriptionInput.AcceptsTab = true;
+            this.descriptionInput.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.descriptionInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.descriptionInput.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.descriptionInput.Location = new System.Drawing.Point(235, 67);
+            this.descriptionInput.MaximumSize = new System.Drawing.Size(400, 250);
             this.descriptionInput.Multiline = true;
             this.descriptionInput.Name = "descriptionInput";
             this.descriptionInput.ReadOnly = true;
             this.descriptionInput.Size = new System.Drawing.Size(400, 250);
             this.descriptionInput.TabIndex = 15;
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(29, 419);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(140, 23);
-            this.cancelButton.TabIndex = 22;
-            this.cancelButton.Text = "Annuleren";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // MovieDetailUser
             // 
