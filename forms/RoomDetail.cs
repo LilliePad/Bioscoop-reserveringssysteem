@@ -28,9 +28,12 @@ namespace Project.Forms {
             InitializeComponent();
         }
 
-
         public override string GetHandle() {
             return "roomDetail";
+        }
+
+        public override bool RequireAdmin() {
+            return true;
         }
 
         public override void OnShow() {

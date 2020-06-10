@@ -38,6 +38,10 @@ namespace Project.Forms {
             return "chairEdit";
         }
 
+        public override bool RequireAdmin() {
+            return true;
+        }
+
         public override void OnShow() {
             Program app = Program.GetInstance();
             ChairService chairManager = app.GetService<ChairService>("chairs");

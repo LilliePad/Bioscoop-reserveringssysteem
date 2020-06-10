@@ -8,7 +8,8 @@ using Project.Forms;
 using Project.Helpers;
 
 namespace Projects.Forms {
-    public partial class ReservationDetail : BaseLayout {
+
+    public class ReservationDetail : BaseLayout {
 
         // Frontend
         private Panel panel;

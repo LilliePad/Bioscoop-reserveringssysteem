@@ -40,6 +40,10 @@ namespace Project.Forms {
             return "movieCreate";
         }
 
+        public override bool RequireAdmin() {
+            return true;
+        }
+
         public override void OnShow() {
             base.OnShow();
 

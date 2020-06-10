@@ -35,6 +35,10 @@ namespace Project.Forms {
             return "showCreate";
         }
 
+        public override bool RequireAdmin() {
+            return true;
+        }
+
         public override void OnShow() {
             Program app = Program.GetInstance();
             MovieService movieService = app.GetService<MovieService>("movies");

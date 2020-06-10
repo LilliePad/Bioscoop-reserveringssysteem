@@ -24,6 +24,10 @@ namespace Project.Forms {
             return "showList";
         }
 
+        public override bool RequireAdmin() {
+            return true;
+        }
+
         public override void OnShow() {
             Program app = Program.GetInstance();
             ShowService showService = app.GetService<ShowService>("shows");
