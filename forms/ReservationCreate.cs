@@ -51,6 +51,9 @@ namespace Project.Forms {
                 item.Tag = "rij: " + chair.row + " " + "nummer: " + chair.number;
                 container.Items.Add(item);
             }
+
+            // Disable save button if no chairs selected
+            saveButton.Enabled = chairs.Count > 0;
         }
 
         private void InitializeComponent() {
