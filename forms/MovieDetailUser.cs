@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Project.Forms.Layouts;
 using Project.Models;
 using Project.Services;
+using System.Linq;
 
 namespace Project.Forms {
 
@@ -55,11 +56,12 @@ namespace Project.Forms {
 
             // Print shows
             List<Show> shows = showService.GetShowsByMovie(movie);
+            List<Show> list = shows.Where(i => i.startTime > DateTime.Now).OrderBy(i => i.startTime).ToList();
             int maximum = shows.Count;
             int rowCount = 15;
             int columnCount = 5;
             int showIndex = 0;
-
+            
             container.ColumnCount = columnCount;
             container.RowCount = rowCount;
 
@@ -71,10 +73,10 @@ namespace Project.Forms {
                 container.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / rowCount));
             }
 
-            for (int i = 0; i < rowCount && showIndex < shows.Count; i++) {
-                for (int j = 0; j < columnCount && showIndex < shows.Count; j++) {
+            for (int i = 0; i < rowCount && showIndex < list.Count; i++) {
+                for (int j = 0; j < columnCount && showIndex < list.Count; j++) {
                     Button button = new Button();
-                    Show show = shows[showIndex];
+                    Show show = list[showIndex];
 
                     button.Text = show.startTime.ToString(Program.DATETIME_FORMAT);
                     button.Name = "" + showIndex;
@@ -210,7 +212,8 @@ namespace Project.Forms {
 
             // Get show and redirect to screen
             List<Show> shows = showService.GetShowsByMovie(movie);
-            Show show = shows[int.Parse(showId)];
+            List<Show> list = shows.Where(i => i.startTime > DateTime.Now).OrderBy(i => i.startTime).ToList();
+            Show show = list[int.Parse(showId)];
 
             reservationScreen.SetShow(show);
             app.ShowScreen(reservationScreen);
