@@ -36,7 +36,7 @@ namespace Project.Forms {
             
             for (int i = 0; i < rooms.Count; i++) {
                 Room room = rooms[i];
-                ListViewItem item = new ListViewItem("Zaal " + room.number, i);
+                ListViewItem item = new ListViewItem("Nummer " + room.number, i);
 
                 item.Tag = room.id;
                 container.Items.Add(item);
@@ -99,7 +99,7 @@ namespace Project.Forms {
 
         private void MovieList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Zalen", 100);
+            container.Columns.Add("Zalen (nummer)", 1000);
         }
 
         private void ButtonNew_Click(object sender, EventArgs e) {

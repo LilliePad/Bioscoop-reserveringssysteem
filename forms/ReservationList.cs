@@ -35,7 +35,8 @@ namespace Project.Forms {
 
             for (int i = 0; i < reservations.Count; i++) {
                 Reservation reservation = reservations[i];
-                Movie movie = reservation.GetShow().GetMovie();
+                Show show = reservation.GetShow();
+                Movie movie = show.GetMovie();
                 User user = reservation.GetUser();
 
                 // Make sure the user is allowed to see it
@@ -44,7 +45,7 @@ namespace Project.Forms {
                 }
 
                 // Create item
-                ListViewItem item = new ListViewItem(reservation.userId + " - " + user.username + " - " + movie.name + " - " + movie.duration, i);
+                ListViewItem item = new ListViewItem(user.username + " - " + movie.name + " - " + show.startTime.ToString(Program.DATETIME_FORMAT), i);
 
                 item.Tag = reservation.id;
                 container.Items.Add(item);
@@ -78,7 +79,7 @@ namespace Project.Forms {
 
         private void ReservationList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Reserveringen", 100);
+            container.Columns.Add("Reserveringen (gebruiker - film - starttijd)", 600);
 
         }
 

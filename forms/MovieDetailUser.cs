@@ -26,7 +26,7 @@ namespace Project.Forms {
         }
 
         public override string GetHandle() {
-            return "movieDetail";
+            return "movieDetailUser";
         }
 
         public override bool RequireLogin() {
@@ -44,8 +44,8 @@ namespace Project.Forms {
 
             title.Text = movie.name;
             descriptionInput.Text = movie.description;
-            durationLabel.Text = "Speeltijd =" + movie.duration + " Minuten";
-            genreLabel.Text = "Genre = " + movie.genre;
+            durationLabel.Text = "Speeltijd " + movie.duration + " Minuten";
+            genreLabel.Text = "Genre " + movie.genre;
             imagePreview.Image = movie.GetImage();
 
             // Clear grid

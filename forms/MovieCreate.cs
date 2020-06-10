@@ -259,10 +259,10 @@ namespace Project.Forms {
             }
 
             // Redirect to screen
-            MovieEdit movieEdit = app.GetScreen<MovieEdit>("movieEdit");
+            MovieDetail movieDetail = app.GetScreen<MovieDetail>("movieDetail");
 
-            movieEdit.SetMovie(movie);
-            app.ShowScreen(movieEdit);
+            movieDetail.SetMovie(movie);
+            app.ShowScreen(movieDetail);
             GuiHelper.ShowInfo("Film succesvol aangemaakt");
         }
 

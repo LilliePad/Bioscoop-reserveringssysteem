@@ -40,7 +40,7 @@ namespace Project.Forms {
 
             for (int i = 0; i < users.Count; i++) {
                 User user = users[i];
-                ListViewItem item = new ListViewItem(user.id + " - " + user.username, i);
+                ListViewItem item = new ListViewItem(user.fullName + " - " + user.username + " - " + (user.admin ? "Ja" : "Nee"), i);
 
                 item.Tag = user.id;
                 container.Items.Add(item);
@@ -103,7 +103,7 @@ namespace Project.Forms {
 
         private void UserList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Gebruikers", 250);
+            container.Columns.Add("Gebruikers (volledige naam - gebruikersnaam - admin)", 600);
         }
 
         private void ListItem_Click(object sender, EventArgs e) {
@@ -114,7 +114,7 @@ namespace Project.Forms {
             ListViewItem item = container.SelectedItems[0];
 
             if (item == null) {
-                GuiHelper.ShowError("Error: Geen item geselecteerd");
+                GuiHelper.ShowError("Geen item geselecteerd");
                 return;
             }
 
@@ -123,7 +123,7 @@ namespace Project.Forms {
             User user = userService.GetUserById(id);
 
             if (user == null) {
-                GuiHelper.ShowError("Error: Kon geen gebruiker vinden voor dit item");
+                GuiHelper.ShowError("Kon geen gebruiker vinden voor dit item");
                 return;
             }
 

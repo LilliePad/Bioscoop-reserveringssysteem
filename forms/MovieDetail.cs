@@ -8,7 +8,7 @@ using Project.Helpers;
 
 namespace Project.Forms {
 
-    public class MovieEdit : BaseLayout {
+    public class MovieDetail : BaseLayout {
 
         // Frontend
         private Panel panel;
@@ -34,12 +34,12 @@ namespace Project.Forms {
         // Backend
         private Movie movie;
 
-        public MovieEdit() {
+        public MovieDetail() {
             InitializeComponent();
         }
 
         public override string GetHandle() {
-            return "movieEdit";
+            return "movieDetail";
         }
 
         public override void OnShow() {

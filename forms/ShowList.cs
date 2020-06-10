@@ -35,7 +35,9 @@ namespace Project.Forms {
             
             for (int i = 0; i < shows.Count; i++) {
                 Show show = shows[i];
-                ListViewItem item = new ListViewItem("Voorstelling id = " + show.id, i);
+                Movie movie = show.GetMovie();
+                Room room = show.GetRoom();
+                ListViewItem item = new ListViewItem(movie.name + " - Nummer " + room.number + " - " + show.startTime.ToString(Program.DATETIME_FORMAT), i);
 
                 item.Tag = show.id;
                 container.Items.Add(item);
@@ -98,7 +100,7 @@ namespace Project.Forms {
 
         private void MovieList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Voorstellingen", 500);
+            container.Columns.Add("Voorstellingen (film - zaal - starttijd)", 600);
         }
 
         private void ListItem_Click(object sender, EventArgs e) {

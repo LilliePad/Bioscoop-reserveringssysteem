@@ -41,7 +41,7 @@ namespace Project.Forms {
 
             for (int i = 0; i < movies.Count; i++) {
                 Movie movie = movies[i];
-                ListViewItem item = new ListViewItem(movie.name, i);
+                ListViewItem item = new ListViewItem(movie.name + " - " + movie.genre + " - " + movie.duration, i);
 
                 item.Tag = movie.id;
 
@@ -109,7 +109,7 @@ namespace Project.Forms {
 
         private void MovieList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Films", 250);
+            container.Columns.Add("Films (naam - genre - speelduur)", 600);
         }
 
         private void ListItem_Click(object sender, EventArgs e) {
@@ -134,10 +134,10 @@ namespace Project.Forms {
             }
 
             // Show screen
-            MovieEdit editScreen = app.GetScreen<MovieEdit>("movieEdit");
+            MovieDetail movieDetail = app.GetScreen<MovieDetail>("movieDetail");
 
-            editScreen.SetMovie(movie);
-            app.ShowScreen(editScreen);
+            movieDetail.SetMovie(movie);
+            app.ShowScreen(movieDetail);
         }
 
         private void NewButton_Click(object sender, EventArgs e) {

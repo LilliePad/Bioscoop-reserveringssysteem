@@ -112,7 +112,7 @@
     <Compile Include="forms\RoomCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\MovieEdit.cs">
+    <Compile Include="forms\MovieDetail.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\MovieCreate.cs">
@@ -185,8 +185,8 @@
     <EmbeddedResource Include="forms\RoomDetail.resx">
       <DependentUpon>RoomDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\MovieEdit.resx">
-      <DependentUpon>MovieEdit.cs</DependentUpon>
+    <EmbeddedResource Include="forms\MovieDetail.resx">
+      <DependentUpon>MovieDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\UserChangePassword.resx">
       <DependentUpon>UserChangePassword.cs</DependentUpon>
