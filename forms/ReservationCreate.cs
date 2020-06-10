@@ -45,7 +45,7 @@ namespace Project.Forms {
 
             for (int i = 0; i < chairs.Count; i++) {
                 Chair chair = chairs[i];
-                ListViewItem item = new ListViewItem("rij: " + chair.row + " " + "nummer: " + chair.number, i);
+                ListViewItem item = new ListViewItem("Reserveer:  rij " + chair.row + " " + "nummer " + chair.number + "  prijs: €" + chair.price , i);
 
                 item.Tag = "rij: " + chair.row + " " + "nummer: " + chair.number;
                 container.Items.Add(item);
@@ -65,9 +65,10 @@ namespace Project.Forms {
             // 
             // selectChairButton
             // 
-            this.selectChairButton.Location = new System.Drawing.Point(273, 418);
+            this.selectChairButton.Location = new System.Drawing.Point(364, 514);
+            this.selectChairButton.Margin = new System.Windows.Forms.Padding(4);
             this.selectChairButton.Name = "selectChairButton";
-            this.selectChairButton.Size = new System.Drawing.Size(140, 23);
+            this.selectChairButton.Size = new System.Drawing.Size(187, 28);
             this.selectChairButton.TabIndex = 2;
             this.selectChairButton.Text = "Stoel kiezen";
             this.selectChairButton.UseVisualStyleBackColor = true;
@@ -75,9 +76,10 @@ namespace Project.Forms {
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(0, 480);
+            this.saveButton.Location = new System.Drawing.Point(0, 591);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(4);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(140, 23);
+            this.saveButton.Size = new System.Drawing.Size(187, 28);
             this.saveButton.TabIndex = 3;
             this.saveButton.Text = "Reserveren";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -85,9 +87,10 @@ namespace Project.Forms {
             // 
             // imagePreview
             // 
-            this.imagePreview.Location = new System.Drawing.Point(0, 91);
+            this.imagePreview.Location = new System.Drawing.Point(14, 83);
+            this.imagePreview.Margin = new System.Windows.Forms.Padding(4);
             this.imagePreview.Name = "imagePreview";
-            this.imagePreview.Size = new System.Drawing.Size(250, 350);
+            this.imagePreview.Size = new System.Drawing.Size(333, 431);
             this.imagePreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imagePreview.TabIndex = 4;
             this.imagePreview.TabStop = false;
@@ -96,20 +99,25 @@ namespace Project.Forms {
             // 
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.title.Location = new System.Drawing.Point(3, 0);
+            this.title.Location = new System.Drawing.Point(4, 0);
+            this.title.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(466, 46);
+            this.title.Size = new System.Drawing.Size(584, 58);
             this.title.TabIndex = 6;
             this.title.Text = "Movie Name Placeholder";
             // 
             // container
             // 
             this.container.HideSelection = false;
-            this.container.Location = new System.Drawing.Point(273, 91);
+            this.container.Location = new System.Drawing.Point(364, 112);
+            this.container.Margin = new System.Windows.Forms.Padding(4);
             this.container.Name = "container";
-            this.container.Size = new System.Drawing.Size(250, 300);
-            this.container.TabIndex = 7;
+            this.container.Size = new System.Drawing.Size(332, 368);
+            this.container.TabIndex = 10;
+            this.container.TabStop = false;
+            this.container.TileSize = new System.Drawing.Size(40, 40);
             this.container.UseCompatibleStateImageBehavior = false;
+            this.container.View = System.Windows.Forms.View.List;
             // 
             // panel
             // 
@@ -118,17 +126,19 @@ namespace Project.Forms {
             this.panel.Controls.Add(this.imagePreview);
             this.panel.Controls.Add(this.title);
             this.panel.Controls.Add(this.container);
-            this.panel.Location = new System.Drawing.Point(42, 118);
+            this.panel.Location = new System.Drawing.Point(56, 145);
+            this.panel.Margin = new System.Windows.Forms.Padding(4);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(993, 534);
+            this.panel.Size = new System.Drawing.Size(1324, 657);
             this.panel.TabIndex = 8;
             // 
             // ReservationCreate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1303, 648);
+            this.ClientSize = new System.Drawing.Size(1737, 798);
             this.Controls.Add(this.panel);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ReservationCreate";
             this.Text = "Form1";
             this.Controls.SetChildIndex(this.panel, 0);
@@ -136,6 +146,7 @@ namespace Project.Forms {
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         public void SetShow(Show show) {
