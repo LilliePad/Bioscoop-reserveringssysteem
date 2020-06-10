@@ -50,7 +50,7 @@ namespace Project.Forms {
             adminInput.Visible = allowAdmin;
             cancelButton.Visible = allowAdmin;
 
-            // Reset values
+            // Clear inputs
             fullNameInput.Text = "";
             usernameInput.Text = "";
             passwordInput.Text = "";

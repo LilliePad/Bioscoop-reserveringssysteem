@@ -44,12 +44,17 @@ namespace Project.Forms {
 
             base.OnShow();
 
+            // Rebuild dropdowns
             movieInput.Items.Clear();
             roomInput.Items.Clear();
 
             movieInput.Items.AddRange(movies.ToArray());
             roomInput.Items.AddRange(rooms.ToArray());
+
+            // Clear inputs
+            datetimeInput.Value = DateTime.Now;
         }
+
         private void InitializeComponent() {
             this.title = new System.Windows.Forms.Label();
             this.movieLabel = new System.Windows.Forms.Label();
