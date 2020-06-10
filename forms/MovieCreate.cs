@@ -40,6 +40,17 @@ namespace Project.Forms {
             return "movieCreate";
         }
 
+        public override void OnShow() {
+            base.OnShow();
+
+            // Clear inputs
+            nameInput.Text = "";
+            descriptionInput.Text = "";
+            genreInput.Text = "";
+            durationInput.Value = 0;
+            imagePreview.Image = null;
+        }
+
         private void InitializeComponent() {
             this.imagePreview = new System.Windows.Forms.PictureBox();
             this.title = new System.Windows.Forms.Label();

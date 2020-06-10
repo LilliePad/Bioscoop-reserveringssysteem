@@ -35,6 +35,7 @@ namespace Project.Forms {
         public override void OnShow() {
             base.OnShow();
 
+            // Clear inputs
             numberInput.Text = "";
             rowInput.Text = "";
             columnInput.Text = "";
