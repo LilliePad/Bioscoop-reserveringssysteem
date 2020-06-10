@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System;
 using Project.Models;
 using Project.Services;
-
+using System.Linq;
 
 namespace Project.Forms {
 
@@ -19,7 +19,7 @@ namespace Project.Forms {
         private Label durationLabel;
         private Label genreLabel;
         private PictureBox imagePreview;
-
+        private Label label1;
         private Movie movie;
 
         public MovieSelect() {
@@ -55,12 +55,14 @@ namespace Project.Forms {
 
             // Print shows
             List<Show> shows = showService.GetShowsByMovie(movie);
-            int maximum = shows.Count;
             int rowCount = 5;
+            List<Show> list = shows.Where(i => i.startTime > DateTime.Now).OrderBy(i => i.startTime).ToList();
+            int maximum = list.Count;
+            int rowCount = 15;
             int columnCount = 5;
             int showIndex = 0;
 
-            container.ColumnCount = 5;
+            container.ColumnCount = columnCount;
             container.RowCount = rowCount;
 
             for (int i = 0; i < columnCount; i++) {
@@ -71,10 +73,10 @@ namespace Project.Forms {
                 container.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / rowCount));
             }
 
-            for (int i = 0; i < rowCount && showIndex < shows.Count; i++) {
-                for (int j = 0; j < columnCount && showIndex < shows.Count; j++) {
+            for (int i = 0; i < rowCount && showIndex < list.Count; i++) {
+                for (int j = 0; j < columnCount && showIndex < list.Count; j++) {
                     Button button = new Button();
-                    Show show = shows[showIndex];
+                    Show show = list[showIndex];
 
                     button.Text = show.startTime.ToString(Program.DATETIME_FORMAT);
                     button.Name = "" + showIndex;
@@ -98,13 +100,14 @@ namespace Project.Forms {
             this.genreLabel = new System.Windows.Forms.Label();
             this.durationLabel = new System.Windows.Forms.Label();
             this.descriptionInput = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // imagePreview
             // 
-            this.imagePreview.Location = new System.Drawing.Point(29, 39);
+            this.imagePreview.Location = new System.Drawing.Point(13, 48);
             this.imagePreview.Name = "imagePreview";
             this.imagePreview.Size = new System.Drawing.Size(200, 270);
             this.imagePreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -115,14 +118,15 @@ namespace Project.Forms {
             // 
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.title.Location = new System.Drawing.Point(28, 0);
+            this.title.Location = new System.Drawing.Point(3, -3);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(49, 46);
+            this.title.Size = new System.Drawing.Size(61, 58);
             this.title.TabIndex = 3;
             this.title.Text = "C";
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.label1);
             this.panel.Controls.Add(this.container);
             this.panel.Controls.Add(this.genreLabel);
             this.panel.Controls.Add(this.durationLabel);
@@ -131,7 +135,7 @@ namespace Project.Forms {
             this.panel.Controls.Add(this.imagePreview);
             this.panel.Location = new System.Drawing.Point(40, 106);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(993, 700);
+            this.panel.Size = new System.Drawing.Size(1600, 700);
             this.panel.TabIndex = 19;
             // 
             // container
@@ -139,40 +143,50 @@ namespace Project.Forms {
             this.container.ColumnCount = 2;
             this.container.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.container.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.container.Location = new System.Drawing.Point(29, 302);
+            this.container.Location = new System.Drawing.Point(650, 60);
             this.container.Name = "container";
             this.container.RowCount = 2;
             this.container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.container.Size = new System.Drawing.Size(950, 395);
+            this.container.Size = new System.Drawing.Size(825, 600);
             this.container.TabIndex = 20;
             // 
             // genreLabel
             // 
             this.genreLabel.AutoSize = true;
             this.genreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.genreLabel.Location = new System.Drawing.Point(660, 103);
+            this.genreLabel.Location = new System.Drawing.Point(17, 345);
             this.genreLabel.Name = "genreLabel";
-            this.genreLabel.Size = new System.Drawing.Size(0, 17);
+            this.genreLabel.Size = new System.Drawing.Size(0, 20);
             this.genreLabel.TabIndex = 19;
             // 
             // durationLabel
             // 
             this.durationLabel.AutoSize = true;
             this.durationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.durationLabel.Location = new System.Drawing.Point(660, 55);
+            this.durationLabel.Location = new System.Drawing.Point(17, 325);
             this.durationLabel.Name = "durationLabel";
-            this.durationLabel.Size = new System.Drawing.Size(0, 17);
+            this.durationLabel.Size = new System.Drawing.Size(0, 20);
             this.durationLabel.TabIndex = 17;
             // 
             // descriptionInput
             // 
-            this.descriptionInput.Location = new System.Drawing.Point(235, 48);
+            this.descriptionInput.Location = new System.Drawing.Point(232, 60);
             this.descriptionInput.Multiline = true;
             this.descriptionInput.Name = "descriptionInput";
             this.descriptionInput.ReadOnly = true;
             this.descriptionInput.Size = new System.Drawing.Size(400, 250);
             this.descriptionInput.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.label1.Location = new System.Drawing.Point(630, -3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(343, 58);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Voorstellingen";
             // 
             // MovieSelect
             // 
@@ -184,6 +198,7 @@ namespace Project.Forms {
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         public void SetMovie(Movie movie) {
@@ -197,11 +212,13 @@ namespace Project.Forms {
 
             // Get show and redirect to screen
             List<Show> shows = showService.GetShowsByMovie(movie);
-            Show show = shows[int.Parse(showId)];
+            List<Show> list = shows.Where(i => i.startTime > DateTime.Now).OrderBy(i => i.startTime).ToList();
+            Show show = list[int.Parse(showId)];
 
             reservationScreen.SetShow(show);
             app.ShowScreen(reservationScreen);
         }
+
 
     }
 }
