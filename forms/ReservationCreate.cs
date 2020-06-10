@@ -23,6 +23,7 @@ namespace Project.Forms {
 
         // Backend
         private Show show;
+        private Button cancelButton;
         private List<Chair> chairs = new List<Chair>();
 
         public ReservationCreate() {
@@ -50,6 +51,9 @@ namespace Project.Forms {
                 item.Tag = "rij: " + chair.row + " " + "nummer: " + chair.number;
                 container.Items.Add(item);
             }
+
+            // Disable save button if no chairs selected
+            saveButton.Enabled = chairs.Count > 0;
         }
 
         private void InitializeComponent() {
@@ -59,16 +63,16 @@ namespace Project.Forms {
             this.title = new System.Windows.Forms.Label();
             this.container = new System.Windows.Forms.ListView();
             this.panel = new System.Windows.Forms.Panel();
+            this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // selectChairButton
             // 
-            this.selectChairButton.Location = new System.Drawing.Point(364, 514);
-            this.selectChairButton.Margin = new System.Windows.Forms.Padding(4);
+            this.selectChairButton.Location = new System.Drawing.Point(273, 418);
             this.selectChairButton.Name = "selectChairButton";
-            this.selectChairButton.Size = new System.Drawing.Size(187, 28);
+            this.selectChairButton.Size = new System.Drawing.Size(140, 23);
             this.selectChairButton.TabIndex = 2;
             this.selectChairButton.Text = "Stoel kiezen";
             this.selectChairButton.UseVisualStyleBackColor = true;
@@ -76,10 +80,9 @@ namespace Project.Forms {
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(0, 591);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(4);
+            this.saveButton.Location = new System.Drawing.Point(0, 480);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(187, 28);
+            this.saveButton.Size = new System.Drawing.Size(140, 23);
             this.saveButton.TabIndex = 3;
             this.saveButton.Text = "Reserveren";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -87,10 +90,9 @@ namespace Project.Forms {
             // 
             // imagePreview
             // 
-            this.imagePreview.Location = new System.Drawing.Point(14, 83);
-            this.imagePreview.Margin = new System.Windows.Forms.Padding(4);
+            this.imagePreview.Location = new System.Drawing.Point(10, 67);
             this.imagePreview.Name = "imagePreview";
-            this.imagePreview.Size = new System.Drawing.Size(333, 431);
+            this.imagePreview.Size = new System.Drawing.Size(250, 350);
             this.imagePreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imagePreview.TabIndex = 4;
             this.imagePreview.TabStop = false;
@@ -99,20 +101,18 @@ namespace Project.Forms {
             // 
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.title.Location = new System.Drawing.Point(4, 0);
-            this.title.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.title.Location = new System.Drawing.Point(3, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(584, 58);
+            this.title.Size = new System.Drawing.Size(466, 46);
             this.title.TabIndex = 6;
             this.title.Text = "Movie Name Placeholder";
             // 
             // container
             // 
             this.container.HideSelection = false;
-            this.container.Location = new System.Drawing.Point(364, 112);
-            this.container.Margin = new System.Windows.Forms.Padding(4);
+            this.container.Location = new System.Drawing.Point(273, 91);
             this.container.Name = "container";
-            this.container.Size = new System.Drawing.Size(332, 368);
+            this.container.Size = new System.Drawing.Size(250, 300);
             this.container.TabIndex = 10;
             this.container.TabStop = false;
             this.container.TileSize = new System.Drawing.Size(40, 40);
@@ -121,24 +121,33 @@ namespace Project.Forms {
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.cancelButton);
             this.panel.Controls.Add(this.selectChairButton);
             this.panel.Controls.Add(this.saveButton);
             this.panel.Controls.Add(this.imagePreview);
             this.panel.Controls.Add(this.title);
             this.panel.Controls.Add(this.container);
-            this.panel.Location = new System.Drawing.Point(56, 145);
-            this.panel.Margin = new System.Windows.Forms.Padding(4);
+            this.panel.Location = new System.Drawing.Point(42, 118);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(1324, 657);
+            this.panel.Size = new System.Drawing.Size(993, 534);
             this.panel.TabIndex = 8;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(163, 480);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(140, 23);
+            this.cancelButton.TabIndex = 11;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // ReservationCreate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1737, 798);
+            this.ClientSize = new System.Drawing.Size(1303, 648);
             this.Controls.Add(this.panel);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ReservationCreate";
             this.Text = "Form1";
             this.Controls.SetChildIndex(this.panel, 0);
@@ -193,6 +202,14 @@ namespace Project.Forms {
 
             app.ShowScreen(reservationList);
             GuiHelper.ShowInfo("Reservering succesvol aangemaakt");
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            MovieDetailUser movieDetailUser = app.GetScreen<MovieDetailUser>("movieDetailUser");
+
+            movieDetailUser.SetMovie(show.GetMovie());
+            app.ShowScreen(movieDetailUser);
         }
 
         public void AddChair(Chair chair) {
