@@ -88,7 +88,7 @@ namespace Project.Forms {
                         } else {
                             Button button = new Button();
 
-                            button.Text = string.Format("{0}-{1}", i + 1, j + 1);
+                            button.Text = string.Format("R" + i + "-N" + j + " prijs: " + chair.price);
                             button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
                             button.Dock = DockStyle.Fill;
 
@@ -130,7 +130,7 @@ namespace Project.Forms {
             this.container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.container.Size = new System.Drawing.Size(1000, 500);
-            this.container.TabIndex = 23;
+            this.container.TabIndex = 30;
             // 
             // title
             // 
