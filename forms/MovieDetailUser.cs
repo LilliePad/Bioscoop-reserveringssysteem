@@ -19,6 +19,7 @@ namespace Project.Forms {
         private Label genreLabel;
         private PictureBox imagePreview;
         private Label voorstellingen;
+        private Button cancelButton;
         private Movie movie;
 
         public MovieDetailUser() {
@@ -94,11 +95,12 @@ namespace Project.Forms {
             this.imagePreview = new System.Windows.Forms.PictureBox();
             this.title = new System.Windows.Forms.Label();
             this.panel = new System.Windows.Forms.Panel();
+            this.voorstellingen = new System.Windows.Forms.Label();
             this.container = new System.Windows.Forms.TableLayoutPanel();
             this.genreLabel = new System.Windows.Forms.Label();
             this.durationLabel = new System.Windows.Forms.Label();
             this.descriptionInput = new System.Windows.Forms.TextBox();
-            this.voorstellingen = new System.Windows.Forms.Label();
+            this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
             this.panel.SuspendLayout();
             this.SuspendLayout();
@@ -124,6 +126,7 @@ namespace Project.Forms {
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.cancelButton);
             this.panel.Controls.Add(this.voorstellingen);
             this.panel.Controls.Add(this.container);
             this.panel.Controls.Add(this.genreLabel);
@@ -135,6 +138,16 @@ namespace Project.Forms {
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(1600, 700);
             this.panel.TabIndex = 19;
+            // 
+            // voorstellingen
+            // 
+            this.voorstellingen.AutoSize = true;
+            this.voorstellingen.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.voorstellingen.Location = new System.Drawing.Point(650, 0);
+            this.voorstellingen.Name = "voorstellingen";
+            this.voorstellingen.Size = new System.Drawing.Size(343, 58);
+            this.voorstellingen.TabIndex = 21;
+            this.voorstellingen.Text = "Voorstellingen";
             // 
             // container
             // 
@@ -176,15 +189,15 @@ namespace Project.Forms {
             this.descriptionInput.Size = new System.Drawing.Size(400, 250);
             this.descriptionInput.TabIndex = 15;
             // 
-            // voorstellingen
+            // cancelButton
             // 
-            this.voorstellingen.AutoSize = true;
-            this.voorstellingen.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
-            this.voorstellingen.Location = new System.Drawing.Point(650, 0);
-            this.voorstellingen.Name = "voorstellingen";
-            this.voorstellingen.Size = new System.Drawing.Size(343, 58);
-            this.voorstellingen.TabIndex = 21;
-            this.voorstellingen.Text = "Voorstellingen";
+            this.cancelButton.Location = new System.Drawing.Point(29, 419);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(140, 23);
+            this.cancelButton.TabIndex = 22;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // MovieDetailUser
             // 
@@ -216,6 +229,11 @@ namespace Project.Forms {
             app.ShowScreen(reservationScreen);
         }
 
+        private void cancelButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            MovieList listScreen = app.GetScreen<MovieList>("movieList");
+            app.ShowScreen(listScreen);
+        }
     }
 
 }
