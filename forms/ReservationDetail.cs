@@ -5,6 +5,7 @@ using Project.Models;
 using Project.Services;
 using Project;
 using Project.Forms;
+using Project.Helpers;
 
 namespace Projects.Forms {
     public partial class ReservationDetail : BaseLayout {
@@ -199,9 +200,17 @@ namespace Projects.Forms {
             Program app = Program.GetInstance();
             UserService userService = app.GetService<UserService>("users");
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
-            reservationService.DeleteReservation(reservation);
-            ReservationList reservationListScreen = Program.GetInstance().GetScreen<ReservationList>("reservationList");
-            Program.GetInstance().ShowScreen(reservationListScreen);
+
+            if(!reservationService.DeleteReservation(reservation)) {
+                GuiHelper.ShowError("Kon reservering niet verwijderen");
+                return;
+            }
+
+            // Redirect to screen
+            ReservationList reservationListScreen = app.GetScreen<ReservationList>("reservationList");
+
+            app.ShowScreen(reservationListScreen);
+            GuiHelper.ShowInfo("Reservering succesvol verwijderd");
         }
 
     }

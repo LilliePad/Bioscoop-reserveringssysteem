@@ -9,7 +9,7 @@ using Project.Helpers;
 
 namespace Project.Forms {
 
-    public class RoomEdit : BaseLayout {
+    public class RoomDetail : BaseLayout {
 
         // Frontend
         private Panel panel;
@@ -24,13 +24,13 @@ namespace Project.Forms {
         // Backend
         private Room room;
 
-        public RoomEdit() {
+        public RoomDetail() {
             InitializeComponent();
         }
 
 
         public override string GetHandle() {
-            return "roomEdit";
+            return "roomDetail";
         }
 
         public override void OnShow() {
@@ -76,8 +76,9 @@ namespace Project.Forms {
             for (int i = 0; i < highestRow; i++) {
                 for (int j = 0; j < highestColumn; j++) {
                     Button button = new Button();
+                    bool taken = chairService.GetChairByRoomAndPosition(room, i + 1, j + 1) != null;
 
-                    button.Text = string.Format("{0}-{1}", i + 1, j + 1);
+                    button.Text = string.Format(taken ? "{0}-{1}" : "Leeg", i + 1, j + 1);
                     button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
                     button.Dock = DockStyle.Fill;
 
@@ -206,7 +207,9 @@ namespace Project.Forms {
 
             // Redirect to screen
             RoomList newScreen = app.GetScreen<RoomList>("roomList");
+
             app.ShowScreen(newScreen);
+            GuiHelper.ShowInfo("Zaal succesvol verwijderd");
         }
 
         private void CancelButton_Click(object sender, EventArgs e) {

@@ -40,6 +40,9 @@ namespace Project.Forms {
 
             base.OnShow();
 
+            currentPasswordInput.Text = "";
+            newPasswordInput.Text = "";
+
             if (user.id != currentUser.id && !currentUser.admin) {
                 throw new PermissionException("Je kunt alleen je eigen account bewerken");
             }
@@ -163,7 +166,7 @@ namespace Project.Forms {
             string newPassword = newPasswordInput.Text;
 
             if (!currentUser.Authenticate(currentPassword)) {
-                GuiHelper.ShowError("Ongeldig wachtwoord");
+                GuiHelper.ShowError("Huidig wachtwoord is ongeldig");
                 return;
             }
             
@@ -175,10 +178,6 @@ namespace Project.Forms {
 
                 userEdit.SetUser(user);
                 app.ShowScreen(userEdit);
-
-                currentPasswordInput.Text = "";
-                newPasswordInput.Text = "";
-
                 GuiHelper.ShowInfo("Wachtwoord succesvol aangepast");
             } else {
                 GuiHelper.ShowError("Kon het wachtwoord niet aanpassen");

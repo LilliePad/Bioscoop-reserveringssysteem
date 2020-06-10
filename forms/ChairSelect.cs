@@ -1,22 +1,15 @@
-﻿using Project.Forms.Layouts;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project.Forms.Layouts;
 using Project.Models;
 using Project.Services;
 using Project.Helpers;
-using System.Drawing.Text;
 
 
 namespace Project.Forms {
 
-    public partial class ChairSelect : BaseLayout {
+    public class ChairSelect : BaseLayout {
 
         // Frontend
         private Panel panel;
@@ -30,7 +23,6 @@ namespace Project.Forms {
         public ChairSelect() {
             InitializeComponent();
         }
-
 
         public override string GetHandle() {
             return "chairSelect";

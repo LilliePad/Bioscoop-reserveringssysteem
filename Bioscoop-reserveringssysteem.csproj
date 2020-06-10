@@ -91,7 +91,7 @@
     <Compile Include="forms\UserList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\MovieSelect.cs">
+    <Compile Include="forms\MovieDetailUser.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\ShowCreate.cs">
@@ -100,7 +100,7 @@
     <Compile Include="forms\RoomList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\RoomEdit.cs">
+    <Compile Include="forms\RoomDetail.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\UserCreate.cs">
@@ -173,8 +173,8 @@
     <EmbeddedResource Include="forms\ChairSelect.resx">
       <DependentUpon>ChairSelect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\MovieSelect.resx">
-      <DependentUpon>MovieSelect.cs</DependentUpon>
+    <EmbeddedResource Include="forms\MovieDetailUser.resx">
+      <DependentUpon>MovieDetailUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ShowCreate.resx">
       <DependentUpon>ShowCreate.cs</DependentUpon>
@@ -182,8 +182,8 @@
     <EmbeddedResource Include="forms\RoomList.resx">
       <DependentUpon>RoomList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\RoomEdit.resx">
-      <DependentUpon>RoomEdit.cs</DependentUpon>
+    <EmbeddedResource Include="forms\RoomDetail.resx">
+      <DependentUpon>RoomDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\MovieEdit.resx">
       <DependentUpon>MovieEdit.cs</DependentUpon>

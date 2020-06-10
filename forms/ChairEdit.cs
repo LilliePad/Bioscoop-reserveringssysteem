@@ -154,10 +154,7 @@ namespace Project.Forms {
                 return;
             }
 
-            // Redirect to screen
-            RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit");
-
-            app.ShowScreen(newScreen);
+            GuiHelper.ShowInfo("Stoel succesvol aangemaakt");
         }
 
         private void DeleteButton_Click(object sender, EventArgs args) {
@@ -178,16 +175,14 @@ namespace Project.Forms {
                 return;
             }
             
-            // Redirect to screen
-            RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit");
-
-            app.ShowScreen(newScreen);
+            GuiHelper.ShowInfo("Stoel succesvol verwijderd");
         }
 
         private void CancelButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            RoomEdit newScreen = app.GetScreen<RoomEdit>("roomEdit");
-            app.ShowScreen(newScreen);
+            RoomDetail roomDetail = app.GetScreen<RoomDetail>("roomDetail");
+
+            app.ShowScreen(roomDetail);
         }
 
     }

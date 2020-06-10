@@ -37,6 +37,11 @@ namespace Project.Helpers {
 
         // Uploads an image, returns StorageFile on success.
         public static StorageFile UploadImage(string source) {
+            if(source == null) {
+                return null;
+            }
+
+            // Build path
             string[] fileInfo = Path.GetFileName(source).Split('.');
             string fileExt = fileInfo[1];
 

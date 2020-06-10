@@ -70,7 +70,7 @@ namespace Project.Forms {
             this.selectChairButton.TabIndex = 2;
             this.selectChairButton.Text = "Stoel kiezen";
             this.selectChairButton.UseVisualStyleBackColor = true;
-            this.selectChairButton.Click += new System.EventHandler(this.Select_Chair_Button_Click);
+            this.selectChairButton.Click += new System.EventHandler(this.SelectChairButton_Click);
             // 
             // saveButton
             // 
@@ -80,7 +80,7 @@ namespace Project.Forms {
             this.saveButton.TabIndex = 3;
             this.saveButton.Text = "Reserveren";
             this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.Reserve_Tickets_Button_Click);
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // imagePreview
             // 
@@ -142,7 +142,7 @@ namespace Project.Forms {
             chairs.Clear();
         }
 
-        private void Select_Chair_Button_Click(object sender, EventArgs e) {
+        private void SelectChairButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             ChairSelect chairSelectScreen = app.GetScreen<ChairSelect>("chairSelect");
 
@@ -150,30 +150,25 @@ namespace Project.Forms {
             app.ShowScreen(chairSelectScreen);
         }
 
-        private void Reserve_Tickets_Button_Click(object sender, EventArgs e) {
+        private void SaveButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
             UserService userService = app.GetService<UserService>("users");
 
             // Save reservations
-            bool reservationSucces = true;
-
             foreach (Chair chair in chairs) {
                 Reservation reservation = new Reservation(show.id, userService.GetCurrentUser().id, chair.id);
 
                 if (!reservationService.SaveReservation(reservation)) {
-                    reservationSucces = false;
+                    GuiHelper.ShowError(ValidationHelper.GetErrorList(reservation));
                 }
             }
 
-            if (reservationSucces) {
-                MovieListUser movieListUserScreen = app.GetScreen<MovieListUser>("movieListUser");
+            // Redirect to screeen
+            ReservationList reservationList = app.GetScreen<ReservationList>("reservationList");
 
-                app.ShowScreen(movieListUserScreen);
-                GuiHelper.ShowInfo("Reservering succesvol aangemaakt");
-            } else {
-                GuiHelper.ShowError("De reservering kon niet aangemaakt worden");
-            }
+            app.ShowScreen(reservationList);
+            GuiHelper.ShowInfo("Reservering succesvol aangemaakt");
         }
 
         public void AddChair(Chair chair) {

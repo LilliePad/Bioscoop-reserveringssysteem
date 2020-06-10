@@ -254,7 +254,7 @@ namespace Project.Forms {
             Movie movie = new Movie(nameInput.Text, descriptionInput.Text, genreInput.Text, (int) durationInput.Value, image);
 
             if (!movieManager.SaveMovie(movie)) {
-                MessageBox.Show("Error: " + ValidationHelper.GetErrorList(movie), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GuiHelper.ShowError(ValidationHelper.GetErrorList(movie));
                 return;
             }
 
@@ -263,6 +263,7 @@ namespace Project.Forms {
 
             movieEdit.SetMovie(movie);
             app.ShowScreen(movieEdit);
+            GuiHelper.ShowInfo("Film succesvol aangemaakt");
         }
 
         private void CancelButton_Click(object sender, EventArgs e) {

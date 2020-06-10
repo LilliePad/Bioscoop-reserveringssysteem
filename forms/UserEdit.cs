@@ -216,7 +216,6 @@ namespace Project.Forms {
         private void SaveButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             UserService userService = app.GetService<UserService>("users");
-            User currentUser = userService.GetCurrentUser();
 
             // Save user
             user.fullName = fullNameInput.Text;
@@ -224,7 +223,7 @@ namespace Project.Forms {
             user.admin = adminInput.Checked;
 
             if(!userService.SaveUser(user)) {
-                GuiHelper.ShowError("Error: " + ValidationHelper.GetErrorList(user));
+                GuiHelper.ShowError(ValidationHelper.GetErrorList(user));
                 return;
             }
 
@@ -232,8 +231,10 @@ namespace Project.Forms {
         }
 
         private void CancelButton_Click(object sender, EventArgs e) {
-            UserList userList = Program.GetInstance().GetScreen<UserList>("userList");
-            Program.GetInstance().ShowScreen(userList);
+            Program app = Program.GetInstance();
+            UserList userList = app.GetScreen<UserList>("userList");
+
+            app.ShowScreen(userList);
         }
 
         private void ChangePasswordButton_Click(object sender, EventArgs e) {

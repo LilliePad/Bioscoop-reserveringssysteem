@@ -205,7 +205,9 @@ namespace Project.Forms {
             }
             
             ShowList newScreen = app.GetScreen<ShowList>("showList");
+
             app.ShowScreen(newScreen);
+            GuiHelper.ShowInfo("Voorstelling succesvol verwijderd");
         }
 
         private void CancelButton_Click(object sender, EventArgs e) {

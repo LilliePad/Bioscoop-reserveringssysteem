@@ -15,23 +15,21 @@ namespace Project.Forms {
         private Label title;
 
         private Label nameLabel;
-        private TextBox nameInput;
+        private Label nameValue;
 
         private Label descriptionLabel;
-        private TextBox descriptionInput;
+        private Label descriptionValue;
 
         private Label durationLabel;
-        private NumericUpDown durationInput;
+        private Label durationValue;
 
         private Label genreLabel;
-        private TextBox genreInput;
+        private Label genreValue;
 
         private Label imageLabel;
-        private Button imageInput;
         private PictureBox imagePreview;
-
-        private Button saveButton;
         private Button cancelButton;
+        private Button deleteButton;
 
         // Backend
         private Movie movie;
@@ -47,10 +45,10 @@ namespace Project.Forms {
         public override void OnShow() {
             base.OnShow();
 
-            nameInput.Text = movie.name;
-            descriptionInput.Text = movie.description;
-            durationInput.Value = movie.duration;
-            genreInput.Text = movie.genre;
+            nameValue.Text = movie.name;
+            descriptionValue.Text = movie.description;
+            durationValue.Text = "" + movie.duration;
+            genreValue.Text = movie.genre;
             imagePreview.ImageLocation = movie.image.location;
         }
 
@@ -61,18 +59,16 @@ namespace Project.Forms {
             this.descriptionLabel = new System.Windows.Forms.Label();
             this.durationLabel = new System.Windows.Forms.Label();
             this.imageLabel = new System.Windows.Forms.Label();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.imageInput = new System.Windows.Forms.Button();
-            this.nameInput = new System.Windows.Forms.TextBox();
-            this.descriptionInput = new System.Windows.Forms.TextBox();
-            this.genreInput = new System.Windows.Forms.TextBox();
             this.genreLabel = new System.Windows.Forms.Label();
             this.panel = new System.Windows.Forms.Panel();
-            this.durationInput = new System.Windows.Forms.NumericUpDown();
+            this.genreValue = new System.Windows.Forms.Label();
+            this.durationValue = new System.Windows.Forms.Label();
+            this.descriptionValue = new System.Windows.Forms.Label();
+            this.nameValue = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
             this.panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.durationInput)).BeginInit();
             this.SuspendLayout();
             // 
             // imagePreview
@@ -90,9 +86,9 @@ namespace Project.Forms {
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.title.Location = new System.Drawing.Point(3, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(278, 46);
+            this.title.Size = new System.Drawing.Size(221, 46);
             this.title.TabIndex = 3;
-            this.title.Text = "Film bewerken";
+            this.title.Text = "Film details";
             // 
             // nameLabel
             // 
@@ -134,48 +130,6 @@ namespace Project.Forms {
             this.imageLabel.TabIndex = 11;
             this.imageLabel.Text = "Afbeelding";
             // 
-            // saveButton
-            // 
-            this.saveButton.Location = new System.Drawing.Point(125, 472);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(140, 23);
-            this.saveButton.TabIndex = 12;
-            this.saveButton.Text = "Opslaan";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
-            // imageInput
-            // 
-            this.imageInput.Location = new System.Drawing.Point(734, 386);
-            this.imageInput.Name = "imageInput";
-            this.imageInput.Size = new System.Drawing.Size(140, 23);
-            this.imageInput.TabIndex = 13;
-            this.imageInput.Text = "Zoek afbeelding";
-            this.imageInput.UseVisualStyleBackColor = true;
-            this.imageInput.Click += new System.EventHandler(this.ImageInput_Click);
-            // 
-            // nameInput
-            // 
-            this.nameInput.Location = new System.Drawing.Point(125, 82);
-            this.nameInput.Name = "nameInput";
-            this.nameInput.Size = new System.Drawing.Size(495, 20);
-            this.nameInput.TabIndex = 14;
-            // 
-            // descriptionInput
-            // 
-            this.descriptionInput.Location = new System.Drawing.Point(125, 131);
-            this.descriptionInput.Multiline = true;
-            this.descriptionInput.Name = "descriptionInput";
-            this.descriptionInput.Size = new System.Drawing.Size(495, 206);
-            this.descriptionInput.TabIndex = 15;
-            // 
-            // genreInput
-            // 
-            this.genreInput.Location = new System.Drawing.Point(125, 394);
-            this.genreInput.Name = "genreInput";
-            this.genreInput.Size = new System.Drawing.Size(495, 20);
-            this.genreInput.TabIndex = 17;
-            // 
             // genreLabel
             // 
             this.genreLabel.AutoSize = true;
@@ -188,17 +142,16 @@ namespace Project.Forms {
             // 
             // panel
             // 
-            this.panel.Controls.Add(this.durationInput);
+            this.panel.Controls.Add(this.deleteButton);
+            this.panel.Controls.Add(this.genreValue);
+            this.panel.Controls.Add(this.durationValue);
+            this.panel.Controls.Add(this.descriptionValue);
+            this.panel.Controls.Add(this.nameValue);
             this.panel.Controls.Add(this.cancelButton);
             this.panel.Controls.Add(this.title);
             this.panel.Controls.Add(this.descriptionLabel);
             this.panel.Controls.Add(this.durationLabel);
             this.panel.Controls.Add(this.imageLabel);
-            this.panel.Controls.Add(this.saveButton);
-            this.panel.Controls.Add(this.imageInput);
-            this.panel.Controls.Add(this.nameInput);
-            this.panel.Controls.Add(this.descriptionInput);
-            this.panel.Controls.Add(this.genreInput);
             this.panel.Controls.Add(this.genreLabel);
             this.panel.Controls.Add(this.nameLabel);
             this.panel.Controls.Add(this.imagePreview);
@@ -207,27 +160,65 @@ namespace Project.Forms {
             this.panel.Size = new System.Drawing.Size(993, 534);
             this.panel.TabIndex = 19;
             // 
-            // durationInput
+            // genreValue
             // 
-            this.durationInput.Location = new System.Drawing.Point(125, 357);
-            this.durationInput.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.durationInput.Name = "durationInput";
-            this.durationInput.Size = new System.Drawing.Size(495, 20);
-            this.durationInput.TabIndex = 20;
+            this.genreValue.AutoSize = true;
+            this.genreValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.genreValue.Location = new System.Drawing.Point(122, 394);
+            this.genreValue.Name = "genreValue";
+            this.genreValue.Size = new System.Drawing.Size(61, 17);
+            this.genreValue.TabIndex = 24;
+            this.genreValue.Text = "<genre>";
+            // 
+            // durationValue
+            // 
+            this.durationValue.AutoSize = true;
+            this.durationValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.durationValue.Location = new System.Drawing.Point(122, 360);
+            this.durationValue.Name = "durationValue";
+            this.durationValue.Size = new System.Drawing.Size(76, 17);
+            this.durationValue.TabIndex = 23;
+            this.durationValue.Text = "<duration>";
+            // 
+            // descriptionValue
+            // 
+            this.descriptionValue.AutoSize = true;
+            this.descriptionValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.descriptionValue.Location = new System.Drawing.Point(122, 131);
+            this.descriptionValue.Name = "descriptionValue";
+            this.descriptionValue.Size = new System.Drawing.Size(93, 17);
+            this.descriptionValue.TabIndex = 22;
+            this.descriptionValue.Text = "<description>";
+            // 
+            // nameValue
+            // 
+            this.nameValue.AutoSize = true;
+            this.nameValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.nameValue.Location = new System.Drawing.Point(122, 82);
+            this.nameValue.Name = "nameValue";
+            this.nameValue.Size = new System.Drawing.Size(59, 17);
+            this.nameValue.TabIndex = 21;
+            this.nameValue.Text = "<name>";
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(290, 472);
+            this.cancelButton.Location = new System.Drawing.Point(177, 449);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(140, 23);
             this.cancelButton.TabIndex = 19;
             this.cancelButton.Text = "Annuleren";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(13, 449);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(140, 23);
+            this.deleteButton.TabIndex = 25;
+            this.deleteButton.Text = "Verwijderen";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // MovieEdit
             // 
@@ -238,7 +229,6 @@ namespace Project.Forms {
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).EndInit();
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.durationInput)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -247,40 +237,21 @@ namespace Project.Forms {
             this.movie = movie;
         }
 
-        private void ImageInput_Click(object sender, EventArgs args) {
-            try {
-                OpenFileDialog dialog = new OpenFileDialog();
-
-                dialog.Filter = "jpg files(*.jpg)|*.jpg| PNG files(*.png)|*.png| All Files(*,*)|*,*";
-
-                if (dialog.ShowDialog() == DialogResult.OK) {
-                    imagePreview.ImageLocation = dialog.FileName;
-                }
-            } catch (Exception e) {
-                GuiHelper.ShowError("Error: " + e.Message);
-            }
-        }
-
-        private void SaveButton_Click(object sender, EventArgs e) {
+        private void DeleteButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            MovieService movieManager = app.GetService<MovieService>("movies");
+            MovieService movieService = app.GetService<MovieService>("movies");
 
-            // Upload file
-            StorageFile image = StorageHelper.UploadImage(imagePreview.ImageLocation);
-
-            // Update and save movie
-            movie.name = nameInput.Text;
-            movie.description = descriptionInput.Text;
-            movie.genre = genreInput.Text;
-            movie.duration = (int) durationInput.Value;
-            movie.image = image;
-
-            if (!movieManager.SaveMovie(movie)) {
-                GuiHelper.ShowError(ValidationHelper.GetErrorList(movie));
+            // Delete room
+            if (!movieService.DeleteMovie(movie)) {
+                GuiHelper.ShowError("Kon film niet verwijderen");
                 return;
             }
 
-            GuiHelper.ShowInfo("Film succesvol aangepast");
+            // Redirect to screen
+            MovieList movieList = app.GetScreen<MovieList>("movieList");
+
+            app.ShowScreen(movieList);
+            GuiHelper.ShowInfo("Film succesvol verwijderd");
         }
 
         private void CancelButton_Click(object sender, EventArgs e) {

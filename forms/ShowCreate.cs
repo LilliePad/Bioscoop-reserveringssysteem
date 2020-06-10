@@ -183,8 +183,6 @@ namespace Project.Forms {
 
         private void SaveButton_Click(object sender, System.EventArgs e) {
             Program app = Program.GetInstance();
-            MovieService movieService = app.GetService<MovieService>("movies");
-            RoomService roomService = app.GetService<RoomService>("rooms");
             ShowService showService = app.GetService<ShowService>("shows");
 
             // Parse values
@@ -210,8 +208,11 @@ namespace Project.Forms {
             }
 
             // Redirect to screen
-            MovieList listScreen = app.GetScreen<MovieList>("movieList");
-            app.ShowScreen(listScreen);
+            ShowDetail showDetail = app.GetScreen<ShowDetail>("showDetail");
+
+            showDetail.SetShow(show);
+            app.ShowScreen(showDetail);
+            GuiHelper.ShowInfo("Voorstelling succesvol aangemaakt");
         }
 
         private void CancelButton_Click(object sender, EventArgs e) {

@@ -56,6 +56,10 @@ namespace Project.Models {
         }
 
         public Image GetImage() {
+            if(image == null) {
+                return null;
+            }
+
             try {
                 return Image.FromFile(image.location);
             } catch(Exception) {

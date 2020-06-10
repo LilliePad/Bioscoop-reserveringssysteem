@@ -104,14 +104,14 @@ namespace Project.Forms {
 
         private void ButtonNew_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
-            RoomCreateDesign newScreen = app.GetScreen<RoomCreateDesign>("roomCreate");
+            RoomCreate newScreen = app.GetScreen<RoomCreate>("roomCreate");
+
             app.ShowScreen(newScreen);
         }
 
         private void ListItem_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             RoomService roomService = app.GetService<RoomService>("rooms");
-            RoomEdit editScreen = app.GetScreen<RoomEdit>("roomEdit");
 
             // Get the clicked item
             ListViewItem item = container.SelectedItems[0];
@@ -130,8 +130,11 @@ namespace Project.Forms {
                 return;
             }
 
-            editScreen.SetRoom(room);
-            app.ShowScreen(editScreen);
+            // Redirect to screen
+            RoomDetail roomDetail = app.GetScreen<RoomDetail>("roomDetail");
+
+            roomDetail.SetRoom(room);
+            app.ShowScreen(roomDetail);
         }
 
     }

@@ -212,7 +212,7 @@ namespace Project.Forms {
             User user = new User(fullNameInput.Text, usernameInput.Text, passwordInput.Text, adminInput.Checked);
 
             if(!userService.SaveUser(user)) {
-                MessageBox.Show("Error: " + ValidationHelper.GetErrorList(user), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GuiHelper.ShowError(ValidationHelper.GetErrorList(user));
                 return;
             }
 
@@ -226,7 +226,6 @@ namespace Project.Forms {
 
             userEdit.SetUser(user);
             app.ShowScreen(userEdit);
-
             GuiHelper.ShowInfo("Gebruiker succesvol aangemaakt");
         }
 

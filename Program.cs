@@ -45,41 +45,33 @@ namespace Project {
             RegisterService(new ShowService());
             RegisterService(new ReservationService());
 
-            // Register screens
-            // movie screens
+            // Screens
             RegisterScreen(new MovieList());
             RegisterScreen(new MovieCreate());
             RegisterScreen(new MovieEdit());
-            RegisterScreen(new MovieListUser());
-            RegisterScreen(new MovieSelect());
 
-            // room screens
             RegisterScreen(new RoomList());
-            RegisterScreen(new RoomCreateDesign());
-            RegisterScreen(new RoomEdit());
+            RegisterScreen(new RoomCreate());
+            RegisterScreen(new RoomDetail());
 
-            // shows screens
-            RegisterScreen(new ShowDetail());
+            RegisterScreen(new ChairEdit());
+
             RegisterScreen(new ShowList());
             RegisterScreen(new ShowCreate());
+            RegisterScreen(new ShowDetail());
 
-            // chair screens
-            RegisterScreen(new ChairEdit()); 
-            RegisterScreen(new ChairSelect());
+            RegisterScreen(new ReservationList());
+            RegisterScreen(new ReservationCreate());
+            RegisterScreen(new ReservationDetail());
 
-            // user screens
             RegisterScreen(new UserList());
             RegisterScreen(new UserCreate());
             RegisterScreen(new UserEdit());
             RegisterScreen(new UserChangePassword());
 
-            // reservation screens
-            RegisterScreen(new ReservationCreate());
-            RegisterScreen(new ReservationList());
-            RegisterScreen(new ReservationDetail());
-
-
-           
+            RegisterScreen(new MovieListUser());
+            RegisterScreen(new MovieDetailUser());
+            RegisterScreen(new ChairSelect());
         }
 
         protected override void Unload() {

@@ -7,7 +7,7 @@ using Project.Helpers;
 
 namespace Project.Forms {
 
-    public partial class RoomCreateDesign : BaseLayout {
+    public partial class RoomCreate : BaseLayout {
 
         private Panel panel;
         private Label title;
@@ -24,7 +24,7 @@ namespace Project.Forms {
         private Button saveButton;
         private Button cancelButton;
 
-        public RoomCreateDesign() {
+        public RoomCreate() {
             InitializeComponent();
         }
 
@@ -184,7 +184,7 @@ namespace Project.Forms {
 
             // Create chairs
             int rows = (int) rowInput.Value;
-            int columns = (int)columnInput.Value;
+            int columns = (int) columnInput.Value;
 
             for (int i = 1; i <= rows; i++) {
                 for(int j = 1; j <= columns; j++) {
@@ -195,15 +195,19 @@ namespace Project.Forms {
                     }
                 }
             }
-            
-            // Go back to list view
-            RoomList listScreen = app.GetScreen<RoomList>("roomList");
-            app.ShowScreen(listScreen);
+
+            // Redirect to screen
+            RoomDetail roomDetail = app.GetScreen<RoomDetail>("roomDetail");
+
+            roomDetail.SetRoom(room);
+            app.ShowScreen(roomDetail);
+            GuiHelper.ShowInfo("Zaal succesvol aangemaakt");
         }
 
         private void CancelButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             RoomList editScreen = app.GetScreen<RoomList>("roomList");
+
             app.ShowScreen(editScreen);
         }
 

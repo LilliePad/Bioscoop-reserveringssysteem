@@ -123,10 +123,10 @@ namespace Project.Forms {
             }
 
             // Show screen
-            MovieSelect movieSelect = app.GetScreen<MovieSelect>("movieSelect");
+            MovieDetailUser movieDetailUser = app.GetScreen<MovieDetailUser>("movieDetailUser");
 
-            movieSelect.SetMovie(movie);
-            app.ShowScreen(movieSelect);
+            movieDetailUser.SetMovie(movie);
+            app.ShowScreen(movieDetailUser);
         }
 
     }
