@@ -17,7 +17,7 @@ namespace Project.Helpers {
         }
 
         public static bool ShowConfirm(string message) {
-            return MessageBox.Show(message, "Error", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error) == DialogResult.Yes;
+            return MessageBox.Show(message, "Bevestiging", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes;
         }
 
     }

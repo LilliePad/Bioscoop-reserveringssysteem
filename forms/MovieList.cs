@@ -25,8 +25,8 @@ namespace Project.Forms {
             return "movieList";
         }
 
-        public override bool RequireLogin() {
-            return false;
+        public override bool RequireAdmin() {
+            return true;
         }
 
         public override void OnShow() {

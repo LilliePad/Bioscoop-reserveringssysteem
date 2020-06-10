@@ -249,6 +249,11 @@ namespace Project.Forms {
             Program app = Program.GetInstance();
             UserService userService = app.GetService<UserService>("users");
 
+            // Ask for confirmation
+            if (!GuiHelper.ShowConfirm("Weet je zeker dat je deze gebruiker wilt verwijderen?")) {
+                return;
+            }
+
             if (userService.DeleteUser(user)) {
                 UserList userList = app.GetScreen<UserList>("userList");
 

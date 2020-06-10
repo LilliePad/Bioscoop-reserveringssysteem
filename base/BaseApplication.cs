@@ -146,24 +146,21 @@ namespace Project.Base {
                 return;
             }
 
-            // Show if not already visible
-            if (currentScreen == null || screen.GetHandle() != currentScreen.GetHandle()) {
-                try {
-                    screen.OnShow();
+            try {
+                screen.OnShow();
 
-                    // Hide current screen
-                    if (currentScreen != null) {
-                        currentScreen.Hide();
-                    }
-
-                    // Show new  screen
-                    screen.Show();
-                    currentScreen = screen;
-                } catch(PermissionException e) {
-                    GuiHelper.ShowError(e.Message);
-                } catch(Exception e) {
-                    GuiHelper.ShowError("Interne error: " + e.Message);
+                // Hide current screen
+                if (currentScreen != null) {
+                    currentScreen.Hide();
                 }
+
+                // Show new  screen
+                screen.Show();
+                currentScreen = screen;
+            } catch(PermissionException e) {
+                GuiHelper.ShowError(e.Message);
+            } catch(Exception e) {
+                GuiHelper.ShowError("Interne error: " + e.Message);
             }
         }
 

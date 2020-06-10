@@ -25,6 +25,10 @@ namespace Project.Forms {
             return "roomList";
         }
 
+        public override bool RequireAdmin() {
+            return true;
+        }
+
         public override void OnShow() {
             Program app = Program.GetInstance();
             RoomService roomService = app.GetService<RoomService>("rooms");
@@ -99,7 +103,7 @@ namespace Project.Forms {
 
         private void MovieList_Load(object sender, System.EventArgs e) {
             container.View = View.Details;
-            container.Columns.Add("Zalen (nummer)", 1000);
+            container.Columns.Add("Zalen (nummer)", 600);
         }
 
         private void ButtonNew_Click(object sender, EventArgs e) {

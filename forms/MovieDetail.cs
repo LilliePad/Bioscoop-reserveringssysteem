@@ -41,6 +41,10 @@ namespace Project.Forms {
             return "movieDetail";
         }
 
+        public override bool RequireAdmin() {
+            return true;
+        }
+
         public override void OnShow() {
             base.OnShow();
 
@@ -239,6 +243,11 @@ namespace Project.Forms {
         private void DeleteButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             MovieService movieService = app.GetService<MovieService>("movies");
+
+            // Ask for confirmation
+            if (!GuiHelper.ShowConfirm("Weet je zeker dat je deze film wilt verwijderen?")) {
+                return;
+            }
 
             // Delete room
             if (!movieService.DeleteMovie(movie)) {

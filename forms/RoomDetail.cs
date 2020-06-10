@@ -28,9 +28,12 @@ namespace Project.Forms {
             InitializeComponent();
         }
 
-
         public override string GetHandle() {
             return "roomDetail";
+        }
+
+        public override bool RequireAdmin() {
+            return true;
         }
 
         public override void OnShow() {
@@ -199,8 +202,13 @@ namespace Project.Forms {
             Program app = Program.GetInstance();
             RoomService roomService = app.GetService<RoomService>("rooms");
 
+            // Ask for confirmation
+            if (!GuiHelper.ShowConfirm("Weet je zeker dat je deze zaal wilt verwijderen?")) {
+                return;
+            }
+
             // Delete room
-            if(!roomService.DeleteRoom(room)) {
+            if (!roomService.DeleteRoom(room)) {
                 GuiHelper.ShowError("Kon zaal niet verwijderen");
                 return;
             }
