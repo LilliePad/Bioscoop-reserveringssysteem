@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Project.Forms.Layouts;
+using Project.Helpers;
 using Project.Models;
 using Project.Services;
 
@@ -109,7 +110,7 @@ namespace Project.Forms {
             ListViewItem item = container.SelectedItems[0];
 
             if (item == null) {
-                MessageBox.Show("Error: Geen item geselecteerd", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GuiHelper.ShowError("Geen item geselecteerd");
                 return;
             }
 
@@ -118,7 +119,7 @@ namespace Project.Forms {
             Movie movie = movieService.GetMovieById(id);
 
             if (movie == null) {
-                MessageBox.Show("Error: Kon geen film vinden voor dit item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GuiHelper.ShowError("Kon geen film vinden voor dit item");
                 return;
             }
 

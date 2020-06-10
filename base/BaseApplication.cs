@@ -1,12 +1,10 @@
-﻿using Project.Errors;
-using Project.Forms.Layouts;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using Project.Errors;
 using Project.Helpers;
 using Project.Models;
 using Project.Services;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Windows.Forms;
 
 namespace Project.Base {
 
