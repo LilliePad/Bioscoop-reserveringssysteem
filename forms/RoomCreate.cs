@@ -4,6 +4,7 @@ using Project.Forms.Layouts;
 using Project.Models;
 using Project.Services;
 using Project.Helpers;
+using Project.Data;
 
 namespace Project.Forms {
 
@@ -179,6 +180,11 @@ namespace Project.Forms {
             ChairService chairManager = app.GetService<ChairService>("chairs");
             RoomService roomManager = app.GetService<RoomService>("rooms");
 
+            // Create bulk update
+            BulkUpdate bulkUpdate = new BulkUpdate();
+
+            bulkUpdate.Begin();
+
             // Save room
             Room room = new Room((int) numberInput.Value);
 
@@ -186,6 +192,9 @@ namespace Project.Forms {
                 GuiHelper.ShowError(ValidationHelper.GetErrorList(room));
                 return;
             }
+
+            // Disable save button
+            saveButton.Enabled = false;
 
             // Create chairs
             int rows = (int) rowInput.Value;
@@ -200,6 +209,12 @@ namespace Project.Forms {
                     }
                 }
             }
+
+            // End bulk update
+            bulkUpdate.End();
+
+            // Enable save button
+            saveButton.Enabled = true;
 
             // Redirect to screen
             RoomDetail roomDetail = app.GetScreen<RoomDetail>("roomDetail");

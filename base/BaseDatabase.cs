@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Project.Data;
 using Project.Helpers;
 
 namespace Project.Base {
@@ -14,6 +15,9 @@ namespace Project.Base {
         // List to keep track of the used ids
         // You can get a new unique id using GetNewId()
         public Dictionary<string, int> newIds = new Dictionary<string, int>();
+
+        // Active bulk actions
+        private List<BulkUpdate> bulkUpdates = new List<BulkUpdate>();
 
         // Loads the database file into this object
         public bool Load() {
@@ -39,6 +43,13 @@ namespace Project.Base {
 
         // Saves this object into the database file
         public bool Save() {
+            bool bulkUpdate = IsPerformingBulkUpate();
+
+            // Ignore if performing a bulk update
+            if(bulkUpdate) {
+                return true;
+            }
+
             try {
                 StorageHelper.SaveFile(STORAGE_CATEGORY, STORAGE_NAME, this);
                 return true;
@@ -77,6 +88,28 @@ namespace Project.Base {
             TryToSave();
 
             return newId;
+        }
+
+        // Registers a bulk update
+        public void RegisterBulkUpdate(BulkUpdate bulkUpdate) {
+            if(bulkUpdates.Contains(bulkUpdate)) {
+                return;
+            }
+
+            bulkUpdates.Add(bulkUpdate);
+        }
+
+        // Registers a bulk update
+        public void RemoveBulkUpdate(BulkUpdate bulkUpdate) {
+            bulkUpdates.Remove(bulkUpdate);
+
+            if(bulkUpdates.Count == 0) {
+                TryToSave();
+            }
+        }
+
+        public bool IsPerformingBulkUpate() {
+            return bulkUpdates.Count > 0;
         }
 
     }
