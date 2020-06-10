@@ -18,12 +18,13 @@ namespace Project.Forms {
         private ListView container;
 
         private PictureBox imagePreview;
-        private Button selectChairButton;
+        private Button addChairButton;
         private Button saveButton;
 
         // Backend
         private Show show;
         private Button cancelButton;
+        private Button removeChairButton;
         private List<Chair> chairs = new List<Chair>();
 
         public ReservationCreate() {
@@ -48,35 +49,39 @@ namespace Project.Forms {
                 Chair chair = chairs[i];
                 ListViewItem item = new ListViewItem("Reserveer:  rij " + chair.row + " " + "nummer " + chair.number + "  prijs: €" + chair.price , i);
 
-                item.Tag = "rij: " + chair.row + " " + "nummer: " + chair.number;
+                item.Tag = chair;
                 container.Items.Add(item);
             }
 
             // Disable save button if no chairs selected
             saveButton.Enabled = chairs.Count > 0;
+
+            // Disable chair delete by default
+            removeChairButton.Enabled = false;
         }
 
         private void InitializeComponent() {
-            this.selectChairButton = new System.Windows.Forms.Button();
+            this.addChairButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.imagePreview = new System.Windows.Forms.PictureBox();
             this.title = new System.Windows.Forms.Label();
             this.container = new System.Windows.Forms.ListView();
             this.panel = new System.Windows.Forms.Panel();
+            this.removeChairButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // selectChairButton
+            // addChairButton
             // 
-            this.selectChairButton.Location = new System.Drawing.Point(273, 418);
-            this.selectChairButton.Name = "selectChairButton";
-            this.selectChairButton.Size = new System.Drawing.Size(140, 23);
-            this.selectChairButton.TabIndex = 2;
-            this.selectChairButton.Text = "Stoel kiezen";
-            this.selectChairButton.UseVisualStyleBackColor = true;
-            this.selectChairButton.Click += new System.EventHandler(this.SelectChairButton_Click);
+            this.addChairButton.Location = new System.Drawing.Point(273, 418);
+            this.addChairButton.Name = "addChairButton";
+            this.addChairButton.Size = new System.Drawing.Size(115, 23);
+            this.addChairButton.TabIndex = 2;
+            this.addChairButton.Text = "Stoel toevoegen";
+            this.addChairButton.UseVisualStyleBackColor = true;
+            this.addChairButton.Click += new System.EventHandler(this.AddChairButton_Click);
             // 
             // saveButton
             // 
@@ -118,11 +123,13 @@ namespace Project.Forms {
             this.container.TileSize = new System.Drawing.Size(40, 40);
             this.container.UseCompatibleStateImageBehavior = false;
             this.container.View = System.Windows.Forms.View.List;
+            this.container.SelectedIndexChanged += new System.EventHandler(this.ListItem_SelectedIndexChanged);
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.removeChairButton);
             this.panel.Controls.Add(this.cancelButton);
-            this.panel.Controls.Add(this.selectChairButton);
+            this.panel.Controls.Add(this.addChairButton);
             this.panel.Controls.Add(this.saveButton);
             this.panel.Controls.Add(this.imagePreview);
             this.panel.Controls.Add(this.title);
@@ -131,6 +138,16 @@ namespace Project.Forms {
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(993, 534);
             this.panel.TabIndex = 8;
+            // 
+            // removeChairButton
+            // 
+            this.removeChairButton.Location = new System.Drawing.Point(408, 418);
+            this.removeChairButton.Name = "removeChairButton";
+            this.removeChairButton.Size = new System.Drawing.Size(115, 23);
+            this.removeChairButton.TabIndex = 12;
+            this.removeChairButton.Text = "Stoel verwijderen";
+            this.removeChairButton.UseVisualStyleBackColor = true;
+            this.removeChairButton.Click += new System.EventHandler(this.RemoveChairButton_Click);
             // 
             // cancelButton
             // 
@@ -163,12 +180,31 @@ namespace Project.Forms {
             chairs.Clear();
         }
 
-        private void SelectChairButton_Click(object sender, EventArgs e) {
+        private void ListItem_SelectedIndexChanged(object sender, EventArgs e) {
+            removeChairButton.Enabled = container.SelectedItems.Count > 0;
+        }
+
+        private void AddChairButton_Click(object sender, EventArgs e) {
             Program app = Program.GetInstance();
             ChairSelect chairSelectScreen = app.GetScreen<ChairSelect>("chairSelect");
 
             chairSelectScreen.SetShow(show);
             app.ShowScreen(chairSelectScreen);
+        }
+
+        private void RemoveChairButton_Click(object sender, EventArgs e) {
+            ListViewItem item = container.SelectedItems[0];
+
+            if (item == null) {
+                GuiHelper.ShowError("Geen item geselecteerd");
+                return;
+            }
+
+            // Remove chair
+            Chair chair = (Chair) item.Tag;
+
+            chairs.Remove(chair);
+            OnShow();
         }
 
         private void SaveButton_Click(object sender, EventArgs e) {
