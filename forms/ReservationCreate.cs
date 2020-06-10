@@ -167,6 +167,18 @@ namespace Project.Forms {
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
             UserService userService = app.GetService<UserService>("users");
 
+            // Calculate total price
+            double totalPrice = 0;
+
+            foreach (Chair chair in chairs) {
+                totalPrice += chair.price;
+            }
+
+            // Ask for confirmation
+            if(!GuiHelper.ShowConfirm("Het totaal bedrag is " + totalPrice + " euro. Wil je de reservering afronden?")) {
+                return;
+            }
+
             // Save reservations
             foreach (Chair chair in chairs) {
                 Reservation reservation = new Reservation(show.id, userService.GetCurrentUser().id, chair.id);
