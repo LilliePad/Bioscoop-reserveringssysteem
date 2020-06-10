@@ -33,6 +33,7 @@ namespace Project.Forms {
             ChairService chairService = app.GetService<ChairService>("chairs");
             RoomService roomService = app.GetService<RoomService>("rooms");
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
+            ReservationCreate reservationCreate = app.GetScreen<ReservationCreate>("reservationCreate");
 
             base.OnShow();
 
@@ -72,32 +73,35 @@ namespace Project.Forms {
                 for (int j = 0; j < highestColum; j++) {
                     Chair chair = chairService.GetChairByRoomAndPosition(show.GetRoom(), i + 1, j + 1);
 
-                    if (chair != null) {
-                        if (reservationService.IsChairTaken(chair, show) || chairs.Contains(chair)) {
-                            Button button = new Button();
+                    // Ignore if chair doesn't exist
+                    if (chair == null) {
+                        continue;
+                    }
 
-                            button.Text = string.Format("Niet beschikbaar");
-                            button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
-                            button.Dock = DockStyle.Fill;
+                    if (reservationService.IsChairTaken(chair, show) || reservationCreate.ContainsChair(chair)) {
+                        Button button = new Button();
 
-                            button.Click += (sender, e) => {
-                                ChairButton_Click(sender, e, button.Name);
-                            };
+                        button.Text = string.Format("Niet beschikbaar");
+                        button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
+                        button.Dock = DockStyle.Fill;
 
-                            container.Controls.Add(button, j, i);
-                        } else {
-                            Button button = new Button();
+                        button.Click += (sender, e) => {
+                            ChairButton_Click(sender, e, button.Name);
+                        };
 
-                            button.Text = string.Format("R" + i + "-N" + j + " prijs: " + chair.price);
-                            button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
-                            button.Dock = DockStyle.Fill;
+                        container.Controls.Add(button, j, i);
+                    } else {
+                        Button button = new Button();
 
-                            button.Click += (sender, e) => {
-                                ChairButton_Click(sender, e, button.Name);
-                            };
+                        button.Text = string.Format("R" + i + "-N" + j + " prijs: " + chair.price);
+                        button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
+                        button.Dock = DockStyle.Fill;
 
-                            container.Controls.Add(button, j, i);
-                        }
+                        button.Click += (sender, e) => {
+                            ChairButton_Click(sender, e, button.Name);
+                        };
+
+                        container.Controls.Add(button, j, i);
                     }
                 }
             }
