@@ -17,6 +17,7 @@ namespace Project.Forms {
         private Label title;
 
         private TableLayoutPanel container;
+        private Button cancelButton;
 
         // Backend
         private Show show;
@@ -113,6 +114,7 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.panel = new System.Windows.Forms.Panel();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.container = new System.Windows.Forms.TableLayoutPanel();
             this.title = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
@@ -120,6 +122,7 @@ namespace Project.Forms {
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.cancelButton);
             this.panel.Controls.Add(this.container);
             this.panel.Controls.Add(this.title);
             this.panel.Location = new System.Drawing.Point(40, 115);
@@ -127,17 +130,27 @@ namespace Project.Forms {
             this.panel.Size = new System.Drawing.Size(1800, 1000);
             this.panel.TabIndex = 20;
             // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(308, 21);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(140, 23);
+            this.cancelButton.TabIndex = 20;
+            this.cancelButton.Text = "Annuleren";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // container
             // 
             this.container.ColumnCount = 2;
             this.container.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.container.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.container.Location = new System.Drawing.Point(20, 134);
+            this.container.Location = new System.Drawing.Point(0, 75);
             this.container.Name = "container";
             this.container.RowCount = 2;
             this.container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.container.Size = new System.Drawing.Size(1000, 500);
+            this.container.Size = new System.Drawing.Size(1400, 600);
             this.container.TabIndex = 30;
             // 
             // title
@@ -146,7 +159,7 @@ namespace Project.Forms {
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.title.Location = new System.Drawing.Point(-6, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(270, 46);
+            this.title.Size = new System.Drawing.Size(338, 58);
             this.title.TabIndex = 3;
             this.title.Text = "Kies een stoel";
             // 
@@ -159,6 +172,7 @@ namespace Project.Forms {
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         public void SetShow(Show show) {
@@ -190,6 +204,11 @@ namespace Project.Forms {
             app.ShowScreen(reservationScreen);
         }
 
+        private void cancelButton_Click(object sender, EventArgs e) {
+            Program app = Program.GetInstance();
+            MovieDetailUser editScreen = app.GetScreen<MovieDetailUser>("movieDetailUser");
+            app.ShowScreen(editScreen);
+        }
     }
 
 }
