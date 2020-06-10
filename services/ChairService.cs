@@ -74,7 +74,6 @@ namespace Project.Services {
                 database.chairs.Add(record);
             }
 
-
             // Update record
             record.id = chair.id;
             record.roomId = chair.roomId;

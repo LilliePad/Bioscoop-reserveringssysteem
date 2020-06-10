@@ -40,7 +40,7 @@ namespace Project.Models {
         }
 
         public override string ToString() {
-            return "number " + number;
+            return "Nummer " + number;
         }
 
     }

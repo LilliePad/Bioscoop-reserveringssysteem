@@ -4,6 +4,7 @@ using Project.Forms.Layouts;
 using Project.Models;
 using Project.Services;
 using Project.Helpers;
+using Project.Data;
 
 namespace Project.Forms {
 
@@ -20,6 +21,9 @@ namespace Project.Forms {
 
         private Label columnLabel;
         private NumericUpDown columnInput;
+
+        private Label priceLabel;
+        private NumericUpDown priceInput;
 
         private Button saveButton;
         private Button cancelButton;
@@ -47,6 +51,8 @@ namespace Project.Forms {
 
         private void InitializeComponent() {
             this.panel = new System.Windows.Forms.Panel();
+            this.columnInput = new System.Windows.Forms.NumericUpDown();
+            this.rowInput = new System.Windows.Forms.NumericUpDown();
             this.numberInput = new System.Windows.Forms.NumericUpDown();
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
@@ -54,16 +60,19 @@ namespace Project.Forms {
             this.rowLabel = new System.Windows.Forms.Label();
             this.columnLabel = new System.Windows.Forms.Label();
             this.numberLabel = new System.Windows.Forms.Label();
-            this.rowInput = new System.Windows.Forms.NumericUpDown();
-            this.columnInput = new System.Windows.Forms.NumericUpDown();
+            this.priceLabel = new System.Windows.Forms.Label();
+            this.priceInput = new System.Windows.Forms.NumericUpDown();
             this.panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numberInput)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rowInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.columnInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rowInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.priceInput)).BeginInit();
             this.SuspendLayout();
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.priceInput);
+            this.panel.Controls.Add(this.priceLabel);
             this.panel.Controls.Add(this.columnInput);
             this.panel.Controls.Add(this.rowInput);
             this.panel.Controls.Add(this.numberInput);
@@ -78,6 +87,20 @@ namespace Project.Forms {
             this.panel.Size = new System.Drawing.Size(993, 534);
             this.panel.TabIndex = 20;
             // 
+            // columnInput
+            // 
+            this.columnInput.Location = new System.Drawing.Point(125, 168);
+            this.columnInput.Name = "columnInput";
+            this.columnInput.Size = new System.Drawing.Size(495, 20);
+            this.columnInput.TabIndex = 26;
+            // 
+            // rowInput
+            // 
+            this.rowInput.Location = new System.Drawing.Point(125, 122);
+            this.rowInput.Name = "rowInput";
+            this.rowInput.Size = new System.Drawing.Size(495, 20);
+            this.rowInput.TabIndex = 25;
+            // 
             // numberInput
             // 
             this.numberInput.Location = new System.Drawing.Point(125, 79);
@@ -87,7 +110,7 @@ namespace Project.Forms {
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(281, 221);
+            this.cancelButton.Location = new System.Drawing.Point(276, 281);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(140, 23);
             this.cancelButton.TabIndex = 23;
@@ -97,7 +120,7 @@ namespace Project.Forms {
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(125, 221);
+            this.saveButton.Location = new System.Drawing.Point(120, 281);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(140, 23);
             this.saveButton.TabIndex = 19;
@@ -145,31 +168,36 @@ namespace Project.Forms {
             this.numberLabel.TabIndex = 4;
             this.numberLabel.Text = "Zaal nummer";
             // 
-            // rowInput
+            // priceLabel
             // 
-            this.rowInput.Location = new System.Drawing.Point(125, 122);
-            this.rowInput.Name = "rowInput";
-            this.rowInput.Size = new System.Drawing.Size(495, 20);
-            this.rowInput.TabIndex = 25;
+            this.priceLabel.AutoSize = true;
+            this.priceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.priceLabel.Location = new System.Drawing.Point(10, 215);
+            this.priceLabel.Name = "priceLabel";
+            this.priceLabel.Size = new System.Drawing.Size(70, 17);
+            this.priceLabel.TabIndex = 27;
+            this.priceLabel.Text = "Stoel prijs";
             // 
-            // columnInput
+            // priceInput
             // 
-            this.columnInput.Location = new System.Drawing.Point(125, 168);
-            this.columnInput.Name = "columnInput";
-            this.columnInput.Size = new System.Drawing.Size(495, 20);
-            this.columnInput.TabIndex = 26;
+            this.priceInput.DecimalPlaces = 2;
+            this.priceInput.Location = new System.Drawing.Point(125, 212);
+            this.priceInput.Name = "priceInput";
+            this.priceInput.Size = new System.Drawing.Size(495, 20);
+            this.priceInput.TabIndex = 28;
             // 
-            // RoomCreateDesign
+            // RoomCreate
             // 
             this.ClientSize = new System.Drawing.Size(1262, 673);
             this.Controls.Add(this.panel);
-            this.Name = "RoomCreateDesign";
+            this.Name = "RoomCreate";
             this.Controls.SetChildIndex(this.panel, 0);
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numberInput)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rowInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.columnInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rowInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numberInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.priceInput)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -179,6 +207,11 @@ namespace Project.Forms {
             ChairService chairManager = app.GetService<ChairService>("chairs");
             RoomService roomManager = app.GetService<RoomService>("rooms");
 
+            // Create bulk update
+            BulkUpdate bulkUpdate = new BulkUpdate();
+
+            bulkUpdate.Begin();
+
             // Save room
             Room room = new Room((int) numberInput.Value);
 
@@ -187,19 +220,29 @@ namespace Project.Forms {
                 return;
             }
 
+            // Disable save button
+            saveButton.Enabled = false;
+
             // Create chairs
             int rows = (int) rowInput.Value;
             int columns = (int) columnInput.Value;
+            double price = (double) priceInput.Value;
 
             for (int i = 1; i <= rows; i++) {
                 for(int j = 1; j <= columns; j++) {
-                    Chair chair = new Chair(room.id, i, j, 0, "default");
+                    Chair chair = new Chair(room.id, i, j, price, "default");
 
                     if (!chairManager.SaveChair(chair)) {
                         GuiHelper.ShowError(ValidationHelper.GetErrorList(room));
                     }
                 }
             }
+
+            // End bulk update
+            bulkUpdate.End();
+
+            // Enable save button
+            saveButton.Enabled = true;
 
             // Redirect to screen
             RoomDetail roomDetail = app.GetScreen<RoomDetail>("roomDetail");
