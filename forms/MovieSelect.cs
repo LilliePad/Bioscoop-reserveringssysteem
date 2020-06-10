@@ -55,7 +55,6 @@ namespace Project.Forms {
 
             // Print shows
             List<Show> shows = showService.GetShowsByMovie(movie);
-            int rowCount = 5;
             List<Show> list = shows.Where(i => i.startTime > DateTime.Now).OrderBy(i => i.startTime).ToList();
             int maximum = list.Count;
             int rowCount = 15;
