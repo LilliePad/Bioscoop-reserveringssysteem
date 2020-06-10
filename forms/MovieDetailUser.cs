@@ -18,7 +18,7 @@ namespace Project.Forms {
         private Label durationLabel;
         private Label genreLabel;
         private PictureBox imagePreview;
-
+        private Label voorstellingen;
         private Movie movie;
 
         public MovieDetailUser() {
@@ -44,8 +44,8 @@ namespace Project.Forms {
 
             title.Text = movie.name;
             descriptionInput.Text = movie.description;
-            durationLabel.Text = "Speeltijd " + movie.duration + " Minuten";
-            genreLabel.Text = "Genre " + movie.genre;
+            durationLabel.Text = "Speeltijd     " + movie.duration + " Minuten";
+            genreLabel.Text = "Genre         " + movie.genre;
             imagePreview.Image = movie.GetImage();
 
             // Clear grid
@@ -56,11 +56,11 @@ namespace Project.Forms {
             // Print shows
             List<Show> shows = showService.GetShowsByMovie(movie);
             int maximum = shows.Count;
-            int rowCount = 5;
+            int rowCount = 15;
             int columnCount = 5;
             int showIndex = 0;
 
-            container.ColumnCount = 5;
+            container.ColumnCount = columnCount;
             container.RowCount = rowCount;
 
             for (int i = 0; i < columnCount; i++) {
@@ -98,13 +98,14 @@ namespace Project.Forms {
             this.genreLabel = new System.Windows.Forms.Label();
             this.durationLabel = new System.Windows.Forms.Label();
             this.descriptionInput = new System.Windows.Forms.TextBox();
+            this.voorstellingen = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // imagePreview
             // 
-            this.imagePreview.Location = new System.Drawing.Point(29, 39);
+            this.imagePreview.Location = new System.Drawing.Point(29, 47);
             this.imagePreview.Name = "imagePreview";
             this.imagePreview.Size = new System.Drawing.Size(200, 270);
             this.imagePreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -117,12 +118,13 @@ namespace Project.Forms {
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.title.Location = new System.Drawing.Point(28, 0);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(49, 46);
+            this.title.Size = new System.Drawing.Size(61, 58);
             this.title.TabIndex = 3;
             this.title.Text = "C";
             // 
             // panel
             // 
+            this.panel.Controls.Add(this.voorstellingen);
             this.panel.Controls.Add(this.container);
             this.panel.Controls.Add(this.genreLabel);
             this.panel.Controls.Add(this.durationLabel);
@@ -131,7 +133,7 @@ namespace Project.Forms {
             this.panel.Controls.Add(this.imagePreview);
             this.panel.Location = new System.Drawing.Point(40, 106);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(993, 700);
+            this.panel.Size = new System.Drawing.Size(1600, 700);
             this.panel.TabIndex = 19;
             // 
             // container
@@ -139,30 +141,30 @@ namespace Project.Forms {
             this.container.ColumnCount = 2;
             this.container.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.container.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.container.Location = new System.Drawing.Point(29, 302);
+            this.container.Location = new System.Drawing.Point(660, 60);
             this.container.Name = "container";
             this.container.RowCount = 2;
             this.container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.container.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.container.Size = new System.Drawing.Size(950, 395);
+            this.container.Size = new System.Drawing.Size(800, 600);
             this.container.TabIndex = 20;
             // 
             // genreLabel
             // 
             this.genreLabel.AutoSize = true;
             this.genreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.genreLabel.Location = new System.Drawing.Point(660, 103);
+            this.genreLabel.Location = new System.Drawing.Point(30, 320);
             this.genreLabel.Name = "genreLabel";
-            this.genreLabel.Size = new System.Drawing.Size(0, 17);
+            this.genreLabel.Size = new System.Drawing.Size(0, 20);
             this.genreLabel.TabIndex = 19;
             // 
             // durationLabel
             // 
             this.durationLabel.AutoSize = true;
             this.durationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.durationLabel.Location = new System.Drawing.Point(660, 55);
+            this.durationLabel.Location = new System.Drawing.Point(30, 350);
             this.durationLabel.Name = "durationLabel";
-            this.durationLabel.Size = new System.Drawing.Size(0, 17);
+            this.durationLabel.Size = new System.Drawing.Size(0, 20);
             this.durationLabel.TabIndex = 17;
             // 
             // descriptionInput
@@ -174,16 +176,27 @@ namespace Project.Forms {
             this.descriptionInput.Size = new System.Drawing.Size(400, 250);
             this.descriptionInput.TabIndex = 15;
             // 
-            // MovieSelect
+            // voorstellingen
+            // 
+            this.voorstellingen.AutoSize = true;
+            this.voorstellingen.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
+            this.voorstellingen.Location = new System.Drawing.Point(650, 0);
+            this.voorstellingen.Name = "voorstellingen";
+            this.voorstellingen.Size = new System.Drawing.Size(343, 58);
+            this.voorstellingen.TabIndex = 21;
+            this.voorstellingen.Text = "Voorstellingen";
+            // 
+            // MovieDetailUser
             // 
             this.ClientSize = new System.Drawing.Size(1360, 807);
             this.Controls.Add(this.panel);
-            this.Name = "MovieSelect";
+            this.Name = "MovieDetailUser";
             this.Controls.SetChildIndex(this.panel, 0);
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).EndInit();
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         public void SetMovie(Movie movie) {
