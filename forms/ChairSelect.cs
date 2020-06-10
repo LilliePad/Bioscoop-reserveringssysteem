@@ -5,6 +5,7 @@ using Project.Forms.Layouts;
 using Project.Models;
 using Project.Services;
 using Project.Helpers;
+using System.Drawing;
 
 
 namespace Project.Forms {
@@ -82,7 +83,9 @@ namespace Project.Forms {
                         Button button = new Button();
 
                         button.Text = string.Format("Niet beschikbaar");
+                        button.BackColor = Color.Red; 
                         button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
+                        
                         button.Dock = DockStyle.Fill;
 
                         button.Click += (sender, e) => {
@@ -94,6 +97,7 @@ namespace Project.Forms {
                         Button button = new Button();
 
                         button.Text = string.Format("R" + i + "-N" + j + " prijs: " + chair.price);
+                        button.BackColor = Color.Green;
                         button.Name = string.Format("button" + (i + 1) + "-" + (j + 1));
                         button.Dock = DockStyle.Fill;
 
