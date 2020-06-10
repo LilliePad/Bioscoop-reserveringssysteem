@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Project.Forms.Layouts;
 using Project.Helpers;
@@ -176,7 +177,7 @@ namespace Project.Forms {
         }
 
         public bool ContainsChair(Chair chair) {
-            return chairs.Contains(chair);
+            return chairs.Where(i => i.id == chair.id).Any();
         }
 
     }
