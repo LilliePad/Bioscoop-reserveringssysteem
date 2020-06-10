@@ -81,7 +81,7 @@ namespace Project.Forms {
                 Button button = new Button();
 
                 button.Text = show.startTime.ToString(Program.DATETIME_FORMAT);
-                button.Name = "show" + show.id;
+                button.Name = "" + show.id;
                 button.BackColor = Color.FromArgb(193, 193, 193);
                 button.Dock = DockStyle.Fill;
 
