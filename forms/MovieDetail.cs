@@ -240,6 +240,11 @@ namespace Project.Forms {
             Program app = Program.GetInstance();
             MovieService movieService = app.GetService<MovieService>("movies");
 
+            // Ask for confirmation
+            if (!GuiHelper.ShowConfirm("Weet je zeker dat je deze film wilt verwijderen?")) {
+                return;
+            }
+
             // Delete room
             if (!movieService.DeleteMovie(movie)) {
                 GuiHelper.ShowError("Kon film niet verwijderen");

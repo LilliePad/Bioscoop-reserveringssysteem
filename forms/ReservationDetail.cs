@@ -201,7 +201,12 @@ namespace Projects.Forms {
             UserService userService = app.GetService<UserService>("users");
             ReservationService reservationService = app.GetService<ReservationService>("reservations");
 
-            if(!reservationService.DeleteReservation(reservation)) {
+            // Ask for confirmation
+            if (!GuiHelper.ShowConfirm("Weet je zeker dat je deze reservering wilt verwijderen?")) {
+                return;
+            }
+
+            if (!reservationService.DeleteReservation(reservation)) {
                 GuiHelper.ShowError("Kon reservering niet verwijderen");
                 return;
             }

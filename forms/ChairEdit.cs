@@ -246,6 +246,11 @@ namespace Project.Forms {
                 return;
             }
 
+            // Ask for confirmation
+            if(!GuiHelper.ShowConfirm("Weet je zeker dat je deze stoel wilt verwijderen?")) {
+                return;
+            }
+
             // Delete it
             if(!chairManager.DeleteChair(chair)) {
                 GuiHelper.ShowError("Kon stoel niet verwijderen");

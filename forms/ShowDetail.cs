@@ -197,9 +197,14 @@ namespace Project.Forms {
         private void DeleteButton_Click(object sender, EventArgs args) {
             Program app = Program.GetInstance();
             ShowService showManager = app.GetService<ShowService>("shows");
-       
+
+            // Ask for confirmation
+            if (!GuiHelper.ShowConfirm("Weet je zeker dat je deze voorstelling wilt verwijderen?")) {
+                return;
+            }
+
             // Delete show
-            if(!showManager.DeleteShow(show)) {
+            if (!showManager.DeleteShow(show)) {
                 GuiHelper.ShowError("Kon voorstelling niet verwijderen");
                 return;
             }
